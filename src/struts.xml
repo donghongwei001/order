@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<package name="default" extends="struts-default" >
+		<action name="demo_*" method="{1}" class="com.dong.action.webAction">
+			<result name="ok">index.jsp</result>
+			
+			<result name="error">l.jsp</result>
+		</action>
+	</package>
+</struts>    
