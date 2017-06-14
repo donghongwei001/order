@@ -25,7 +25,7 @@
 		body{
 			background:white;
 			background-size:100%;
-			background:url("images/12345689.jpg");
+			background:url("images/123456789.jpg");
 			background-size:100%;
 		}
 		#waibian{
