@@ -10,17 +10,17 @@ BODY {
 }
 
 BODY {
-	FONT-SIZE: 12px;
+	FONT-SIZE: 15px;
 	COLOR: #000000
 }
 
 TD {
-	FONT-SIZE: 12px;
+	FONT-SIZE: 15px;
 	COLOR: #000000
 }
 
 TH {
-	FONT-SIZE: 12px;
+	FONT-SIZE: 15px;
 	COLOR: #000000
 }
 </style>
@@ -50,7 +50,8 @@ TH {
 			</td>
 		</tr>
 	</table>
-	<table width="100%" border="0" cellspacing="0" cellpadding="0" style ="border:1px solid green">
+	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+
 		<tr>
 			<td height="30" valign="bottom"
 				background="${pageContext.request.contextPath}/admin/images/mis_01.jpg">
