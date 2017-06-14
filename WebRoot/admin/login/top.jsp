@@ -51,6 +51,7 @@ TH {
 		</tr>
 	</table>
 	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+
 		<tr>
 			<td height="30" valign="bottom"
 				background="${pageContext.request.contextPath}/admin/images/mis_01.jpg">

@@ -51,6 +51,7 @@
 		d.add(21,7,'添加餐桌','${pageContext.request.contextPath}/admin/products/table_list.jsp','','mainFrame');
 		d.add(22,8,'顾客信息','${pageContext.request.contextPath}/admin/products/cust_list.jsp','','mainFrame');
 		/* d.add(23,8,'积分查询','${pageContext.request.contextPath}/booklistservice','','mainFrame'); */
+
 	
 		
 		document.write(d);
