@@ -20,7 +20,7 @@ public class Connpool {
 	static{
 		bds = new BasicDataSource();
 		bds.setDriverClassName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-		bds.setUrl("jdbc:sqlserver://localhost:1433; DatabaseName=school");
+		bds.setUrl("jdbc:sqlserver://localhost:1433; DatabaseName=order");
 		bds.setUsername("sa");
 		bds.setPassword("818716");
 	}

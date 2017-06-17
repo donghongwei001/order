@@ -4,7 +4,13 @@
 	<package name="default" extends="struts-default" >
 		<action name="demo_*" method="{1}" class="com.dong.action.webAction">
 			<result name="ok">index.jsp</result>
-			
+			<result name="error">l.jsp</result>
+		</action>
+	</package>
+	<package name="default1" extends="struts-default" >
+		<action name="kitchen_*" method="{1}" class="com.dong.action.KitchenAction">
+			<result name="flush">admin/products/Kitchen.jsp</result>
+			<result name="pass" type="redirect">admin/products/Kitchen.jsp</result>
 			<result name="error">l.jsp</result>
 		</action>
 	</package>
