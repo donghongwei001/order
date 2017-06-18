@@ -33,7 +33,7 @@ public class KitchenAction extends BaseAction{
 		super.setsession("list", list);
 		List<SortKitchenFoodBean> doingFood = ks.showWaitFood("2");//查询状态为2的正做菜品
 		super.setsession("doing", doingFood);		
-		List<SortKitchenFoodBean> doneFood = ks.showWaitFood("3");//查询状态为3的已做菜品
+		List<WaitFoodBean> doneFood = ks.showDoneFood();//查询状态为3的已做菜品
 		//System.out.println("doneFood:"+doneFood.size());
 		super.setsession("done", doneFood);		
 		String count = ks.findCount();
@@ -41,15 +41,36 @@ public class KitchenAction extends BaseAction{
 		return "pass";
 	}
 	
-	/**update方法为更新数据库菜品状态信息
+	/**做菜按钮
+	 * 	功能:1.更新数据库菜品状态信息
+	 * 		2.更新页面菜品显示 调用findfood方法
 	 * @author hcb
 	 * 
 	 */
-	public String update(){
+	public String doFood(){
 		String orderfoodid = super.getparameter("orderfoodid");
 		String status = super.getparameter("status");
 		System.out.println("update:"+orderfoodid);
 		ks.updateStatus(orderfoodid,status);
+		findFood();
+		return "pass";
+	}
+	
+	/**上菜按钮
+	 * 	功能:1.更新数据库菜品状态信息
+	 * 		2.更新数据库最后上菜时间
+	 * 		3.记录该菜的上菜时间
+	 * 		3.更新页面菜品显示  调用findfood方法
+	 * @author hcb
+	 * 
+	 */
+	public String servingFood(){
+		String orderfoodid = super.getparameter("orderfoodid");
+		String status = super.getparameter("status");
+		String orderId = super.getparameter("orderId");
+		System.out.println("update:"+orderfoodid);
+		ks.updateStatusServingTime(orderfoodid,status);	//更新数据库菜品状态和该菜上菜时间
+		ks.updateLastTime(orderId);		//更新数据库最后上菜时间
 		findFood();
 		return "pass";
 	}

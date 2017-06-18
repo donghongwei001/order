@@ -27,7 +27,6 @@ public class KitchenDaoImpl implements KitchenDao {
 	public List<SortKitchenFoodBean> showWaitFood(String sql1,String sql2) {
 		// TODO Auto-generated method stub
 		setDbweight(sql2); //排序前现在数据库中设置好权重
-		
 		return mergeFood(sql2);	//调用并菜函数
 		}
 	
@@ -46,17 +45,13 @@ public class KitchenDaoImpl implements KitchenDao {
 				int fNum = wfb.get(i).getFood_num();
 				String tNum = wfb.get(i).getTable_name();	//获得该菜的桌号
 				String idString = wfb.get(i).getOrder_food_id()+"";		//菜品id
-				String food_name = wfb.get(i).getFood_name();
+				String food_name = wfb.get(i).getFood_name();		//菜品名称
+				String orderId = wfb.get(i).getFk_order_id();		//订单id  (记录用来更新订单最后上菜时间)
 				//System.out.println(food_name);
 				String order_food_mark = wfb.get(i).getOrder_food_mark();
 				int maxMerge = wfb.get(i).getFood_maxcb();
 				//添加入集合前先用for对mergelist进行遍历  判断是否能进行合并
 				for (int j = 0; j < MergeList.size(); j++) {
-					/*System.out.println("------"+MergeList.get(j).getWfb().getFood_name());
-					System.out.println(MergeList.get(j).getWfb().getOrder_food_mark());
-					System.out.println("mark:"+order_food_mark);
-					System.out.println("mergemark:"+MergeList.get(j).getWfb().getOrder_food_mark());
-					System.out.println("foodnum:"+MergeList.get(j).getFoodnum());*/
 					if (food_name.equals(MergeList.get(j).getWfb().getFood_name())) {
 					//if (food_name.equals(MergeList.get(j).getWfb().getFood_name())&&order_food_mark.equals(MergeList.get(j).getWfb().getOrder_food_mark())&&maxMerge > MergeList.get(j).getFoodnum()) {
 						System.out.println("符合并菜条件");
@@ -64,16 +59,21 @@ public class KitchenDaoImpl implements KitchenDao {
 						fNum += MergeList.get(j).getFoodnum();	//更新数量
 						tNum = MergeList.get(j).getTabid()+","+tNum;//更新桌号
 						idString = MergeList.get(j).getOrder_food_id()+"-"+idString;//更新id编号
+						orderId = MergeList.get(j).getOrderId()+"-"+orderId;	//更新订单id
+						System.out.println("合并后的订单编号是:"+orderId);
 						MergeList.get(j).setFoodnum(fNum);
 						MergeList.get(j).setOrder_food_id(idString);
 						MergeList.get(j).setTabid(tNum);
+						MergeList.get(j).setOrderId(orderId);
 					}
 				}
 				skfb.setFoodnum(fNum);
 				skfb.setWfb(wfb.get(i));
 				skfb.setOrder_food_id(idString);
 				skfb.setTabid(tNum);
+				skfb.setOrderId(orderId);
 				if (flag==1) {
+					System.out.println();
 					continue;
 				}
 				MergeList.add(skfb);
@@ -129,24 +129,6 @@ public class KitchenDaoImpl implements KitchenDao {
 		return wfb;
 	}
 			
-		/**对已经封装好的list集合进行按权重排序
-		 * @author hcb
-		 * 
-		 */
-		/*for (int j = 0; j < list.size()-1; j++) {
-			for (int j2 = 1; j2 < list.size()-j; j2++) {
-				if (list.get(j).getWeight()<list.get(j+1).getWeight()) {
-					SortKitchenFoodBean temp = list.get(j);
-					list.set(j, list.get(j+1));
-					list.set(j+1, temp);
-				}
-			}
-		}
-		return list;
-	}*/
-
-	
-
 	public static void main(String[] args) {
 		KitchenDaoImpl kdi = new KitchenDaoImpl();
 		String sql1 ="select odf.order_food_id,odf.order_food_weight,ot.order_id 'fk_order_id',tt.table_id 'table_name' , ft.food_name 'food_name',odf.order_food_mark 'order_food_mark',DATEDIFF(SS,ot.order_lasttime,GETDATE()) 'lasttime',DATEDIFF(SS,ot.order_time,GETDATE()) 'time',et.emp_name 'emp_name',odf.order_press 'order_press',ft.food_time 'food_time',odf.order_food_num 'food_num',ft.food_merge 'food_maxcb' from order_food odf,order_table ot,emp_table et,food_table ft,table_table tt"+
@@ -177,12 +159,35 @@ public class KitchenDaoImpl implements KitchenDao {
 			}
 			return query;
 		}
-
-	public void updateStatus(String sql, String status, String id) {
+		
+	/**更新数据库的方法(一次更新一个参数的方法)
+	 * param1为需要更新的参数
+	 * param2位where后面的条件
+	 * @author hcb
+	 * 
+	 */
+	public void updateDataBase(String sql, String param1, String param2) {
 		// TODO Auto-generated method stub
 		QueryRunner qr = new QueryRunner(cp.getBds());
 		try {
-			qr.update(sql, status,id);
+			qr.update(sql, param1,param2);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	/**更新数据库的方法(一次更新两个参数的方法)
+	 * param1为需要更新的参数
+	 * param2位where后面的条件
+	 * @author hcb
+	 * 
+	 */
+	public void updateDataBase(String sql, String param1, String param2,String param3) {
+		// TODO Auto-generated method stub
+		QueryRunner qr = new QueryRunner(cp.getBds());
+		try {
+			qr.update(sql, param1,param2,param3);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

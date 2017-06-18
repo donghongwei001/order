@@ -16,9 +16,14 @@ public class WaitFoodBean {
 	//修改
 	private float order_food_weight;	//该菜的上菜权重 按权重排序
 	private int order_food_id;	//该菜的菜单编号
+	private String servingtime;		//记录该才的上菜时间
 	
-	
-	
+	public String getServingtime() {
+		return servingtime;
+	}
+	public void setServingtime(String servingtime) {
+		this.servingtime = servingtime;
+	}
 	public float getOrder_food_weight() {
 		return order_food_weight;
 	}

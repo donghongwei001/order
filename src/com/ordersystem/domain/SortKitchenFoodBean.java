@@ -9,7 +9,16 @@ public class SortKitchenFoodBean {
 	private String order_food_id;	//id编号
 	private int foodnum;	//记录合并菜品后该菜的数量
 	private String tabid;	//餐桌编号
+	private String orderId;	//订单编号  在更新餐桌最后上菜时间的时候需要用到
 	
+	public String getOrderId() {
+		return orderId;
+	}
+
+	public void setOrderId(String orderId) {
+		this.orderId = orderId;
+	}
+
 	@Override
 	public String toString() {
 		return "wfb=" + wfb + ", order_food_id="

@@ -45,7 +45,7 @@
 			<td>${li.wfb.food_name}</td>
 			<td>${li.foodnum }</td>
 			<td>${li.wfb.order_food_mark }</td>
-			<td><a href="${pageContext.request.contextPath}/kitchen_update.action?orderfoodid=${li.order_food_id }&status=2" type="button" class="btn btn-info btn-xs">做菜</a></td>
+			<td><a href="${pageContext.request.contextPath}/kitchen_doFood.action?orderfoodid=${li.order_food_id }&status=2" type="button" class="btn btn-info btn-xs">做菜</a></td>
 			
 		</tr>
 		</c:forEach>
@@ -72,14 +72,14 @@
 			<td>${dg.wfb.food_name}</td>
 			<td>${dg.foodnum }</td>
 			<td>${dg.wfb.order_food_mark }</td>
-			<td><a type="button" class="btn btn-success btn-xs" href="${pageContext.request.contextPath}/kitchen_update.action?orderfoodid=${dg.order_food_id }&status=3">上菜</a></td>
+			<td><a type="button" class="btn btn-success btn-xs" href="${pageContext.request.contextPath}/kitchen_servingFood.action?orderfoodid=${dg.order_food_id }&status=3&orderId=${dg.orderId}">上菜</a></td>
 		</tr>
 		</c:forEach>
 	</table>
 </div></div>
     <!-- <div role="tabpanel" class="tab-pane" id="profile">...okiokiokioki</div>
     <div role="tabpanel" class="tab-pane" id="messages">..srtghjl.</div> -->
-    <div role="tabpanel" class="tab-pane" id="settings"><h3>正做菜单</h3>
+    <div role="tabpanel" class="tab-pane" id="settings">
 	<table class="table table-hover" style="font-size:14">
 		<tr>
 			<th>序号</th>
@@ -87,6 +87,8 @@
 			<th>服务员</th>
 			<th>菜名</th>
 			<th>数量</th>
+			<th>上菜时间</th>
+			
 			<th>备注</th>
 			
 			<th>上菜</th>
@@ -94,12 +96,13 @@
 		<c:forEach items="${done }" var="dg" varStatus="di">
 		<tr>
 			<td>${di.count }</td>
-			<td>${dg.tabid }</td>
-			<td>${dg.wfb.emp_name }</td>
-			<td>${dg.wfb.food_name}</td>
-			<td>${dg.foodnum }</td>
-			<td>${dg.wfb.order_food_mark }</td>
-			<td><a type="button" class="btn btn-success btn-xs" href="${pageContext.request.contextPath}/kitchen_update.action?orderfoodid=${dg.order_food_id }&status=1">查看</a></td>
+			<td>${dg.table_name }</td>
+			<td>${dg.emp_name }</td>
+			<td>${dg.food_name}</td>
+			<td>${dg.food_num }</td>
+			<td>${dg.servingtime }</td>
+			<td>${dg.order_food_mark }</td>
+			<td><a type="button" class="btn btn-success btn-xs" href="${pageContext.request.contextPath}/kitchen_doFood.action?orderfoodid=${dg.order_food_id }&status=1">查看</a></td>
 		</tr>
 		</c:forEach>
 	</table></div>
