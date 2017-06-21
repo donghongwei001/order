@@ -1,9 +1,4 @@
 package com.order.servlet;
-<<<<<<< HEAD
-
-=======
-asdffadf
->>>>>>> 2eec60056abc161d42035b376d75f6ad0d78f0dc
 import java.io.IOException;
 import java.io.PrintWriter;
 
