@@ -27,6 +27,7 @@ public class BaseAction {
 			response.getWriter().write(str);
 		} catch (Exception e) {
 			// TODO: handle exception
+			System.out.println(e.getMessage());
 		}
 	}
 	public void setsession(String key,Object value){

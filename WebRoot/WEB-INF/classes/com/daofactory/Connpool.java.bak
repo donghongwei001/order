@@ -1,5 +1,14 @@
 package com.daofactory;
-
+<<<<<<< HEAD
+dfasdfadfsd
+122234567890
+12345678
+1234567890-
+1234567890
+1234567
+=======
+sdfgdgh
+>>>>>>> 4af002b4123f4247dd33adfc637e42d790673e46
 import java.sql.Connection;
 import java.sql.SQLException;
 

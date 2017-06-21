@@ -1,6 +1,6 @@
 package com.daofactory;
 
- import java.sql.Connection;
+import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -83,7 +83,6 @@ public class DaoFactory {
 	 * @author hcb
 	 */
 	public static ArrayList<ArrayList> execQuery(String sql,Object[]params){
-		
 		Connection con = null;
 		PreparedStatement p = null;
 		ResultSet rs = null;
@@ -103,10 +102,10 @@ public class DaoFactory {
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			System.out.println("22222");
+			System.out.println(e.getMessage());
 		}finally{
 			closeAll(con, p, rs);
-		}
+		} 
 		return arr;
 	}
 }

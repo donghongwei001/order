@@ -107,13 +107,25 @@
 		function bgcot(div){
 			div.style.backgroundColor="white";
 		} */
+		
+		function backdata(){
+			var gender = document.getElementsByName(emp_gender);
+			for(var i=0;i<gender.length;i++){
+				var sex = gender[i].value;
+				alert(sex);
+				/* if(data==sex){
+					gender[i].checked;
+				} */
+			}
+		}
+		
 </script>
 
 <body>
 	<!-- <div id="search_he"></div> -->
 	<br>
 	<form id="Form1" name="Form1"
-		action="${pageContext.request.contextPath}/findProductByManyCondition"
+		action="${pageContext.request.contextPath}/emp_queryEmp.action"
 		method="post">
 		<table cellSpacing="1" cellPadding="0" width="100%" align="center"
 			bgColor="#f5fafe" border="0"> 
@@ -130,25 +142,25 @@
 								<td height="22" align="center" bgColor="#f5fafe" class="ta_01">
 									员工编号</td>
 								<td class="ta_01" bgColor="#ffffff"><input type="text"
-									name="id" size="15" value="" id="Form1_userName" class="bg" />
+									name="emp_id" size="15" value="${emp_id }" id="emp_id" class="bg" />
 								</td>
 								<td height="22" align="center" bgColor="#f5fafe" class="ta_01">
 									姓名：</td>
 								<td class="ta_01" bgColor="#ffffff"><input type="text"
-									name="id" size="15" value="" id="Form1_userName" class="bg" /></td>
+									name="emp_name" size="15" value="${emp_name }" id="emp_name" class="bg" /></td>
 							</tr>
 
 							<tr>
 								<td height="22" align="center" bgColor="#f5fafe" class="ta_01">
 									性别：</td>
 								<td class="ta_01" bgColor="#ffffff">
-									<input type="radio" name="emp_gender"  />男
-									<input type="radio"name="emp_gender"  />女
+									<input type="radio" name="emp_gender" id="emp_gender" value="" />男
+									<input type="radio"name="emp_gender"  id="emp_gender" value=""/>女
 								</td>
 								<td height="22" align="center" bgColor="#f5fafe" class="ta_01">
 									身份证号：</td>
 								<td class="ta_01" bgColor="#ffffff"><input type="text"
-									name="name" size="15" value="" id="Form1_userName" class="bg" />
+									name="emp_idcar" size="15" value="${emp_idcar }" id="emp_idcar" class="bg" />
 								</td>
 								
 							</tr>
@@ -188,102 +200,59 @@
 							style="BORDER-RIGHT: gray 1px solid; BORDER-TOP: gray 1px solid; BORDER-LEFT: gray 1px solid; WIDTH: 100%; WORD-BREAK: break-all; BORDER-BOTTOM: gray 1px solid; BORDER-COLLAPSE: collapse; BACKGROUND-COLOR: #f5fafe; WORD-WRAP: break-word">
 							<tr
 								style="FONT-WEIGHT: bold; FONT-SIZE: 12pt; HEIGHT: 25px; BACKGROUND-COLOR: #afd1f3">
-								<td align="center" width="7%">员工编号</td>
-								<td align="center" width="6%">姓名</td>
-								<td align="center" width="5%">性别</td>
-								<td align="center" width="8%">出生年月</td>
-								<td align="center" width="5%">年龄</td>
-								<td  align="center" width="17%">身份证号</td>
-								<td align="center" width="12%">家庭住址</td>
-								<td  align="center" width="8%">入职时间</td>
-								<td align="center" width="7%">职位</td>
-								<td  align="center" width="6%">状态</td>
-								<td  align="center" width="9%">电话</td>
-								<td  align="center" width="5%">
-											编辑</td>
-
-								<td  align="center" width="5%">删除</td>
+								<th align="center" width="7%">员工编号</th>
+								<th align="center" width="6%">姓名</th>
+								<th align="center" width="5%">性别</th>
+								<th align="center" width="8%">出生年月</th>
+								<th align="center" width="5%">年龄</th>
+								<th  align="center" width="17%">身份证号</th>
+								<th align="center" width="12%">家庭住址</th>
+								<th  align="center" width="8%">入职时间</th>
+								<th align="center" width="7%">职位</th>
+								<th  align="center" width="6%">状态</th>
+								<th  align="center" width="9%">电话</th>
+								<th  align="center" width="5%">编辑</th>
+								<th  align="center" width="5%">删除</th>
 							</tr>
+							<tbody id="tbody">
+							<c:forEach items="${allemp }" var = "li">
 							<tr onmouseover="this.style.backgroundColor = 'white'"
 									onmouseout="this.style.backgroundColor = '#F5FAFE';">
-									<td style="CURSOR: hand; HEIGHT: 22px" align="center"
-										width="7%">001</td>
-									<td style="CURSOR: hand; HEIGHT: 22px" align="center"
-										width="6%">张三</td>
-									<td style="CURSOR: hand; HEIGHT: 22px" align="center"
-										width="5%">男</td>
-									<td style="CURSOR: hand; HEIGHT: 22px" align="center"
-										width="8%">1994-12-14</td>
-									<td style="CURSOR: hand; HEIGHT: 22px" align="center" width="5%">23</td>
-									<td align="center" style="HEIGHT: 22px" width="17%">410223199512145263</td>
-									
-
-									<td align="center" style="HEIGHT: 22px" width="12%">河南省开封市
-									</td>
-									<td align="center" style="HEIGHT: 22px" width="8%">2017-02-13</td>
-									<td align="center" style="HEIGHT: 22px" width="7%">服务员</td>
-									<td align="center" style="HEIGHT: 22px" width="6%">在职</td>
-									<td align="center" style="HEIGHT: 22px" width="9%">15539687842</td>
+									<td style="CURSOR: hand; HEIGHT: 22px" align="center" width="7%">${li.emp_id }</td>
+									<td style="CURSOR: hand; HEIGHT: 22px" align="center" width="6%">${li.emp_name }</td>
+									<td style="CURSOR: hand; HEIGHT: 22px" align="center" width="5%">${li.emp_gender }</td>
+									<td style="CURSOR: hand; HEIGHT: 22px" align="center" width="8%">${li.emp_birday }</td>
+									<td style="CURSOR: hand; HEIGHT: 22px" align="center" width="5%">${li.emp_age }</td>
+									<td align="center" style="HEIGHT: 22px" width="17%">${li.emp_idcar }</td>
+									<td align="center" style="HEIGHT: 22px" width="12%">${li.emp_address }</td>
+									<td align="center" style="HEIGHT: 22px" width="8%">${li.emp_hire_date }</td>
+									<td align="center" style="HEIGHT: 22px" width="7%">${li.role_name }</td>
+									<td align="center" style="HEIGHT: 22px" width="6%">${li.emp_state }</td>
+									<td align="center" style="HEIGHT: 22px" width="9%">${li.emp_phone }</td>
 									<td align="center" style="HEIGHT: 22px" width="5%"><a
-										href="${pageContext.request.contextPath}/admin/products/emp_edit.jsp">
-										
-											<img
-											src="${pageContext.request.contextPath}/admin/images/i_edit.gif"
+										href="${pageContext.request.contextPath}/emp_editEmp.action?emp_id=${li.emp_id}">
+											<img src="${pageContext.request.contextPath}/admin/images/i_edit.gif"
 											border="0" style="CURSOR: hand"> </a>
 									</td>
-
-									<td align="center" style="HEIGHT: 22px" width="5%"><img
-											src="${pageContext.request.contextPath}/admin/images/i_del.gif"
-											width="16" height="16" border="0" style="CURSOR: hand">
+									<td align="center" style="HEIGHT: 22px" width="5%">
+										<img src="${pageContext.request.contextPath}/admin/images/i_del.gif"
+											width="16" height="16" border="0" style="CURSOR: hand" onclick = "delEmp('${li.emp_id}')">
 									</td>
 								</tr>
-								<!--  -->
+								</c:forEach>
+							</tbody>
+							<%-- <c:forEach items="${allemp }" var = "li">
 								<tr onmouseover="this.style.backgroundColor = 'white'"
 									onmouseout="this.style.backgroundColor = '#F5FAFE';">
 									<td style="CURSOR: hand; HEIGHT: 22px" align="center"
-										width="7%">002</td>
+										width="23">${li.emp_id }</td>
 									<td style="CURSOR: hand; HEIGHT: 22px" align="center"
-										width="6%">李四</td>
+										width="18%">${li.emp_name }</td>
 									<td style="CURSOR: hand; HEIGHT: 22px" align="center"
-										width="5%">男</td>
+										width="8%">${li.emp_gender }</td>
 									<td style="CURSOR: hand; HEIGHT: 22px" align="center"
-										width="8%">1992-05-08</td>
-									<td style="CURSOR: hand; HEIGHT: 22px" align="center" width="5%">25</td>
-									<td align="center" style="HEIGHT: 22px" width="17%">410223199512185213</td>
-									
-
-									<td align="center" style="HEIGHT: 22px" width="12%">河南省新乡市
-									</td>
-									<td align="center" style="HEIGHT: 22px" width="8%">2017-02-18</td>
-									<td align="center" style="HEIGHT: 22px" width="7%">保安</td>
-									<td align="center" style="HEIGHT: 22px" width="6%">在职</td>
-									<td align="center" style="HEIGHT: 22px" width="9%">15539688547</td>
-									<td align="center" style="HEIGHT: 22px" width="5%"><a
-										href="${pageContext.request.contextPath}/admin/products/emp_edit.jsp">
-										
-											<img
-											src="${pageContext.request.contextPath}/admin/images/i_edit.gif"
-											border="0" style="CURSOR: hand"> </a>
-									</td>
-
-									<td align="center" style="HEIGHT: 22px" width="5%"><img
-											src="${pageContext.request.contextPath}/admin/images/i_del.gif"
-											width="16" height="16" border="0" style="CURSOR: hand">
-									</td>
-								</tr>
-
-							<%-- <c:forEach items="${list }" var = "li">
-								<tr onmouseover="this.style.backgroundColor = 'white'"
-									onmouseout="this.style.backgroundColor = '#F5FAFE';">
-									<td style="CURSOR: hand; HEIGHT: 22px" align="center"
-										width="23">${li.bookid }</td>
-									<td style="CURSOR: hand; HEIGHT: 22px" align="center"
-										width="18%">${li.name }</td>
-									<td style="CURSOR: hand; HEIGHT: 22px" align="center"
-										width="8%">${li.price }</td>
-									<td style="CURSOR: hand; HEIGHT: 22px" align="center"
-										width="8%">${li.pnum }</td>
-									<td style="CURSOR: hand; HEIGHT: 22px" align="center">${li.category }</td>
+										width="8%">${li.emp_birday }</td>
+									<td style="CURSOR: hand; HEIGHT: 22px" align="center">${li.emp_age }</td>
 									<td align="center" style="HEIGHT: 22px" width="7%"><a
 										href="${pageContext.request.contextPath}/deleterecord?id=${li.bookid}&method=update">
 											<img
@@ -306,6 +275,78 @@
 			</TBODY>
 		</table>
 	</form>
+	<button class="pre" onclick="bac()">上一页</button>
+	<button class="bac" onclick="pre(4)">下一页</button><span id="currentpage">第1页</span><span>共${total }页</span>
+	<input type="hidden" value="${total }" id="allpage">
 </body>
+<script type="text/javascript">
+
+var pageNo=1;
+
+function delEmp(name) {
+		var flag = window.confirm("确认删除员工信息吗?");
+		if (flag) {
+			 $.ajax({
+				url:"/Ordersystem/emp_delEmp.action",
+				data:{pageNo:pageNo,emp_idcar:$("#emp_idcar").val(),emp_id:$("#emp_id").val(),emp_name:$("#emp_name").val(),emp_gender:$("#emp_gender").val(),del_id:name},
+				type:"post",
+				dataType:"json",
+				success:function(list){
+					 $("#tbody").empty();
+					 for(var i=0;i<list.length;i++){
+						 var tr = $("<tr onmouseover='this.style.backgroundColor ='white''	onmouseout='this.style.backgroundColor = '#F5FAFE';'><td align='center'>"+list[i].emp_id+"</td><td align='center'>"+list[i].emp_name+"</td><td align='center'>"+list[i].emp_gender+"</td><td align='center'>"+list[i].emp_birday+"</td><td align='center'>"+list[i].emp_age+"</td><td align='center'>"+list[i].emp_idcar+"</td><td align='center'>"+list[i].emp_address+"</td><td align='center'>"+list[i].emp_hire_date+"</td><td align='center'>"+list[i].role_name+"</td><td align='center'>"+list[i].emp_state+"</td><td align='center'>"+list[i].emp_phone+
+						 "</td><td align='center' style='HEIGHT: 22px' width='5%'><a href='${pageContext.request.contextPath}/emp_editEmp.action?emp_id="+list[i].emp_id+"'><img src='${pageContext.request.contextPath}/admin/images/i_edit.gif'	border='0' style='CURSOR: hand'> </a></td><td align='center' style='HEIGHT: 22px' width='5%'><img src='${pageContext.request.contextPath}/admin/images/i_del.gif' width='16' height='16' onclick = 'delEmp("+list[i].emp_id+")'"+
+						 " border='0' style='CURSOR: hand'>	</td></tr>");
+						$("#tbody").append(tr);	 
+					}  
+					$("#currentpage").text("第"+pageNo+"页"); 
+				}
+			}); 
+	
+		}
+		}
+
+	function bac(){
+		pageNo = --pageNo<1?1:pageNo;
+		 $.ajax({
+			url:"/Ordersystem/emp_ajxQueryEmp.action",
+			data:{pageNo:pageNo,emp_idcar:$("#emp_idcar").val(),emp_id:$("#emp_id").val(),emp_name:$("#emp_name").val(),emp_gender:$("#emp_gender").val()},
+			type:"post",
+			dataType:"json",
+			success:function(list){
+				 $("#tbody").empty();
+				 for(var i=0;i<list.length;i++){
+					  var tr = $("<tr onmouseover='this.style.backgroundColor ='white''	onmouseout='this.style.backgroundColor = '#F5FAFE';'><td align='center'>"+list[i].emp_id+"</td><td align='center'>"+list[i].emp_name+"</td><td align='center'>"+list[i].emp_gender+"</td><td align='center'>"+list[i].emp_birday+"</td><td align='center'>"+list[i].emp_age+"</td><td align='center'>"+list[i].emp_idcar+"</td><td align='center'>"+list[i].emp_address+"</td><td align='center'>"+list[i].emp_hire_date+"</td><td align='center'>"+list[i].role_name+"</td><td align='center'>"+list[i].emp_state+"</td><td align='center'>"+list[i].emp_phone+
+						 "</td><td align='center' style='HEIGHT: 22px' width='5%'><a href='${pageContext.request.contextPath}/emp_editEmp.action?emp_id="+list[i].emp_id+"'><img src='${pageContext.request.contextPath}/admin/images/i_edit.gif'	border='0' style='CURSOR: hand'> </a></td><td align='center' style='HEIGHT: 22px' width='5%'><img src='${pageContext.request.contextPath}/admin/images/i_del.gif' width='16' height='16' onclick = 'delEmp("+list[i].emp_id+")'"+
+						 " border='0' style='CURSOR: hand'>	</td></tr>");
+					$("#tbody").append(tr);	 
+				}  
+				$("#currentpage").text("第"+pageNo+"页"); 
+			}
+		}); 
+	}
+	function pre(){
+		var total = $("#allpage").val();
+		pageNo = ++pageNo>total?total:pageNo;
+		 $.ajax({
+			url:"/Ordersystem/emp_ajxQueryEmp.action",
+			data:{pageNo:pageNo,emp_idcar:$("#emp_idcar").val(),emp_id:$("#emp_id").val(),emp_name:$("#emp_name").val(),emp_gender:$("#emp_gender").val()},
+			type:"post",
+			dataType:"json",
+			success:function(list){
+				 $("#tbody").empty();
+				 for(var i=0;i<list.length;i++){
+						  var tr = $("<tr onmouseover='this.style.backgroundColor ='white''	onmouseout='this.style.backgroundColor = '#F5FAFE';'><td align='center'>"+list[i].emp_id+"</td><td align='center'>"+list[i].emp_name+"</td><td align='center'>"+list[i].emp_gender+"</td><td align='center'>"+list[i].emp_birday+"</td><td align='center'>"+list[i].emp_age+"</td><td align='center'>"+list[i].emp_idcar+"</td><td align='center'>"+list[i].emp_address+"</td><td align='center'>"+list[i].emp_hire_date+"</td><td align='center'>"+list[i].role_name+"</td><td align='center'>"+list[i].emp_state+"</td><td align='center'>"+list[i].emp_phone+
+						 "</td><td align='center' style='HEIGHT: 22px' width='5%'><a href='${pageContext.request.contextPath}/emp_editEmp.action?emp_id="+list[i].emp_id+"'><img src='${pageContext.request.contextPath}/admin/images/i_edit.gif'	border='0' style='CURSOR: hand'> </a></td><td align='center' style='HEIGHT: 22px' width='5%'><img src='${pageContext.request.contextPath}/admin/images/i_del.gif' width='16' height='16' onclick = 'delEmp("+list[i].emp_id+")'"+
+						 " border='0' style='CURSOR: hand'>	</td></tr>");
+						$("#tbody").append(tr);	 
+				}   
+				 $("#currentpage").text("第"+pageNo+"页");
+			}
+		}); 
+	};
+
+
+</script>
 </HTML>
 

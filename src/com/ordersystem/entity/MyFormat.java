@@ -8,6 +8,10 @@ public class MyFormat {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd,hh:mm:ss");
 		return sdf;
 	}
+	public static SimpleDateFormat getLastServingFormat(){
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		return sdf;
+	}
 	public static void main(String[] args) {
 		System.out.println(getDateformat().format(new Date()));
 	}
