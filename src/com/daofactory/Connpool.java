@@ -6,51 +6,39 @@ import java.sql.SQLException;
 import org.apache.commons.dbcp.BasicDataSource;
 
 public class Connpool {
-	private static BasicDataSource bds = null;
-	
-	
-	public static BasicDataSource getBds() {
-		return bds;
+	public static BasicDataSource getDataSource() {
+		return dataSource;
 	}
-
-	public static void setBds(BasicDataSource bds) {
-		Connpool.bds = bds;
+	public static void setDataSource(BasicDataSource dataSource) {
+		Connpool.dataSource = dataSource;
 	}
-
+	private static BasicDataSource dataSource=null;
 	static{
-		bds = new BasicDataSource();
-		bds.setDriverClassName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-		bds.setUrl("jdbc:sqlserver://localhost:1433; DatabaseName=school");
-		bds.setUsername("sa");
-		bds.setPassword("818716");
+		
+		dataSource=new BasicDataSource();
+		dataSource.setDriverClassName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+		dataSource.setUrl("jdbc:sqlserver://172.16.22.78:1433; DatabaseName=order");
+		dataSource.setUsername("sa");
+		dataSource.setPassword("818716");
+		
 	}
-	
-	/**get方法用来得到连接池中的连接
-	 * @author hcb
-	 * 
-	 */
-	public static Connection getConn() {
-		Connection conn = null;
+	public Connection getConnection(){
+
 		try {
-			conn = bds.getConnection();
+			if (dataSource!=null) {
+				return dataSource.getConnection();
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return conn;
+		return null;
 	}
-	
-	/**closeConn关闭链接的方法
-	 * @author hcb
-	 * 
-	 */
-	public static void closeConn(Connection conn){
+	public void close(){
 		try {
-			conn.commit();
-			conn.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			dataSource.close();
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
 	}
 }

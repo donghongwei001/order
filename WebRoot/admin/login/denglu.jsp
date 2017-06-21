@@ -58,7 +58,7 @@
 
   <body>
 	<h1>欢迎登陆后台系统</h1>
-	<form action="../../dengluservlet" method="post">
+	<form action="../../wei_save.action" method="post">
 	<div class="input-group">
 	  <span class="input-group-addon" id="basic-addon1">请输入用户名</span>
 	  <input type="text" name="username" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
@@ -69,7 +69,8 @@
 	</div>
 	<div id="erweima">
 		<div id="erweima1">请输入验证码</div><input type="text" id ="Txtidcode" class ="txtVerification"><span id="idcode"></span>
-		<input type="submit" id="butn" value="提交">
+		<input type="button" id="butn" value="提交">
+		<input type="submit" value="提交">
 	</div>
 	</form>
     <!-- Bootstrap core JavaScript

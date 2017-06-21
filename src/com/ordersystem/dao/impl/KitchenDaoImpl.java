@@ -15,16 +15,21 @@ import com.ordersystem.domain.SortKitchenFoodBean;
 import com.ordersystem.domain.WaitFoodBean;
 
 public class KitchenDaoImpl implements KitchenDao {
+
+	public List<SortKitchenFoodBean> showWaitFood() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	/**从数据库中得到所有待做菜品
 	 * @author hcb
 	 * 
 	 */
-	Connpool cp = new Connpool();
+	/*Connpool cp = new Connpool();
 	
-	/* (non-Javadoc)
+	 (non-Javadoc)
 	 * @see com.ordersystem.dao.KitchenDao#showWaitFood()
-	 */
+	 
 	public List<SortKitchenFoodBean> showWaitFood() {
 		// TODO Auto-generated method stub
 		//Connection conn = cp.getConn();
@@ -41,10 +46,10 @@ public class KitchenDaoImpl implements KitchenDao {
 			return null;
 		}
 		
-		/**对从数据库取出的每个菜品list集合进行 遍历并菜封装
+		*//**对从数据库取出的每个菜品list集合进行 遍历并菜封装
 		 * @author hcb
 		 * 
-		 */
+		 *//*
 		List<SortKitchenFoodBean> list = new ArrayList<SortKitchenFoodBean>();	//用来存放封装鸡皮的菜品类对象
 		for (int i = 0; i < wfb.size(); i++) {		
 			
@@ -86,10 +91,10 @@ public class KitchenDaoImpl implements KitchenDao {
 			list.add(skfb);
 		}//并菜结束
 		
-		/**对已经封装好的list集合进行按权重排序
+		*//**对已经封装好的list集合进行按权重排序
 		 * @author hcb
 		 * 
-		 */
+		 *//*
 		for (int j = 0; j < list.size()-1; j++) {
 			for (int j2 = 1; j2 < list.size()-j; j2++) {
 				if (list.get(j).getWeight()<list.get(j+1).getWeight()) {
@@ -100,5 +105,5 @@ public class KitchenDaoImpl implements KitchenDao {
 			}
 		}
 		return list;
-	}
+	}*/
 }

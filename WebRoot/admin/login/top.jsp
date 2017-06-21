@@ -29,14 +29,21 @@ TH {
 
 <script type="text/javascript">
 	function exitSys() {
-		var flag = window.confirm("确认退出系统吗?");
-		if (flag) {
-			window.top.open('', '_parent', '');
-			window.top.close();
-		}
-		//如果你使用的是firefox浏览器必须要做以下设置 
-		//1、在地址栏输入about:config然后回车，警告确认 
-		//2、在过滤器中输入”dom.allow_scripts_to_close_windows“，双击即可将此值设为true 即可完成了 
+	alert("1212");
+		$.ajax({ //发送了一个新的请求，与按钮这个请求完全不是一马事
+				type : "post", //请求方式
+				url : "/Ordersystem/dongtuichu.action", //请求地址
+				dataType : "text",
+				
+				//async : false,
+
+				success : function(data) { //请求成功后调用的回调函数，参数1【data】 请求返回的数据，这个数据类型是dataType  制定
+					alert("212121212");
+				}
+
+			})
+		
+		
 
 	}
 </script>
@@ -100,8 +107,8 @@ TH {
 									</td>
 									<td width="155" valign="bottom"
 										background="${pageContext.request.contextPath}/admin/images/mis_05b.jpg">
-										<font color="blue"><a href="javascript:void(0)"
-											onclick="exitSys()">退出系统</a> </font></td>
+										<font color="blue"><button
+											onclick="exitSys()">退出系统</button> </font></td>
 									<td width="10" align="right"
 										background="${pageContext.request.contextPath}/admin/images/mis_05b.jpg">
 										<img

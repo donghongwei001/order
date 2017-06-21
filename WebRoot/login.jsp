@@ -83,6 +83,10 @@ carousel-inner {
 .modal fade {
 	background: url("images/main2.jpg");
 }
+#tishi{
+	display:none;
+	position:absolute;
+}
 </style>
 
 <!-- Bootstrap core CSS -->
@@ -111,7 +115,7 @@ carousel-inner {
 	<a href="项目前台2.html" />
 	<button type="button" id="anniu" class="btn btn-success  btn btn-lg">本店介绍</button>
 	</a>&nbsp;
-	<a href="项目前台4.html" />
+	<a href="index.jsp" />
 	<button type="button" id="anniu" class="btn btn-warning  btn btn-lg">欢迎点菜</button>
 	</a>
 
@@ -124,22 +128,22 @@ carousel-inner {
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
-						<spanaria-hidden="true">&times;</span>
+						<span aria-hidden="true">&times;</span>
 					</button>
 					<h4 class="modal-title" id="myModalLabel">登录信息</h4>
 				</div>
 				<div class="modal-body">
 					<!--表单验证-->
-					<form action="webdenglu" method="post">
-						<div class="form-group">
-							<label for="exampleInputEmail1">请输入用户名</label> <input type="text"
+					<form action="hong_save.action" method="post">
+						<div class="form-group" style="margin-left:0px">
+							<label for="exampleInputEmail1">请输入用户名</label> <input type="text" id="username"
 								name="username" class="form-control" placeholder="Username"
-								aria-describedby="basic-addon1">
+								aria-describedby="basic-addon1"style="width:60% ">
 						</div>
 						<div class="form-group">
 							<label for="exampleInputPassword1">请输入您的密码</label> <input
-								type="text" name="password" class="form-control"
-								placeholder="Password" aria-describedby="basic-addon1">
+								type="text" name="password" onblur="dengluyanzheng()" class="form-control" id="password"
+								placeholder="Password" aria-describedby="basic-addon1"style="width:60%">
 						</div>
 
 						<div class="modal-footer">
@@ -158,7 +162,7 @@ carousel-inner {
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal2"
+					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
@@ -166,30 +170,33 @@ carousel-inner {
 				</div>
 				<div class="modal2-body">
 					<!--表单验证-->
-					<form action="demo_excuted.action" method="post">
+					<form action="dong_save.action" method="post">
 						<div class="form-group">
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label
-								for="exampleInputEmail1">请输入用户名</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text"
-								class="form-control" placeholder="Username"
-								name="user"
-								aria-describedby="basic-addon1">
+								for="exampleInputEmail1">请输入用户名</label>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text"
+								class="form-control" placeholder="Username"onblur="shijiao()"id="zhuce" name="u.user"
+								aria-describedby="basic-addon1" style="width:60%">
+								
 						</div>
+						<div id="tishi">用户名已存在</div>
 						<div class="form-group">
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label
 								for="exampleInputPassword1">&nbsp;&nbsp;&nbsp;请输入您的密码</label> <input
-								type="text" class="form-control"name="pass" placeholder="Password"
-								aria-describedby="basic-addon1">
+								type="text" class="form-control" name="u.pass"
+								placeholder="Password" aria-describedby="basic-addon1"style="width:60%">
 						</div>
 						<div>
 							<input type="text" id="Txtidcode" class="txtVerification">
-							&nbsp;&nbsp;&nbsp;&nbsp;<span id="idcode"></span>
+							&nbsp;&nbsp;&nbsp;&nbsp;<span id="idcode"></span> <input
+								type="button" id="butn" value="提交">
 
 
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">关闭</button>
-							<button type="submit"id="idcode"  class="btn btn-default">注册和登录</button>
+							<button type="submit" class="btn btn-default">注册和登录</button>
 						</div>
 					</form>
 				</div>
@@ -243,11 +250,47 @@ carousel-inner {
 		$("#butn").click(function() {
 			var IsBy = $.idcode.validateCode() //调用返回值，返回值结果为true或者false
 			if (IsBy) {
-					
+
 			} else {
 				alert("请重新输入")
 			}
 		})
+		function shijiao(){
+			
+				$.ajax({ //发送了一个新的请求，与按钮这个请求完全不是一马事
+					type : "post", //请求方式
+					url : "/Ordersystem/zhuce.action", //请求地址
+					data:{value:$("#zhuce").val()},
+					dataType : "text",
+					//async : false,
+					
+					success : function(data) { //请求成功后调用的回调函数，参数1【data】 请求返回的数据，这个数据类型是dataType  制定
+						if(data=="ture"){
+						$("#zhuce").val("");
+							alert("用户名已存在");
+							
+						}
+					}
+	
+				})
+			
+		}
+		function dengluyanzheng(){
+			
+			$.ajax({ //发送了一个新的请求，与按钮这个请求完全不是一马事
+					type : "post", //请求方式
+					url : "/Ordersystem/dengluyan.action", //请求地址
+					data:{nameha:$("#username").val(),passha:$("#password").val()},
+					dataType : "text",
+					success : function(data) { //请求成功后调用的回调函数，参数1【data】 请求返回的数据，这个数据类型是dataType  制定
+							if (data==0) {
+								alert("用户名或密码错误，请从新输入");
+							}
+							
+					}
+	
+				})
+		}
 	</script>
 
 

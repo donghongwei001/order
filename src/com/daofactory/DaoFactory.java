@@ -27,7 +27,7 @@ public class DaoFactory {
 	 */
 	public static Connection getConnection(String databasename){
 		Connection con = null;
-		String URL="jdbc:sqlserver://localhost:1433; DatabaseName="+databasename;
+		String URL="jdbc:sqlserver://172.16.22.78:1433; DatabaseName="+databasename;
 		try {			
 			con = DriverManager.getConnection(URL,"sa","818716");
 		} catch (Exception e) {
@@ -68,10 +68,9 @@ public class DaoFactory {
 	public static int executeUpdate(String sql,Object[] params){
 		int flag = -1;
 		try {
-			Connection con = getConnection("ordersystem");
+			Connection con = getConnection("order");
 			PreparedStatement ps = con.prepareStatement(sql);
 			setParams(ps, params);
-			System.out.println("555");
 			flag = ps.executeUpdate();
 		} catch (Exception e) {
 			System.out.println(e.getMessage()+"4");
@@ -87,7 +86,7 @@ public class DaoFactory {
 		Connection con = null;
 		PreparedStatement p = null;
 		ResultSet rs = null;
-		con = getConnection("ordersystem");
+		con = getConnection("order");
 		ArrayList<ArrayList> arr = new ArrayList<ArrayList>();
 		try {
 			p = con.prepareStatement(sql);
