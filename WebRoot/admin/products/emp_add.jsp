@@ -8,11 +8,11 @@
 	type="text/css" rel="stylesheet">
 
 
-</HEAD>
+<script type="text/javascript" src="../js/jquery-2.1.3.js"></script></HEAD>
 
 <body>
 	<form id="userAction_save_do" name="Form1"
-		action="${pageContext.request.contextPath}/addservlet" method="post">
+		action="${pageContext.request.contextPath}/emp_addEmp.action" method="post" enctype="multipart/form-data">
 		&nbsp;
 		<table cellSpacing="1" cellPadding="5" width="100%" align="center"
 			bgColor="#eeeeee" style="border: 1px solid #8ba7e3" border="0">
@@ -26,97 +26,104 @@
 			<tr>
 				<td align="center" bgColor="#f5fafe" class="ta_01">员工编号：</td>
 				<td class="ta_01" bgColor="#ffffff"><input type="text"
-					name="emp_id" class="bg"/>
+					name="emp.emp_id" class="bg"/>
 				</td>
+			</tr>
+			<tr>
 				<td align="center" bgColor="#f5fafe" class="ta_01">姓名：</td>
 				<td class="ta_01" bgColor="#ffffff"><input type="text"
-					name="emp_name" 
+					name="emp.emp_name" 
 					class="bg" />
 				</td>
 			</tr>
 			<tr>
 				<td align="center" bgColor="#f5fafe" class="ta_01">性别：</td>
 				<td class="ta_01" bgColor="#ffffff">
-				<input type="radio" name="emp_gender"  />男
-				<input type="radio"name="emp_gender"  />女
+				<input type="radio" name="emp.emp_gender" checked="checked" value="男" />男
+				<input type="radio"name="emp.emp_gender" value="女" />女
 				</td>
+			</tr>
+			<tr>
 				<td align="center" bgColor="#f5fafe" class="ta_01">出生年月：</td>
 				<td class="ta_01" bgColor="#ffffff">
-						<select name="emp_birthday">
-							<option>1972年</option>
-							<option>1973年</option>
-							<option>1974年</option>
-							<option>1975年</option>
-							<option>1976年</option>
-							<option>1977年</option>
-							<option>1978年</option>
-							<option>1979年</option>
-							<option>1980年</option>
-							<option>1981年</option>
-							<option>1982年</option>
-							<option>1983年</option>
-							<option>1984年</option>
-							<option>1985年</option>
-							<option>1986年</option>
-							<option>1987年</option>
-							<option>1988年</option>
-							<option>1989年</option>
-							<option>1990年</option>
-							<option>1991年</option>
-							<option>1992年</option>
-							<option>1993年</option>
-							<option>1994年</option>
-							<option>1995年</option>
-							<option>1996年</option>
-							<option>1997年</option>
+				<select name="emp.emp_birday">
+							<option value="--请选择--">--请选择--</option>
+							<option value="1972">1972</option>
+							<option value="1973">1973</option>
+							<option value="1974">1974</option>
+							<option value="1975">1975</option>
+							<option value="1976">1976</option>
+							<option value="1977">1977</option>
+							<option value="1978">1978</option>
+							<option value="1979">1979</option>
+							<option value="1980">1980</option>
+							<option value="1981">1981</option>
+							<option value="1982">1982</option>
+							<option value="1983">1983</option>
+							<option value="1984">1984</option>
+							<option value="1985">1985</option>
+							<option value="1986">1986</option>
+							<option value="1987">1987</option>
+							<option value="1988">1988</option>
+							<option value="1989">1989</option>
+							<option value="1990">1990</option>
+							<option value="1991">1991</option>
+							<option value="1992">1992</option>
+							<option value="1993">1993</option>
+							<option value="1994">1994</option>
+							<option value="1995">1995</option>
+							<option value="1996">1996</option>
+							<option value="1997">1997</option>
 						</select>
-						<select name="emp_birthday">
-						<option>1月</option>
-						<option>2月</option>
-						<option>3月</option>
-						<option>4月</option>
-						<option>5月</option>
-						<option>6月</option>
-						<option>7月</option>
-						<option>8月</option>
-						<option>9月</option>
-						<option>10月</option>
-						<option>11月</option>
-						<option>12月</option>
+						<select name="emp.emp_birday">
+						<option value="--请选择--">--请选择--</option>
+						<option  value="1">1</option>
+						<option  value="2">2</option>
+						<option  value="3">3</option>
+						<option  value="4">4</option>
+						<option  value="5">5</option>
+						<option value="6">6</option>
+						<option value="7">7</option>
+						<option value="8">8</option>
+						<option value="9">9</option>
+						<option value="10">10</option>
+						<option value="11">11</option>
+						<option value="12">12</option>
 					</select>
-					<select name="emp_birthday">
-						<option>1</option>
-						<option>2</option>
-						<option>3</option>
-						<option>4</option>
-						<option>5</option>
-						<option>6</option>
-						<option>7</option>
-						<option>8</option>
-						<option>9</option>
-						<option>10</option>
-						<option>11</option>
-						<option>12</option>
-						<option>13</option>
-						<option>14</option>
-						<option>15</option>
-						<option>16</option>
-						<option>17</option>
-						<option>18</option>
-						<option>19</option>
-						<option>20</option>
-						<option>21</option>
-						<option>22</option>
-						<option>23</option>
-						<option>24</option>
-						<option>25</option>
-						<option>26</option>
-						<option>27</option>
-						<option>28</option>
-						<option>29</option>
-						<option>30</option>
-						<option>31</option>
-					</select>
+					<select name="emp.emp_birday">
+						<option  value="--请选择--">--请选择--</option>
+						<option  value="1">1</option>
+						<option  value="2">2</option>
+						<option  value="3">3</option>
+						<option  value="4">4</option>
+						<option  value="5">5</option>
+						<option  value="6">6</option>
+						<option  value="7">7</option>
+						<option  value="8">8</option>
+						<option  value="9">9</option>
+						<option  value="10">10</option>
+						<option  value="11">11</option>
+						<option  value="12">12</option>
+						<option  value="13">13</option>
+						<option  value="14">14</option>
+						<option  value="15">15</option>
+						<option  value="16">16</option>
+						<option  value="17">17</option>
+						<option  value="18">18</option>
+						<option  value="19">19</option>
+						<option  value="20">20</option>
+						<option  value="21">21</option>
+						<option  value="22">22</option>
+						<option  value="23">23</option>
+						<option  value="24">24</option>
+						<option  value="25">25</option>
+						<option  value="26">26</option>
+						<option  value="27">27</option>
+						<option  value="28">28</option>
+						<option  value="29">29</option>
+						<option  value="30">30</option>
+						<option  value="31">31</option>
+					</select>	
 				</td>
 			</tr>
 
@@ -124,135 +131,157 @@
 			<tr>
 				<td align="center" bgColor="#f5fafe" class="ta_01">年龄：</td>
 				<td class="ta_01" bgColor="#ffffff">
-				<select  name="emp_age">
-						<option>20</option>
-						<option>21</option>
-						<option>22</option>
-						<option>23</option>
-						<option>24</option>
-						<option>25</option>
-						<option>26</option>
-						<option>27</option>
-						<option>28</option>
-						<option>29</option>
-						<option>30</option>
-						<option>31</option>
-						<option>32</option>
-						<option>33</option>
-						<option>34</option>
-						<option>35</option>
-						<option>36</option>
-						<option>37</option>
-						<option>38</option>
-						<option>39</option>
-						<option>40</option>
-						<option>41</option>
-						<option>42</option>
-						<option>43</option>
-						<option>44</option>
-						<option>45</option>
-					</select>
+				<select  name="emp.emp_age">
+						<option value="--请选择--">--请选择--</option>
+						<option value="20">20</option>
+						<option value="21">21</option>
+						<option value="22">22</option>
+						<option value="23">23</option>
+						<option value="24">24</option>
+						<option value="25">25</option>
+						<option value="26">26</option>
+						<option value="27">27</option>
+						<option value="28">28</option>
+						<option value="29">29</option>
+						<option value="30">30</option>
+						<option value="31">31</option>
+						<option value="32">32</option>
+						<option value="33">33</option>
+						<option value="34">34</option>
+						<option value="35">35</option>
+						<option value="36">36</option>
+						<option value="37">37</option>
+						<option value="38">38</option>
+						<option value="39">39</option>
+						<option value="40">40</option>
+						<option value="41">41</option>
+						<option value="42">42</option>
+						<option value="43">43</option>
+						<option value="44">44</option>
+						<option value="45">45</option>
+					</select>	
 				</td>
+			</tr>
+			
+			<tr>
 				<td align="center" bgColor="#f5fafe" class="ta_01">身份证号：</td>
 				<td class="ta_01" bgColor="#ffffff"><input type="text"
-					name="emp_idCar" 
+					name="emp.emp_idcar" 
 					class="bg" />
 				</td>
 			</tr>
 			<tr>
 				<td align="center" bgColor="#f5fafe" class="ta_01">家庭住址：</td>
 				<td class="ta_01" bgColor="#ffffff"><input type="text"
-					name="emp_address" 
+					name="emp.emp_address" 
 					class="bg" />
 				</td>
+			</tr>
+			<tr>
 				<td align="center" bgColor="#f5fafe" class="ta_01">入职时间：</td>
 				<td class="ta_01" bgColor="#ffffff">
-					<select name="emp_hire_date">
-						<option>2012年</option>
-						<option>2013年</option>
-						<option>2014年</option>
-						<option>2015年</option>
-						<option>2016年</option>
-						<option>2017年</option>
+				<select name="emp.emp_hire_date">
+						<option value="--请选择--">--请选择--</option>
+						<option value="2012">2012</option>
+						<option value="2013">2013</option>
+						<option value="2014">2014</option>
+						<option value="2015">2015</option>
+						<option value="2016">2016</option>
+						<option value="2017">2017</option>
+					</select>年
+					<select name="emp.emp_hire_date">
+						<option value="--请选择--">--请选择--</option>
+						<option  value="1">1</option>
+						<option  value="2">2</option>
+						<option  value="3">3</option>
+						<option  value="4">4</option>
+						<option  value="5">5</option>
+						<option  value="6">6</option>
+						<option  value="7">7</option>
+						<option  value="8">8</option>
+						<option  value="9">9</option>
+						<option  value="10">10</option>
+						<option  value="11">11</option>
+						<option  value="12">12</option>
 					</select>
-					<select name="emp_hire_date">
-						<option>1月</option>
-						<option>2月</option>
-						<option>3月</option>
-						<option>4月</option>
-						<option>5月</option>
-						<option>6月</option>
-						<option>7月</option>
-						<option>8月</option>
-						<option>9月</option>
-						<option>10月</option>
-						<option>11月</option>
-						<option>12月</option>
-					</select>
-					<select name="emp_hire_date">
-						<option>1</option>
-						<option>2</option>
-						<option>3</option>
-						<option>4</option>
-						<option>5</option>
-						<option>6</option>
-						<option>7</option>
-						<option>8</option>
-						<option>9</option>
-						<option>10</option>
-						<option>11</option>
-						<option>12</option>
-						<option>13</option>
-						<option>14</option>
-						<option>15</option>
-						<option>16</option>
-						<option>17</option>
-						<option>18</option>
-						<option>19</option>
-						<option>20</option>
-						<option>21</option>
-						<option>22</option>
-						<option>23</option>
-						<option>24</option>
-						<option>25</option>
-						<option>26</option>
-						<option>27</option>
-						<option>28</option>
-						<option>29</option>
-						<option>30</option>
-						<option>31</option>
-					</select>
+					<select name="emp.emp_hire_date">
+						<option value="--请选择--">--请选择--</option>
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option  value="4">4</option>
+						<option  value="5">5</option>
+						<option  value="6">6</option>
+						<option  value="7">7</option>
+						<option  value="8">8</option>
+						<option  value="9">9</option>
+						<option  value="10">10</option>
+						<option  value="11">11</option>
+						<option  value="12">12</option>
+						<option  value="13">13</option>
+						<option  value="14">14</option>
+						<option  value="15">15</option>
+						<option  value="16">16</option>
+						<option  value="17">17</option>
+						<option  value="18">18</option>
+						<option  value="19">19</option>
+						<option  value="20">20</option>
+						<option  value="21">21</option>
+						<option  value="22">22</option>
+						<option  value="23">23</option>
+						<option  value="24">24</option>
+						<option  value="25">25</option>
+						<option  value="26">26</option>
+						<option  value="27">27</option>
+						<option  value="28">28</option>
+						<option  value="29">29</option>
+						<option  value="30">30</option>
+						<option  value="31">31</option>
+					</select>	
 				</td>
 			</tr>
 			<tr>
 				<td align="center" bgColor="#f5fafe" class="ta_01">职位：</td>
 				<td class="ta_01" bgColor="#ffffff">
-					<select  name="emp_fk_pos_id">
-						<option value="服务员">服务员</option>
-						<option value="经理">经理</option>
-						<option value="厨师">厨师</option>
-						<option value="领班">领班</option>
-						<option value="保洁">保洁</option>
-						<option value="保安">保安</option>
-					</select>
-				</td>
-				<td align="center" bgColor="#f5fafe" class="ta_01">状态：</td>
-				<td class="ta_01" bgColor="#ffffff">
-					<select name="emp_struts">
-						<option>在职</option>
-						<option>请假</option>
-						<option>调休</option>
+					<select  name="emp.emp_fk_pos_id" id="posSelect">
+						<option value="--请选择--" selected="selected">--请选择--</option>
 					</select>
 				</td>
 			</tr>
+			<tr>
+				<td align="center" bgColor="#f5fafe" class="ta_01">状态：</td>
+				<td class="ta_01" bgColor="#ffffff">
+					<select name="emp.emp_state">
+						<option value="--请选择--" selected="selected">--请选择--</option>
+						<option value="4">在职</option>
+						<option value="5">请假</option>
+						<option value="7">调休</option>
+						<option value="6">离职</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td align="center" bgColor="#f5fafe" class="ta_01">电话：</td>
+				<td class="ta_01" bgColor="#ffffff"><input type="text"
+					name="emp.emp_phone" class="bg" />
+				</td>
+			</tr>
 			
-			<TR>
+			<!-- <TR>
 				<td align="center" colSpan="1" >电话：
 				</td>
 				<td class="ta_01" colSpan="3"><input type="text"
-					name="emp_phone" 
+					name="emp.emp_phone" 
 					class="bg" /></td>
-			</TR>
+			</TR> -->
+			<tr>
+				<td align="center" bgColor="#f5fafe" class="ta_01">头像：</td>
+				<td class="ta_01" bgColor="#ffffff">
+				<img id="img" ><br>
+				<input type="file" name="emppic"  class="bg" />
+				</td>
+			</tr>
 
 			<tr>
 				<td class="ta_01" style="WIDTH: 100%" align="center"
@@ -278,4 +307,19 @@
 		</table>
 	</form>
 </body>
+<script type="text/javascript">
+	$(function(){
+		$("#posSelect").click(function(){
+			$.post("emp_showPosition.action",
+				function(data){
+					$("#posSelect").empty();
+					
+					for(var i = 0;i<data.length;i++){
+						var str = $("<option value="+data[i].role_id+">"+data[i].role_name+"</option>");
+						$("#posSelect").append(str);
+					}
+				},"json");
+		});
+	});
+</script>
 </HTML>

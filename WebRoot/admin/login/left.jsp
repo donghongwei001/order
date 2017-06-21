@@ -35,7 +35,7 @@
 		d.add(8,0,'客户管理','','','mainFrame');
 		
 		//子目录添加
-		d.add(9,1,'员工信息','${pageContext.request.contextPath}/admin/products/emp_list.jsp','','mainFrame');
+		d.add(9,1,'员工信息','${pageContext.request.contextPath}/emp_queryEmp.action','','mainFrame');
 		/* d.add(10,1,'查看信息','${pageContext.request.contextPath}/admin/products/emp_info.jsp','','mainFrame'); */
 		d.add(11,2,'订单列表','${pageContext.request.contextPath}/admin/products/order_list.jsp','','mainFrame');
 		/* d.add(12,2,'订单查询','${pageContext.request.contextPath}/booklistservice','','mainFrame'); */

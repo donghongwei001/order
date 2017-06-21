@@ -7,11 +7,19 @@
 			<result name="error">l.jsp</result>
 		</action>
 	</package>
-	<package name="default1" extends="struts-default" >
+	<package name="hcbdefault1" extends="struts-default" >
 		<action name="kitchen_*" method="{1}" class="com.dong.action.KitchenAction">
 			<result name="flush">admin/products/Kitchen.jsp</result>
 			<result name="pass" type="redirect">admin/products/Kitchen.jsp</result>
 			<result name="error">l.jsp</result>
+		</action>
+	</package>
+	<package name="hcbdefault2" extends="struts-default" >
+		<action name="emp_*" method="{1}" class="com.dong.action.EmpAction">
+			<result name="flush">admin/products/Kitchen.jsp</result>
+			<result name="succ" type="redirect">admin/products/emp_list.jsp</result>
+			<result name="error">l.jsp</result>
+			<result name="edit">admin/products/emp_edit.jsp</result>
 		</action>
 	</package>
 </struts>    
