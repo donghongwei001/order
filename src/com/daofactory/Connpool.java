@@ -1,7 +1,5 @@
 package com.daofactory;
-dfasdfadfsd
-122234567890
-12345678
+sdfgdgh
 import java.sql.Connection;
 import java.sql.SQLException;
 
