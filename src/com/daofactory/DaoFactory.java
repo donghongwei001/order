@@ -58,9 +58,9 @@ public class DaoFactory {
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
-			System.out.println(e.getMessage()+"3");
 		}
 	}
+	
 	
 	/*
 	 * @author hcb
@@ -73,7 +73,7 @@ public class DaoFactory {
 			setParams(ps, params);
 			flag = ps.executeUpdate();
 		} catch (Exception e) {
-			System.out.println(e.getMessage()+"4");
+			
 		}
 		return flag;
 	}

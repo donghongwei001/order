@@ -23,6 +23,34 @@
 			<result name="ok" type="redirect">/index.jsp</result>
 			
 		</action>
+		<action name="cust_*" method="{1}" class="com.dong.action.CustAction">
+			<result name="successs">/admin/products/cust_add.jsp</result>
+			
+		</action>
+		<action name="Table_*" method="{1}" class="com.dong.action.TableAction">
+			<result name="ss">/admin/products/table_list.jsp</result>
+			<result name="error">l.jsp</result>
+		</action>
+	</package>
+	<package name="hcbdefault1" extends="struts-default" >
+		<action name="kitchen_*" method="{1}" class="com.dong.action.KitchenAction">
+			<result name="flush">admin/products/Kitchen.jsp</result>
+			<result name="pass" type="redirect">admin/products/Kitchen.jsp</result>
+			<result name="error">l.jsp</result>
+		</action>
+	</package>
+	<package name="hcbdefault2" extends="struts-default" >
+		<action name="emp_*" method="{1}" class="com.dong.action.EmpAction">
+			<result name="flush">admin/products/Kitchen.jsp</result>
+			<result name="succ" type="redirect">admin/products/emp_list.jsp</result>
+			<result name="error">l.jsp</result>
+			<result name="edit">admin/products/emp_edit.jsp</result>
+		</action>
+		<action name="dishe_*" method="{1}" class="com.dong.action.DisheAction">
+			<result name="succ" type="redirect">admin/products/dishes_list.jsp</result>
+			<result name="error">l.jsp</result>
+			<result name="edit">admin/products/emp_edit.jsp</result>
+		</action>
 	</package>
 	<package name="default1" extends="struts-default">
 		<interceptors>

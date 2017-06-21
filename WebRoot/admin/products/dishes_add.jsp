@@ -12,59 +12,67 @@
 
 <body>
 	<form id="userAction_save_do" name="Form1"
-		action="${pageContext.request.contextPath}/addservlet" method="post">
+		action="${pageContext.request.contextPath}/dishe_addDishe.action" method="post" enctype="multipart/form-data">
 		&nbsp;
 		<table cellSpacing="1" cellPadding="5" width="100%" align="center"
 			bgColor="#eeeeee" style="border: 1px solid #8ba7e3" border="0">
 			<tr>
 				<td class="ta_01" align="center" bgColor="#afd1f3" colSpan="4"
-					height="26"><strong><STRONG>添加商品</STRONG> </strong>
+					height="26"><strong><STRONG>菜品添加</STRONG> </strong>
 				</td>
 			</tr>
 
 
 			<tr>
-				<td align="center" bgColor="#f5fafe" class="ta_01">商品名称：</td>
+				<td align="center" bgColor="#f5fafe" class="ta_01">菜品名称：</td>
 				<td class="ta_01" bgColor="#ffffff"><input type="text"
-					name="name" class="bg"/>
+					name="db.food_name" class="bg"/>
 				</td>
-				<td align="center" bgColor="#f5fafe" class="ta_01">商品价格：</td>
+				<td align="center" bgColor="#f5fafe" class="ta_01">菜品单价：</td>
 				<td class="ta_01" bgColor="#ffffff"><input type="text"
-					name="price" 
+					name="db.food_price" 
 					class="bg" />
 				</td>
 			</tr>
 			<tr>
-				<td align="center" bgColor="#f5fafe" class="ta_01">商品数量：</td>
+				<td align="center" bgColor="#f5fafe" class="ta_01">最大并菜数：</td>
 				<td class="ta_01" bgColor="#ffffff"><input type="text"
-					name="pnum" 
+					name="db.food_merge" 
 					class="bg" />
 				</td>
-				<td align="center" bgColor="#f5fafe" class="ta_01">商品类别：</td>
-				<td class="ta_01" bgColor="#ffffff"><select name="category"
+				<td align="center" bgColor="#f5fafe" class="ta_01">所属菜系：</td>
+				<td class="ta_01" bgColor="#ffffff"><select name="db.food_fk_dishes_id"
 					id="category">
 						<option value="" selected="selected">--选择菜品类--</option>
-										<option value="热菜">热菜</option>
-										<option value="凉菜">凉菜</option>
-										<option value="汤">汤</option>
-										<option value="饮料">饮料</option>
+										<option value="1">热菜</option>
+										<option value="2">凉菜</option>
+										<option value="3">汤</option>
+										<option value="4">饮料</option>
 				</select>
 				</td>
 			</tr>
 
-
+		<tr>
+		<td align="center" bgColor="#f5fafe" class="ta_01">加工时间:</td>
+		<td class="ta_01" bgColor="#ffffff" colSpan="3"><input type="text"
+					name="db.food_time" 
+					class="bg" />
+				</td>
+		
+		</tr>
 			<tr>
-				<td align="center" bgColor="#f5fafe" class="ta_01">商品图片：</td>
+				<td align="center" bgColor="#f5fafe" class="ta_01">上传图片：</td>
 				<td class="ta_01" bgColor="#ffffff" colSpan="3">
 				<input
-					type="file" name="upload" size="30" value=""/>
+					type="file" name="food_pic" size="30" value=""/>
 				</td>
 			</tr>
+			
 			<TR>
-				<TD class="ta_01" align="center" bgColor="#f5fafe">商品描述：</TD>
+				<TD class="ta_01" align="center" bgColor="#f5fafe">菜品描述：</TD>
 				<TD class="ta_01" bgColor="#ffffff" colSpan="3">
 				<textarea
-						name="description" cols="30" rows="3" 
+						name="db.description" cols="30" rows="3" 
 						style="WIDTH: 96%"></textarea>
 				</TD>
 			</TR>

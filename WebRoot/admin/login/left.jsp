@@ -35,7 +35,7 @@
 		d.add(8,0,'客户管理','','','mainFrame');
 		
 		//子目录添加
-		d.add(9,1,'员工信息','${pageContext.request.contextPath}/admin/products/emp_list.jsp','','mainFrame');
+		d.add(9,1,'员工信息','${pageContext.request.contextPath}/emp_queryEmp.action','','mainFrame');
 		/* d.add(10,1,'查看信息','${pageContext.request.contextPath}/admin/products/emp_info.jsp','','mainFrame'); */
 		d.add(11,2,'订单列表','${pageContext.request.contextPath}/Ordersystem/wei_query1.action','','mainFrame');
 		/* d.add(12,2,'订单查询','${pageContext.request.contextPath}/booklistservice','','mainFrame'); */
@@ -43,13 +43,13 @@
 		d.add(26,25,'前台管理','${pageContext.request.contextPath}/admin/products/servicer.jsp ','','mainFrame');
 		d.add(14,4,'权限分配','${pageContext.request.contextPath}/admin/products/show_right.jsp','','mainFrame');
 		d.add(15,4,'修改权限','${pageContext.request.contextPath}/admin/products/show_right.jsp','','mainFrame');
-		d.add(16,5,'菜品排序','${pageContext.request.contextPath}/admin/products/Kitchen.jsp','','mainFrame');
+		d.add(16,5,'菜品排序','${pageContext.request.contextPath}/kitchen_findFood.action','','mainFrame');
 		/* d.add(17,5,'菜目估清','${pageContext.request.contextPath}/booklistservice','','mainFrame'); */
 		d.add(18,6,'菜品信息','${pageContext.request.contextPath}/admin/products/dishes_list.jsp','','mainFrame');
 		/* d.add(19,6,'菜品查询','${pageContext.request.contextPath}/admin/products/food_info.jsp','','mainFrame'); */
 		/* d.add(20,7,'餐桌信息','${pageContext.request.contextPath}/admin/products/table_info.jsp','','mainFrame'); */
-		d.add(21,7,'添加餐桌','${pageContext.request.contextPath}/admin/products/table_list.jsp','','mainFrame');
-		d.add(22,8,'顾客信息','${pageContext.request.contextPath}/admin/products/cust_list.jsp','','mainFrame');
+		d.add(21,7,'添加餐桌','${pageContext.request.contextPath}/Table_seleAll.action','','mainFrame');
+		d.add(22,8,'顾客信息','${pageContext.request.contextPath}/cust_showAllCust.action','','mainFrame');
 		/* d.add(23,8,'积分查询','${pageContext.request.contextPath}/booklistservice','','mainFrame'); */
 
 	

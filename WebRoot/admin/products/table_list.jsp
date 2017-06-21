@@ -66,7 +66,7 @@
 	);
 	 */
 	
-	window.onload = function(){
+	/* window.onload = function(){
 		//alert("00");
 		var ipt = document.getElementById("Form1_userName");
 		var div = document.getElementById("search_he");
@@ -106,15 +106,15 @@
 		}
 		function bgcot(div){
 			div.style.backgroundColor="white";
-		}
+		} */
 </script>
 
 <body>
 	<div id="search_he"></div>
-	<br>
-	<form id="Form1" name="Form1"
-		action="${pageContext.request.contextPath}/findProductByManyCondition"
-		method="post">
+	
+	<%--  <form id="Form1" name="Form1"
+		action="${pageContext.request.contextPath}/Table_selezhuohao.action" 
+		method="post">  --%>
 		<table cellSpacing="1" cellPadding="0" width="100%" align="center"
 			bgColor="#f5fafe" border="0"> 
 			<TBODY>
@@ -125,37 +125,21 @@
 				</tr>
 				<tr>
 					<td>
-						<table cellpadding="0" cellspacing="0" border="0" width="100%">
-							<tr>
-								<td height="22" align="center" bgColor="#f5fafe" class="ta_01">
-									桌号</td>
-								<td class="ta_01" bgColor="#ffffff"><input type="text"
-									name="id" size="15" value="" id="Form1_userName" class="bg" />
+						
+						 <table cellpadding="0" cellspacing="0" border="0" width="100%"> 
+						 	<tr>
+						 		<td>
+							<form action="Table_selezhuo.action" method="post">
+								桌号：<input type="text" name="zhuohao"><br>
+								<input type="submit" value="查询"> 
+							</form>
 								</td>
-								
-
-							
-
-							<tr>
-								<td width="100" height="22" align="center" bgColor="#f5fafe"
-									class="ta_01"></td>
-								<td class="ta_01" bgColor="#ffffff"><font face="宋体"
-									color="red"> &nbsp;</font>
-								</td>
-								<td align="right" bgColor="#ffffff" class="ta_01"><br>
-									<br></td>
-								<td align="right" bgColor="#ffffff" class="ta_01">
-									<button type="submit" id="search" name="search"
-										value="&#26597;&#35810;" class="button_view">
-										&#26597;&#35810;</button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input
-									type="reset" name="reset" value="&#37325;&#32622;"
-									class="button_view" />
-								</td>
-							</tr>
-						</table>
+							</tr> 
+						 </table> 
 					</td>
 
 				</tr>
+				
 				<tr>
 					<td class="ta_01" align="center" bgColor="#afd1f3"><strong>餐桌列表</strong>
 					</TD>
@@ -177,16 +161,47 @@
 								<td align="center" width="24%">桌号</td>
 								<td align="center" width="18%">可供就餐人数</td>
 								<td align="center" width="9%">服务员</td>
-								<td align="center" width="9%">销量</td>
 								<td width="8%" align="center">状态</td>
-								<td width="8%" align="center">编辑
-								</td>
-
+								<td width="8%" align="center">编辑</td>
 								<td width="8%" align="center">删除</td>
 							</tr>
-							<tr
+							
+							 <c:forEach items="${list}" var="row1">
+									<tr style="FONT-WEIGHT: bold; HEIGHT:33px;FONT-WEIGHT: bold;FONT-SIZE: 12pt; HEIGHT: 25px;">
+										<td align="center" width="25%">${row1.table_id}</td>
+										<td align="center" width="25%">${row1.table_Capacity}</td>
+										<td align="center" width="25%">${row1.fk_emp_id}</td>
+										<td align="center" width="25%">${row1.table_state }</td>
+										<td width="8%" align="center">
+									<a
+										href="${pageContext.request.contextPath}/admin/products/money_edit.jsp">
+											<img
+											src="${pageContext.request.contextPath}/admin/images/i_del.gif"
+											width="16" height="16" border="0" style="CURSOR: hand">
+									</a>
+								</td>
+								<td width="8%" align="center">
+									<a
+										href="${pageContext.request.contextPath}/deleterecord?id=&method=del">
+											<img
+											src="${pageContext.request.contextPath}/admin/images/i_del.gif"
+											width="16" height="16" border="0" style="CURSOR: hand">
+									</a>
+								</td> 
+									</tr>
+								</c:forEach>
+	
+							
+							
+							
+							
+							
+							
+							
+							
+						<%-- 	<tr
 								style="FONT-WEIGHT: bold; FONT-SIZE: 12pt; HEIGHT: 25px; BACKGROUND-COLOR: #afd1f3">
-								<td align="center" width="24%">1</td>
+								<td align="center" width="24%"></td>
 								<td align="center" width="18%">10</td>
 								<td align="center" width="9%">张三</td>
 								<td align="center" width="9%">3</td>
@@ -231,7 +246,7 @@
 											width="16" height="16" border="0" style="CURSOR: hand">
 									</a>
 								</td>
-							</tr>
+							</tr> --%>
 							
 
 							<%-- <c:forEach items="${list }" var = "li">
@@ -267,7 +282,7 @@
 				</tr>
 			</TBODY>
 		</table>
-	</form>
+<!--  </form>  -->
 </body>
 </HTML>
 
