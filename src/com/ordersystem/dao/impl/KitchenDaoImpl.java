@@ -49,10 +49,12 @@ public class KitchenDaoImpl implements KitchenDao {
 				String orderId = wfb.get(i).getFk_order_id();		//订单id  (记录用来更新订单最后上菜时间)
 				//System.out.println(food_name);
 				String order_food_mark = wfb.get(i).getOrder_food_mark();
-				int maxMerge = wfb.get(i).getFood_maxcb();
+				int maxMerge = wfb.get(i).getFood_maxcb();		//得到该菜的最大能合并数
+				String mark = wfb.get(i).getOrder_food_mark()==null?"ept":wfb.get(i).getOrder_food_mark();
 				//添加入集合前先用for对mergelist进行遍历  判断是否能进行合并
 				for (int j = 0; j < MergeList.size(); j++) {
-					if (food_name.equals(MergeList.get(j).getWfb().getFood_name())) {
+					String merkM = MergeList.get(j).getWfb().getOrder_food_mark()==null?"ept":MergeList.get(j).getWfb().getOrder_food_mark();
+					if (food_name.equals(MergeList.get(j).getWfb().getFood_name())&&maxMerge > MergeList.get(j).getFoodnum()&&mark.equals(merkM)) {
 					//if (food_name.equals(MergeList.get(j).getWfb().getFood_name())&&order_food_mark.equals(MergeList.get(j).getWfb().getOrder_food_mark())&&maxMerge > MergeList.get(j).getFoodnum()) {
 						System.out.println("符合并菜条件");
 						flag = 1;

@@ -35,11 +35,11 @@ public class PageUtil {
 			flag2=getAllPage();
 		}
 		StringBuffer sb = new StringBuffer();
-		sb.append("<a href='?currPage=1&pageSize="+getPage()+"'>首页</a>");
-		sb.append("<a href='?currPage="+flag1+"&pageSize="+getPage()+"'>上一页</a>");
+		sb.append("<a href='/Ordersystem/kitchen_findFood.action?currPage=1&pageSize="+getPage()+"'>首页</a>");
+		sb.append("<a href='/Ordersystem/kitchen_findFood.action?currPage="+flag1+"&pageSize="+getPage()+"'>上一页</a>");
 		
-		sb.append("<a href='?currPage="+flag2+"&pageSize="+getPage()+"'>下一页</a>");
-		sb.append("<a href='?currPage="+getAllPage()+"&pageSize="+getPage()+"'>尾页</a>");
+		sb.append("<a href='/Ordersystem/kitchen_findFood.action?currPage="+flag2+"&pageSize="+getPage()+"'>下一页</a>");
+		sb.append("<a href='kitchen_findFood.action?currPage="+getAllPage()+"&pageSize="+getPage()+"'>尾页</a>");
 		return sb.toString(); 	
 		
 	}

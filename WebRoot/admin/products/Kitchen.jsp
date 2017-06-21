@@ -93,21 +93,86 @@
 			
 			<th>上菜</th>
 		</tr>
-		<c:forEach items="${done }" var="dg" varStatus="di">
-		<tr>
-			<td>${di.count }</td>
-			<td>${dg.table_name }</td>
-			<td>${dg.emp_name }</td>
-			<td>${dg.food_name}</td>
-			<td>${dg.food_num }</td>
-			<td>${dg.servingtime }</td>
-			<td>${dg.order_food_mark }</td>
-			<td><a type="button" class="btn btn-success btn-xs" href="${pageContext.request.contextPath}/kitchen_doFood.action?orderfoodid=${dg.order_food_id }&status=1">查看</a></td>
-		</tr>
-		</c:forEach>
-	</table></div>
+				<tbody id="tbody">
+					<c:forEach items="${done.rows }" var="dg" varStatus="di">
+						<tr>
+							<td>${di.count }</td>
+							<td>${dg.table_name }</td>
+							<td>${dg.emp_name }</td>
+							<td>${dg.food_name}</td>
+							<td>${dg.food_num }</td>
+							<td>${dg.servingtime }</td>
+							<td>${dg.order_food_mark }</td>
+							<td><a type="button" class="btn btn-success btn-xs"
+								href="${pageContext.request.contextPath}/kitchen_doFood.action?orderfoodid=${dg.order_food_id }&status=1">查看</a>
+							</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+	<button class="pre" onclick="bac()">上一页</button>
+	<button class="bac" onclick="pre(4)">下一页</button><span id="currentpage">第1页</span><span>共${done.allPage }页</span>
+	<input type="hidden" value="${done.allPage }" id="allpage">
+	</div>
   </div>
-	
-
 </body>
+<script type="text/javascript">
+	/* $(function(){
+		$(".pre").click(function(){
+			alert("555");
+			$.post("kitchen_slitPage.action",
+				{pageNo:++pageNo},
+				function(tlist){
+					$("#tbody").empty();
+					var list = eval("("+tlist+")");
+					for(var i=0,i<list.length,i++){
+						var tr = $("<tr><td>"+(pageNo*10+i)+"</td><td>"+list[i].table_name+"</td><td>"+list[i].emp_name+"</td><td>"+list[i].food_num+"</td><td>"+list[i].servingtime+"</td><td>"+list[i].order_food_mark+"</td><td><a type='button' class='btn btn-success btn-xs' href='${pageContext.request.contextPath}/kitchen_doFood.action?orderfoodid="+list[i].order_food_id+"&status=1'>查看</a></td>");
+						$("#tbody").append(tr);	
+					}
+				},"text");
+		});
+	})	 */
+	var pageNo=1;
+	function bac(){
+		pageNo = --pageNo<1?1:pageNo;
+		 $.ajax({
+			url:"/Ordersystem/kitchen_slitPage.action",
+			data:{pageNo:pageNo},
+			type:"post",
+			dataType:"json",
+			success:function(list){
+				 $("#tbody").empty();
+				 for(var i=0;i<list.length;i++){
+					 var tr = $("<tr><td>"+((pageNo-1)*3+i+1)+"</td><td>"+list[i].table_name+"</td><td>"+list[i].emp_name+"</td><td>"+list[i].food_name+"</td><td>"+list[i].food_num+"</td><td>"+list[i].servingtime+"</td><td>"+list[i].order_food_mark+"</td><td><a type='button' class='btn btn-success btn-xs' href='${pageContext.request.contextPath}/kitchen_doFood.action?orderfoodid="+list[i].order_food_id+"&status=1'>查看</a></td>");
+					$("#tbody").append(tr);	 
+				}  
+				$("#currentpage").text("第"+pageNo+"页"); 
+			}
+		}); 
+	}
+	function pre(){
+		var total = $("#allpage").val();
+		pageNo = ++pageNo>total?total:pageNo;
+		 $.ajax({
+			url:"/Ordersystem/kitchen_slitPage.action",
+			data:{pageNo:pageNo},
+			type:"post",
+			dataType:"json",
+			success:function(list){
+				 $("#tbody").empty();
+				 for(var i=0;i<list.length;i++){
+						 var tr = $("<tr><td>"+((pageNo-1)*3+i+1)+"</td><td>"+list[i].table_name+"</td><td>"+list[i].emp_name+"</td><td>"+list[i].food_name+"</td><td>"+list[i].food_num+"</td><td>"+list[i].servingtime+"</td><td>"+list[i].order_food_mark+"</td><td><a type='button' class='btn btn-success btn-xs' href='${pageContext.request.contextPath}/kitchen_doFood.action?orderfoodid="+list[i].order_food_id+"&status=1'>查看</a></td>");
+						$("#tbody").append(tr);	 
+				}   
+				 $("#currentpage").text("第"+pageNo+"页");
+			}
+		}); 
+	};
+
+</script>
 </html>
+
+
+
+
+
