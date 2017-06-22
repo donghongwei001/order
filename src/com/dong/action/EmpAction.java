@@ -190,9 +190,7 @@ public class EmpAction extends BaseAction implements ModelDriven<EmpBeam>{
 	 * 
 	 */
 	public String showPosition(){
-		System.out.println("******------");
 		List<RoleBean> roleList = es.findPosition();
-		System.out.println(roleList.size()+"********");
 		String str = JSON.toJSONString(roleList);
 		System.out.println(str);
 		super.write(str);

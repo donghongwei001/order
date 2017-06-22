@@ -11,7 +11,7 @@
 <script language="javascript"
 	src="${pageContext.request.contextPath}/admin/js/check.js"></script>
 
-</HEAD>
+<script type="text/javascript" src="../js/jquery-2.1.3.js"></script></HEAD>
 <script type="text/javascript">
 	//设置类别的默认值
 	function setProductCategory(t) {
@@ -28,7 +28,7 @@
 
 	};
 </script>
-<body onload = "setProductCategory('${book.category }')">
+<body >
 	<form id="userAction_save_do" name="Form1"
 		action="${pageContext.request.contextPath}/deleterecord?id=${book.bookid}&method=reset" method="post">
 	
@@ -53,13 +53,7 @@
 				<td class="ta_01" bgColor="#ffffff"><input type="text"
 					name="pnum" class="bg" value="${book.pnum }" /></td>
 				<td align="center" bgColor="#f5fafe" class="ta_01">商品类别：</td>
-				<td class="ta_01" bgColor="#ffffff"><select name="category"
-					id="category">
-						<option value="" selected="selected">--选择菜品类--</option>
-										<option value="热菜">热菜</option>
-										<option value="凉菜">凉菜</option>
-										<option value="汤">汤</option>
-										<option value="饮料">饮料</option>
+				<td class="ta_01" bgColor="#ffffff"><select name="category"	id="category">
 				</select></td>
 			</tr>
 
@@ -98,7 +92,23 @@
 		</table>
 	</form>
 
-
+<script type="text/javascript">
+	
+	//function findcar(){
+		//function bodyOnload(){
+	$(document).ready(function(){ 
+		$.post("dishe_findCategory.action",
+			function (data){
+				$("#category").empty();
+				for(var i=0;i<data.length;i++){
+					var str = $("<option value="+data[i].dishes_id+">"+data[i].dishes_name+"</option>");
+					$("#category").append(str);
+				}
+			},"json");
+		})
+	//}
+	
+	</script>
 
 
 </body>
