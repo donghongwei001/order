@@ -27,7 +27,7 @@ public class DaoFactory {
 	 */
 	public static Connection getConnection(String databasename){
 		Connection con = null;
-		String URL="jdbc:sqlserver://localhost:1433; DatabaseName="+databasename;
+		String URL="jdbc:sqlserver://172.16.22.78:1433; DatabaseName="+databasename;
 		try {			
 			con = DriverManager.getConnection(URL,"sa","818716");
 		} catch (Exception e) {
@@ -58,9 +58,9 @@ public class DaoFactory {
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
-			System.out.println(e.getMessage()+"3");
 		}
 	}
+	
 	
 	/*
 	 * @author hcb
@@ -71,10 +71,9 @@ public class DaoFactory {
 			Connection con = getConnection("order");
 			PreparedStatement ps = con.prepareStatement(sql);
 			setParams(ps, params);
-			System.out.println("555");
 			flag = ps.executeUpdate();
 		} catch (Exception e) {
-			System.out.println(e.getMessage()+"4");
+			
 		}
 		return flag;
 	}

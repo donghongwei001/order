@@ -14,6 +14,11 @@ import com.ordersystem.domain.SortKitchenFoodBean;
 import com.ordersystem.domain.WaitFoodBean;
 
 public class KitchenDaoImpl implements KitchenDao {
+
+	public List<SortKitchenFoodBean> showWaitFood() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	/**从数据库中得到所有待做菜品
 	 * @author hcb
@@ -102,7 +107,7 @@ public class KitchenDaoImpl implements KitchenDao {
 			double weight = 0;	//定义权重变量
 			weight = (0.3*wfb.get(i).getLasttime()+0.3*wfb.get(i).getTime()+0.4*wfb.get(i).getOrder_press()*100)*wfb.get(i).getFood_time();
 			//System.out.println(weight);
-			QueryRunner qr = new QueryRunner(cp.getBds());
+			QueryRunner qr = new QueryRunner(cp.getDataSource());
 			String upsql = "update order_food set order_food_weight=? where order_food_id=?";
 			try {
 				qr.update(upsql, weight,wfb.get(i).getOrder_food_id());
@@ -119,7 +124,7 @@ public class KitchenDaoImpl implements KitchenDao {
 	 */
 	public List<WaitFoodBean> showFood(String sql) {
 		
-		QueryRunner qr = new QueryRunner(cp.getBds());
+		QueryRunner qr = new QueryRunner(cp.getDataSource());
 		List<WaitFoodBean> wfb = null;  //-----wfb存放的是数据库返回的 waitfoodbean对象
 		try {
 			wfb = qr.query(sql, new BeanListHandler<WaitFoodBean>(WaitFoodBean.class));
@@ -150,7 +155,7 @@ public class KitchenDaoImpl implements KitchenDao {
 	 */
 		public String findCount(String sql) {
 			// TODO Auto-generated method stub
-			QueryRunner qr = new QueryRunner(cp.getBds());
+			QueryRunner qr = new QueryRunner(cp.getDataSource());
 			String query = null;
 			try {
 				query = qr.query(sql, new ScalarHandler(1) ).toString();
@@ -170,7 +175,7 @@ public class KitchenDaoImpl implements KitchenDao {
 	 */
 	public void updateDataBase(String sql, String param1, String param2) {
 		// TODO Auto-generated method stub
-		QueryRunner qr = new QueryRunner(cp.getBds());
+		QueryRunner qr = new QueryRunner(cp.getDataSource());
 		try {
 			qr.update(sql, param1,param2);
 		} catch (SQLException e) {
@@ -187,7 +192,7 @@ public class KitchenDaoImpl implements KitchenDao {
 	 */
 	public void updateDataBase(String sql, String param1, String param2,String param3) {
 		// TODO Auto-generated method stub
-		QueryRunner qr = new QueryRunner(cp.getBds());
+		QueryRunner qr = new QueryRunner(cp.getDataSource());
 		try {
 			qr.update(sql, param1,param2,param3);
 		} catch (SQLException e) {

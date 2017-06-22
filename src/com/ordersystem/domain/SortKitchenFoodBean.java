@@ -43,7 +43,6 @@ public class SortKitchenFoodBean {
 	public void setWfb(WaitFoodBean wfb) {
 		this.wfb = wfb;
 	}
-	
 	public int getFoodnum() {
 		return foodnum;
 	}

@@ -12,7 +12,7 @@
 
 <body>
 	<form id="userAction_save_do" name="Form1"
-		action="${pageContext.request.contextPath}/addservlet" method="post">
+		action="${pageContext.request.contextPath}/Table_addzhuozi.action" method="post">
 		&nbsp;
 		<table cellSpacing="1" cellPadding="5" width="100%" align="center"
 			bgColor="#eeeeee" style="border: 1px solid #8ba7e3" border="0">
@@ -21,37 +21,32 @@
 					height="26"><strong><STRONG>添加餐桌</STRONG> </strong>
 				</td>
 			</tr>
-
-
-			<tr>
-				<td align="center" bgColor="#f5fafe" class="ta_01">餐桌名称：</td>
+	<tr>
+				<td align="center" bgColor="#f5fafe" class="ta_01">餐桌编号：</td>
 				<td class="ta_01" bgColor="#ffffff"><input type="text"
 					name="name" class="bg"/>
 				</td>
 				
 			</tr>
 			<tr>
-				<td align="center" bgColor="#f5fafe" class="ta_01">餐桌大小：</td>
+				<td align="center" bgColor="#f5fafe" class="ta_01">可供餐人数：</td>
 				<td class="ta_01" bgColor="#ffffff"><input type="text"
-					name="pnum" 
-					class="bg" />
+					name="pnum" class="bg" />
 				</td>
 				
 			</tr>
-
-
-			
 			<TR>
-				<TD class="ta_01" align="center" bgColor="#f5fafe">餐桌描述：</TD>
+				<TD class="ta_01" align="center" bgColor="#f5fafe">餐桌服务员：</TD>
 				<TD class="ta_01" bgColor="#ffffff" colSpan="3">
-				<textarea
-						name="description" cols="30" rows="3" 
-						style="WIDTH: 96%"></textarea>
+				<input type="text" name="fuwuyuan" class="bg" />
 				</TD>
 			</TR>
-			
-
-
+			<TR>
+				<TD class="ta_01" align="center" bgColor="#f5fafe">餐桌状态：</TD>
+				<TD class="ta_01" bgColor="#ffffff" colSpan="3">
+				<input type="text" name="zhuangtai" class="bg" />
+				</TD>
+			</TR>
 			<tr>
 				<td class="ta_01" style="WIDTH: 100%" align="center"
 					bgColor="#f5fafe" colSpan="4">

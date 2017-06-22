@@ -89,7 +89,7 @@ body {
 
 #hujiao {
 	margin-left: 10%;
-	margin-bottom: -5%;
+	margin-bottom:%;
 }
 
 .btn-info {

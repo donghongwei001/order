@@ -58,18 +58,19 @@
 
   <body>
 	<h1>欢迎登陆后台系统</h1>
-	<form action="../../dengluservlet" method="post">
+	<form action="../../wei_save.action" method="post">
 	<div class="input-group">
 	  <span class="input-group-addon" id="basic-addon1">请输入用户名</span>
-	  <input type="text" name="username" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
+	  <input type="text" name="username"id="username" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
 	</div>
 	<div class="input-group" id="mima">
 	  <span class="input-group-addon" id="basic-addon1">请&nbsp;输&nbsp;入&nbsp;密&nbsp;码</span>
-	  <input type="text" name="password" class="form-control" placeholder="Password" aria-describedby="basic-addon1">
+	  <input type="text" name="password"id="password" onblur="houtaidenglu()" class="form-control" placeholder="Password" aria-describedby="basic-addon1">
 	</div>
 	<div id="erweima">
 		<div id="erweima1">请输入验证码</div><input type="text" id ="Txtidcode" class ="txtVerification"><span id="idcode"></span>
-		<input type="submit" id="butn" value="提交">
+		<input type="button" id="butn" value="提交">
+		<input type="submit" value="提交">
 	</div>
 	</form>
     <!-- Bootstrap core JavaScript
@@ -88,6 +89,27 @@
             alert("请重新输入")
 			}
 		 })
+		 function houtaidenglu(){
+		 	$.ajax({ //发送了一个新的请求，与按钮这个请求完全不是一马事
+				type : "post", //请求方式
+				url : "/Ordersystem/wei_houtaidenglu.action", //请求地址
+				dataType : "text",
+				data : {
+					user : $("#username").val(),
+					pass : $("#password").val()
+				},
+				//async : false,
+
+				success : function(data) { //请求成功后调用的回调函数，参数1【data】 请求返回的数据，这个数据类型是dataType  制定
+					if (data==0) {
+						alert("用户名或密码错误,请从新输入");
+						$("#username").val("");
+						$("#password").val("");
+					} 
+				}
+
+			})
+		 }
 	</script>
   </body>
 </html>
