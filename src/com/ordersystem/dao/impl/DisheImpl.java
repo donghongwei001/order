@@ -16,7 +16,7 @@ import com.ordersystem.domain.FoodCategoryBean;
 
 public class DisheImpl implements DisheDao {
 	Connpool cp = new Connpool();
-	QueryRunner qr = new QueryRunner(cp.getBds());
+	QueryRunner qr = new QueryRunner(cp.getDataSource());
 	
 	/**向数据库中插入菜品记录
 	 * @author hcb

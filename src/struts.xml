@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd"><struts>
-	<package name="default" extends="struts-default" >
+	<!-- <package name="default" extends="struts-default" >
 		<interceptors>
 			<interceptor name="donginter" class="com.dong.interceptor.DongInterceptor">
-				<!-- 不拦截的方法 -->
+				不拦截的方法
 				<param name="excludeMethods">query,dengluyanzheng</param>
 			</interceptor>
-			<!-- 构建一个拦截器栈 -->
+			构建一个拦截器栈
 			<interceptor-stack name="aaabbb">
 				<interceptor-ref name="donginter"></interceptor-ref>
 				<interceptor-ref name="defaultStack"></interceptor-ref>
@@ -14,7 +14,7 @@
 		</interceptors>
 		
 		
-		<!-- 配置默认的拦截器 -->
+		配置默认的拦截器
 		<default-interceptor-ref name="aaabbb"></default-interceptor-ref>
 		<global-results>
 			<result name="login" type="redirect">/login.jsp</result>
@@ -31,7 +31,7 @@
 			<result name="ss">/admin/products/table_list.jsp</result>
 			<result name="error">l.jsp</result>
 		</action>
-	</package>
+	</package> -->
 	<package name="hcbdefault1" extends="struts-default" >
 		<action name="kitchen_*" method="{1}" class="com.dong.action.KitchenAction">
 			<result name="flush">admin/products/Kitchen.jsp</result>
@@ -52,13 +52,13 @@
 			<result name="edit">admin/products/emp_edit.jsp</result>
 		</action>
 	</package>
-	<package name="default1" extends="struts-default">
+	<!-- <package name="default1" extends="struts-default">
 		<interceptors>
 			<interceptor name="honginter" class="com.dong.interceptor.DongInterceptor2">
-				<!-- 不拦截的方法 -->
+				不拦截的方法
 				<param name="excludeMethods">query,dengluyanzheng</param>
 			</interceptor>
-			<!-- 构建一个拦截器栈 -->
+			构建一个拦截器栈
 			<interceptor-stack name="aaabbb">
 				<interceptor-ref name="honginter"></interceptor-ref>
 				<interceptor-ref name="defaultStack"></interceptor-ref>
@@ -66,7 +66,7 @@
 		</interceptors>
 		
 		
-		<!-- 配置默认的拦截器 -->
+		配置默认的拦截器
 		<default-interceptor-ref name="aaabbb"></default-interceptor-ref>
 		<global-results>
 			<result name="login" type="redirect">/login.jsp</result>
@@ -78,10 +78,10 @@
 	<package name="default2" extends="struts-default">
 		<interceptors>
 			<interceptor name="weiinter" class="com.dong.interceptor.DongInterceptor3">
-				<!-- 不拦截的方法 -->
+				不拦截的方法
 				<param name="excludeMethods">query1,update,houtaidenglu</param>
 			</interceptor>
-			<!-- 构建一个拦截器栈 -->
+			构建一个拦截器栈
 			<interceptor-stack name="aaabbb">
 				<interceptor-ref name="weiinter"></interceptor-ref>
 				<interceptor-ref name="defaultStack"></interceptor-ref>
@@ -89,7 +89,7 @@
 		</interceptors>
 		
 		
-		<!-- 配置默认的拦截器 -->
+		配置默认的拦截器
 		<default-interceptor-ref name="aaabbb"></default-interceptor-ref>
 		<global-results>
 			<result name="login" type="redirect">/admin/login/denglu.jsp</result>
@@ -99,7 +99,7 @@
 			<result name="error">/admin/products/money_list.jsp</result>
 			<result name="aaa">/admin/products/order_list.jsp</result>
 		</action>
-	</package>
+	</package> -->
 	
 	
 </struts>    
