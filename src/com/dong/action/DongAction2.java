@@ -39,16 +39,7 @@ public class DongAction2 {
 
 	public String dengluyanzheng(){
 		
-		System.out.println("1231212121212121212");
-		try {
-			Object[]params= new Object[]{getNameha()};
-			ArrayList list=new DaoFactory().execQuery("select * from cus_table where cus_name=?", params);
-			for (int i = 0; i < list.size(); i++) {
-				System.out.println(list.get(i));
-			}
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
+		
 		return null;
 	}
 }

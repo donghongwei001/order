@@ -79,7 +79,7 @@
 		<interceptors>
 			<interceptor name="weiinter" class="com.dong.interceptor.DongInterceptor3">
 				<!-- 不拦截的方法 -->
-				<param name="excludeMethods">query1,update</param>
+				<param name="excludeMethods">query1,update,houtaidenglu</param>
 			</interceptor>
 			<!-- 构建一个拦截器栈 -->
 			<interceptor-stack name="aaabbb">

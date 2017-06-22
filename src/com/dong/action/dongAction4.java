@@ -26,6 +26,7 @@ import com.daofactory.DaoFactory;
 import com.opensymphony.xwork2.ActionSupport;
 import com.ordersystem.dao.impl.Userdaoimpl;
 import com.ordersystem.domain.OrderBean;
+import com.ordersystem.domain.TableBean;
 import com.ordersystem.entity.MyFormat;
 import com.sun.org.apache.bcel.internal.generic.NEW;
 
@@ -237,7 +238,7 @@ public class dongAction4 extends ActionSupport{
 	
 	@Action("dengluyan")
 	public String dengluyanzheng() throws IOException{
-		System.out.println("12121212");
+		
 		int flag=0;
 		ArrayList list=new Userdaoimpl().executeQuery("select *  from cus_table");
 		for (int i = 0; i < list.size(); i++) {
@@ -246,8 +247,23 @@ public class dongAction4 extends ActionSupport{
 				flag=1;
 			}
 		}
-		String str=JSON.toJSONString(flag);
+		String str=null;
+		if (flag==1) {
+			QueryRunner qr = new QueryRunner(cp.getDataSource());
+			List<TableBean> list1=null;
+			try {
+				list1 = qr.query("select table_id from table_table where table_state=8", new BeanListHandler<TableBean>(TableBean.class));
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			//ArrayList list1=new Userdaoimpl().executeQuery("select table_id from table_table where table_state=8");
+			str=JSON.toJSONString(list1);
+		}else if (flag==0) {
+			str=JSON.toJSONString(flag);
+		}
 		response.getWriter().print(str);
+		
 		return null;
 	}
 	

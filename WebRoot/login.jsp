@@ -1,6 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html lang="zh-CN">
 <head>
@@ -145,7 +145,10 @@ carousel-inner {
 								type="text" name="password" onblur="dengluyanzheng()" class="form-control" id="password"
 								placeholder="Password" aria-describedby="basic-addon1"style="width:60%">
 						</div>
-
+						<select id="category">
+							
+							
+						</select>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">关闭</button>
@@ -281,10 +284,20 @@ carousel-inner {
 					type : "post", //请求方式
 					url : "/Ordersystem/dengluyan.action", //请求地址
 					data:{nameha:$("#username").val(),passha:$("#password").val()},
-					dataType : "text",
-					success : function(data) { //请求成功后调用的回调函数，参数1【data】 请求返回的数据，这个数据类型是dataType  制定
+					dataType : "json",
+					success : function(data) { //请求成功后调用的回调函数，参数1【data】 请求返回的数据，这个数据类型是dataType制定
+							//alert(data);
 							if (data==0) {
+								$("#username").val("");
+								$("#password").val("");
 								alert("用户名或密码错误，请从新输入");
+							}else if (data!=0) {
+								$("#category").empty();
+								$("#category").append("<option value='' check='checked'>请选择桌号</option>");
+								for(var i=0;i<data.length;i++){
+									var op=$("<option >"+data[i].table_id+"</option>");
+									$("#category").append(op);
+								}
 							}
 							
 					}

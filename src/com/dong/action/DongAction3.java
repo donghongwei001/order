@@ -16,6 +16,7 @@ import org.apache.struts2.convention.annotation.Action;
 
 import com.ConnPool.NaturalPersonService;
 import com.ConnPool.PageUtil;
+import com.alibaba.fastjson.JSON;
 import com.daofactory.Connpool;
 import com.daofactory.DaoFactory;
 import com.ordersystem.dao.impl.Userdaoimpl;
@@ -28,6 +29,38 @@ public class DongAction3 {
 	HttpServletResponse response=ServletActionContext.getResponse();
 	public String save(){
 		return "ok";
+	}
+	private String user;
+	private String pass;
+	
+	public String getUser() {
+		return user;
+	}
+
+	public void setUser(String user) {
+		this.user = user;
+	}
+
+	public String getPass() {
+		return pass;
+	}
+
+	public void setPass(String pass) {
+		this.pass = pass;
+	}
+
+	public String houtaidenglu() throws IOException{
+		ArrayList list=new Userdaoimpl().executeQuery("select account_number,account_psw from account");
+		int flag=0;
+		for (int i = 0; i < list.size(); i++) {
+			ArrayList list1=(ArrayList) list.get(i);
+			if (list1.get(0).equals(getUser())&&list1.get(1).equals(getPass())) {
+				flag=1;
+			}
+		}
+		String str=JSON.toJSONString(flag);
+		response.getWriter().print(str);
+		return null;
 	}
 	
 	public String update() throws IOException{
