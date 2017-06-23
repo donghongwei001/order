@@ -158,29 +158,29 @@
 							style="BORDER-RIGHT: gray 1px solid; BORDER-TOP: gray 1px solid; BORDER-LEFT: gray 1px solid; WIDTH: 100%; WORD-BREAK: break-all; BORDER-BOTTOM: gray 1px solid; BORDER-COLLAPSE: collapse; BACKGROUND-COLOR: #f5fafe; WORD-WRAP: break-word">
 							<tr
 								style="FONT-WEIGHT: bold; FONT-SIZE: 12pt; HEIGHT: 25px; BACKGROUND-COLOR: #afd1f3">
-								<td align="center" width="24%">桌号</td>
-								<td align="center" width="18%">可供就餐人数</td>
-								<td align="center" width="9%">服务员</td>
-								<td width="8%" align="center">状态</td>
-								<td width="8%" align="center">编辑</td>
-								<td width="8%" align="center">删除</td>
+								<td align="center" width="20%">桌号</td>
+								<td align="center" width="10%">可供就餐人数</td>
+								<td align="center" width="20%">服务员</td>
+								<td width="15%" align="center">状态</td>
+								<td width="12%" align="center">编辑</td>
+								<td width="12%" align="center">删除</td>
 							</tr>
 							
 							 <c:forEach items="${list}" var="row1">
 									<tr style="FONT-WEIGHT: bold; HEIGHT:33px;FONT-WEIGHT: bold;FONT-SIZE: 12pt; HEIGHT: 25px;">
-										<td align="center" width="25%">${row1.table_id}</td>
-										<td align="center" width="25%">${row1.table_Capacity}</td>
-										<td align="center" width="25%">${row1.fk_emp_id}</td>
-										<td align="center" width="25%">${row1.table_state }</td>
-										<td width="8%" align="center">
+										<td align="center" width="20%">${row1.table_id}</td>
+										<td align="center" width="20%">${row1.table_Capacity}</td>
+										<td align="center" width="20%">${row1.fk_emp_id}</td>
+										<td align="center" width="20%">${row1.table_state }</td>
+										<td width="9%" align="center">
 									<a
 										href="${pageContext.request.contextPath}/admin/products/money_edit.jsp">
 											<img
-											src="${pageContext.request.contextPath}/admin/images/i_del.gif"
+											src="${pageContext.request.contextPath}/admin/images/i_edit.gif"
 											width="16" height="16" border="0" style="CURSOR: hand">
 									</a>
 								</td>
-								<td width="8%" align="center">
+								<td width="9%" align="center">
 									<a
 										href="${pageContext.request.contextPath}/deleterecord?id=&method=del">
 											<img

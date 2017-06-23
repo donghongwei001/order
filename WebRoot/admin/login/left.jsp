@@ -48,7 +48,7 @@
 		d.add(18,6,'菜品信息','${pageContext.request.contextPath}/admin/products/dishes_list.jsp','','mainFrame');
 		/* d.add(19,6,'菜品查询','${pageContext.request.contextPath}/admin/products/food_info.jsp','','mainFrame'); */
 		/* d.add(20,7,'餐桌信息','${pageContext.request.contextPath}/admin/products/table_info.jsp','','mainFrame'); */
-		d.add(21,7,'添加餐桌','${pageContext.request.contextPath}/Table_seleAll.action','','mainFrame');
+		d.add(21,7,'餐桌信息','${pageContext.request.contextPath}/Table_seleAll.action','','mainFrame');
 		d.add(22,8,'顾客信息','${pageContext.request.contextPath}/cust_showAllCust.action','','mainFrame');
 		/* d.add(23,8,'积分查询','${pageContext.request.contextPath}/booklistservice','','mainFrame'); */
 

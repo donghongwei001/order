@@ -38,7 +38,7 @@ public class DisheAction extends BaseAction implements ModelDriven<DisheBean> {
 	 * 
 	 */
 	public String addDishe(){
-		super
+		super.getparameter("description:");
 		System.out.println(db+"****"+food_picFileName);
 		return "succ";
 	}
