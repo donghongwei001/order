@@ -1,5 +1,6 @@
 package com.ordersystem.dao.impl;
 
+
 import java.util.ArrayList;
 import java.util.List;
 import com.daofactory.DaoFactory;
@@ -13,15 +14,15 @@ import com.ordersystem.domain.CustBean_indent;
 public class CustImpl {
 	DaoFactory ss=new DaoFactory();
 	public List<CustBean> listCust(String user){
-		String sql="select * from cus_table where cus_name like ?";
-		Object[] para =new Object[]{"%"+user+"%"};
+		String sql="select b.cus_id,b.cus_name,c.xiaofei from cus_id_money c,cus_table b where c.cus_id = b.cus_id and b.cus_name like ?";
+		Object[] para =new Object[]{'%'+user+'%'};
 		ArrayList<ArrayList> arr=ss.execQuery(sql, para);
 		ArrayList<CustBean> list=new ArrayList<CustBean>();
 		for (int i = 0; i < arr.size(); i++) {
 			CustBean ct=new CustBean();
 			ct.setCus_id((Integer) arr.get(i).get(0));
 			ct.setCus_name((String) arr.get(i).get(1));
-			ct.setXiaofei((String) arr.get(i).get(2));
+			ct.setXiaofei( (Integer) arr.get(i).get(2));
 			list.add(ct);
 		}
 		return list;
@@ -31,14 +32,14 @@ public class CustImpl {
 	 * 查询数据库中所有顾客信息
 	 */
 	public List<CustBean> showAllCust() {
-		String sql="select * from cus_table";
+		String sql="select b.cus_id,b.cus_name,c.xiaofei from cus_id_money c,cus_table b where c.cus_id = b.cus_id";
 		ArrayList<ArrayList> arr = ss.execQuery(sql, null);
 		ArrayList<CustBean> list=new ArrayList<CustBean>();
 		for (int i = 0; i < arr.size(); i++) {
 			CustBean ct=new CustBean();
 			ct.setCus_id((Integer) arr.get(i).get(0));
 			ct.setCus_name((String) arr.get(i).get(1));
-			ct.setXiaofei((String) arr.get(i).get(2));
+			ct.setXiaofei((Integer) arr.get(i).get(2));
 			list.add(ct);
 		}
 		return list;

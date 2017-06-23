@@ -3,8 +3,15 @@ package com.ordersystem.domain;
 public class TableBean {
 	private int table_id;
 	private int table_Capacity;
-	private int table_state;
+	private String  table_state;
 	private String fk_emp_id;
+	private String table_name;
+	public String getTable_name() {
+		return table_name;
+	}
+	public void setTable_name(String table_name) {
+		this.table_name = table_name;
+	}
 	public int getTable_id() {
 		return table_id;
 	}
@@ -17,10 +24,11 @@ public class TableBean {
 	public void setTable_Capacity(int table_Capacity) {
 		this.table_Capacity = table_Capacity;
 	}
-	public int getTable_state() {
+	
+	public String getTable_state() {
 		return table_state;
 	}
-	public void setTable_state(int table_state) {
+	public void setTable_state(String table_state) {
 		this.table_state = table_state;
 	}
 	public String getFk_emp_id() {

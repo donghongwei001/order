@@ -105,7 +105,7 @@ h1 {
 }
 
 td {
-	width: 800px;
+	width: 40%;
 }
 </style>
 

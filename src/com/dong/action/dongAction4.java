@@ -368,13 +368,13 @@ public class dongAction4 extends ActionSupport{
 		Object[]params1=new Object[]{zhuahao};
 		ArrayList<ArrayList> list1=new DaoFactory().execQuery("select fk_emp_id from ser_tab where fk_table_id=?", params1);
 		Object[]params2=new Object[]{shijian,zhuahao,money,list1.get(0).get(0),shijian,list.get(0).get(0)};
-		int flag=new DaoFactory().executeUpdate("insert into order_table(order_id,order_time,order_fk_tabid,order_money,order_fk_empid,order_lasttime,order_fk_cusid) values (15,?,?,?,?,?,?)", params2);
+		int flag=new DaoFactory().executeUpdate("insert into order_table(order_id,order_time,order_fk_tabid,order_money,order_fk_empid,order_lasttime,order_fk_cusid) values (16,?,?,?,?,?,?)", params2);
 		System.out.println(flag);
 		ArrayList list2=(ArrayList) session.getAttribute("cart");
 		for (int i = 0; i < list2.size(); i++) {
 			GouwucheBean gBean=(GouwucheBean) list2.get(i);
 			Object[]params3=new Object[]{gBean.getId(),gBean.getCount()};
-			int flag1=new DaoFactory().executeUpdate("insert into order_food(fk_order_id,fk_food_id,order_food_num,order_food_status) values(15,?,?,1)", params3);
+			int flag1=new DaoFactory().executeUpdate("insert into order_food(fk_order_id,fk_food_id,order_food_num,order_food_status) values(16,?,?,1)", params3);
 			System.out.println(flag1);
 		}
 		Object[]params4=new Object[]{zhuahao};

@@ -22,15 +22,11 @@
 		<action name="dong_*" class="com.dong.action.dongAction" method="{1}">
 			<result name="ok" type="redirect">/index.jsp</result>
 		</action>
-		<action name="cust_*" method="{1}" class="com.dong.action.CustAction">
-			<result name="successs">/admin/products/cust_add.jsp</result>
-			
-		</action>
-		<action name="Table_*" method="{1}" class="com.dong.action.TableAction">
-			<result name="ss">/admin/products/table_list.jsp</result>
-			<result name="error">l.jsp</result>
-		</action>
-	</package>
+		</package>
+	
+	
+	
+	
 	<package name="hcbdefault1" extends="struts-default" >
 		<action name="kitchen_*" method="{1}" class="com.dong.action.KitchenAction">
 			<result name="flush">admin/products/Kitchen.jsp</result>
@@ -55,6 +51,8 @@
 			<result name="details">admin/products/OrderDetails.jsp</result>
 			<result name="edit">admin/products/dishes_edit.jsp</result>
 		</action>
+		
+		
 	</package>
 	 <package name="default1" extends="struts-default">
 		<interceptors>
@@ -105,6 +103,15 @@
 			<result name="cart">mainfood.jsp</result>
 		</action>
 	</package>
-	
+	<package name="default" extends="struts-default">
+		<action name="cust_*" method="{1}" class="com.dong.action.CustAction">
+			<result name="successs">/admin/products/cust_add.jsp</result>
+			
+		</action>
+		<action name="Table_*" method="{1}" class="com.dong.action.TableAction">
+			<result name="ss">/admin/products/table_list.jsp</result>
+			<result name="error">l.jsp</result>
+		</action>
+	</package>
 	
 </struts>    

@@ -23,17 +23,14 @@ public class CustAction extends BaseAction{
 	CustService ce=new CustService();
 	public String xiaofeixq(){
 		String cus_id = super.getparameter("cus_id");
-		CustService cs=new CustService();
-		List<CustBean_indent> li=cs.shop(cus_id);
+		List<CustBean_indent> li=ce.shop(cus_id);
 		super.setRequestAttr("list", li);
 		return "successs";
 	}
 	
 	public void selectuser() {
 		String user=request.getParameter("name");
-		System.out.println(user);
 		List<CustBean> cb = ce.showCust(user);
-		System.out.println("cb的长度是"+cb.size());
 		super.setsession("list", cb);
 		try {
 			request.getRequestDispatcher("/admin/products/cust_list.jsp").forward(request, response);
@@ -46,7 +43,6 @@ public class CustAction extends BaseAction{
 		}
 	}
 	public String showAllCust(){
-		
 		List<CustBean> cb = ce.showAllCust();
 		super.setsession("list", cb);
 		try { 

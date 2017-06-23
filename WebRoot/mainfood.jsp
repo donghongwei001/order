@@ -89,6 +89,8 @@ span {
 #wodiandecai {
 	margin-left: ;
 	position: absolute;
+	top:300px;
+	right:300px;
 }
 .navbar-default{
 	margin-left:1340px;
@@ -114,7 +116,7 @@ span {
 	<input type="hidden" id="count" value="${list2}">
 	<c:forEach items="${list1}" var="b">
 		<div id="${b.food_id}"
-			style="float:left;margin-left:10%;margin-top:5%;width:250px;height:200px;background:url('uploadFile/${b.food_pic}') no-repeat;background-size:100%">
+			style="float:left;margin-left:8%;margin-top:5%;width:250px;height:200px;background:url('uploadFile/${b.food_pic}') no-repeat;background-size:100%">
 			<span class="name" id="${b.food_id}">${b.food_name}</span>
 			<%-- <button type="button"  id="${b.food_id}" class="btn btn-danger btn-sm">-</button>
 			<span class="shuliang"  id="${b.food_id}">0</span>
@@ -170,7 +172,7 @@ span {
 					<div class="modal-footer">
 					<FONT SIZE="5" COLOR="green"><B>总金额:${he}元</B> </FONT>
 						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-						<button type="button" onclick="xiadan()" class="btn btn-default">确认结账</button>
+						<button type="button" onclick="xiadan()" class="btn btn-default">确认下单</button>
 					</div>
 					
 				</div>

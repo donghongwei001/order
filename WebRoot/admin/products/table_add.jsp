@@ -8,7 +8,7 @@
 	type="text/css" rel="stylesheet">
 
 
-</HEAD>
+<script type="text/javascript" src="../js/jquery-2.1.3.js"></script></HEAD>
 
 <body>
 	<form id="userAction_save_do" name="Form1"
@@ -21,30 +21,22 @@
 					height="26"><strong><STRONG>添加餐桌</STRONG> </strong>
 				</td>
 			</tr>
-	<tr>
-				<td align="center" bgColor="#f5fafe" class="ta_01">餐桌编号：</td>
-				<td class="ta_01" bgColor="#ffffff"><input type="text"
-					name="name" class="bg"/>
-				</td>
-				
-			</tr>
 			<tr>
 				<td align="center" bgColor="#f5fafe" class="ta_01">可供餐人数：</td>
-				<td class="ta_01" bgColor="#ffffff"><input type="text"
-					name="pnum" class="bg" />
+				<td class="ta_01" bgColor="#ffffff"><input type="text" name="pnum" class="bg" />
 				</td>
-				
+			</tr>
+			<tr>
+				<td align="center" bgColor="#f5fafe" class="ta_01">餐桌名称：</td>
+				<td class="ta_01" bgColor="#ffffff"><input type="text" name="table_name" class="bg" />
+				</td>
 			</tr>
 			<TR>
 				<TD class="ta_01" align="center" bgColor="#f5fafe">餐桌服务员：</TD>
 				<TD class="ta_01" bgColor="#ffffff" colSpan="3">
-				<input type="text" name="fuwuyuan" class="bg" />
-				</TD>
-			</TR>
-			<TR>
-				<TD class="ta_01" align="center" bgColor="#f5fafe">餐桌状态：</TD>
-				<TD class="ta_01" bgColor="#ffffff" colSpan="3">
-				<input type="text" name="zhuangtai" class="bg" />
+				<select name="emp_fk_pos_id" id="posSelect">
+				<option value="--请选择--" selected="selected">--请选择--</option>
+				</select>
 				</TD>
 			</TR>
 			<tr>
@@ -71,4 +63,19 @@
 		</table>
 	</form>
 </body>
+<script type="text/javascript">
+	$(document).ready(
+		function(){
+			$.post("Table_sewaiter.action",
+				function(data){
+					$("#posSelect").empty();
+					$("#posSelect").append("<option value='qingxuanze' selected='selected'>--请选择--</option>");
+					for(var i = 0;i<data.length;i++){
+						var str = $("<option value="+data[i].emp_id+">"+data[i].waiter+"</option>");
+						$("#posSelect").append(str);
+					}
+				},"json");
+		});
+
+</script>
 </HTML>
