@@ -35,11 +35,11 @@
  <div class="very-row" style="font-size:12px;" align="center">
  <c:forEach items="${tbList }" var="tb">
  	<c:if test="${tb.table_state==8}" var="result">
-	<div class="mytable"><a href="serv_orderDetails.action?table_id=${tb.table_id }" target="main"><img src="../images/000002.png" width="100px" height="75px"></a><BR><p align="center">
+	<div class="mytable"><a href="serv_orderDetails.action?table_id=${tb.table_id }" target="main"><img src="../images/000002.PNG" width="100px" height="75px"></a><BR><p align="center">
 	<input type="checkbox" name="table_id" value="${tb.table_id }">&nbsp;&nbsp;${tb.table_id }</p><p>服务员:${tb.emp_name}</p></div>
  	</c:if>
  	<c:if test="${tb.table_state==9}" var="result">
-	<div class="mytable"><a href="serv_orderDetails.action?table_id=${tb.table_id }" target="main"><img src="../images/000001.png" width="100px" height="75px"></a><BR><p align="center">
+	<div class="mytable"><a href="serv_orderDetails.action?table_id=${tb.table_id }" target="main"><img src="../images/000001.PNG" width="100px" height="75px"></a><BR><p align="center">
 	<input type="checkbox" name="table_id" value="${tb.table_id }">&nbsp;&nbsp;${tb.table_id }</p><p>服务员:${tb.emp_name}</p></div>
  	</c:if>
  	<c:if test="${tb.table_state==10}" var="result">

@@ -17,7 +17,7 @@ public class Connpool {
 		
 		dataSource=new BasicDataSource();
 		dataSource.setDriverClassName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-		dataSource.setUrl("jdbc:sqlserver://localhost:1433; DatabaseName=order");
+		dataSource.setUrl("jdbc:sqlserver://172.16.22.78:1433; DatabaseName=order");
 		dataSource.setUsername("sa");
 		dataSource.setPassword("818716");
 		
