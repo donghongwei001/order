@@ -13,6 +13,7 @@ import org.apache.struts2.ServletActionContext;
 import com.alibaba.fastjson.JSON;
 import com.opensymphony.xwork2.ModelDriven;
 import com.ordersystem.domain.DisheBean;
+import com.ordersystem.domain.EmpBeam;
 import com.ordersystem.domain.FoodCategoryBean;
 import com.ordersystem.service.DisheService;
 
@@ -107,9 +108,9 @@ public class DisheAction extends BaseAction implements ModelDriven<DisheBean> {
 		if(category!=null&&!category.equals("")) ma.put("dt.dishes_id", category);
 		if(minprice!=null&&!minprice.equals("")) price.put("minprice", minprice);
 		if(maxprice!=null&&!maxprice.equals("")) price.put("maxprice", maxprice);
-		Integer pageSize = 5;
+		Integer pageSize = 10;
 		Integer pageStart = 0;
-		List dishList = ds.queryDishe(ma,price,5+"",0+"");
+		List dishList = ds.queryDishe(ma,price,pageSize+"",pageStart+"");
 		List<DisheBean> disheInfo = (List<DisheBean>) dishList.get(0);
 		Integer count = (Integer) dishList.get(1);
 		Integer total = count/pageSize;
@@ -124,7 +125,7 @@ public class DisheAction extends BaseAction implements ModelDriven<DisheBean> {
 		return "succ";
 	}
 	
-	/**查询菜品的方法
+	/**ajax查询菜品的方法
 	 * @author hcb
 	 * 
 	 */
@@ -142,7 +143,7 @@ public class DisheAction extends BaseAction implements ModelDriven<DisheBean> {
 		if(category!=null&&!category.equals("")) ma.put("category", category);
 		if(minprice!=null&&!minprice.equals("")) price.put("minprice", minprice);
 		if(maxprice!=null&&!maxprice.equals("")) price.put("maxprice", maxprice);
-		Integer pageSize = 5;
+		Integer pageSize = 10;
 		Integer pageStart = 0;
 		Integer pageNum = null;
 		try {
@@ -183,4 +184,29 @@ public class DisheAction extends BaseAction implements ModelDriven<DisheBean> {
 	 * @author hcb
 	 * 
 	 */
+	public String delDishe(){
+		String del_id = super.getparameter("del_id");
+		ds.del_dishe(del_id);
+		ajaxQueryDishes();
+		System.out.println("------delDishe-------");
+		return null;
+	}
+	
+	/**编辑菜品的方法
+	 * @author hcb
+	 * 
+	 */
+	public String editDishe(){
+		String food_id = super.getparameter("food_id");
+		Map<String, String> ma = new HashMap<String, String>();
+		ma.put("food_id", food_id);
+		List foodli = ds.queryDishe(ma, null, "10", "0");
+		if(foodli.size()!=0){
+			DisheBean disheInfo = (DisheBean)((List) foodli.get(0)).get(0);
+			super.setsession("disheInfo", disheInfo);
+			return "edit";
+		}
+		return "error";
+		
+	}
 }

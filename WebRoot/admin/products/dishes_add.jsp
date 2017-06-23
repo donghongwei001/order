@@ -10,7 +10,7 @@
 
 <script type="text/javascript" src="../js/jquery-2.1.3.js"></script></HEAD>
 
-<body onload="findcar()">
+<body>
 	<form id="userAction_save_do" name="Form1"
 		action="${pageContext.request.contextPath}/dishe_addDishe.action" method="post" enctype="multipart/form-data">
 		&nbsp;
@@ -105,17 +105,17 @@
 	</form>
 	
 	<script type="text/javascript">
-	
-		function findcar(){
+	$(document).ready(function(){
 			$.post("dishe_findCategory.action",
 				function (data){
 					$("#category").empty();
+					$("#category").append("<option value='' selected='selected'>--选择菜系--</option>");
 					for(var i=0;i<data.length;i++){
 						var str = $("<option value="+data[i].dishes_id+">"+data[i].dishes_name+"</option>");
 						$("#category").append(str);
 					}
 				},"json");
-		}
+		})
 	
 	</script>
 	

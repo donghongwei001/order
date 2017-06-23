@@ -308,18 +308,16 @@
 	</form>
 </body>
 <script type="text/javascript">
-	$(function(){
-		$("#posSelect").click(function(){
+	$(document).ready(function(){
 			$.post("emp_showPosition.action",
 				function(data){
 					$("#posSelect").empty();
-					
+					$("#posSelect").append("<option value='' selected='selected'>--请选择--</option>");
 					for(var i = 0;i<data.length;i++){
 						var str = $("<option value="+data[i].role_id+">"+data[i].role_name+"</option>");
 						$("#posSelect").append(str);
 					}
-				},"json");
-		});
-	});
+				},"json");})
+		
 </script>
 </HTML>

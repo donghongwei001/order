@@ -30,13 +30,13 @@ public class DisheService {
 	public List queryDishe(Map<String, String> ma,Map<String, String> price, String pageSize, String pageStart) {
 		// TODO Auto-generated method stub
 		String sta = "";
-		if(ma.size()!=0){
+		if(ma!=null&&ma.size()!=0){
 			Set<String> key = ma.keySet();
 			for (String k : key) {
 				sta += " and "+k+" like '%"+ma.get(k)+"%'";
 			}
 		}
-		if(price.size()!=0){
+		if(price!=null&&price.size()!=0){
 			sta +=" and ft.food_price between "+price.get("minprice")+" and "+price.get("maxprice");
 		}
 		String sql1 = "select top "+pageSize+" ft.food_id,ft.food_name,ft.food_price,ft.food_time,ft.food_merge,ft.food_pic,ft.food_fk_dishes_id,ft.food_description,dt.dishes_name from food_table ft,dishes_table dt where ft.food_fk_dishes_id=dt.dishes_id "+
@@ -45,4 +45,16 @@ public class DisheService {
 		List dishInfo = di.queryDishe(sql1,sql2);
 		return dishInfo;
 	}
+
+	/**删除菜品的方法
+	 * @author hcb
+	 * 
+	 */
+	
+	public void del_dishe(String del_id) {
+		// TODO Auto-generated method stub
+		String sql = "delete food_table where food_id=?";
+		di.del_dishe(sql,del_id);
+	}
+	
 }

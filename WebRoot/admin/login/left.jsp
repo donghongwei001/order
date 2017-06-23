@@ -40,7 +40,7 @@
 		d.add(11,2,'订单列表','${pageContext.request.contextPath}/Ordersystem/wei_query1.action','','mainFrame');
 		/* d.add(12,2,'订单查询','${pageContext.request.contextPath}/booklistservice','','mainFrame'); */
 		d.add(13,24,'财务报表','${pageContext.request.contextPath}/fenye.action ','','mainFrame');
-		d.add(26,25,'前台管理','${pageContext.request.contextPath}/admin/products/servicer.jsp ','','mainFrame');
+		d.add(26,25,'前台管理','${pageContext.request.contextPath}/serv_showTable.action ','','mainFrame');
 		d.add(14,4,'权限分配','${pageContext.request.contextPath}/admin/products/show_right.jsp','','mainFrame');
 		d.add(15,4,'修改权限','${pageContext.request.contextPath}/admin/products/show_right.jsp','','mainFrame');
 		d.add(16,5,'菜品排序','${pageContext.request.contextPath}/kitchen_findFood.action','','mainFrame');

@@ -170,13 +170,13 @@
 								<td width="8%" align="center">${di.food_merge }</td>
 								<td width="8%" align="center">${di.food_time }</td>
 								<td align="center" style="HEIGHT: 22px" width="5%"><a
-										href="${pageContext.request.contextPath}/dishe_editEmp.action?emp_id=${di.food_id}">
+										href="${pageContext.request.contextPath}/dishe_editDishe.action?food_id=${di.food_id}">
 											<img src="${pageContext.request.contextPath}/admin/images/i_edit.gif"
 											border="0" style="CURSOR: hand"> </a>
 									</td>
 								<td align="center" style="HEIGHT: 22px" width="5%">
 										<img src="${pageContext.request.contextPath}/admin/images/i_del.gif"
-											width="16" height="16" border="0" style="CURSOR: hand" onclick = "delEmp('${di.food_id}')">
+											width="16" height="16" border="0" style="CURSOR: hand" onclick = "delDeshe('${di.food_id}')">
 									</td>
 							</tr>
 							</c:forEach>
@@ -223,8 +223,8 @@
 								"<td align='center' width='9%'>"+list[i].dishes_name+"</td>"+
 								"<td width='8%' align='center'>"+list[i].food_merge+"</td>"+
 								"<td width='8%' align='center'>"+list[i].food_time+"</td>"+
-								"<td align='center' style='HEIGHT: 22px' width='5%'><a href='${pageContext.request.contextPath}/dishe_editEmp.action?emp_id="+list[i].food_id+"'><img src='${pageContext.request.contextPath}/admin/images/i_edit.gif' border='0' style='CURSOR: hand'> </a></td>"+
-								"<td align='center' style='HEIGHT: 22px' width='5%'><img src='${pageContext.request.contextPath}/admin/images/i_del.gif' width='16' height='16' border='0' style='CURSOR: hand' onclick = 'delEmp('"+list[i].food_id+"')'></td></tr>");
+								"<td align='center' style='HEIGHT: 22px' width='5%'><a href='${pageContext.request.contextPath}/dishe_editDishe.action?food_id="+list[i].food_id+"'><img src='${pageContext.request.contextPath}/admin/images/i_edit.gif' border='0' style='CURSOR: hand'> </a></td>"+
+								"<td align='center' style='HEIGHT: 22px' width='5%'><img src='${pageContext.request.contextPath}/admin/images/i_del.gif' width='16' height='16' border='0' style='CURSOR: hand' onclick = 'delDeshe("+list[i].food_id+")'></td></tr>");
 					$("#tbody").append(tr);	 
 				}  
 				$("#currentpage").text("第"+pageNo+"页"); 
@@ -251,13 +251,42 @@
 								"<td align='center' width='9%'>"+list[i].dishes_name+"</td>"+
 								"<td width='8%' align='center'>"+list[i].food_merge+"</td>"+
 								"<td width='8%' align='center'>"+list[i].food_time+"</td>"+
-								"<td align='center' style='HEIGHT: 22px' width='5%'><a href='${pageContext.request.contextPath}/dishe_editEmp.action?emp_id="+list[i].food_id+"'><img src='${pageContext.request.contextPath}/admin/images/i_edit.gif' border='0' style='CURSOR: hand'> </a></td>"+
-								"<td align='center' style='HEIGHT: 22px' width='5%'><img src='${pageContext.request.contextPath}/admin/images/i_del.gif' width='16' height='16' border='0' style='CURSOR: hand' onclick = 'delEmp('"+list[i].food_id+"')'></td></tr>");
+								"<td align='center' style='HEIGHT: 22px' width='5%'><a href='${pageContext.request.contextPath}/dishe_editDishe.action?food_id="+list[i].food_id+"'><img src='${pageContext.request.contextPath}/admin/images/i_edit.gif' border='0' style='CURSOR: hand'> </a></td>"+
+								"<td align='center' style='HEIGHT: 22px' width='5%'><img src='${pageContext.request.contextPath}/admin/images/i_del.gif' width='16' height='16' border='0' style='CURSOR: hand' onclick = 'delDeshe("+list[i].food_id+")'></td></tr>");
 						$("#tbody").append(tr);	 
 				}   
 				 $("#currentpage").text("第"+pageNo+"页");
 			}
 		}); 
+	};
+	
+	//删除的方法
+	function delDeshe(id){
+	var flag = window.confirm("确认删除菜品信息吗?");
+		if (flag) {
+		 $.ajax({
+			url:"/Ordersystem/dishe_delDishe.action",
+			data:{pageNo:pageNo,del_id:id,category:$("#category").val(),food_id:$("#food_id").val(),food_name:$("#food_name").val(),minprice:$("#minprice").val(),maxprice:$("#maxprice").val()},
+			type:"post",
+			dataType:"json",
+			success:function(list){
+				 $("#tbody").empty();
+				 for(var i=0;i<list.length;i++){
+						  var tr = $("<tr style='FONT-WEIGHT: bold; FONT-SIZE: 12pt; HEIGHT: 25px; BACKGROUND-COLOR: #afd1f3'>"+
+								"<td align='center' width='14%'>"+list[i].food_id+"</td>"+
+								"<td align='center' width='18%'>"+list[i].food_name+"</td>"+
+								"<td align='center' width='9%'>"+list[i].food_price+"</td>"+
+								"<td align='center' width='9%'>"+list[i].dishes_name+"</td>"+
+								"<td width='8%' align='center'>"+list[i].food_merge+"</td>"+
+								"<td width='8%' align='center'>"+list[i].food_time+"</td>"+
+								"<td align='center' style='HEIGHT: 22px' width='5%'><a href='${pageContext.request.contextPath}/dishe_editDishe.action?emp_id="+list[i].food_id+"'><img src='${pageContext.request.contextPath}/admin/images/i_edit.gif' border='0' style='CURSOR: hand'> </a></td>"+
+								"<td align='center' style='HEIGHT: 22px' width='5%'><img src='${pageContext.request.contextPath}/admin/images/i_del.gif' width='16' height='16' border='0' style='CURSOR: hand' onclick = 'delDeshe("+list[i].food_id+")'></td></tr>");
+						$("#tbody").append(tr);	 
+				}   
+				 $("#currentpage").text("第"+pageNo+"页");
+			}
+		}); 
+	}
 	};
 	</script>
 </body>

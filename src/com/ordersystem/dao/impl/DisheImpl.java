@@ -46,7 +46,11 @@ public class DisheImpl implements DisheDao {
 		}
 		return fcb;
 	}
-
+	
+	/**分页按条件查询
+	 * @author hcb
+	 * 
+	 */
 	public List queryDishe(String sql1,String sql2) {
 		List disheInfo = new ArrayList();
 		
@@ -57,9 +61,26 @@ public class DisheImpl implements DisheDao {
 			disheInfo.add(count);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 		return disheInfo;
+	}
+
+	/**删除菜品信息
+	 * @author hcb
+	 * 
+	 */
+	public void del_dishe(String sql, String del_id) {
+		// TODO Auto-generated method stub
+		Object[] params = new Object[]{del_id};
+		try {
+		int i = DaoFactory.executeUpdate(sql, params);
+		System.out.println("删除的结果为:"+i);
+			//qr.update(sql, del_id);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

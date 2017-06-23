@@ -47,7 +47,7 @@ public class KitchenDaoImpl implements KitchenDao {
 			for (int i = 0; i < wfb.size(); i++) {
 				SortKitchenFoodBean skfb = new SortKitchenFoodBean();	//菜品封装类
 				int flag=-1;	//定义一个标志 判断是否合并了该菜
-				int fNum = wfb.get(i).getFood_num();
+				int fNum = wfb.get(i).getFood_num();		//获得该菜所点的数量
 				String tNum = wfb.get(i).getTable_name();	//获得该菜的桌号
 				String idString = wfb.get(i).getOrder_food_id()+"";		//菜品id
 				String food_name = wfb.get(i).getFood_name();		//菜品名称
@@ -58,17 +58,20 @@ public class KitchenDaoImpl implements KitchenDao {
 				String mark = wfb.get(i).getOrder_food_mark()==null?"ept":wfb.get(i).getOrder_food_mark();
 				//添加入集合前先用for对mergelist进行遍历  判断是否能进行合并
 				for (int j = 0; j < MergeList.size(); j++) {
-					String merkM = MergeList.get(j).getWfb().getOrder_food_mark()==null?"ept":MergeList.get(j).getWfb().getOrder_food_mark();
-					if (food_name.equals(MergeList.get(j).getWfb().getFood_name())&&maxMerge > MergeList.get(j).getFoodnum()&&mark.equals(merkM)) {
+					int count =fNum + MergeList.get(j).getFoodnum();		//算出如果合并后该菜的数量  判断若数量小于最大合并数 则符合并菜条件
+					String merkM = MergeList.get(j).getWfb().getOrder_food_mark()==null?"ept":MergeList.get(j).getWfb().getOrder_food_mark();	//获取备注用来判断备注是否一样
+					if (food_name.equals(MergeList.get(j).getWfb().getFood_name()) && maxMerge >= count && mark.equals(merkM)) {
+						
+						
 					//if (food_name.equals(MergeList.get(j).getWfb().getFood_name())&&order_food_mark.equals(MergeList.get(j).getWfb().getOrder_food_mark())&&maxMerge > MergeList.get(j).getFoodnum()) {
-						System.out.println("符合并菜条件");
 						flag = 1;
 						fNum += MergeList.get(j).getFoodnum();	//更新数量
+						System.out.println("fNum+"+fNum);
 						tNum = MergeList.get(j).getTabid()+","+tNum;//更新桌号
 						idString = MergeList.get(j).getOrder_food_id()+"-"+idString;//更新id编号
 						orderId = MergeList.get(j).getOrderId()+"-"+orderId;	//更新订单id
 						System.out.println("合并后的订单编号是:"+orderId);
-						MergeList.get(j).setFoodnum(fNum);
+						MergeList.get(j).setFoodnum(fNum);			//更新菜品数目
 						MergeList.get(j).setOrder_food_id(idString);
 						MergeList.get(j).setTabid(tNum);
 						MergeList.get(j).setOrderId(orderId);
@@ -105,7 +108,7 @@ public class KitchenDaoImpl implements KitchenDao {
 		for (int i = 0; i < wfb.size(); i++) {
 			//System.out.println(wfb.get(i));
 			double weight = 0;	//定义权重变量
-			weight = (0.3*wfb.get(i).getLasttime()+0.3*wfb.get(i).getTime()+0.4*wfb.get(i).getOrder_press()*100)*wfb.get(i).getFood_time();
+			weight = (0.15*wfb.get(i).getLasttime()+0.35*wfb.get(i).getTime()+0.5*wfb.get(i).getOrder_press()*100)*wfb.get(i).getFood_time();
 			//System.out.println(weight);
 			QueryRunner qr = new QueryRunner(cp.getDataSource());
 			String upsql = "update order_food set order_food_weight=? where order_food_id=?";
