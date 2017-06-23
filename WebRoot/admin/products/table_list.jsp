@@ -173,8 +173,8 @@
 										<td align="center" width="20%">${row1.fk_emp_id}</td>
 										<td align="center" width="20%">${row1.table_state }</td>
 										<td width="9%" align="center">
-									<a
-										href="${pageContext.request.contextPath}/admin/products/money_edit.jsp">
+									<%-- <a
+										href="${pageContext.request.contextPath}/admin/products/money_edit.jsp"> --%>
 											<img
 											src="${pageContext.request.contextPath}/admin/images/i_edit.gif"
 											width="16" height="16" border="0" style="CURSOR: hand">
