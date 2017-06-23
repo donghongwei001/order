@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.ordersystem.dao.impl.KitchenDaoImpl;
-import com.ordersystem.domain.FoodBean;
+import com.ordersystem.domain.FoodCategoryBean;
 import com.ordersystem.domain.SortKitchenFoodBean;
 import com.ordersystem.domain.WaitFoodBean;
 import com.ordersystem.entity.MyFormat;

@@ -104,7 +104,7 @@ public class KitchenAction extends BaseAction{
 			currPage = Integer.parseInt(super.getparameter("currPage"));	//获取当前页码
 			pageSize = Integer.parseInt(super.getparameter("pageSize"));	//获取每页显示条数
 		} catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		currPage =currPage==null?1:currPage;	//设置默认页数
 		pageSize = pageSize==null?3:pageSize;	//设置默认每页显示条数

@@ -8,7 +8,7 @@
 	type="text/css" rel="stylesheet">
 
 
-</HEAD>
+<script type="text/javascript" src="../js/jquery-2.1.3.js"></script></HEAD>
 
 <body>
 	<form id="userAction_save_do" name="Form1"
@@ -44,10 +44,7 @@
 				<td class="ta_01" bgColor="#ffffff"><select name="db.food_fk_dishes_id"
 					id="category">
 						<option value="" selected="selected">--选择菜品类--</option>
-										<option value="1">热菜</option>
-										<option value="2">凉菜</option>
-										<option value="3">汤</option>
-										<option value="4">饮料</option>
+									
 				</select>
 				</td>
 			</tr>
@@ -72,7 +69,7 @@
 				<TD class="ta_01" align="center" bgColor="#f5fafe">菜品描述：</TD>
 				<TD class="ta_01" bgColor="#ffffff" colSpan="3">
 				<textarea
-						name="db.description" cols="30" rows="3" 
+						name="description" cols="30" rows="3" 
 						style="WIDTH: 96%"></textarea>
 				</TD>
 			</TR>
@@ -106,5 +103,21 @@
 			</tr>
 		</table>
 	</form>
+	
+	<script type="text/javascript">
+	$(document).ready(function(){
+			$.post("dishe_findCategory.action",
+				function (data){
+					$("#category").empty();
+					$("#category").append("<option value='' selected='selected'>--选择菜系--</option>");
+					for(var i=0;i<data.length;i++){
+						var str = $("<option value="+data[i].dishes_id+">"+data[i].dishes_name+"</option>");
+						$("#category").append(str);
+					}
+				},"json");
+		})
+	
+	</script>
+	
 </body>
 </HTML>

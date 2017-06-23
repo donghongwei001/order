@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+  <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <HTML>
  <HEAD>
@@ -31,62 +32,26 @@
 
  <BODY><div>
  
- <div class="very-row">
-	<div class="mytable"><a href="OrderDetails.jsp" target="main"><img src="../images/000001.PNG"></a><BR><p align="center"><input type="checkbox" name="tableid">001</p></div>
-	<div class="mytable"><img src="../images/000001.PNG"><BR><p align="center"><input type="checkbox" name="tableid">002</p></div>
-	<div class="mytable"><img src="../images/000002.PNG"><BR><p align="center"><input type="checkbox" name="tableid">003</p></div>
-	<div class="mytable"><img src="../images/000001.PNG"><BR><p align="center"><input type="checkbox" name="tableid">004</p></div>
-	<div class="mytable"><img src="../images/000001.PNG"><BR><p align="center"><input type="checkbox" name="tableid">005</p></div>
-	<div class="mytable"><img src="../images/000001.PNG"><BR><p align="center"><input type="checkbox" name="tableid">006</p></div>
-	<div class="mytable"><img src="../images/000002.PNG"><BR><p align="center"><input type="checkbox" name="tableid">007</p></div>
-	<div class="mytable"><img src="../images/000001.PNG"><BR><p align="center"><input type="checkbox" name="tableid">008</p></div>
-  </div>
-  <div class="very-row">
-	<div class="mytable"><img src="../images/000001.PNG"><BR><p align="center"><input type="checkbox" name="tableid">009</p></div>
-	<div class="mytable"><img src="../images/000002.PNG"><BR><p align="center"><input type="checkbox" name="tableid">010</p></div>
-	<div class="mytable"><img src="../images/000001.PNG"><BR><p align="center"><input type="checkbox" name="tableid">011</p></div>
-	<div class="mytable"><img src="../images/000001.PNG"><BR><p align="center"><input type="checkbox" name="tableid">012</p></div>
-	<div class="mytable"><img src="../images/000001.PNG"><BR><p align="center"><input type="checkbox" name="tableid">013</p></div>
-	<div class="mytable"><img src="../images/000001.PNG"><BR><p align="center"><input type="checkbox" name="tableid">014</p></div>
-	<div class="mytable"><img src="../images/000002.PNG"><BR><p align="center"><input type="checkbox" name="tableid">015</p></div>
-	<div class="mytable"><img src="../images/000001.PNG"><BR><p align="center"><input type="checkbox" name="tableid">016</p></div>
-  </div>
-   <div class="very-row">
-	<div class="mytable"><img src="../images/000001.PNG"><BR><p align="center"><input type="checkbox" name="tableid">017</p></div>
-	<div class="mytable"><img src="../images/000001.PNG"><BR><p align="center"><input type="checkbox" name="tableid">018</p></div>
-	<div class="mytable"><img src="../images/000002.PNG"><BR><p align="center"><input type="checkbox" name="tableid">019</p></div>
-	<div class="mytable"><img src="../images/000001.PNG"><BR><p align="center"><input type="checkbox" name="tableid">020</p></div>
-	<div class="mytable"><img src="../images/000001.PNG"><BR><p align="center"><input type="checkbox" name="tableid">021</p></div>
-	<div class="mytable"><img src="../images/000001.PNG"><BR><p align="center"><input type="checkbox" name="tableid">022</p></div>
-	<div class="mytable"><img src="../images/000002.PNG"><BR><p align="center"><input type="checkbox" name="tableid">023</p></div>
-	<div class="mytable"><img src="../images/000001.PNG"><BR><p align="center"><input type="checkbox" name="tableid">024</p></div>
-  </div>
-  <div class="very-row">
-	<div class="mytable"><img src="../images/000001.PNG"><BR><p align="center"><input type="checkbox" name="tableid">025</p></div>
-	<div class="mytable"><img src="../images/000002.PNG"><BR><p align="center"><input type="checkbox" name="tableid">026</p></div>
-	<div class="mytable"><img src="../images/000001.PNG"><BR><p align="center"><input type="checkbox" name="tableid">027</p></div>
-	<div class="mytable"><img src="../images/000001.PNG"><BR><p align="center"><input type="checkbox" name="tableid">028</p></div>
-	<div class="mytable"><img src="../images/000001.PNG"><BR><p align="center"><input type="checkbox" name="tableid">029</p></div>
-	<div class="mytable"><img src="../images/000001.PNG"><BR><p align="center"><input type="checkbox" name="tableid">030</p></div>
-	<div class="mytable"><img src="../images/000002.PNG"><BR><p align="center"><input type="checkbox" name="tableid">031</p></div>
-	<div class="mytable"><img src="../images/000001.PNG"><BR><p align="center"><input type="checkbox" name="tableid">031</p></div>
-  </div>
-   <div class="very-row">
-	<div class="mytable"><img src="../images/000001.PNG"><BR><p align="center"><input type="checkbox" name="tableid">033</p></div>
-	<div class="mytable"><img src="../images/000001.PNG"><BR><p align="center"><input type="checkbox" name="tableid">034</p></div>
-	<div class="mytable"><img src="../images/000002.PNG"><BR><p align="center"><input type="checkbox" name="tableid">035</p></div>
-	<div class="mytable"><img src="../images/000001.PNG"><BR><p align="center"><input type="checkbox" name="tableid">036</p></div>
-	<div class="mytable"><img src="../images/000001.PNG"><BR><p align="center"><input type="checkbox" name="tableid">037</p></div>
-	<div class="mytable"><img src="../images/000001.PNG"><BR><p align="center"><input type="checkbox" name="tableid">038</p></div>
-	<div class="mytable"><img src="../images/000002.PNG"><BR><p align="center"><input type="checkbox" name="tableid">039</p></div>
-	<div class="mytable"><img src="../images/000001.PNG"><BR><p align="center"><input type="checkbox" name="tableid">040</p></div>
-  </div>
-
+ <div class="very-row" style="font-size:12px;" align="center">
+ <c:forEach items="${tbList }" var="tb">
+ 	<c:if test="${tb.table_state==8}" var="result">
+	<div class="mytable"><a href="serv_orderDetails.action?table_id=${tb.table_id }" target="main"><img src="../images/000002.png" width="100px" height="75px"></a><BR><p align="center">
+	<input type="checkbox" name="table_id" value="${tb.table_id }">&nbsp;&nbsp;${tb.table_id }</p><p>服务员:${tb.emp_name}</p></div>
+ 	</c:if>
+ 	<c:if test="${tb.table_state==9}" var="result">
+	<div class="mytable"><a href="serv_orderDetails.action?table_id=${tb.table_id }" target="main"><img src="../images/000001.png" width="100px" height="75px"></a><BR><p align="center">
+	<input type="checkbox" name="table_id" value="${tb.table_id }">&nbsp;&nbsp;${tb.table_id }</p><p>服务员:${tb.emp_name}</p></div>
+ 	</c:if>
+ 	<c:if test="${tb.table_state==10}" var="result">
+	<div class="mytable"><a href="serv_orderDetails.action?table_id=${tb.table_id }" target="main"><img src="../images/000003.png" width="100px" height="75px"></a><BR><p align="center">
+	<input type="checkbox" name="table_id" value="${tb.table_id }">&nbsp;&nbsp;${tb.table_id }</p><p>服务员:${tb.emp_name }</p></div>
+ 	</c:if>
+</c:forEach>
  </div>
    
   <!-- <div class="container">
 	<button class="btn btn-primary">添加餐桌</button>
   </div> -->
- 
+ <input type="hidden" id="txt1" value="555444">
  </BODY>
 </HTML>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd"><struts>
-	<package name="default" extends="struts-default" >
+	<package name="default4" extends="struts-default" >
 		<interceptors>
 			<interceptor name="donginter" class="com.dong.interceptor.DongInterceptor">
 				<!-- 不拦截的方法 -->
@@ -21,7 +21,6 @@
 		</global-results>
 		<action name="dong_*" class="com.dong.action.dongAction" method="{1}">
 			<result name="ok" type="redirect">/index.jsp</result>
-			
 		</action>
 		<action name="cust_*" method="{1}" class="com.dong.action.CustAction">
 			<result name="successs">/admin/products/cust_add.jsp</result>
@@ -49,10 +48,15 @@
 		<action name="dishe_*" method="{1}" class="com.dong.action.DisheAction">
 			<result name="succ" type="redirect">admin/products/dishes_list.jsp</result>
 			<result name="error">l.jsp</result>
-			<result name="edit">admin/products/emp_edit.jsp</result>
+			<result name="edit">admin/products/dishes_edit.jsp</result>
+		</action>
+		<action name="serv_*" method="{1}" class="com.dong.action.ServicePageAction">
+			<result name="succ" type="redirect">admin/products/servicer.jsp</result>
+			<result name="details">admin/products/OrderDetails.jsp</result>
+			<result name="edit">admin/products/dishes_edit.jsp</result>
 		</action>
 	</package>
-	<package name="default1" extends="struts-default">
+	 <package name="default1" extends="struts-default">
 		<interceptors>
 			<interceptor name="honginter" class="com.dong.interceptor.DongInterceptor2">
 				<!-- 不拦截的方法 -->
