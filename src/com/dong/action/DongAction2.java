@@ -2,38 +2,27 @@ package com.dong.action;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.apache.struts2.ServletActionContext;
+
 import com.daofactory.DaoFactory;
 
-public class DongAction2 {
+public class DongAction2{
+	
+	HttpServletRequest request=ServletActionContext.getRequest();
+	HttpSession session=ServletActionContext.getRequest().getSession();
 	public String save(){
+		String user=request.getParameter("username");
+		String zhuohao=request.getParameter("zhuohao");
+		String pass=request.getParameter("password");
+		session.setAttribute("pass", pass);
+		session.setAttribute("user", user);
+		session.setAttribute("zhuohao", zhuohao);
 		return "ok";
 	}
-	private String nameha;
-	private String passha;
 	
-	
-
-	public String getNameha() {
-		return nameha;
-	}
-
-
-
-	public void setNameha(String nameha) {
-		this.nameha = nameha;
-	}
-
-
-
-	public String getPassha() {
-		return passha;
-	}
-
-
-
-	public void setPassha(String passha) {
-		this.passha = passha;
-	}
 
 
 

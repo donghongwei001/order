@@ -145,7 +145,7 @@ carousel-inner {
 								type="text" name="password" onblur="dengluyanzheng()" class="form-control" id="password"
 								placeholder="Password" aria-describedby="basic-addon1"style="width:60%">
 						</div>
-						<select id="category">
+						<select id="category" name="zhuohao">
 							
 							
 						</select>
@@ -293,9 +293,9 @@ carousel-inner {
 								alert("用户名或密码错误，请从新输入");
 							}else if (data!=0) {
 								$("#category").empty();
-								$("#category").append("<option value='' check='checked'>请选择桌号</option>");
+								$("#category").append("<option  check='checked'>请选择桌号</option>");
 								for(var i=0;i<data.length;i++){
-									var op=$("<option >"+data[i].table_id+"</option>");
+									var op=$("<option id='id'>"+data[i].table_id+"</option>");
 									$("#category").append(op);
 								}
 							}
@@ -303,6 +303,8 @@ carousel-inner {
 					}
 	
 				})
+				
+				
 		}
 	</script>
 

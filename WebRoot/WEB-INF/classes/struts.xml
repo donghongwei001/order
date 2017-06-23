@@ -79,7 +79,7 @@
 		<interceptors>
 			<interceptor name="weiinter" class="com.dong.interceptor.DongInterceptor3">
 				<!-- 不拦截的方法 -->
-				<param name="excludeMethods">query1,update,houtaidenglu</param>
+				<param name="excludeMethods">query1,update,houtaidenglu,findfood,addshopcars</param>
 			</interceptor>
 			<!-- 构建一个拦截器栈 -->
 			<interceptor-stack name="aaabbb">
@@ -98,6 +98,7 @@
 			<result name="ok" type="redirect">/admin/login/home.jsp</result>
 			<result name="error">/admin/products/money_list.jsp</result>
 			<result name="aaa">/admin/products/order_list.jsp</result>
+			<result name="cart">mainfood.jsp</result>
 		</action>
 	</package>
 	

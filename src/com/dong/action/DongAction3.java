@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -20,7 +21,10 @@ import com.alibaba.fastjson.JSON;
 import com.daofactory.Connpool;
 import com.daofactory.DaoFactory;
 import com.ordersystem.dao.impl.Userdaoimpl;
+import com.ordersystem.domain.DisheBean;
+import com.ordersystem.domain.GouwucheBean;
 import com.ordersystem.domain.OrderBean;
+import com.ordersystem.domain.TableBean;
 
 public class DongAction3 {
 	Connpool cp = new Connpool();
@@ -114,5 +118,50 @@ public class DongAction3 {
 		response.sendRedirect("/Ordersystem/admin/products/order_list.jsp");
 		return null;
 	}
+	
+	//¹ºÎï³µ
+	public String addshopcars() throws IOException, ServletException{
+		
+		
+		String id=request.getParameter("id");
+		String count=request.getParameter("count");
+		String price=request.getParameter("price");
+		int index=Integer.parseInt(count);
+		int num=Integer.parseInt(price);
+		int sum=index*num;
+		Integer id1=Integer.parseInt(id);
+		String sum1=Integer.toString(sum);
+		Integer he=(Integer) session.getAttribute("he");
+		if (he==null) {
+			he=sum;
+			session.setAttribute("he", he);
+		}else {
+			he=he+sum;
+			session.setAttribute("he", he);
+		}
+		
+		Object[]params=new Object[]{id};
+		ArrayList list=new DaoFactory().execQuery("select food_name from food_table where food_id=?", params);
+		
+		GouwucheBean gBean=new GouwucheBean();
+		gBean.setId(id1);
+		gBean.setName(list);
+		gBean.setCount(count);
+		gBean.setPrice(sum1);
+		ArrayList list2=new ArrayList();
+		list2.add(gBean);
+		/*session.setAttribute("cart", list2);
+		System.out.println(list2);*/
+		ArrayList list1= (ArrayList) session.getAttribute("cart");
+		if (list1==null) {
+			session.setAttribute("cart", list2);
+		}else{
+			list1.add(gBean);
+			session.setAttribute("cart", list1);
+		}
+		return "cart";
+		
+	}
+	
 	
 }

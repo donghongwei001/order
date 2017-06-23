@@ -1,7 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="zh-CN">
 <head>
+
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -64,7 +67,7 @@ body {
 
 #wodiandecai {
 	margin-left: 75%;
-	margin-top:-4%;
+	margin-top: -4%;
 	background: url("images/beijing1.jpg");
 	backgrounf-size: 100%;
 }
@@ -89,7 +92,7 @@ body {
 
 #hujiao {
 	margin-left: 10%;
-	margin-bottom:%;
+	margin-bottom: %;
 }
 
 .btn-info {
@@ -98,9 +101,15 @@ body {
 
 #zhuohao {
 	margin-left: -15%;
-	margin-top: 0.5%;
+	margin-top: 2%;
 	background: url("images/anniubeijing4.jpg");
 	padding: 5px;
+	color: white;
+	font-size: 20px;
+}
+
+#user {
+	margin-left: -15%;
 	color: white;
 }
 </style>
@@ -110,52 +119,48 @@ body {
 	<nav class="navbar navbar-default navbar-fixed-top">
 	<div class="container">
 		<ul id="nav-tabs" class="nav nav-tabs" role="tablist">
-			<li id="zhuohao" role="presentation">本桌桌号:031</li>
+			<li id="user" role="presentation">欢迎您:${user}</li>
+			<li id="zhuohao" role="presentation">您当前桌号为:${zhuohao}</li>
 			<li role="presentation" class="active"><a id="active"
 				href="#home" aria-controls="home" role="tab" data-toggle="tab"><button
 						type="submit" id="sousuo1" class="btn btn-info btn-lg">
 						<span class=" glyphicon glyphicon-apple"></span>菜单信息<span
 							class="glyphicon glyphicon-apple"></span>
-					</button> </a>
-			</li>
+					</button> </a></li>
 
 			<li role="presentation"><a href="#profile"
 				aria-controls="profile" role="tab" data-toggle="tab"><button
 						type="submit" id="sousuo1" class="btn btn-info btn-lg">
 						<span class=" glyphicon glyphicon-apple"></span>个人信息<span
 							class="glyphicon glyphicon-apple"></span>
-					</button> </a>
-			</li>
+					</button> </a></li>
 			<li role="presentation"><a href="#messages"
 				aria-controls="messages" role="tab" data-toggle="tab">
 					<button type="submit" id="sousuo1" class="btn btn-info btn-lg">
 						<span class=" glyphicon glyphicon-apple"></span>积分商城<span
 							class="glyphicon glyphicon-apple"></span>
-					</button> </a>
-			</li>
+					</button> </a></li>
 			<li role="presentation"><a href="#settings"
 				aria-controls="settings" role="tab" data-toggle="tab">
 					<button type="submit" id="sousuo1" class="btn btn-info btn-lg">
 						<span class=" glyphicon glyphicon-apple"></span>Settings<span
 							class="glyphicon glyphicon-apple"></span>
-					</button> </a>
-			</li>
+					</button> </a></li>
 			<li>
 				<form class="navbar-form navbar-left">
 					<div class="form-group">
 						<input type="text" class="form-control" placeholder="Search">
 					</div>
 					<button type="submit" id="sousuo1" class="btn btn-default">搜索</button>
-				</form></li>
+				</form>
+			</li>
 
 
 			<li role="presentation"><a href="项目前台.html" />
-				<button type="button" class="btn btn-danger">返回主页面</button> </a>
-			</li>
+				<button type="button" class="btn btn-danger">返回主页面</button> </a></li>
 			<li><button type="button" id="jiezhang"
 					class="btn btn-primary btn-lg" data-toggle="modal"
-					data-target="#myModal2">结账</button>
-			</li>
+					data-target="#myModal2">结账</button></li>
 
 		</ul>
 	</div>
@@ -165,15 +170,15 @@ body {
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal2"
+					<button type="button" class="close" data-dismiss="modal	"
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 					<h4 class="modal2-title" id="myModal2Label">确认结账</h4>
 				</div>
 				<div class="modal2-body">
-					<iframe class="kuangjia3" src="paymoney.jsp" width="100%" height="600px"
-						scrolling="yes"> </iframe>
+					<iframe class="kuangjia3" src="paymoney.jsp" width="100%"
+						height="600px" scrolling="yes"> </iframe>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT SIZE="5"
 						COLOR="green"><B>总金额:￥584.5元</B> </FONT>
 					<div class="modal-footer">
@@ -191,9 +196,9 @@ body {
 			<div class="container">
 				<button type="submit" id="hujiao" class="btn btn-danger btn-lg">呼叫服务员</button>
 
-				<button type="button" id="wodiandecai"
+				<!-- <button type="button" id="wodiandecai"
 					class="btn btn-primary btn-lg" data-toggle="modal"
-					data-target="#myModal3">我的菜单</button>
+					data-target="#myModal3">我的菜单</button> -->
 			</div>
 			</nav>
 			<div class="modal fade" id="myModal3" tabindex="-1" role="dialog"
@@ -201,17 +206,36 @@ body {
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
 						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal3"
+
+							<button type="button" class="close" data-dismiss="modal"
 								aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
 							<h4 class="modal3-title" id="myModal3Label">确认结账...</h4>
 						</div>
 						<div class="modal3-body">
-							<iframe class="kuangjia3" src="paymoney.jsp" width="100%"
-								height="600px" scrolling="yes"> </iframe>
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT SIZE="5"
-								COLOR="green"><B>总金额:￥584.5元</B> </FONT>
+						<iframe class="kuangjia3" src="paymoney.jsp" width="100%"
+						height="600px" scrolling="yes"> </iframe>
+							<table class="table table-hover">
+								<tr>
+									<td width="250">名称</td>
+									<td width="250">数量</td>
+									<td width="250">单价</td>
+								</tr>
+								<c:forEach items="${cart}" var="a">
+									<tr>
+
+										<td width="250">${a.name}</td>
+										<td width="250">${a.count}</td>
+										<td width="250">${a.price}</td>
+										<td width="250"><button type="button"
+												class="btn btn-danger">删除</button>
+										</td>
+
+									</tr>
+								</c:forEach>
+							</table>
+							<FONT SIZE="5" COLOR="green"><B>总金额:￥584.5元</B> </FONT>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-default"
 									data-dismiss="modal">关闭</button>
@@ -245,12 +269,12 @@ body {
 						<div class="panel-body">
 							<p class="text-success">
 								您&nbsp;&nbsp;&nbsp;的&nbsp;&nbsp;&nbsp;用&nbsp;&nbsp;&nbsp;户&nbsp;&nbsp;&nbsp;名：<input
-									type="text" id="gerenxinxi" placeholder="donghongwei" />
+									type="text" id="gerenxinxi" placeholder="${user}" />
 							</p>
 							<br />
 							<p class="text-info">
-								您关联的手机号是&nbsp;：<input type="text" id="gerenxinxi"
-									placeholder="18603708444" />
+								您&nbsp;&nbsp;&nbsp;的&nbsp;&nbsp;&nbsp;密&nbsp;&nbsp;&nbsp;码&nbsp;&nbsp;&nbsp;：&nbsp;：<input type="text" id="gerenxinxi"
+									placeholder="${pass}" />
 							</p>
 							<br /> <br /> <br />
 							<button type="button" class="btn btn-danger" data-toggle="modal"
@@ -262,11 +286,11 @@ body {
 									<div class="modal-content">
 										<p class="text-success">
 											您&nbsp;&nbsp;&nbsp;的&nbsp;&nbsp;&nbsp;用&nbsp;&nbsp;&nbsp;户&nbsp;&nbsp;&nbsp;名：<input
-												type="text" id="gerenxinxi" placeholder="donghongwei" />
+									type="text" id="gerenxinxi" placeholder="${user}" />
 										</p>
 										<p class="text-info">
-											您关联的手机号是&nbsp;：<input type="text" id="gerenxinxi"
-												placeholder="18603708444" />
+											您&nbsp;&nbsp;&nbsp;的&nbsp;&nbsp;&nbsp;密&nbsp;&nbsp;&nbsp;码&nbsp;&nbsp;&nbsp;：&nbsp;：<input type="text" id="gerenxinxi"
+									placeholder="${pass}" />
 										</p>
 										<button type="button" class="btn btn-danger btn-lg"
 											data-dismiss="modal">取消</button>
@@ -366,8 +390,17 @@ body {
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script src="js/jquery-2.1.3.js"></script>
 	<script src="js/bootstrap.min.js"></script>
-	<script type="java/script">
-		$("#mainframe",parent.document.body).attr("src","http://www.111cn.net");
+
+	<script type="text/javascript">
+		$("#mainframe", parent.document.body).attr("src",
+				"http://www.111cn.net");
+		
 	</script>
 </body>
+
+
+
+
+
+
 </html>

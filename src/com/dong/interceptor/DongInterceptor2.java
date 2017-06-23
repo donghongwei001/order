@@ -3,6 +3,7 @@ package com.dong.interceptor;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
 
@@ -17,14 +18,14 @@ public class DongInterceptor2 extends MethodFilterInterceptor{
 		String user=request.getParameter("username");
 		String pass=request.getParameter("password");
 		
-		
 		ArrayList tableList=new Userdaoimpl().executeQuery("select cus_name,cus_psw from cus_table");
 		for (int i = 0; i < tableList.size(); i++) {
 			ArrayList list=(ArrayList) tableList.get(i);
 			if (user.equals(list.get(0))&&pass.equals(list.get(1))) {
-				
+					
 					String resultp=arg0.invoke();
-					return resultp;
+					return 
+							resultp;
 			}
 		}
 		return "login";

@@ -8,9 +8,31 @@ public class OrderBean {
 	private int order_fk_tabid;
 	private String  order_money;
 	private String emp_name;
+	private int order_fk_empid;
+	private int order_fk_cusid;
 	private String cus_name;
 	private int order_dt_score;
 	private String oeder_dt_mark;
+	private Date order_lasttime;
+	
+	public Date getOrder_lasttime() {
+		return order_lasttime;
+	}
+	public void setOrder_lasttime(Date order_lasttime) {
+		this.order_lasttime = order_lasttime;
+	}
+	public int getOrder_fk_empid() {
+		return order_fk_empid;
+	}
+	public void setOrder_fk_empid(int order_fk_empid) {
+		this.order_fk_empid = order_fk_empid;
+	}
+	public int getOrder_fk_cusid() {
+		return order_fk_cusid;
+	}
+	public void setOrder_fk_cusid(int order_fk_cusid) {
+		this.order_fk_cusid = order_fk_cusid;
+	}
 	public int getOrder_id() {
 		return order_id;
 	}
