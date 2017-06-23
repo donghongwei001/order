@@ -39,7 +39,7 @@ body {
 
 .kuangjia2 {
 	margin-left: 20%;
-	margin-top: -53%;
+	margin-top: -67%;
 }
 
 #nav-tabs {
@@ -101,7 +101,7 @@ body {
 
 #zhuohao {
 	margin-left: -15%;
-	margin-top: 2%;
+	margin-top: 3%;
 	background: url("images/anniubeijing4.jpg");
 	padding: 5px;
 	color: white;

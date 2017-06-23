@@ -73,19 +73,19 @@
 			<div class="col-md-2" style="width:17%">
 				<div class="list-group">
 				  <a href="ManagementTable.jsp" target="main"class="list-group-item">餐桌管理</a>
-				  <a href="ReservationTable.jsp" target="main" class="list-group-item">餐桌预定</a>
-				  <a href="order_lsit.jsp" target="main" class="list-group-item">订单查询</a>
+				<!--   <a href="ReservationTable.jsp" target="main" class="list-group-item">餐桌预定</a>
+				  <a href="order_lsit.jsp" target="main" class="list-group-item">订单查询</a> -->
 				 
 				  
 				</div>
-				<a href="###" class="btn btn-danger button-control"  role="button">清台</a>
+				<!-- <a href="###" class="btn btn-danger button-control"  role="button">清台</a>
 				<a href="###" class="btn btn-danger button-control"  role="button">清扫结束</a><BR>
 				<a href="###" class="btn btn-primary button-control" role="button" data-toggle="modal" data-target="#myModal2">买单</a>
 				<a href="###" class="btn btn-primary button-control" role="button">交班报表</a><BR>
 				<a href="###" class="btn btn-warning button-control" role="button">催菜</a>
 				<a href="###" class="btn btn-warning button-control" role="button">查看流水</a><BR>
 				<a href="###" class="btn btn-danger button-control" role="button">拆台</a>
-				<a href="ManagementTable.html" target="main" class="btn btn-success button-control" role="button">刷新桌位</a>
+				<a href="ManagementTable.html" target="main" class="btn btn-success button-control" role="button">刷新桌位</a> -->
 				
 			</div>
 		</div>

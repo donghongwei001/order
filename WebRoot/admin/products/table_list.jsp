@@ -181,8 +181,8 @@
 									</a>
 								</td>
 								<td width="9%" align="center">
-									<a
-										href="${pageContext.request.contextPath}/deleterecord?id=&method=del">
+									<%-- <a
+										href="${pageContext.request.contextPath}/deleterecord?id=&method=del"> --%>
 											<img
 											src="${pageContext.request.contextPath}/admin/images/i_del.gif"
 											width="16" height="16" border="0" style="CURSOR: hand">
