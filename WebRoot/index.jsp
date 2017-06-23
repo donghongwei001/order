@@ -373,13 +373,13 @@ body {
 			</div>
 
 		</div>
-		<div role="tabpanel" class="tab-pane" id="messages">
+		<!-- <div role="tabpanel" class="tab-pane" id="messages">
 			<img src="images/13152800091302.jpg" /> dsfdsfds
 		</div>
 		<div role="tabpanel" class="tab-pane" id="settings">
 			<img
 				src="images/855afb27317633aa17385d7948db026ef74f244a184f3-OEcmVE_fw658.jpg" />
-		</div>
+		</div> -->
 	</div>
 
 
