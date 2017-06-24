@@ -16,7 +16,7 @@ import com.ordersystem.domain.RoleBean;
 
 public class EmpImpl implements EmpDao{
 	Connpool  cp = new Connpool();
-	QueryRunner qr = new QueryRunner(cp.getBds());
+	QueryRunner qr = new QueryRunner(cp.getDataSource());
 	
 	/**添加员工的方法
 	 * @author hcb

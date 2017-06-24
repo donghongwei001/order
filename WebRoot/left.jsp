@@ -40,7 +40,7 @@
 	
 	<br/>
 	<ul class="nav nav-pills nav-stacked">
-		<li role="presentation" ><a href="mainfood.jsp" target="main"><button class="btn btn-info btn-lg" > <B>招牌菜</B></button></a></li>
+		<li role="presentation" ><a href="/Ordersystem/findfood.action" target="main"><button class="btn btn-info btn-lg" > <B>招牌菜</B></button></a></li>
 		<li role="presentation"><a href="豫菜.html" target="main"><button class="btn btn-info btn-lg" ><B>豫菜</B></button></a></li>
 		<li role="presentation"><a href="框架2.html" target="main"><button class="btn btn-info btn-lg" ><B>肉类</B></button></a></li>
 		<li role="presentation"><a href="框架2.html" target="main"><button class="btn btn-info btn-lg" ><B>菌菜类</B></button></a></li>

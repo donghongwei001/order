@@ -2,13 +2,13 @@ package com.ordersystem.dao;
 
 import java.util.List;
 
-import com.ordersystem.domain.FoodBean;
+import com.ordersystem.domain.FoodCategoryBean;
 
 public interface FoodDao {
 	/*@添加菜品
 	 * @author hcb
 	 */
-	public int addFood(FoodBean fo);
+	public int addFood(FoodCategoryBean fo);
 	
 	/*查询所有菜品的方法
 	 * @author hcb

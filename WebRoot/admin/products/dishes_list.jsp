@@ -75,7 +75,7 @@
 	<div id="search_he"></div>
 	<br>
 	<form id="Form1" name="Form1"
-		action="${pageContext.request.contextPath}/findProductByManyCondition"
+		action="${pageContext.request.contextPath}/dishe_queryAllDishes.action"
 		method="post">
 		<table cellSpacing="1" cellPadding="0" width="100%" align="center"
 			bgColor="#f5fafe" border="0"> 
@@ -90,33 +90,28 @@
 						<table cellpadding="0" cellspacing="0" border="0" width="100%">
 							<tr>
 								<td height="22" align="center" bgColor="#f5fafe" class="ta_01">
-									商品编号</td>
+									菜品编号</td>
 								<td class="ta_01" bgColor="#ffffff"><input type="text"
-									name="id" size="15" value="" id="Form1_userName" class="bg" />
+									name="food_id" size="15" value="" id="food_id" class="bg" value="${food_id }" />
 								</td>
 								<td height="22" align="center" bgColor="#f5fafe" class="ta_01">
-									类别：</td>
+									菜品类别：</td>
 								<td class="ta_01" bgColor="#ffffff"><select name="category"
 									id="category">
-										<option value="" selected="selected">--选择菜品类--</option>
-										<option value="热菜">热菜</option>
-										<option value="凉菜">凉菜</option>
-										<option value="汤">汤</option>
-										<option value="饮料">饮料</option>
+									
 								</select></td>
 							</tr>
-
 							<tr>
 								<td height="22" align="center" bgColor="#f5fafe" class="ta_01">
-									商品名称：</td>
+									菜品名称：</td>
 								<td class="ta_01" bgColor="#ffffff"><input type="text"
-									name="name" size="15" value="" id="Form1_userName" class="bg" />
+									name="food_name" size="15" id="food_name" class="bg" value="${food_name }"/>
 								</td>
 								<td height="22" align="center" bgColor="#f5fafe" class="ta_01">
 									价格区间(元)：</td>
 								<td class="ta_01" bgColor="#ffffff"><input type="text"
-									name="minprice" size="10" value="" />- <input type="text"
-									name="maxprice" size="10" value="" /></td>
+									id="minprice" name="minprice" size="10" value="${minprice}" />- <input type="text"
+									id="maxprice" name="maxprice" size="10" value="${maxprice}" /></td>
 							</tr>
 
 							<tr>
@@ -137,10 +132,9 @@
 							</tr>
 						</table>
 					</td>
-
 				</tr>
 				<tr>
-					<td class="ta_01" align="center" bgColor="#afd1f3"><strong>商品列表</strong>
+					<td class="ta_01" align="center" bgColor="#afd1f3"><strong>菜目列表</strong>
 					</TD>
 				</tr>
 				<tr>
@@ -157,171 +151,144 @@
 							style="BORDER-RIGHT: gray 1px solid; BORDER-TOP: gray 1px solid; BORDER-LEFT: gray 1px solid; WIDTH: 100%; WORD-BREAK: break-all; BORDER-BOTTOM: gray 1px solid; BORDER-COLLAPSE: collapse; BACKGROUND-COLOR: #f5fafe; WORD-WRAP: break-word">
 							<tr
 								style="FONT-WEIGHT: bold; FONT-SIZE: 12pt; HEIGHT: 25px; BACKGROUND-COLOR: #afd1f3">
-								<td align="center" width="14%">商品编号</td>
-								<td align="center" width="18%">商品名称</td>
-								<td align="center" width="9%">商品价格</td>
-								<td align="center" width="9%">商品数量</td>
-								<td width="8%" align="center">商品类别</td>
-								<td width="8%" align="center">图片</td>
-								<td width="10%" align="center">做菜时间</td>
-								<td width="8%" align="center">删除</td>
+								<th align="center" width="14%">编号</th>
+								<th align="center" width="18%">菜品名称</th>
+								<th align="center" width="9%">菜品价格</th>
+								<th width="8%" align="center">所属菜系</th>
+								<th align="center" width="9%">最大并菜数</th>
+								<th width="10%" align="center">加工时间</th>
+								<th width="8%" align="center">编辑</th>
+								<th width="8%" align="center">删除</th>
 							</tr>
-							<tr
-								style="FONT-WEIGHT: bold; FONT-SIZE: 12pt; HEIGHT: 25px; BACKGROUND-COLOR: #afd1f3">
-								<td align="center" width="14%">10001</td>
-								<td align="center" width="18%">红烧茄子</td>
-								<td align="center" width="9%">30</td>
-								<td align="center" width="9%">1</td>
-								<td width="8%" align="center">热菜</td>
-								<td width="8%" align="center">编辑</td>
-								<td width="10%" align="center">5分钟</td>
-								<td width="8%" align="center"><input type="button"value="删除"/></td>
-							</tr>
-							<tr
-								style="FONT-WEIGHT: bold; FONT-SIZE: 12pt; HEIGHT: 25px; BACKGROUND-COLOR: #afd1f3">
-								<td align="center" width="14%">商品编号</td>
-								<td align="center" width="18%">商品名称</td>
-								<td align="center" width="9%">商品价格</td>
-								<td align="center" width="9%">1</td>
-								<td width="8%" align="center">商品类别</td>
-								<td width="8%" align="center">编辑</td>
-								<td width="10%" align="center">5分钟</td>
-								<td width="8%" align="center"><input type="button"value="删除"/></td>
-							</tr>
-							<tr
-								style="FONT-WEIGHT: bold; FONT-SIZE: 12pt; HEIGHT: 25px; BACKGROUND-COLOR: #afd1f3">
-								<td align="center" width="14%">商品编号</td>
-								<td align="center" width="18%">商品名称</td>
-								<td align="center" width="9%">商品价格</td>
-								<td align="center" width="9%">1</td>
-								<td width="8%" align="center">商品类别</td>
-								<td width="8%" align="center">编辑</td>
-								<td width="10%" align="center">5分钟</td>
-								<td width="8%" align="center"><input type="button"value="删除"/></td>
-							</tr>
-							<tr
-								style="FONT-WEIGHT: bold; FONT-SIZE: 12pt; HEIGHT: 25px; BACKGROUND-COLOR: #afd1f3">
-								<td align="center" width="14%">商品编号</td>
-								<td align="center" width="18%">商品名称</td>
-								<td align="center" width="9%">商品价格</td>
-								<td align="center" width="9%">1</td>
-								<td width="8%" align="center">商品类别</td>
-								<td width="8%" align="center">编辑</td>
-								<td width="10%" align="center">5分钟</td>
-								<td width="8%" align="center"><input type="button"value="删除"/></td>
-							</tr>
-							<tr
-								style="FONT-WEIGHT: bold; FONT-SIZE: 12pt; HEIGHT: 25px; BACKGROUND-COLOR: #afd1f3">
-								<td align="center" width="14%">商品编号</td>
-								<td align="center" width="18%">商品名称</td>
-								<td align="center" width="9%">商品价格</td>
-								<td align="center" width="9%">1</td>
-								<td width="8%" align="center">商品类别</td>
-								<td width="8%" align="center">编辑</td>
-								<td width="10%" align="center">5分钟</td>
-								<td width="8%" align="center"><input type="button"value="删除"/></td>
-							</tr>
-							<tr
-								style="FONT-WEIGHT: bold; FONT-SIZE: 12pt; HEIGHT: 25px; BACKGROUND-COLOR: #afd1f3">
-								<td align="center" width="14%">商品编号</td>
-								<td align="center" width="18%">商品名称</td>
-								<td align="center" width="9%">商品价格</td>
-								<td align="center" width="9%">1</td>
-								<td width="8%" align="center">商品类别</td>
-								<td width="8%" align="center">编辑</td>
-								<td width="10%" align="center">5分钟</td>
-								<td width="8%" align="center"><input type="button"value="删除"/></td>
-							</tr>
-							<tr
-								style="FONT-WEIGHT: bold; FONT-SIZE: 12pt; HEIGHT: 25px; BACKGROUND-COLOR: #afd1f3">
-								<td align="center" width="14%">商品编号</td>
-								<td align="center" width="18%">商品名称</td>
-								<td align="center" width="9%">商品价格</td>
-								<td align="center" width="9%">1</td>
-								<td width="8%" align="center">商品类别</td>
-								<td width="8%" align="center">编辑</td>
-								<td width="10%" align="center">5分钟</td>
-								<td width="8%" align="center"><input type="button"value="删除"/></td>
-							</tr>
-							<tr
-								style="FONT-WEIGHT: bold; FONT-SIZE: 12pt; HEIGHT: 25px; BACKGROUND-COLOR: #afd1f3">
-								<td align="center" width="14%">商品编号</td>
-								<td align="center" width="18%">商品名称</td>
-								<td align="center" width="9%">商品价格</td>
-								<td align="center" width="9%">1</td>
-								<td width="8%" align="center">商品类别</td>
-								<td width="8%" align="center">编辑</td>
-								<td width="10%" align="center">5分钟</td>
-								<td width="8%" align="center"><input type="button"value="删除"/></td>
-							</tr>
-							<tr
-								style="FONT-WEIGHT: bold; FONT-SIZE: 12pt; HEIGHT: 25px; BACKGROUND-COLOR: #afd1f3">
-								<td align="center" width="14%">商品编号</td>
-								<td align="center" width="18%">商品名称</td>
-								<td align="center" width="9%">商品价格</td>
-								<td align="center" width="9%">1</td>
-								<td width="8%" align="center">商品类别</td>
-								<td width="8%" align="center">编辑</td>
-								<td width="10%" align="center">5分钟</td>
-								<td width="8%" align="center"><input type="button"value="删除"/></td>
-							</tr>
-							<tr
-								style="FONT-WEIGHT: bold; FONT-SIZE: 12pt; HEIGHT: 25px; BACKGROUND-COLOR: #afd1f3">
-								<td align="center" width="14%">商品编号</td>
-								<td align="center" width="18%">商品名称</td>
-								<td align="center" width="9%">商品价格</td>
-								<td align="center" width="9%">1</td>
-								<td width="8%" align="center">商品类别</td>
-								<td width="8%" align="center">编辑</td>
-								<td width="10%" align="center">5分钟</td>
-								<td width="8%" align="center"><input type="button"value="删除"/></td>
-							</tr>
-							<tr
-								style="FONT-WEIGHT: bold; FONT-SIZE: 12pt; HEIGHT: 25px; BACKGROUND-COLOR: #afd1f3">
-								<td align="center" width="14%">商品编号</td>
-								<td align="center" width="18%">商品名称</td>
-								<td align="center" width="9%">商品价格</td>
-								<td align="center" width="9%">1</td>
-								<td width="8%" align="center">商品类别</td>
-								<td width="8%" align="center">编辑</td>
-								<td width="10%" align="center">5分钟</td>
-								<td width="8%" align="center"><input type="button"value="删除"/></td>
-							</tr>
-
-							<c:forEach items="${list }" var = "li">
-								<tr onmouseover="this.style.backgroundColor = 'white'"
-									onmouseout="this.style.backgroundColor = '#F5FAFE';">
-									<td style="CURSOR: hand; HEIGHT: 22px" align="center"
-										width="23">${li.bookid }</td>
-									<td style="CURSOR: hand; HEIGHT: 22px" align="center"
-										width="18%">${li.name }</td>
-									<td style="CURSOR: hand; HEIGHT: 22px" align="center"
-										width="8%">${li.price }</td>
-									<td style="CURSOR: hand; HEIGHT: 22px" align="center"
-										width="8%">${li.pnum }</td>
-									<td style="CURSOR: hand; HEIGHT: 22px" align="center">${li.category }</td>
-									<td align="center" style="HEIGHT: 22px" width="7%"><a
-										href="${pageContext.request.contextPath}/admin/products/dishes_edit.jsp">
-											<img
-											src="${pageContext.request.contextPath}/admin/images/i_edit.gif"
+							<tbody id = "tbody">
+							<c:forEach items="${disheInfo }" var="di">
+							<tr	style="FONT-WEIGHT: bold; FONT-SIZE: 12pt; HEIGHT: 25px; BACKGROUND-COLOR: #afd1f3">
+								<td align="center" width="14%">${di.food_id }</td>
+								<td align="center" width="18%">${di.food_name }</td>
+								<td align="center" width="9%">${di.food_price }</td>
+								<td align="center" width="9%">${di.dishes_name }</td>
+								<td width="8%" align="center">${di.food_merge }</td>
+								<td width="8%" align="center">${di.food_time }</td>
+								<td align="center" style="HEIGHT: 22px" width="5%"><a
+										href="${pageContext.request.contextPath}/dishe_editDishe.action?food_id=${di.food_id}">
+											<img src="${pageContext.request.contextPath}/admin/images/i_edit.gif"
 											border="0" style="CURSOR: hand"> </a>
 									</td>
-
-									<td align="center" style="HEIGHT: 22px" width="7%"><a
-										href="${pageContext.request.contextPath}/deleterecord?id=${li.bookid}&method=del">
-											<img
-											src="${pageContext.request.contextPath}/admin/images/i_del.gif"
-											width="16" height="16" border="0" style="CURSOR: hand">
-									</a>
+								<td align="center" style="HEIGHT: 22px" width="5%">
+										<img src="${pageContext.request.contextPath}/admin/images/i_del.gif"
+											width="16" height="16" border="0" style="CURSOR: hand" onclick = "delDeshe('${di.food_id}')">
 									</td>
-								</tr>
-						</c:forEach>
+							</tr>
+							</c:forEach>
+							</tbody>
 						</table>
 					</td>
 				</tr>
 			</TBODY>
 		</table>
 	</form>
+	<button class="pre" onclick="bac()">上一页</button>
+	<button class="bac" onclick="pre(4)">下一页</button><span id="currentpage">第1页</span><span>共${total }页</span>
+	<input type="hidden" value="${total }" id="allpage">
+	
+	<script type="text/javascript">
+	var pageNo = 1;
+	//动态显示下拉框中的选项
+	$(document).ready(function(){
+		$.post("dishe_findCategory.action",
+			function (data){
+				$("#category").empty();
+				$("#category").append("<option check='checked' value=''>----请选择----</option>");
+				for(var i=0;i<data.length;i++){
+					var str = $("<option value="+data[i].dishes_id+">"+data[i].dishes_name+"</option>");
+					$("#category").append(str);
+				}
+			},"json");
+		})
+	//上一页按钮分页
+	function bac(){
+		pageNo = --pageNo<1?1:pageNo;
+		 $.ajax({
+			url:"/Ordersystem/dishe_ajaxQueryDishes.action",
+			data:{pageNo:pageNo,category:$("#category").val(),food_id:$("#food_id").val(),food_name:$("#food_name").val(),minprice:$("#minprice").val(),maxprice:$("#maxprice").val()},
+			type:"post",
+			dataType:"json",
+			success:function(list){
+				 $("#tbody").empty();
+				 for(var i=0;i<list.length;i++){
+					  var tr = $("<tr style='FONT-WEIGHT: bold; FONT-SIZE: 12pt; HEIGHT: 25px; BACKGROUND-COLOR: #afd1f3'>"+
+								"<td align='center' width='14%'>"+list[i].food_id+"</td>"+
+								"<td align='center' width='18%'>"+list[i].food_name+"</td>"+
+								"<td align='center' width='9%'>"+list[i].food_price+"</td>"+
+								"<td align='center' width='9%'>"+list[i].dishes_name+"</td>"+
+								"<td width='8%' align='center'>"+list[i].food_merge+"</td>"+
+								"<td width='8%' align='center'>"+list[i].food_time+"</td>"+
+								"<td align='center' style='HEIGHT: 22px' width='5%'><a href='${pageContext.request.contextPath}/dishe_editDishe.action?food_id="+list[i].food_id+"'><img src='${pageContext.request.contextPath}/admin/images/i_edit.gif' border='0' style='CURSOR: hand'> </a></td>"+
+								"<td align='center' style='HEIGHT: 22px' width='5%'><img src='${pageContext.request.contextPath}/admin/images/i_del.gif' width='16' height='16' border='0' style='CURSOR: hand' onclick = 'delDeshe("+list[i].food_id+")'></td></tr>");
+					$("#tbody").append(tr);	 
+				}  
+				$("#currentpage").text("第"+pageNo+"页"); 
+			}
+		}); 
+	}
+	
+	//下一页按钮分页
+	function pre(){
+		var total = $("#allpage").val();
+		pageNo = ++pageNo>total?total:pageNo;
+		 $.ajax({
+			url:"/Ordersystem/dishe_ajaxQueryDishes.action",
+			data:{pageNo:pageNo,category:$("#category").val(),food_id:$("#food_id").val(),food_name:$("#food_name").val(),minprice:$("#minprice").val(),maxprice:$("#maxprice").val()},
+			type:"post",
+			dataType:"json",
+			success:function(list){
+				 $("#tbody").empty();
+				 for(var i=0;i<list.length;i++){
+						  var tr = $("<tr style='FONT-WEIGHT: bold; FONT-SIZE: 12pt; HEIGHT: 25px; BACKGROUND-COLOR: #afd1f3'>"+
+								"<td align='center' width='14%'>"+list[i].food_id+"</td>"+
+								"<td align='center' width='18%'>"+list[i].food_name+"</td>"+
+								"<td align='center' width='9%'>"+list[i].food_price+"</td>"+
+								"<td align='center' width='9%'>"+list[i].dishes_name+"</td>"+
+								"<td width='8%' align='center'>"+list[i].food_merge+"</td>"+
+								"<td width='8%' align='center'>"+list[i].food_time+"</td>"+
+								"<td align='center' style='HEIGHT: 22px' width='5%'><a href='${pageContext.request.contextPath}/dishe_editDishe.action?food_id="+list[i].food_id+"'><img src='${pageContext.request.contextPath}/admin/images/i_edit.gif' border='0' style='CURSOR: hand'> </a></td>"+
+								"<td align='center' style='HEIGHT: 22px' width='5%'><img src='${pageContext.request.contextPath}/admin/images/i_del.gif' width='16' height='16' border='0' style='CURSOR: hand' onclick = 'delDeshe("+list[i].food_id+")'></td></tr>");
+						$("#tbody").append(tr);	 
+				}   
+				 $("#currentpage").text("第"+pageNo+"页");
+			}
+		}); 
+	};
+	
+	//删除的方法
+	function delDeshe(id){
+	var flag = window.confirm("确认删除菜品信息吗?");
+		if (flag) {
+		 $.ajax({
+			url:"/Ordersystem/dishe_delDishe.action",
+			data:{pageNo:pageNo,del_id:id,category:$("#category").val(),food_id:$("#food_id").val(),food_name:$("#food_name").val(),minprice:$("#minprice").val(),maxprice:$("#maxprice").val()},
+			type:"post",
+			dataType:"json",
+			success:function(list){
+				 $("#tbody").empty();
+				 for(var i=0;i<list.length;i++){
+						  var tr = $("<tr style='FONT-WEIGHT: bold; FONT-SIZE: 12pt; HEIGHT: 25px; BACKGROUND-COLOR: #afd1f3'>"+
+								"<td align='center' width='14%'>"+list[i].food_id+"</td>"+
+								"<td align='center' width='18%'>"+list[i].food_name+"</td>"+
+								"<td align='center' width='9%'>"+list[i].food_price+"</td>"+
+								"<td align='center' width='9%'>"+list[i].dishes_name+"</td>"+
+								"<td width='8%' align='center'>"+list[i].food_merge+"</td>"+
+								"<td width='8%' align='center'>"+list[i].food_time+"</td>"+
+								"<td align='center' style='HEIGHT: 22px' width='5%'><a href='${pageContext.request.contextPath}/dishe_editDishe.action?emp_id="+list[i].food_id+"'><img src='${pageContext.request.contextPath}/admin/images/i_edit.gif' border='0' style='CURSOR: hand'> </a></td>"+
+								"<td align='center' style='HEIGHT: 22px' width='5%'><img src='${pageContext.request.contextPath}/admin/images/i_del.gif' width='16' height='16' border='0' style='CURSOR: hand' onclick = 'delDeshe("+list[i].food_id+")'></td></tr>");
+						$("#tbody").append(tr);	 
+				}   
+				 $("#currentpage").text("第"+pageNo+"页");
+			}
+		}); 
+	}
+	};
+	</script>
 </body>
 </HTML>
 

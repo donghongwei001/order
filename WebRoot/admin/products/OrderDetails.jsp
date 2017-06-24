@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <HTML>
  <HEAD>
@@ -43,13 +44,26 @@
 		margin:0 auto;
 	}
   </style>
+  <script type="text/javascript">
+  	$(document).ready(function(){
+  		var numb = document.getElementsByName("numb");
+  		var price = document.getElementsByName("price");
+  		var count = 0;
+  		var val = document.getElementById("countRMB");
+  		for(var i=0;i<numb.length;i++){
+  			count +=  numb[i]*price[i];
+  		}
+  		val.value=count;
+  	})
+  
+  </script>
+  
  </HEAD>
 
  <BODY>
  
 	<div class="rowee">
 		<div class="collg7">
-			
 			<div class="mytable">
 			  <table class="table table-striped table-condensed table-hover">
 				<tr>
@@ -58,16 +72,11 @@
 				<tr>
 					<th>序号</th><th>菜目名称</th><th>数量</th><th>单价</th><th>桌号</th><th>口味</th><th>删除</th>
 				</tr>
+				<c:forEach items="${solb }" var="sb" varStatus="sob">
 				<tr>
-					<td>1</td><td>油焖大虾</td><td>1</td><td>68</td><td>1</td><td>重口味</td><td><input type="checkbox" name="addmenu"></td>
+					<td>${sob.count }</td><td>${sb.food_name }</td><td name="numb">${sb.order_food_num }</td><td name="price">${sb.food_price }</td><td>${sb.table_name }</td><td>${sb.order_food_mark }</td><td><input type="checkbox" name="addmenu" value="${sb.order_food_id }"></td>
 				</tr>
-				<tr>
-					<td>2</td><td>青龙闹海</td><td>1</td><td>56</td><td>1</td><td>清淡</td><td><input type="checkbox" name="addmenu"></td>
-				</tr>
-				<tr>
-					<td>3</td><td>蚂蚁上树</td><td>1</td><td>38</td><td>1</td><td>特辣</td><td><input type="checkbox" name="addmenu"></td>
-				</tr>
-			  </table>
+				</c:forEach>
 			</div>
 
 			<div class="" style="margin-top:10px">
@@ -86,8 +95,6 @@
 				<div><a class="btn btn-warning" href="#" style="margin:0 10 0 10">修改做法</a></div>				
 				</div>
 			</div>
-		  
-		 
 		</div>
 		<div class="collg5">
 			<div class="mymenu">
@@ -109,35 +116,10 @@
 					</tr>
 				  </table>
 			</div>
-			
-			<!-- <div class="row">
-				<div class="col-lg-2">菜名</div>
-				<div class="col-lg-2">单价</div>
-				<div class="col-lg-2">菜系</div>
-				<div class="col-lg-2">口味</div>
-				<div class="col-lg-2">菜名</div>
-				<div class="col-lg-2">菜名</div>
-			</div>
-			<div class="row">
-				<div class="col-lg-2">小葱拌豆腐</div>
-				<div class="col-lg-2">28</div>
-				<div class="col-lg-2">家常菜</div>
-				<div class="col-lg-2">清淡</div>
-				<div class="col-lg-2">菜名</div>
-				<div class="col-lg-2">菜名</div>
-			</div>
-			<div class="row">
-				<div class="col-lg-2">剁椒鱼头</div>
-				<div class="col-lg-2">58</div>
-				<div class="col-lg-2">湘菜</div>
-				<div class="col-lg-2">特辣</div>
-				<div class="col-lg-2">菜名</div>
-				<div class="col-lg-2">菜名</div>
-			</div> -->
 			<div style="margin-top:10px"><a class="btn btn-primary" href="#">添加菜品</a></div>
-			
 		</div>
 	</div>
+  <input type="hidden" id="txt1" value="66666 ">
   
  </BODY>
 </HTML>

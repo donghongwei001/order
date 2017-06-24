@@ -44,44 +44,12 @@
 				<a class="navbar-brand" href="#">brand</a>
 			</div>
 			<div class="collapse navbar-collapse">
-				<p class="navbar-text">已用桌位:<span class="badge" id="usetable">12</span></p>
-				<p class="navbar-text">剩余桌位:<span class="badge" id="surplustable">12</span></p>
-				<p class="navbar-text">总单数:<span class="badge" id="surplustable">12</span></p>
-				<p class="navbar-text">未结单:<span class="badge" id="surplustable">12</span></p>
-				<p class="navbar-text">已结单:<span class="badge" id="surplustable">12</span></p>
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#" data-toggle="modal" data-target="#myModal">服务员登录</a></li>
-						<!-- 登录模态框 -->
-						<div class="modal fade bs-example-modal-sm" id="myModal" role="modal" aira-label="myModalLabel" aria-hidden="true" data-backdrop="true">
-							<div class="modal-dialog modal-sm">
-								<div class="modal-content">
-									<div class="modal-header" style="background-color:#0000CC;color:white;">
-										<button class="close" type="button" data-dismiss="modal" aria-label="close">
-										<span aria-hidden="true">&times;</span>
-										</button>
-										<h3 style="text-align:center;">欢迎登录</h3>
-									</div>
-									<div class="modal-body">
-										<form>
-											<div class="form-group">
-												<label class= "control-label">用户名:</label>
-												<input type="text" class="form-control" placeholder="账号">
-											</div>
-											<div class="form-group">
-												<label class="control-label">密码:</label>
-												<input class="form-control" type="text" placeholder="密码">
-											</div>
-										</form>
-									</div>
-									<div class="modal-footer">
-										<button type="button" class="btn btn-default" data-dismiss="modal">退出</button>
-										<button type="button" class="btn btn-primary" >登录</button>
-									</div>
-								</div>
-							</div>
-						  </div>
-					<li><a href="#">帮助</a></li>
-				</ul>
+				<p class="navbar-text">已用桌位:<span class="badge" id="usetable">${occupy}</span></p>
+				<p class="navbar-text">剩余桌位:<span class="badge" id="surplustable">${rest}</span></p>
+				<p class="navbar-text" >待清桌位:<span class="badge" id="surplustable" class="label label-danger">${dirty}</span></p>
+				<p class="navbar-text">未结单:<span class="badge" id="surplustable">${total}</span></p>
+				<p class="navbar-text">已结单:<span class="badge" id="surplustable">${payed}</span></p>
+				
 				<form class="navbar-form navbar-right" role="search">
 					<div class="form-group">
 						<input class="form-control" type="text" placeholder="搜索">
@@ -105,19 +73,19 @@
 			<div class="col-md-2" style="width:17%">
 				<div class="list-group">
 				  <a href="ManagementTable.jsp" target="main"class="list-group-item">餐桌管理</a>
-				  <a href="ReservationTable.jsp" target="main" class="list-group-item">餐桌预定</a>
-				  <a href="order_lsit.jsp" target="main" class="list-group-item">订单查询</a>
+				<!--   <a href="ReservationTable.jsp" target="main" class="list-group-item">餐桌预定</a>
+				  <a href="order_lsit.jsp" target="main" class="list-group-item">订单查询</a> -->
 				 
 				  
 				</div>
-				<a href="###" class="btn btn-danger button-control"  role="button">清台</a>
+				<!-- <a href="###" class="btn btn-danger button-control"  role="button">清台</a>
 				<a href="###" class="btn btn-danger button-control"  role="button">清扫结束</a><BR>
 				<a href="###" class="btn btn-primary button-control" role="button" data-toggle="modal" data-target="#myModal2">买单</a>
 				<a href="###" class="btn btn-primary button-control" role="button">交班报表</a><BR>
 				<a href="###" class="btn btn-warning button-control" role="button">催菜</a>
 				<a href="###" class="btn btn-warning button-control" role="button">查看流水</a><BR>
 				<a href="###" class="btn btn-danger button-control" role="button">拆台</a>
-				<a href="ManagementTable.html" target="main" class="btn btn-success button-control" role="button">刷新桌位</a>
+				<a href="ManagementTable.html" target="main" class="btn btn-success button-control" role="button">刷新桌位</a> -->
 				
 			</div>
 		</div>
@@ -166,5 +134,26 @@
     </div>
   </div>
 </div>
+<br><br>
+
+      
+<script type="text/javascript">  
+function getValue()  
+{  
+    var ofrm1 = document.getElementById("main").document;      
+    if (ofrm1==undefined)  
+    {  
+        ofrm1 = document.getElementById("main").contentWindow.document;  
+        var ff = ofrm1.getElementById("txt1").value;  
+        alert("firefox/chrome取值结果为:" + ff);  
+    }  
+    else  
+    {  
+        var ie = document.frames["main"].document.getElementById("txt1").value;  
+        alert("ie取值结果为:" + ie);  
+    }   
+}  
+</script>  
+
  </BODY>
 </HTML>
