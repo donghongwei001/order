@@ -26,100 +26,16 @@
 </style>
 </HEAD>
 <script type="text/javascript">
-	/* var ipid = document.getElementById("Form1_userName");
-	ipid.onkeyup=function(){
-		alert("111");
-	} */
 	
-	/* $(document).ready(function(){
-		var ipid = document.getElementById("Form1_userName");
-		//var div=document.getElementById("search_he");
-		alert("111");
-		ipid.onkeyup=function(){
-		
-	};
-	}); */
-	 
-	/* $("input").focus(
-		function(){
-			alert("11");
-			 $("#search_he").get(0).style.left=$(this).get(0).offsetLeft+"px";
-			$("#search_he").get(0).style.display="block";
-			alert("000");
-			$("#search_he").get(0).style.width=$(this).get(0).offsetWidth+"px";
-			$("#search_he").get(0).style.top=$(this).get(0).offsetHeight+$(this).get(0).offsetTop+"px"; 
-		}); */
-		
-		/* $("input").focus(
-			function(){
-				alert("aaaaa");
-			
-				$("#search_he").get(0).style.display="block";
-				$("#search_he").get(0).style.left=$(this).get(0).offsetLeft+"px";
-				$("#search_he").get(0).style.width=$(this).get(0).offsetWidth+"px";
-				$("#search_he").get(0).style.top=$(this).get(0).offsetHeight+$(this).get(0).offsetTop+"px";
-			
-		}
-	);
-	$("input").blur(
-		function(){$("#search_he").get(0).style.display="none";}
-	);
-	 */
-	
-	/* window.onload = function(){
-		//alert("00");
-		var ipt = document.getElementById("Form1_userName");
-		var div = document.getElementById("search_he");
-		ipt.onkeyup = function(){
-			var xhr = getXMLHttpRequest();//获取连接
-			//处理结果
-			xhr.onreadystatechange=function(){
-					//alert(xhr.readyState);
-				if(xhr.readyState==4&&xhr.status==200){
-					var str=xhr.responseText;
-					var ss = str.split(",");
-					var childdivs = "";
-					for(var i=0;i<ss.length;i++){
-						childdivs+="<div onmouseover='bgco(this)' onmouseout='bgcot(this)' onclick='writeva(this)'>"+ss[i]+"</div>";
-					}
-					div.innerHTML=childdivs;
-				};
-			};
-			//建立连接
-			xhr.open("post","searchele?name="+ipt.value+"&time="+new Date().getTime());
-			//发送连接
-			xhr.send(null);
-		};
-		ipt.onblur=function(){
-			div.innerHTML="";
-		};
-		
-	};	
-		function writeva(di){
-			alert("55");
-			var dive = document.getElementById("search_he");
-			var value = di.innerHTML;
-			dive.innerHTML=value;
-		}
-		function bgco(div){
-			div.style.backgroundColor="gray";
-		}
-		function bgcot(div){
-			div.style.backgroundColor="white";
-		} */
 </script>
-
 <body>
 	<div id="search_he"></div>
 	
-	<%--  <form id="Form1" name="Form1"
-		action="${pageContext.request.contextPath}/Table_selezhuohao.action" 
-		method="post">  --%>
-		<table cellSpacing="1" cellPadding="0" width="100%" align="center"
+	<table cellSpacing="1" cellPadding="0" width="100%" align="center"
 			bgColor="#f5fafe" border="0"> 
 			<TBODY>
 				<tr>
-					<td class="ta_01" align="center" bgColor="#afd1f3" ><strong>查
+					<td class="ta_01" align="center" bgColor="#afd1f3" ><strong>查 
 							询 条 件</strong>
 					</td>
 				</tr>
@@ -175,12 +91,12 @@
 										<td align="center" width="20%">${row.fk_emp_id}</td>
 										<td align="center" width="15%">${row.table_state }</td>
 										<td width="9%" align="center">
-									<%-- <a
-										href="${pageContext.request.contextPath}/admin/products/money_edit.jsp"> --%>
+										 <a href="${pageContext.request.contextPath}/Table_seid.action?tabled=${row.table_id}&name=${row.table_name}&capacity=${row.table_Capacity}" > 
 											<img
 											src="${pageContext.request.contextPath}/admin/images/i_edit.gif"
-											width="16" height="16" border="0" style="CURSOR: hand">
+											width="16" height="16" border="0" style="CURSOR: hand" type="submit">
 									</a>
+									
 								</td>
 								<td width="9%" align="center">
 									<a
@@ -284,7 +200,7 @@
 				</tr>
 			</TBODY>
 		</table>
-<!--  </form>  -->
+
 </body>
 </HTML>
 

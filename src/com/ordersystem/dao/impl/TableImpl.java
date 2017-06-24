@@ -30,7 +30,8 @@ public class TableImpl {
 	}
 	
 	public  List<TableBean> seleall() {
-		String sql="select table_id,table_name,table_Capacity,code_name,emp_name from  table_table,ser_tab,emp_table,role_table,code_table where emp_fk_pos_id=role_id and emp_id = fk_emp_id and fk_table_id=table_id and code_id=table_state and emp_fk_pos_id='2' ";
+		/*String sql="select table_id,table_name,table_Capacity,code_name,emp_name from  table_table,ser_tab,emp_table,role_table,code_table where emp_fk_pos_id=role_id and emp_id = fk_emp_id and fk_table_id=table_id and code_id=table_state and emp_fk_pos_id='2' ";*/
+		String sql="select table_id,table_name,table_Capacity,code_name,emp_name from  table_table,ser_tab,emp_table,role_table,code_table where emp_fk_pos_id=role_id and emp_id = fk_emp_id and fk_table_id=table_id and code_id=table_state ";
 		ArrayList<ArrayList> arr=dt.execQuery(sql, null);
 		ArrayList<TableBean> list=new ArrayList<TableBean>();
 		for (int i = 0; i < arr.size(); i++) {
@@ -84,4 +85,14 @@ public class TableImpl {
 		dt.executeUpdate(sql1, arr2);
 	}
 	
+	public void update(TableBean tb,ser_tabBean st,String tb_id){
+		String sql="update table_table set table_Capacity='"+tb.getTable_Capacity()+"',table_name='"+tb.getTable_name()+"' where table_id=?";
+		Object[] pa=new Object[]{tb_id};
+		Object[] pe=new Object[]{st.getFk_emp_id(),tb_id};
+		dt.executeUpdate(sql, pa);
+		System.out.println(st.getFk_emp_id()+"*****");
+		String sq="update ser_tab set fk_emp_id=? where fk_table_id=?";
+		int flag =dt.executeUpdate(sq,pe);
+		System.out.println(flag);
+	}
 }

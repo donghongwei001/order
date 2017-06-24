@@ -21,71 +21,109 @@ import com.ordersystem.domain.ser_tabBean;
 import com.ordersystem.service.TableService;
 
 
-	
-public class TableAction extends BaseAction {
-		HttpServletRequest request = ServletActionContext.getRequest();
-		HttpServletResponse response = ServletActionContext.getResponse();
-		TableService ts=new TableService();
-/**
- * 方法功能说明：  根据桌号查询桌子信息
- */
-		public String selezhuo() {
-			String table_id = super.getparameter("zhuohao");
-			List<TableBean> li=ts.selezhuohao(table_id);
-			super.setsession("list", li);
-			System.out.println("11111");
-			return "ss";
-		}
-		
-		public String seleAll() { 
-			List<TableBean> li=ts.seleA();
-			super.setsession("list", li);
-			try {
-				request.getRequestDispatcher("/admin/products/table_list.jsp").forward(request, response);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			return "ss";
-		}
-		/**
-		 * 用json得到查出的服务员的
-		 */
-		public String sewaiter() {
-			List<Table_indent> li=ts.selwaiter();
-			String str = com.alibaba.fastjson.JSON.toJSONString(li);
-			super.write(str);
-			return null;
-		}
-		
-		/**
-		 * 
-		 * 方法功能说明： 增加桌子 
-		 */
-		public String addzhuozi() {
-			int table_state=8;
-			TableBean tb=new TableBean();
-			ser_tabBean st=new ser_tabBean();
-			String pnum = super.getparameter("pnum");      //获得可供餐人数
-			String emp_fk_pos_id=super.getparameter("emp_fk_pos_id"); //获得选中后服务员的 ID
-			String table_name=super.getparameter("table_name"); //获得添加桌子的name
-			try {
-				tb.setTable_Capacity(Integer.parseInt(pnum));
-				tb.setTable_state(String.valueOf(table_state));
-				tb.setTable_name(table_name);
-				st.setFk_emp_id(Integer.parseInt(emp_fk_pos_id));
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
-			ts.addtable(tb,st);
-			seleAll();			//返回餐桌页面并重新查询
-			return "ss";
-		}
 
-		public EmpBeam getModel() {
-			// TODO Auto-generated method stub
-			return null;
+public class TableAction extends BaseAction {
+	HttpServletRequest request = ServletActionContext.getRequest();
+	HttpServletResponse response = ServletActionContext.getResponse();
+	TableService ts=new TableService();
+	/**
+	 * 方法功能说明：  根据桌号查询桌子信息
+	 */
+	public String selezhuo() {
+		String table_id = super.getparameter("zhuohao");
+		List<TableBean> li=ts.selezhuohao(table_id);
+		super.setsession("list", li);
+		System.out.println("11111");
+		return "ss";
+	}
+
+	public String seleAll() { 
+		List<TableBean> li=ts.seleA();
+		super.setsession("list", li);
+		try {
+			request.getRequestDispatcher("/admin/products/table_list.jsp").forward(request, response);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		
-		
+		return "ss";
+	}
+	/**
+	 * 用json得到查出的服务员的
+	 */
+	public String sewaiter() {
+		List<Table_indent> li=ts.selwaiter();
+		String str = com.alibaba.fastjson.JSON.toJSONString(li);
+		super.write(str);
+		return null;
+	}
+
+	/**
+	 * 
+	 * 方法功能说明： 增加桌子 
+	 */
+	public String addzhuozi() {
+		int table_state=8;
+		TableBean tb=new TableBean();
+		ser_tabBean st=new ser_tabBean();
+		String pnum = super.getparameter("pnum");      //获得可供餐人数
+		String emp_fk_pos_id=super.getparameter("emp_fk_pos_id"); //获得选中后服务员的 ID
+		String table_name=super.getparameter("table_name"); //获得添加桌子的name
+		try {
+			tb.setTable_Capacity(Integer.parseInt(pnum));
+			tb.setTable_state(String.valueOf(table_state));
+			tb.setTable_name(table_name);
+			st.setFk_emp_id(Integer.parseInt(emp_fk_pos_id));
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		ts.addtable(tb,st);
+		seleAll();			//返回餐桌页面并重新查询
+		return "ss";
+	}
+
+	public EmpBeam getModel() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	/**
+	 * 
+	 * 方法功能说明： 餐桌信息编辑时获得桌子ID
+	 */
+	public String seid() {
+		String id=super.getparameter("tabled");
+		String name=super.getparameter("name");
+		String capacity=super.getparameter("capacity");
+		super.setsession("taleid", id);
+		super.setsession("name", name);
+		super.setsession("capacity", capacity);
+		return "up";
+	}
+
+	/** 
+	 * 方法功能说明：  修改桌子信息
+	 *people:获取修改后的可供餐人数
+	 *t_name:修改后的桌子名字
+	 *emp_fk_pos_id:修改后的服务员ID
+	 *tb_id:获取桌子ID 
+	 */
+	public String updatezhuozi(){
+		TableBean tb=new TableBean();
+		ser_tabBean st=new ser_tabBean();
+		String tb_id=super.getparameter("id");
+		String people=super.getparameter("people");
+		String t_name=super.getparameter("t_name");
+		String emp_fk_pos_id=super.getparameter("emp_fk_pos_id");
+		try {
+			tb.setTable_Capacity(Integer.parseInt(people));
+			tb.setTable_name(t_name);
+			st.setFk_emp_id(Integer.parseInt(emp_fk_pos_id));
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		ts.updatee(tb,st,tb_id);
+		seleAll();
+		return "ss";
+	}
+
 }

@@ -30,4 +30,10 @@ public class TableService {
 	public void addtable( TableBean tb,ser_tabBean st) {
 		tq.addzhuo(tb,st);
 	}
+	/**
+	 * 方法功能说明： 修改桌子信息
+	 */
+	public void updatee(TableBean tb,ser_tabBean st,String tb_id) {
+		tq.update(tb,st,tb_id);
+	}
 }

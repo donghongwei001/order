@@ -64,6 +64,7 @@
 	</form>
 </body>
 <script type="text/javascript">
+
 	$(document).ready(
 		function(){
 			$.post("Table_sewaiter.action",
