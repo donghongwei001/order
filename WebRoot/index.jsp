@@ -30,16 +30,17 @@
 
 body {
 	margin: 0px;
-	padding: 0px;
+	padding: 70px;
 }
 
 .kuangjia1 {
-	
+	margin-top: 0%;
+	margin-left: -40;
 }
 
 .kuangjia2 {
 	margin-left: 20%;
-	margin-top: -67%;
+	margin-top: -48%;
 }
 
 #nav-tabs {
@@ -49,7 +50,8 @@ body {
 }
 
 #sousuo1 {
-	margin-top: 5px;
+	margin-top:7px;
+	margin-left:40px;
 }
 
 #sousuo2 {
@@ -65,20 +67,18 @@ body {
 	margin-top: 2%;
 }
 
-#wodiandecai {
-	margin-left: 75%;
-	margin-top: -4%;
-	background: url("images/beijing1.jpg");
-	backgrounf-size: 100%;
+.form-group {
+	margin-top: 15px;
 }
 
 .container {
 	width: 100%;
-	background: url("images/beijingtupian2.jpeg");
+	background: url("uploadFile/36.jpg") repeat-x;
 }
 
 .navbar-default {
 	width: 100%;
+	margin-bottom: 10px;
 }
 
 #shanchu {
@@ -86,7 +86,7 @@ body {
 }
 
 #jiezhang {
-	margin-top: 5%;
+	margin-top: 28%;
 	margin-left: 70%;
 }
 
@@ -110,9 +110,29 @@ body {
 
 #user {
 	margin-left: -15%;
-	color: white;
+	color:	brown;
+
+}
+
+#xiamiancaidan {
+	height: 80px;
+}
+
+#zhuyemian {
+	margin-top: 10px;
+}
+
+#kaitai {
+	margin-top: 17px;
+	margin-left:60px;
+}#geren{
+	margin-left:40px;
+}#sousuo{
+	margin-left:60px;
 }
 </style>
+
+
 </head>
 
 <body>
@@ -126,45 +146,76 @@ body {
 						type="submit" id="sousuo1" class="btn btn-info btn-lg">
 						<span class=" glyphicon glyphicon-apple"></span>菜单信息<span
 							class="glyphicon glyphicon-apple"></span>
-					</button> </a></li>
+					</button> </a>
+			</li>
 
-			<li role="presentation"><a href="#profile"
+			<li role="presentation" id="geren"><a href="#profile"
 				aria-controls="profile" role="tab" data-toggle="tab"><button
 						type="submit" id="sousuo1" class="btn btn-info btn-lg">
 						<span class=" glyphicon glyphicon-apple"></span>个人信息<span
 							class="glyphicon glyphicon-apple"></span>
-					</button> </a></li>
-			<li role="presentation"><a href="#messages"
-				aria-controls="messages" role="tab" data-toggle="tab">
-					<button type="submit" id="sousuo1" class="btn btn-info btn-lg">
-						<span class=" glyphicon glyphicon-apple"></span>积分商城<span
-							class="glyphicon glyphicon-apple"></span>
-					</button> </a></li>
-			<li role="presentation"><a href="#settings"
-				aria-controls="settings" role="tab" data-toggle="tab">
-					<button type="submit" id="sousuo1" class="btn btn-info btn-lg">
-						<span class=" glyphicon glyphicon-apple"></span>Settings<span
-							class="glyphicon glyphicon-apple"></span>
-					</button> </a></li>
-			<li>
+					</button> </a>
+			</li>
+			
+			<li role="presentation" ><button type="button" id="kaitai"
+					class="btn btn-primary btn-lg" data-toggle="modal"
+					data-target="#myModal">
+					<span class=" glyphicon glyphicon-apple"></span>开台<span
+						class=" glyphicon glyphicon-apple"></span>
+				</button></li>
+
+			<li id="sousuo">
 				<form class="navbar-form navbar-left">
 					<div class="form-group">
-						<input type="text" class="form-control" placeholder="Search">
+						<input type="text" class="form-control" placeholder="请输入美食名称">
 					</div>
 					<button type="submit" id="sousuo1" class="btn btn-default">搜索</button>
-				</form>
-			</li>
+				</form></li>
 
 
-			<li role="presentation"><a href="项目前台.html" />
-				<button type="button" class="btn btn-danger">返回主页面</button> </a></li>
+			
 			<li><button type="button" id="jiezhang"
 					class="btn btn-primary btn-lg" data-toggle="modal"
-					data-target="#myModal2">结账</button></li>
+					data-target="#myModal2">结账</button>
+			</li>
 
 		</ul>
 	</div>
 	</nav>
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">欢迎开台</h4>
+				</div>
+				<div class="modal-body">
+					<div class="input-group">
+						<span class="input-group-addon" id="basic-addon1">开台密码</span> <input
+							type="text" class="form-control" onblur="kaitai()"
+							placeholder="Password" id="kaitaiyanzheng"
+							aria-describedby="basic-addon1">
+					</div>
+					<br/>
+					<br/>
+					<br/>
+					选桌:<select id="category" name="zhuohao">
+
+
+					</select>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						<button type="submit" onclick="kaitaitijiao()"
+							class="btn btn-default">确认开台</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 	<div class="modal fade" id="myModal2" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
@@ -177,18 +228,34 @@ body {
 					<h4 class="modal2-title" id="myModal2Label">确认结账</h4>
 				</div>
 				<div class="modal2-body">
-					<iframe class="kuangjia3" src="paymoney.jsp" width="100%"
-						height="600px" scrolling="yes"> </iframe>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT SIZE="5"
-						COLOR="green"><B>总金额:￥584.5元</B> </FONT>
+					<table class="table table-hover">
+								<tr>
+									<td width="250">名称</td>
+									<td width="250">数量</td>
+									<td width="250">单价</td>
+								</tr>
+								<c:forEach items="${cart1}" var="a">
+									<tr>
+
+										<td width="250">${a.food_name}</td>
+										<td width="250">${a.order_food_num}</td>
+										<td width="250">${a.food_price}</td>
+										
+
+									</tr>
+								</c:forEach>
+							</table>
+					
 					<div class="modal-footer">
+						<FONT SIZE="5" COLOR="red"><B>总金额:${he}元</B> </FONT>
 						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-						<button type="submit" class="btn btn-default">确认结账</button>
+						<button type="submit" onclick="jiezhang()" class="btn btn-default">确认结账</button>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+
 	<div class="tab-content">
 		<div role="tabpanel" class="tab-pane active" id="home">
 			<nav id="xiamiancaidan"
@@ -211,44 +278,31 @@ body {
 								aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
-							<h4 class="modal3-title" id="myModal3Label">确认结账...</h4>
+							<h4 class="modal3-title" id="myModal3Label">输入结账密码</h4>
 						</div>
 						<div class="modal3-body">
-						<iframe class="kuangjia3" src="paymoney.jsp" width="100%"
-						height="600px" scrolling="yes"> </iframe>
-							<table class="table table-hover">
-								<tr>
-									<td width="250">名称</td>
-									<td width="250">数量</td>
-									<td width="250">单价</td>
-								</tr>
-								<c:forEach items="${cart}" var="a">
-									<tr>
-
-										<td width="250">${a.name}</td>
-										<td width="250">${a.count}</td>
-										<td width="250">${a.price}</td>
-										<td width="250"><button type="button"
-												class="btn btn-danger">删除</button>
-										</td>
-
-									</tr>
-								</c:forEach>
-							</table>
-							<FONT SIZE="5" COLOR="green"><B>总金额:￥584.5元</B> </FONT>
+							<form action="/Ordersystem/jiezhang.action">
+							<div class="input-group">
+						<span class="input-group-addon" id="basic-addon1">结账密码</span> <input
+							type="text" class="form-control"  name="jiezhangmima"
+							placeholder="Password" id="kaitaiyanzheng"
+							aria-describedby="basic-addon1">
+						</div>
+							
 							<div class="modal-footer">
 								<button type="button" class="btn btn-default"
 									data-dismiss="modal">关闭</button>
 								<button type="submit" class="btn btn-default">确认结账</button>
 							</div>
+							</form>
 						</div>
 					</div>
 				</div>
 			</div>
-			<iframe class="kuangjia1" src="left.jsp" width="20%" height="1000px"
+			<iframe class="kuangjia1" src="left.jsp" width="20%" height="820px"
 				scrolling="auto"> </iframe>
-			<iframe class="kuangjia2" src="mainfood.jsp" name="main" width="80%"
-				height="1000px" scrolling="auto"> </iframe>
+			<iframe class="kuangjia2" src="mainfood.jsp" name="main" width="83%"
+				height="835px" scrolling="auto"> </iframe>
 		</div>
 
 		<div role="tabpanel" class="tab-pane" id="profile">
@@ -273,8 +327,8 @@ body {
 							</p>
 							<br />
 							<p class="text-info">
-								您&nbsp;&nbsp;&nbsp;的&nbsp;&nbsp;&nbsp;密&nbsp;&nbsp;&nbsp;码&nbsp;&nbsp;&nbsp;：&nbsp;：<input type="text" id="gerenxinxi"
-									placeholder="${pass}" />
+								您&nbsp;&nbsp;&nbsp;的&nbsp;&nbsp;&nbsp;密&nbsp;&nbsp;&nbsp;码&nbsp;&nbsp;&nbsp;：&nbsp;：<input
+									type="text" id="gerenxinxi" placeholder="${pass}" />
 							</p>
 							<br /> <br /> <br />
 							<button type="button" class="btn btn-danger" data-toggle="modal"
@@ -286,11 +340,11 @@ body {
 									<div class="modal-content">
 										<p class="text-success">
 											您&nbsp;&nbsp;&nbsp;的&nbsp;&nbsp;&nbsp;用&nbsp;&nbsp;&nbsp;户&nbsp;&nbsp;&nbsp;名：<input
-									type="text" id="gerenxinxi" placeholder="${user}" />
+												type="text" id="gerenxinxi" placeholder="${user}" />
 										</p>
 										<p class="text-info">
-											您&nbsp;&nbsp;&nbsp;的&nbsp;&nbsp;&nbsp;密&nbsp;&nbsp;&nbsp;码&nbsp;&nbsp;&nbsp;：&nbsp;：<input type="text" id="gerenxinxi"
-									placeholder="${pass}" />
+											您&nbsp;&nbsp;&nbsp;的&nbsp;&nbsp;&nbsp;密&nbsp;&nbsp;&nbsp;码&nbsp;&nbsp;&nbsp;：&nbsp;：<input
+												type="text" id="gerenxinxi" placeholder="${pass}" />
 										</p>
 										<button type="button" class="btn btn-danger btn-lg"
 											data-dismiss="modal">取消</button>
@@ -394,7 +448,60 @@ body {
 	<script type="text/javascript">
 		$("#mainframe", parent.document.body).attr("src",
 				"http://www.111cn.net");
-		
+		function kaitai() {
+			$.ajax({ //发送了一个新的请求，与按钮这个请求完全不是一马事
+				type : "post", //请求方式
+				url : "/Ordersystem/kaitaiyanzheng.action", //请求地址
+				data : {
+					kaitaimima : $("#kaitaiyanzheng").val()
+				},
+				dataType : "json",
+				success : function(data) { //请求成功后调用的回调函数，参数1【data】 请求返回的数据，这个数据类型是dataType制定
+					//alert(data);
+					if (data == 0) {
+						$("#kaitaiyanzheng").val("");
+						alert("开台密码输入错误,请从新输入！");
+					} else {
+						$("#category").empty();
+						$("#category").append(
+								"<option  check='checked'>请选择桌号</option>");
+						for ( var i = 0; i < data.length; i++) {
+							var op = $("<option id='id'>" + data[i].table_id
+									+ "</option>");
+							$("#category").append(op);
+						}
+					}
+
+				}
+
+			})
+
+		}
+		function kaitaitijiao() {
+			var index = document.getElementById("category").value;
+			var mima = document.getElementById("kaitaiyanzheng").value;
+			if (index >0 && mima != "") {
+				$.ajax({ //发送了一个新的请求，与按钮这个请求完全不是一马事
+
+					type : "post", //请求方式
+					url : "/Ordersystem/kaitai.action", //请求地址
+					dataType : "text",
+					data : {
+						zhuohao : index
+					},
+					success : function(data) { //请求成功后调用的回调函数，参数1【data】 请求返回的数据，这个数据类型是dataType制定
+						alert("开台成功")
+						$("#myModal").modal("toggle");
+						$("#kaitai").attr("disabled", true); 
+					}
+
+				})
+			}
+		}
+		function jiezhang(){
+			alert("111");
+			$("#myModal3").modal("toggle");
+		}
 	</script>
 </body>
 

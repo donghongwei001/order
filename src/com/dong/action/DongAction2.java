@@ -15,11 +15,11 @@ public class DongAction2{
 	HttpSession session=ServletActionContext.getRequest().getSession();
 	public String save(){
 		String user=request.getParameter("username");
-		String zhuohao=request.getParameter("zhuohao");
+		
 		String pass=request.getParameter("password");
 		session.setAttribute("pass", pass);
 		session.setAttribute("user", user);
-		session.setAttribute("zhuohao", zhuohao);
+		
 		return "ok";
 	}
 	
