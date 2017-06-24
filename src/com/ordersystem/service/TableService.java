@@ -36,4 +36,8 @@ public class TableService {
 	public void updatee(TableBean tb,ser_tabBean st,String tb_id) {
 		tq.update(tb,st,tb_id);
 	}
+	
+	public void seleid(TableBean tb,ser_tabBean st,String id) {
+		tq.deltable(tb,st, id);
+	}
 }

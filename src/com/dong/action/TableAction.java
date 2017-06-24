@@ -125,5 +125,17 @@ public class TableAction extends BaseAction {
 		seleAll();
 		return "ss";
 	}
-
+	
+	/** 
+	 * 方法功能说明：  删除餐桌
+	 * id:要删除的桌子的id
+	 */
+	public String del(){
+		String id=super.getparameter("tab");
+		TableBean tb=new TableBean();
+		ser_tabBean st=new ser_tabBean();
+		ts.seleid(tb, st, id);
+		seleAll();
+		return "ss";
+	}
 }

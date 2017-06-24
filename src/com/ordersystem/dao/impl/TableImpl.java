@@ -95,4 +95,10 @@ public class TableImpl {
 		int flag =dt.executeUpdate(sq,pe);
 		System.out.println(flag);
 	}
+	
+	public void deltable(TableBean tb,ser_tabBean st,String tb_id){
+		Object[] pa=new Object[]{tb_id};
+		String sql="delete from table_table where table_id=?";
+		dt.executeUpdate(sql, pa);
+	}
 }

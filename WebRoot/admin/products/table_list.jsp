@@ -35,18 +35,17 @@
 			bgColor="#f5fafe" border="0"> 
 			<TBODY>
 				<tr>
-					<td class="ta_01" align="center" bgColor="#afd1f3" ><strong>查 
+					<td class="ta_01" align="center" bgColor="#afd1f3" ><strong>查  
 							询 条 件</strong>
 					</td>
 				</tr>
 				<tr>
 					<td>
-						
-						 <table cellpadding="0" cellspacing="0" border="0" width="100%"> 
+						<table cellpadding="0" cellspacing="0" border="0" width="100%"> 
 						 	<tr>
 						 		<td>
 							<form action="Table_selezhuo.action" method="post">
-								桌号：<input type="text" name="zhuohao"><br>
+								桌号：<input type="text" name="zhuohao"/><br>
 								<input type="submit" value="查询"> 
 							</form>
 								</td>
@@ -100,7 +99,7 @@
 								</td>
 								<td width="9%" align="center">
 									<a
-										href="${pageContext.request.contextPath}/deleterecord?id=&method=del">
+										href="${pageContext.request.contextPath}/Table_del.action?tab=${row.table_id}">
 											<img
 											src="${pageContext.request.contextPath}/admin/images/i_del.gif"
 											width="16" height="16" border="0" style="CURSOR: hand">
@@ -117,84 +116,7 @@
 							
 							
 							
-						<%-- 	<tr
-								style="FONT-WEIGHT: bold; FONT-SIZE: 12pt; HEIGHT: 25px; BACKGROUND-COLOR: #afd1f3">
-								<td align="center" width="24%"></td>
-								<td align="center" width="18%">10</td>
-								<td align="center" width="9%">张三</td>
-								<td align="center" width="9%">3</td>
-								<td width="8%" align="center">空闲</td>
-								<td width="8%" align="center">
-									<a
-										href="${pageContext.request.contextPath}/admin/products/money_edit.jsp">
-											<img
-											src="${pageContext.request.contextPath}/admin/images/i_del.gif"
-											width="16" height="16" border="0" style="CURSOR: hand">
-									</a>
-								</td>
-								<td width="8%" align="center">
-									<a
-										href="${pageContext.request.contextPath}/deleterecord?id=${li.bookid}&method=del">
-											<img
-											src="${pageContext.request.contextPath}/admin/images/i_del.gif"
-											width="16" height="16" border="0" style="CURSOR: hand">
-									</a>
-								</td>
-							</tr>
-							<tr
-								style="FONT-WEIGHT: bold; FONT-SIZE: 12pt; HEIGHT: 25px; BACKGROUND-COLOR: #afd1f3">
-								<td align="center" width="24%">1</td>
-								<td align="center" width="18%">10</td>
-								<td align="center" width="9%">张三</td>
-								<td align="center" width="9%">3</td>
-								<td width="8%" align="center">空闲</td>
-								<td width="8%" align="center">
-									<a
-										href="${pageContext.request.contextPath}/admin/products/money_edit.jsp">
-											<img
-											src="${pageContext.request.contextPath}/admin/images/i_del.gif"
-											width="16" height="16" border="0" style="CURSOR: hand">
-									</a>
-								</td>
-								<td width="8%" align="center">
-									<a
-										href="${pageContext.request.contextPath}/deleterecord?id=${li.bookid}&method=del">
-											<img
-											src="${pageContext.request.contextPath}/admin/images/i_del.gif"
-											width="16" height="16" border="0" style="CURSOR: hand">
-									</a>
-								</td>
-							</tr> --%>
-							
-
-							<%-- <c:forEach items="${list }" var = "li">
-								<tr onmouseover="this.style.backgroundColor = 'white'"
-									onmouseout="this.style.backgroundColor = '#F5FAFE';">
-									<td style="CURSOR: hand; HEIGHT: 22px" align="center"
-										width="23">${li.bookid }</td>
-									<td style="CURSOR: hand; HEIGHT: 22px" align="center"
-										width="18%">${li.name }</td>
-									<td style="CURSOR: hand; HEIGHT: 22px" align="center"
-										width="8%">${li.price }</td>
-									<td style="CURSOR: hand; HEIGHT: 22px" align="center"
-										width="8%">${li.pnum }</td>
-									<td style="CURSOR: hand; HEIGHT: 22px" align="center">${li.category }</td>
-									<td align="center" style="HEIGHT: 22px" width="7%"><a
-										href="${pageContext.request.contextPath}/admin/products/table_edit.jsp">
-											<img
-											src="${pageContext.request.contextPath}/admin/images/i_edit.gif"
-											border="0" style="CURSOR: hand"> </a>
-									</td>
-
-									<td align="center" style="HEIGHT: 22px" width="7%"><a
-										href="${pageContext.request.contextPath}/deleterecord?id=${li.bookid}&method=del">
-											<img
-											src="${pageContext.request.contextPath}/admin/images/i_del.gif"
-											width="16" height="16" border="0" style="CURSOR: hand">
-									</a>
-									</td>
-								</tr>
-						</c:forEach> --%>
+					
 						</table>
 					</td>
 				</tr>
