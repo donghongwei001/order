@@ -26,6 +26,9 @@ public class TableAction extends BaseAction {
 		HttpServletRequest request = ServletActionContext.getRequest();
 		HttpServletResponse response = ServletActionContext.getResponse();
 		TableService ts=new TableService();
+/**
+ * 方法功能说明：  根据桌号查询桌子信息
+ */
 		public String selezhuo() {
 			String table_id = super.getparameter("zhuohao");
 			List<TableBean> li=ts.selezhuohao(table_id);

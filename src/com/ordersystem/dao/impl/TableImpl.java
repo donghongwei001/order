@@ -14,30 +14,32 @@ public class TableImpl {
 	DaoFactory dt=new DaoFactory();
 	public List<TableBean> ss(String table_id){
 		Object[] param=new Object[]{table_id};
-		String sql="select table_id,table_Capacity,code_name,emp_name from  table_table,ser_tab,emp_table,role_table,code_table where emp_fk_pos_id=role_id and emp_id = fk_emp_id and fk_table_id=table_id and code_id=table_state and emp_fk_pos_id='2' and table_id=?";
+		String sql="select table_id,table_name,table_Capacity,code_name,emp_name from  table_table,ser_tab,emp_table,role_table,code_table where emp_fk_pos_id=role_id and emp_id = fk_emp_id and fk_table_id=table_id and code_id=table_state and emp_fk_pos_id='2' and table_id=?";
 		ArrayList<ArrayList> arr=dt.execQuery(sql, param);
 		ArrayList<TableBean> list=new ArrayList<TableBean>();
 		for (int i = 0; i < arr.size(); i++) {
 			TableBean tb = new TableBean();
 			tb.setTable_id( (Integer) arr.get(i).get(0));
-			tb.setTable_Capacity((Integer) arr.get(i).get(1));
-			tb.setTable_state((String) arr.get(i).get(2));
-			tb.setFk_emp_id((String) arr.get(i).get(3));
+			tb.setTable_name((String) arr.get(i).get(1));
+			tb.setTable_Capacity((Integer) arr.get(i).get(2));
+			tb.setTable_state((String) arr.get(i).get(3));
+			tb.setFk_emp_id((String) arr.get(i).get(4));
 			list.add(tb);
 		}
 		return list;
 	}
 	
 	public  List<TableBean> seleall() {
-		String sql="select table_id,table_Capacity,code_name,emp_name from  table_table,ser_tab,emp_table,role_table,code_table where emp_fk_pos_id=role_id and emp_id = fk_emp_id and fk_table_id=table_id and code_id=table_state and emp_fk_pos_id='2' ";
+		String sql="select table_id,table_name,table_Capacity,code_name,emp_name from  table_table,ser_tab,emp_table,role_table,code_table where emp_fk_pos_id=role_id and emp_id = fk_emp_id and fk_table_id=table_id and code_id=table_state and emp_fk_pos_id='2' ";
 		ArrayList<ArrayList> arr=dt.execQuery(sql, null);
 		ArrayList<TableBean> list=new ArrayList<TableBean>();
 		for (int i = 0; i < arr.size(); i++) {
 			TableBean tb = new TableBean();
 			tb.setTable_id( (Integer) arr.get(i).get(0));
-			tb.setTable_Capacity((Integer) arr.get(i).get(1));
-			tb.setTable_state((String) arr.get(i).get(2));
-			tb.setFk_emp_id((String) arr.get(i).get(3));
+			tb.setTable_name((String) arr.get(i).get(1));
+			tb.setTable_Capacity((Integer) arr.get(i).get(2));
+			tb.setTable_state((String) arr.get(i).get(3));
+			tb.setFk_emp_id((String) arr.get(i).get(4));
 			list.add(tb);
 		}
 		return list;

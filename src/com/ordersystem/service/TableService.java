@@ -11,6 +11,10 @@ import com.ordersystem.domain.ser_tabBean;
 public class TableService {
 	TableImpl tq = new TableImpl();
 	
+	/**
+	 * 
+	 * 方法功能说明：  查询所有桌子信息
+	 */
 	public List<TableBean> seleA() {
 		return tq.seleall();
 	}
