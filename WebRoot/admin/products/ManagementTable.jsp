@@ -18,6 +18,7 @@
 	.very-rowe{
 		overflow:auto;
 		height:auto;
+		border:1px solid blue;
 	}
 	.mytable{
 		float:left;
@@ -30,7 +31,7 @@
   </style>
  </HEAD>
 
- <BODY><div>
+ <BODY>
  
  <div class="very-row" style="font-size:12px;" align="center">
  <c:forEach items="${tbList }" var="tb">
@@ -51,7 +52,6 @@
    
   <!-- <div class="container">
 	<button class="btn btn-primary">添加餐桌</button>
-  </div> -->
- <input type="hidden" id="txt1" value="555444">
+ <input type="hidden" id="txt1" value="555444">-->
  </BODY>
 </HTML>
