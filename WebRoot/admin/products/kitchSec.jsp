@@ -51,7 +51,7 @@
 			<td>${li.wfb.lasttime }</td>
 			<td>${li.wfb.order_press }</td>
 			<td>${li.wfb.order_food_mark }</td>
-			<td><a href="${pageContext.request.contextPath}/kitchen_doFood.action?orderfoodid=${li.order_food_id }&status=2" type="button" class="btn btn-info btn-xs">做菜</a></td>
+			<td><a href="${pageContext.request.contextPath}/kitchen_secDoFood.action?orderfoodid=${li.order_food_id }&status=2" type="button" class="btn btn-info btn-xs">做菜</a></td>
 			
 		</tr>
 		</c:forEach>
@@ -77,7 +77,7 @@
 			<td>${dg.wfb.food_name}</td>
 			<td>${dg.foodnum }</td>
 			<td>${dg.wfb.order_food_mark }</td>
-			<td><a type="button" class="btn btn-success btn-xs" href="${pageContext.request.contextPath}/kitchen_servingFood.action?orderfoodid=${dg.order_food_id }&status=3&orderId=${dg.orderId}">上菜</a></td>
+			<td><a type="button" class="btn btn-success btn-xs" href="${pageContext.request.contextPath}/kitchen_secServingFood.action?orderfoodid=${dg.order_food_id }&status=3&orderId=${dg.orderId}">上菜</a></td>
 		</tr>
 		</c:forEach>
 	</table>

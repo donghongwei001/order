@@ -23,7 +23,7 @@ public class KitchenAction extends BaseAction{
 	KitchenService ks = new KitchenService(); 
 	HttpServletRequest request=ServletActionContext.getRequest();
 	PageUtil pu = new PageUtil();		//分页辅助类
-	/**查找排序后的菜品清单
+	/**算法3:查找排序后的菜品清单
 	 * @author hcb
 	 * 执行此方法时  1.更新 排序列表和出菜列表 
 	 * 			 2.更新数据库菜品状态为正做
@@ -107,7 +107,7 @@ public class KitchenAction extends BaseAction{
 			//e.printStackTrace();
 		}
 		currPage =currPage==null?1:currPage;	//设置默认页数
-		pageSize = pageSize==null?3:pageSize;	//设置默认每页显示条数
+		pageSize = pageSize==null?10:pageSize;	//设置默认每页显示条数
 		int startIndex=(currPage-1)*pageSize;	//设置默认
 		Integer count = Integer.parseInt(ks.findCount("3"));
 		List<WaitFoodBean> doneFood = ks.showDoneFood(pageSize,startIndex);//查询状态为3的已做菜品
@@ -132,8 +132,8 @@ public class KitchenAction extends BaseAction{
 			e.printStackTrace();
 		}
 		page = page==null?1:page;
-		int startIndex = (page-1)*3;
-		List<WaitFoodBean> doneFood = ks.showDoneFood(3,startIndex);//查询状态为3的已做菜品
+		int startIndex = (page-1)*10;
+		List<WaitFoodBean> doneFood = ks.showDoneFood(10,startIndex);//查询状态为3的已做菜品
 		for (int i = 0; i < doneFood.size(); i++) {
 			String mark = doneFood.get(i).getOrder_food_mark()==null?"":doneFood.get(i).getOrder_food_mark();
 			doneFood.get(i).setOrder_food_mark(mark);
@@ -142,4 +142,115 @@ public class KitchenAction extends BaseAction{
 		super.write(js);
 		return null;
 	}
+	
+	   /**算法2:按时间先进先出  查找排序后的菜品清单
+		 * @author hcb
+		 * 执行此方法时  1.更新 排序列表和出菜列表 
+		 * 			 2.更新数据库菜品状态为正做
+		 * 			3.更新徽章显示的数量
+		 * 			4.更新已做菜单列表
+		 */
+		public String secFindFood(){
+			List<SortKitchenFoodBean> list = ks.secShowWaitFood("1");//查询状态为1的待做菜品
+			super.setsession("list", list);
+			List<SortKitchenFoodBean> doingFood = ks.secShowWaitFood("2");//查询状态为2的正做菜品
+			super.setsession("doing", doingFood);		
+			//System.out.println("doneFood:"+doneFood.size());
+			PageUtil paging = paging();		//分页封装查询状态为3的已做菜品
+			super.setsession("done", paging);		
+			String count = ks.findCount("1");
+			super.setsession("count", count);
+			return "secpass";
+		}
+		
+		/**算法2:做菜按钮
+		 * 	功能:1.更新数据库菜品状态信息
+		 * 		2.更新页面菜品显示 调用findfood方法
+		 * @author hcb
+		 * 
+		 */
+		public String secDoFood(){
+			String orderfoodid = super.getparameter("orderfoodid");
+			String status = super.getparameter("status");
+			System.out.println("update:"+orderfoodid);
+			ks.updateStatus(orderfoodid,status);
+			secFindFood();
+			return "secpass";
+		}
+		
+		/**算法2:上菜按钮
+		 * 	功能:1.更新数据库菜品状态信息
+		 * 		2.更新数据库最后上菜时间
+		 * 		3.记录该菜的上菜时间
+		 * 		3.更新页面菜品显示  调用findfood方法
+		 * @author hcb
+		 * 
+		 */
+		public String secServingFood(){
+			String orderfoodid = super.getparameter("orderfoodid");
+			String status = super.getparameter("status");
+			String orderId = super.getparameter("orderId");
+			ks.updateStatusServingTime(orderfoodid,status);	//更新数据库菜品状态和该菜上菜时间
+			ks.updateLastTime(orderId);		//更新数据库最后上菜时间
+			secFindFood();
+			return "secpass";
+		}
+		
+		/**算法3: 按桌号轮流取菜排序   查找排序后的菜品清单
+		 * @author hcb
+		 * 执行此方法时  1.更新 排序列表和出菜列表 
+		 * 			 2.更新数据库菜品状态为正做
+		 * 			3.更新徽章显示的数量
+		 * 			4.更新已做菜单列表
+		 */
+		//@Action(value="sortwaitfood",results={@Result(name="pass",location= "admin/products/Kitchen.jsp")})
+		public String thrFindFood(){
+			System.out.println("List<SortKitchenFoodBean> list");
+			List<SortKitchenFoodBean> list = ks.ThrShowWaitFood("1");//查询状态为1的待做菜品
+			super.setsession("list", list);
+			List<SortKitchenFoodBean> doingFood = ks.ThrShowWaitFood("2");//查询状态为2的正做菜品
+			super.setsession("doing", doingFood);		
+			
+			//System.out.println("doneFood:"+doneFood.size());
+			PageUtil paging = paging();		//分页封装查询状态为3的已做菜品
+			super.setsession("done", paging);		
+			String count = ks.findCount("1");
+			super.setsession("count", count);
+			return "thrpass";
+		}
+		
+		/**算法3:做菜按钮
+		 * 	功能:1.更新数据库菜品状态信息
+		 * 		2.更新页面菜品显示 调用findfood方法
+		 * @author hcb
+		 * 
+		 */
+		public String thrDoFood(){
+			String orderfoodid = super.getparameter("orderfoodid");
+			String status = super.getparameter("status");
+			System.out.println("update:"+orderfoodid);
+			ks.updateStatus(orderfoodid,status);
+			thrFindFood();
+			return "secpass";
+		}
+		
+		/**算法3:上菜按钮
+		 * 	功能:1.更新数据库菜品状态信息
+		 * 		2.更新数据库最后上菜时间
+		 * 		3.记录该菜的上菜时间
+		 * 		3.更新页面菜品显示  调用findfood方法
+		 * @author hcb
+		 * 
+		 */
+		public String thrServingFood(){
+			String orderfoodid = super.getparameter("orderfoodid");
+			String status = super.getparameter("status");
+			String orderId = super.getparameter("orderId");
+			ks.updateStatusServingTime(orderfoodid,status);	//更新数据库菜品状态和该菜上菜时间
+			ks.updateLastTime(orderId);		//更新数据库最后上菜时间
+			thrFindFood();
+			return "secpass";
+		}
+		
+		
 }
