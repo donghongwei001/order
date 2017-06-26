@@ -313,7 +313,7 @@ function delEmp(name) {
 	function bac(){
 		pageNo = --pageNo<1?1:pageNo;
 		 $.ajax({
-			url:"/Ordersystem/emp_ajxQueryEmp.action",
+			url:"/Ordersystem/em p_ajxQueryEmp.action",
 			data:{pageNo:pageNo,emp_idcar:$("#emp_idcar").val(),emp_id:$("#emp_id").val(),emp_name:$("#emp_name").val(),emp_gender:$("#emp_gender").val()},
 			type:"post",
 			dataType:"json",

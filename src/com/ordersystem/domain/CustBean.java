@@ -5,7 +5,13 @@ import java.text.DecimalFormat;
 public class CustBean {
 	private int cus_id;
 	private String cus_name;
-	private int xiaofei;
+	private String  xiaofei;
+	public String getXiaofei() {
+		return xiaofei;
+	}
+	public void setXiaofei(String xiaofei) {
+		this.xiaofei = xiaofei;
+	}
 	public int getCus_id() {
 		return cus_id;
 	}
@@ -18,14 +24,10 @@ public class CustBean {
 	public void setCus_name(String cus_name) {
 		this.cus_name = cus_name;
 	}
-	public int getXiaofei() {
-		return xiaofei;
-	}
-	public void setXiaofei(int xiaofei) {
-		this.xiaofei = xiaofei;
-	}
+	
 	
 
+	
 	
 	
 }	

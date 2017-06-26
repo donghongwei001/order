@@ -75,7 +75,6 @@
 		function(){
 			$.post("Table_sewaiter.action",
 			function(data){
-				alert("sssss");
 					$("#posSelect").empty();
 					$("#posSelect").append("<option value='qingxuanze' selected='selected'>--请选择--</option>");
 					for(var i = 0;i<data.length;i++){

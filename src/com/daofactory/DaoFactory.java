@@ -68,7 +68,7 @@ public class DaoFactory {
 	public static int executeUpdate(String sql,Object[] params){
 		int flag = -1;
 		try {
-			Connection con = getConnection("order");
+			Connection con = getConnection("orderdb");
 			PreparedStatement ps = con.prepareStatement(sql);
 			setParams(ps, params);
 			flag = ps.executeUpdate();
@@ -86,7 +86,7 @@ public class DaoFactory {
 		Connection con = null;
 		PreparedStatement p = null;
 		ResultSet rs = null;
-		con = getConnection("order");
+		con = getConnection("orderdb");
 		ArrayList<ArrayList> arr = new ArrayList<ArrayList>();
 		try {
 			p = con.prepareStatement(sql);

@@ -107,22 +107,13 @@
 								</td> 
 									</tr>
 								</c:forEach>
-	
-							
-							
-							
-							
-							
-							
-							
-							
-					
-						</table>
+							</table>
 					</td>
 				</tr>
 			</TBODY>
 		</table>
-
+	<button onclick="shang()">上一页</button>
+	<button onclick="xia()">下一页</button><span></span>
 </body>
 </HTML>
 
