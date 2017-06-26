@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="zh-CN">
   <head>
@@ -23,7 +24,8 @@
     <![endif]-->
 	<style type="text/css">
 		body{
-			background:url("images/beijingtupian.jpg");
+			background:url("uploadFile/35.jpg");
+			background-attachment:fixed;
 			font-size:25px;
 		}#zhuohao{
 			font-size:23px;
@@ -36,22 +38,13 @@
 
   <body>
 	<br/>
-	<br/>
-	
-	<br/>
+
 	<ul class="nav nav-pills nav-stacked">
-		<li role="presentation" ><a href="/Ordersystem/findfood.action" target="main"><button class="btn btn-info btn-lg" > <B>招牌菜</B></button></a></li>
-		<li role="presentation"><a href="豫菜.html" target="main"><button class="btn btn-info btn-lg" ><B>豫菜</B></button></a></li>
-		<li role="presentation"><a href="框架2.html" target="main"><button class="btn btn-info btn-lg" ><B>肉类</B></button></a></li>
-		<li role="presentation"><a href="框架2.html" target="main"><button class="btn btn-info btn-lg" ><B>菌菜类</B></button></a></li>
-		<li role="presentation"><a href="框架2.html" target="main"><button class="btn btn-info btn-lg" ><B>蔬菜类</B></button></a></li>
-		<li role="presentation"><a href="框架2.html" target="main"><button class="btn btn-info btn-lg" ><B>汤类</B></button></a></li>
-		<li role="presentation"><a href="框架2.html" target="main"><button class="btn btn-info btn-lg" ><B>鱼肉</B></button></a></li>
-		<li role="presentation"><a href="框架2.html" target="main"><button class="btn btn-info btn-lg" ><B>羊肉</B></button></a></li>
-		<li role="presentation"><a href="框架2.html" target="main"><button class="btn btn-info btn-lg" ><B>牛肉</B></button></a></li>
-		<li role="presentation"><a href="框架2.html" target="main"><button class="btn btn-info btn-lg" ><B>红酒</B></button></a></li>
-		<li role="presentation"><a href="饮料.html" target="main"><button class="btn btn-info btn-lg" ><B>饮料</B></button></a></li>
-		<li role="presentation"><a href="框架2.html" target="main"><button class="btn btn-info btn-lg" ><B>白酒和啤酒</B></button></a></li>
+	<c:forEach items="${list}" var="a">
+		<li role="presentation" ><a href="/Ordersystem/findfood.action?id=${a.dishes_id}" target="main"><button class="btn btn-info btn-lg" > <B>${a.dishes_name}</B></button></a></li>
+	</c:forEach>
+		
+		
 	</ul>
 		
     <!-- Bootstrap core JavaScript

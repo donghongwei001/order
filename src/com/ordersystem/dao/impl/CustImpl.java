@@ -22,7 +22,7 @@ public class CustImpl {
 			CustBean ct=new CustBean();
 			ct.setCus_id((Integer) arr.get(i).get(0));
 			ct.setCus_name((String) arr.get(i).get(1));
-			ct.setXiaofei( (Integer) arr.get(i).get(2));
+			ct.setXiaofei( (String) arr.get(i).get(2).toString());
 			list.add(ct);
 		}
 		return list;
@@ -39,7 +39,7 @@ public class CustImpl {
 			CustBean ct=new CustBean();
 			ct.setCus_id((Integer) arr.get(i).get(0));
 			ct.setCus_name((String) arr.get(i).get(1));
-			ct.setXiaofei((Integer) arr.get(i).get(2));
+			ct.setXiaofei((String) arr.get(i).get(2).toString());
 			list.add(ct);
 		}
 		return list;

@@ -16,28 +16,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	.name{
   		font-size:30px;
   		margin-left:330px;
-  		margin-top:00px;
+  		margin-top:-100px;
   	}
   	#jian{
   		float:left;
   		margin-left:200px;
-  		margin-top:600px;
+  		margin-top:700px;
   	}
   	#shu{float:left;
-  		margin-top:610px;
+  		margin-top:710px;
   		margin-left:50px;
   	}
   	#jia{
   		margin-left:50px;
   		float:left;
-  		margin-top:600px;
+  		margin-top:700px;
   	}
   	.btn-success{
   		margin-left:500px;
   		margin-top:-50px;
   	}.btn-warning{
-  		margin-left:-300px;
-  		margin-top:600px;
+  		margin-left:-800px;
+  		margin-top:780px;
   	}#jiage{
   		font-size:25px;
   		margin-left:100px;
@@ -58,11 +58,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
    <c:forEach items="${foodintro}" var="b">
     	<form action="wei_addshopcars.action?id=${b.food_id}&price=${b.food_price}" method="post">
-		<div 
-			style="float:left;margin-left:27%;margin-top:10%;width:500px;height:600px;background:url('uploadFile/${b.food_pic}') no-repeat;background-size:100%">
+		<div
+			style="float:left;margin-left:27%;margin-top:10%;width:700px;height:600px;background:url('uploadFile/${b.food_pic}') no-repeat;background-size:100%">
 			<div id="name" class="name">${b.food_name}</div>
 			<div class="aaa">Price:¥<div id="jiage">${b.food_price}</div></div>
-			<a href="mainfood.jsp"><button class="btn btn-warning btn-lg">返回</button></a>
+			
 			<button type="button"id="jian" onclick="jianshao()"class="btn btn-danger btn-lg">-</button>
 			<div id="shu"><span class="shuliang"id="shuliang" >1</span></div>
 			<input type="hidden" name="count" id="num">
@@ -73,6 +73,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div>
 		</form>
     </c:forEach>
+    <a href="mainfood.jsp"><button class="btn btn-warning btn-lg">返回</button></a>
   </body>
   <script src="js/jquery-2.1.3.js"></script>
   <script src="js/bootstrap.min.js"></script>

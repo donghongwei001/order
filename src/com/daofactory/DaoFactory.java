@@ -86,7 +86,7 @@ public class DaoFactory {
 		Connection con = null;
 		PreparedStatement p = null;
 		ResultSet rs = null;
-		con = getConnection("order");
+		con = getConnection("orderdb");
 		ArrayList<ArrayList> arr = new ArrayList<ArrayList>();
 		try {
 			p = con.prepareStatement(sql);

@@ -174,7 +174,9 @@ public class DisheAction extends BaseAction implements ModelDriven<DisheBean> {
 	 * 
 	 */
 	public String findCategory(){
+		System.out.println("11111");
 		List<FoodCategoryBean> fcb = ds.findCategory();
+		System.out.println("fcb"+fcb.size());
 		String str = JSON.toJSONString(fcb);
 		super.write(str);
 		return null;

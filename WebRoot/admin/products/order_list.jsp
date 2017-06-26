@@ -101,13 +101,9 @@
 		<div id="n1">
 
 			<div>
-				<span class="label label-success radius">已付款</span>
+				
 				<section class="Hui-article-box"> <nav class="breadcrumb">
-				<i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span>
-				订单管理 <span class="c-gray en">&gt;</span> 订单列表 <a
-					class="btn btn-success radius r"
-					style="line-height:1.6em;margin-top:3px" href="" title="刷新"><i
-					class="Hui-iconfont">&#xe68f;</i></a> <a
+				 <a
 					href="${pageContext.request.contextPath}/Ordersystem/wei_query1.action"><button
 							
 							style="background:#000; class="label label-success radius" filter:alpha(opacity:0); opacity:0.2;">全部订单</button>
@@ -115,33 +111,32 @@
 				<div class="Hui-article">
 					<article class="cl pd-20">
 					<form action="/Ordersystem/dongdingdan.action" method="post">
-						<div class="text-c">
+						
 
 							<span id="riqi">日期范围</span>：
 							<div class="control-group" id="shijian1">
-								<label class="control-label">初始时间</label>
-								<div class="controls input-append date form_date" data-date=""
-									data-date-format="yyyy-MM-dd" data-link-field="dtp_input2"
-									data-link-format="yyyy-mm-dd">
-									<input size="16" type="text" value="" readonly
-										id="shijiankuang3" name="shijiankuang3"> <span
-										class="add-on"><i class="icon-remove"></i> </span> <span
-										class="add-on"><i class="icon-th"></i> </span>
+								<label class="control-label"> 初始时间</label>
+								<div class="controls input-append date form_datetime"
+									data-date="2017-06-16T00:00:00Z" data-date-format="yyyy-MM-dd"
+									data-link-field="dtp_input1">
+									<input id="shijiankuang3" name="shijiankuang3" size="25"
+										type="text" value="" readonly> <span class="add-on"><i
+										class="icon-remove"></i> </span> <span class="add-on"><i
+										class="icon-th"></i> </span>
 								</div>
-								<input type="hidden" id="dtp_input2" value="" /><br />
+								<input type="hidden" id="dtp_input1" value="" /><br />
 							</div>
-
 							<div class="control-group" id="shijian2">
-								<label class="control-label">结束时间</label>
-								<div class="controls input-append date form_date" data-date=""
-									data-date-format="yyyy-MM-dd" data-link-field="dtp_input2"
-									data-link-format="yyyy-mm-dd">
-									<input size="16" type="text" value="" readonly
-										id="shijiankuang4" name="shijiankuang4"> <span
-										class="add-on"><i class="icon-remove"></i> </span> <span
-										class="add-on"><i class="icon-th"></i> </span>
+								<label class="control-label"> 初始时间</label>
+								<div class="controls input-append date form_datetime"
+									data-date="2017-06-16T00:00:00Z" data-date-format="yyyy-MM-dd"
+									data-link-field="dtp_input1">
+									<input id="shijiankuang4" name="shijiankuang4" size="25"
+										type="text" value="" readonly> <span class="add-on"><i
+										class="icon-remove"></i> </span> <span class="add-on"><i
+										class="icon-th"></i> </span>
 								</div>
-								<input type="hidden" id="dtp_input2" value="" /><br />
+								<input type="hidden" id="dtp_input1" value="" /><br />
 							</div>
 							<input type="text" name="ordername" id="ordername"
 								placeholder=" 订单编号" style="width:250px" class="input-text">
@@ -149,7 +144,7 @@
 								<i class="Hui-iconfont">&#xe665;</i> 搜订单
 							</button>
 
-						</div>
+						
 					</form>
 					<div class="cl pd-5 bg-1 bk-gray mt-20">
 						<span class="l"><a href="javascript:;" onclick="datadel()"
@@ -187,6 +182,9 @@
 									<th width="100"
 										onmouseover="this.style.backgroundColor = '#5F9F9F ';"
 										onmouseout="this.style.backgroundColor = '#afd1f3 ';">评价</th>
+										<th width="100"
+										onmouseover="this.style.backgroundColor = '#5F9F9F ';"
+										onmouseout="this.style.backgroundColor = '#afd1f3 ';">状态</th>
 									<th width="100"
 										onmouseover="this.style.backgroundColor = '#5F9F9F ';"
 										onmouseout="this.style.backgroundColor = '#afd1f3 ';">删除</th>
@@ -207,6 +205,7 @@
 										<td>${b.cus_name}</td>
 										<td>${b.order_dt_score}</td>
 										<td>${b.oeder_dt_mark}</td>
+										<td><span class="label label-success radius">${b.code_name}</span></td>
 										<td><button onclick="shanchu(${b.order_id})">删除</button></td>
 									</tr>
 								</c:forEach>
@@ -227,9 +226,6 @@
 	</div>
 	
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-	<script src="../js/jquery-2.1.3.js"></script>
-	<!-- Include all compiled plugins (below), or include individual files as needed -->
-	<script src="../js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="../js/jquery-2.1.3.js"
 		charset="UTF-8"></script>
 	<script type="text/javascript" src="../js/bootstrap.min.js"></script>
@@ -237,44 +233,28 @@
 		charset="UTF-8"></script>
 	<script type="text/javascript"
 		src="../js/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
-	<script>
-		/* $(function() {
-			$(".panel-heading").click(function(e) {
-				
-				$(this).find("span").toggleClass("glyphicon-chevron-down");
-				$(this).find("span").toggleClass("glyphicon-chevron-up");
-			});
-		}); */
 		
-		
-	  $('.form_date').datetimepicker({
-			language : 'fr',
+	
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	
+	<script type="text/javascript" src="../js/jquery-2.1.3.js"
+		charset="UTF-8"></script>
+	<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../js/bootstrap-datetimepicker.js"
+		charset="UTF-8"></script>
+	<script type="text/javascript"
+		src="../js/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
+	<script type="text/javascript">
+		 $(".form_datetime").datetimepicker({
+			//language:  'fr',
 			weekStart : 1,
 			todayBtn : 1,
 			autoclose : 1,
 			todayHighlight : 1,
 			startView : 2,
-			minView : 2,
-			forceParse : 0
-		}); 
-		
-		function shanchu(name) {
-			alert(name);
-			$.ajax({ 
-				type : "post", 
-				url : "/Ordersystem/shanchu.action",
-				dataType : "text",
-				data : {id:name},
-				success : function(data) {
-
-				}
-			});
-		}}
-		
-		
-
-		
-
+			forceParse : 0,
+			showMeridian : 1,
+		})
 	</script>
 </body>
 </html>
