@@ -102,17 +102,18 @@ div {
 			</div>
 			<div class="col-md-2" style="width:17%">
 				<div class="list-group">
-					<a href="ManagementTable.jsp" target="main" class="list-group-item">餐桌管理</a>
-					<a href="ReservationTable.jsp" target="main"
+					<!-- <a href="ManagementTable.jsp" target="main" class="list-group-item">餐桌管理</a> -->
+					<!-- <a href="ReservationTable.jsp" target="main"
 						class="list-group-item">餐桌预定</a> <a href="order_lsit.jsp"
-						target="main" class="list-group-item">订单查询</a>
+						target="main" class="list-group-item">订单查询</a> -->
 
 
 				</div>
-				<a href="${pageContext.request.contextPath}/serv_showTable.action" class="btn btn-success button-control" role="button">刷新页面</a>
-				<a href="javascript:starteat()" class="btn btn-warning button-control" role="button">开台</a><BR>
-				<a href="javascript:clear()" class="btn btn-danger button-control" role="button">清扫结束</a>
+				<a href="javascript:starteat()" class="btn btn-info button-control" role="button">开台</a><BR>
 				<a href="javascript:reminder()" class="btn btn-warning button-control" role="button">催菜</a>
+				<a href="ManagementTable.jsp" target="main" class="btn btn-primary button-control" role="button">餐桌管理</a>
+				<a href="${pageContext.request.contextPath}/serv_showTable.action" class="btn btn-success button-control" role="button">刷新页面</a>
+				<a href="javascript:clear()" class="btn btn-danger button-control" role="button">清扫结束</a>
 				
 				<!-- <a href="###" class="btn btn-primary button-control" role="button" data-toggle="modal" data-target="#myModal2">买单</a> <a href="###"
 					class="btn btn-primary button-control" role="button">交班报表</a><BR> -->

@@ -103,25 +103,38 @@ public class KitchenDaoImpl implements KitchenDao {
 				String mark = wfb.get(i).getOrder_food_mark()==null?"ept":wfb.get(i).getOrder_food_mark();
 				//添加入集合前先用for对mergelist进行遍历  判断是否能进行合并
 				for (int j = 0; j < MergeList.size(); j++) {
-					int count =fNum + MergeList.get(j).getFoodnum();		//算出如果合并后该菜的数量  判断若数量小于最大合并数 则符合并菜条件
+					//重新修改合并后显示菜品数目
+					String foodnum = MergeList.get(j).getFoodnum();
+					int megerNum = 0;	//定义一个合并后的菜品总数
+					if (foodnum.indexOf('-')>0) {
+						String[] splitfNum = foodnum.split("-");		//先拆分拼装好的字符串
+						for (int k = 0; k < splitfNum.length; k++) {
+							megerNum += Integer.parseInt(splitfNum[k]);	//转换为数字后相加即为当前的已合并总数
+						}
+					}else megerNum = Integer.parseInt(foodnum);			//如果取出的字符串 当前没有合并的则直接转换为数字格式
+					
+					int count =fNum + megerNum;//之前合并的总数		//算出如果合并后该菜的数量  判断若数量小于最大合并数 则符合并菜条件
 					String merkM = MergeList.get(j).getWfb().getOrder_food_mark()==null?"ept":MergeList.get(j).getWfb().getOrder_food_mark();	//获取备注用来判断备注是否一样
 					if (food_name.equals(MergeList.get(j).getWfb().getFood_name()) && maxMerge >= count && mark.equals(merkM)) {
 					//if (food_name.equals(MergeList.get(j).getWfb().getFood_name())&&order_food_mark.equals(MergeList.get(j).getWfb().getOrder_food_mark())&&maxMerge > MergeList.get(j).getFoodnum()) {
 						flag = 1;
-						fNum += MergeList.get(j).getFoodnum();	//更新数量
+						String megerNumStr= MergeList.get(j).getFoodnum()+"-"+fNum;
+						//fNum = MergeList.get(j).getFoodnum();	//更新数量为拼字符串的形式
+						//fNum += MergeList.get(j).getFoodnum();	//更新数量
+						
 						
 						System.out.println("fNum+"+fNum);
 						tNum = MergeList.get(j).getTabid()+","+tNum;//更新桌号
 						idString = MergeList.get(j).getOrder_food_id()+"-"+idString;//更新id编号
 						orderId = MergeList.get(j).getOrderId()+"-"+orderId;	//更新订单id
 						System.out.println("合并后的订单编号是:"+orderId);
-						MergeList.get(j).setFoodnum(fNum);			//更新菜品数目
+						MergeList.get(j).setFoodnum(megerNumStr);			//更新菜品数目
 						MergeList.get(j).setOrder_food_id(idString);
 						MergeList.get(j).setTabid(tNum);
 						MergeList.get(j).setOrderId(orderId);
 					}
 				}
-				skfb.setFoodnum(fNum);
+				skfb.setFoodnum(fNum+"");
 				skfb.setWfb(wfb.get(i));
 				skfb.setOrder_food_id(idString);
 				skfb.setTabid(tNum);

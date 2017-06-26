@@ -7,7 +7,7 @@ package com.ordersystem.domain;
 public class SortKitchenFoodBean {
 	private WaitFoodBean wfb;
 	private String order_food_id;	//id编号
-	private int foodnum;	//记录合并菜品后该菜的数量
+	private String foodnum;	//记录合并菜品后该菜的数量
 	private String tabid;	//餐桌编号
 	private String orderId;	//订单编号  在更新餐桌最后上菜时间的时候需要用到
 	
@@ -43,11 +43,14 @@ public class SortKitchenFoodBean {
 	public void setWfb(WaitFoodBean wfb) {
 		this.wfb = wfb;
 	}
-	public int getFoodnum() {
+
+	public String getFoodnum() {
 		return foodnum;
 	}
-	public void setFoodnum(int foodnum) {
+
+	public void setFoodnum(String foodnum) {
 		this.foodnum = foodnum;
 	}
+	
 	
 }
