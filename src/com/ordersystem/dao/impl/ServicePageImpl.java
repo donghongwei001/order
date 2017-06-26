@@ -17,6 +17,7 @@ import com.ordersystem.entity.MyFormat;
 public class ServicePageImpl {
 	Connpool cp = new Connpool();
 	QueryRunner qr = new QueryRunner(cp.getDataSource());
+	
 	/**查询数据库中的桌子并显示在服务员界面
 	 * @author hcb
 	 * 
@@ -143,6 +144,10 @@ public class ServicePageImpl {
 		return i;
 	}
 
+	/**给餐桌添加菜的方法
+	 * @author hcb
+	 * 
+	 */
 	public Integer addOrderfood(String foodid, String tableid) {
 		// TODO Auto-generated method stub
 		//sql1为查询到该桌号下正在吃放的订单编号
@@ -159,6 +164,73 @@ public class ServicePageImpl {
 			e.printStackTrace();
 		}
 		return i;
+	}
+	
+	/**设置公用的方法 功能为 通过前台传给的桌子id在数据库中查找到该桌号当前就餐的订单编号
+	 * @author hcb
+	 * @tabid 为前端传回的桌号id
+	 */
+	public Integer searchOrderId(String tabid){
+		//String sql1 = "select ot.order_id from table_table tt,order_table ot where table_state=9 and ot.order_status=11 and ot.order_fk_tabid=tt.table_id and tt.table_id=?";
+		Integer orderid = null;
+		try {
+			orderid = (Integer) qr.query("select ot.order_id from table_table tt,order_table ot where table_state=9 and ot.order_status=11 and ot.order_fk_tabid=tt.table_id and tt.table_id="+tabid, new ScalarHandler(1));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return orderid;
+	}
+
+	/**该函数功能为结账前先检查该餐桌是否有未上完的菜(正做和未做)
+	 * @author hcb
+	 * 
+	 */
+	public Integer checkfood(String tbid) {
+		// TODO Auto-generated method stub
+		Integer orderId = searchOrderId(tbid);
+		System.out.println(orderId+"orderIdorderId");
+		String sql1 = "select COUNT(*) from order_food where fk_order_id =? and order_food_status = 1";
+		String sql2 = "select COUNT(*) from order_food where fk_order_id =? and order_food_status = 2";
+		Object[] params = new Object[]{orderId};
+		int r=0;
+		try {
+			Integer i = (Integer) qr.query("select COUNT(*) from order_food where fk_order_id ="+orderId+" and order_food_status = 1", new ScalarHandler(1));
+			Integer j = (Integer) qr.query("select COUNT(*) from order_food where fk_order_id ="+orderId+" and order_food_status = 2", new ScalarHandler(1));
+			//Integer i = (Integer) DaoFactory.execQuery(sql1, params).get(0).get(0);
+			//Integer j = (Integer) DaoFactory.execQuery(sql2, params).get(0).get(0);
+			i=i==null?0:i;
+			j=j==null?0:j;
+			r=i+j;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return r;
+	}
+	
+	/**更新数据库状态 以及插入数据的方法 
+	 * @author hcb
+	 * 
+	 */
+	public Integer updateStatus(String sql,Object[] params){
+		return DaoFactory.executeUpdate(sql, params);
+	}
+	
+	/**得到一个单元格中数值的方法 入求总金额
+	 * @author hcb
+	 * 
+	 */
+	public Integer findone(String sql){
+		Integer num = null;
+		try {
+			num = (Integer) qr.query(sql, new ScalarHandler(1));
+			num = num==null?0:num;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return num;
 	}
 	
 	

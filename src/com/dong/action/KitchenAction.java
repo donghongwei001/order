@@ -78,21 +78,6 @@ public class KitchenAction extends BaseAction{
 		return "pass";
 	}
 	
-	/**查找正在做菜的菜品集合
-	 * @author hcb
-	 * 执行此方法时    1.只更新出菜列表
-	 * 				2.更新数据库菜品状态为已做
-	 */
-	//@Action(value="doingfood",results={@Result(name="find",location="Kitchen.jsp")})
-	public String findDoFood(){
-		/*List<WaitFoodBean> doingFood = ks.showWaitFood(null);
-		request.setAttribute("doing2", doingFood);
-		for (int i = 0; i < doingFood.size(); i++) {
-			System.out.println(doingFood.get(i));
-		}*/
-		return "find";
-	}
-	
 	/**分页封装函数
 	 * @author hcb
 	 * 
@@ -109,7 +94,8 @@ public class KitchenAction extends BaseAction{
 		currPage =currPage==null?1:currPage;	//设置默认页数
 		pageSize = pageSize==null?10:pageSize;	//设置默认每页显示条数
 		int startIndex=(currPage-1)*pageSize;	//设置默认
-		Integer count = Integer.parseInt(ks.findCount("3"));
+		Integer count = Integer.parseInt(ks.findPageCount("3"));//
+		System.out.println(count+"////count");
 		List<WaitFoodBean> doneFood = ks.showDoneFood(pageSize,startIndex);//查询状态为3的已做菜品
 		pu.setRows(doneFood);
 		pu.setTotal(count);
@@ -231,7 +217,7 @@ public class KitchenAction extends BaseAction{
 			System.out.println("update:"+orderfoodid);
 			ks.updateStatus(orderfoodid,status);
 			thrFindFood();
-			return "secpass";
+			return "thrpass";
 		}
 		
 		/**算法3:上菜按钮
@@ -249,7 +235,7 @@ public class KitchenAction extends BaseAction{
 			ks.updateStatusServingTime(orderfoodid,status);	//更新数据库菜品状态和该菜上菜时间
 			ks.updateLastTime(orderId);		//更新数据库最后上菜时间
 			thrFindFood();
-			return "secpass";
+			return "thrpass";
 		}
 		
 		

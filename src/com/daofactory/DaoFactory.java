@@ -68,7 +68,7 @@ public class DaoFactory {
 	public static int executeUpdate(String sql,Object[] params){
 		int flag = -1;
 		try {
-			Connection con = getConnection("order");
+			Connection con = getConnection("orderdb");
 			PreparedStatement ps = con.prepareStatement(sql);
 			setParams(ps, params);
 			flag = ps.executeUpdate();

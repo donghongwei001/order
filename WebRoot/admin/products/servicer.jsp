@@ -109,16 +109,18 @@ div {
 
 
 				</div>
-				<a href="###" class="btn btn-danger button-control" role="button">清台</a>
-				<a href="###" class="btn btn-danger button-control" role="button">清扫结束</a><BR>
-				<a href="###" class="btn btn-primary button-control" role="button"
-					data-toggle="modal" data-target="#myModal2">买单</a> <a href="###"
-					class="btn btn-primary button-control" role="button">交班报表</a><BR>
-				<a href="###" class="btn btn-warning button-control" role="button">催菜</a>
-				<a href="###" class="btn btn-warning button-control" role="button">查看流水</a><BR>
-				<a href="###" class="btn btn-danger button-control" role="button">拆台</a>
-				<a href="ManagementTable.html" target="main"
-					class="btn btn-success button-control" role="button">刷新桌位</a>
+				<a href="${pageContext.request.contextPath}/serv_showTable.action" class="btn btn-success button-control" role="button">刷新页面</a>
+				<a href="javascript:starteat()" class="btn btn-warning button-control" role="button">开台</a><BR>
+				<a href="javascript:clear()" class="btn btn-danger button-control" role="button">清扫结束</a>
+				<a href="javascript:reminder()" class="btn btn-warning button-control" role="button">催菜</a>
+				
+				<!-- <a href="###" class="btn btn-primary button-control" role="button" data-toggle="modal" data-target="#myModal2">买单</a> <a href="###"
+					class="btn btn-primary button-control" role="button">交班报表</a><BR> -->
+				
+				
+				<!-- <a href="###" class="btn btn-danger button-control" role="button">拆台</a> -->
+				<!-- <a href="ManagementTable.html" target="main"
+					class="btn btn-success button-control" role="button">刷新桌位</a> -->
 
 			</div>
 		</div>
@@ -181,18 +183,111 @@ div {
 
 
 	<script type="text/javascript">
-		function getValue() {
-			var ofrm1 = document.getElementById("main").document;
-			if (ofrm1 == undefined) {
-				ofrm1 = document.getElementById("main").contentWindow.document;
-				var ff = ofrm1.getElementById("txt1").value;
-				alert("firefox/chrome取值结果为:" + ff);
-			} else {
-				var ie = document.frames["main"].document
-						.getElementById("txt1").value;
-				alert("ie取值结果为:" + ie);
+	//开台的方法
+	function starteat(){
+		var flag = window.confirm("您确认开台吗?");
+		if(flag){
+			var tabid = getValue();
+			alert(tabid.length);
+			for(var i=0;i<tabid.length;i++){
+				$.ajax({
+					url:"/Ordersystem/serv_starteat.action",
+					data:{tableid:tabid[i]},
+					type:"post",
+					dataType:"text",
+					success:function(list){
+						//alert(list);
+						if(list=="true"){
+							alert("开台成功,开始点菜吧!");
+						}else{
+							alert("操作失败,服务器忙,请稍后再试!");
+						}
+					}
+				});
 			}
 		}
+	}
+	
+	//服务员主界面催菜的函数	
+	var num=0;
+	function reminder(){
+		num++;
+		if(num>2){
+			alert("您催菜次数过于频繁!请耐心等待!");
+			return;
+		}
+		var tabid = getValue();
+		for(var i=0;i<tabid.length;i++){
+			$.ajax({
+					url:"/Ordersystem/serv_reminder.action",
+					data:{tableid:tabid[i]},
+					type:"post",
+					dataType:"text",
+					success:function(list){
+						//alert(list);
+						if(list=="true"){
+							alert("催单成功,菜品马上就到!");
+						}else{
+							alert("操作失败,服务器忙,请稍后再试!");
+						}
+					}
+			});
+		}
+	}
+		
+		//清台事件
+		function clear(){
+			var flag = window.confirm("请确认此桌号已清扫完?");
+			if(flag){
+				var tab = getValue();
+				for(var i=0;i<tab.length;i++){
+					$.ajax({
+						url:"/Ordersystem/serv_clearTable.action",
+						data:{tableid:tab[i]}, 
+						type:"post",
+						dataType:"text",
+						success:function(list){
+							//alert(list);
+							if(list=="true"){
+								alert("操作成功,桌台已为可用!");
+							}else{
+								alert("操作失败,服务器忙,请稍后再试!");
+								
+							}
+						}
+					})//ajax事件结束
+				}
+			}
+		}
+		
+		//公用方法 用来获取frame框中选中的checkbox value
+		function getValue() {
+			var ofrm1 = document.getElementById("main").document;
+			var box;
+			var tabid = new Array();
+			
+			if (ofrm1 == undefined) {
+				ofrm1 = document.getElementById("main").contentWindow.document;
+				box=ofrm1.getElementsByName("table_id");
+				for(var i=0;i<box.length;i++){
+					if(box[i].checked){
+						tabid.push(box[i].value);
+					}
+				}
+			} else {
+				box = document.frames["main"].document.getElementsByName("table_id");
+				for(var i=0;i<box.length;i++){
+					if(box[i].checked){
+						tabid.push(box[i].value);
+					}
+				}
+				//var ie = document.frames["main"].document.getElementsByName("txt1").value;
+			}
+			return tabid;
+		}
+		
+		
+		
 	</script>
 
 </BODY>

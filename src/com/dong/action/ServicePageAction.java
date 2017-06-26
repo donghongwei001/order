@@ -7,6 +7,7 @@ import java.util.Map;
 import org.apache.struts2.ServletActionContext;
 
 import com.alibaba.fastjson.JSON;
+import com.daofactory.DaoFactory;
 import com.opensymphony.xwork2.ModelDriven;
 import com.ordersystem.domain.DisheBean;
 import com.ordersystem.domain.ServiceOrderListBean;
@@ -149,6 +150,67 @@ public class ServicePageAction extends BaseAction implements ModelDriven<Service
 			super.write("true");
 		}else super.write("false");
 		orderDetails();
+		return null;
+	}
+	
+	/**该函数功能为结账前先检查该餐桌是否有未上完的菜
+	 * @author hcb
+	 * 
+	 */
+	public String checkfood(){
+		String tbid = super.getparameter("tableid");
+		String count = super.getparameter("count");
+		int i = sps.checkfood(tbid);
+		if (i!=0) {
+			super.write("false");
+		}else{
+			Integer status = sps.paymoney(tbid,count);
+			if (status>0) {
+				super.write("true");
+			}else super.write("false");
+		}
+		return null;
+	}
+	
+	/**强制付款的方法
+	 * @author hcb
+	 * 
+	 */
+	/*public String paymoney(){
+		String tbid = super.getparameter("tableid");
+		Integer status = sps.paymoney(tbid);
+		if (status>0) {
+			super.write("ture");
+		}else super.write("false");
+		return null;
+	}*/
+
+	/**清扫结束 改变桌子状态的方法
+	 * 功能 改变桌子状态
+	 * @author hcb
+	 * 
+	 */
+	public String clearTable(){
+		String tableid = super.getparameter("tableid");
+		Integer i = sps.updateTable(tableid);
+		if(i>0){
+			super.write("true");
+		}else super.write("false");
+		return null;
+	}
+	
+	/**前台服务员开台的方法
+	 * @author hcb
+	 * 
+	 */
+	public String starteat(){
+		System.out.println("1245");
+		String tableid = super.getparameter("tableid");
+		String empid = "1003";
+		Integer i = sps.starteat(tableid,empid);
+		if(i>0){
+			super.write("true");
+		}else super.write("false");
 		return null;
 	}
 	

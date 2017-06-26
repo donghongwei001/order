@@ -16,7 +16,6 @@
 	.mytable{
 		height:460px;
 		background-color:#669933;
-		
 	}
 	td{text-align:center;}
 	th{text-align:center;}
@@ -25,16 +24,16 @@
 		height:460px;
 	}
 	.button-control {
-	width:40px;
+	width:100px;
 	
 	text-align: center;
 	}
 	.button-control{
-		width:120px;
+		
 		margin:15 0 0 15;
 		text-align:center;
 	}
-	.collg7{width:35%;
+	.collg7{width:40%;
 		float:left;	
 	}
 	.collg5{width:55%;
@@ -56,7 +55,7 @@
   		for(var i=0;i<numb.length;i++){
   			count +=   parseInt(numb[i].innerText)* parseInt(price[i].innerText);
   		}
-  		val.innerHTML=count+"元";
+  		val.innerHTML=count;
   	})
   
   </script>
@@ -115,15 +114,58 @@
 		</div>
 	</div>
 <div style="margin-top:10px">
-	<div style="float:left;line-height:2" ><B>总计消费:</B></div><div id="countRMB" style="float:left;width:80px;line-height:2" ></div>
-	
+	<div style="float:left;line-height:2" ><B>总计消费:</B></div><div id="countRMB" style="float:left;width:40px;line-height:2" ></div><span>元</span>&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;	
 	<a class="btn btn-danger button-control" href="javascript:delfood()">移除菜品</a>
-	<a class="btn btn-warning button-control" href="javascript:flush()" style="margin:0 10 0 10">页面刷新</a>
 	<a class="btn btn-primary button-control" href="javascript:addfood('${table_id}')">添加菜品</a>
+	<a class="btn btn-primary button-control" href="javascript:paymoney('${table_id}')">结账</a>
+	<a class="btn btn-warning button-control" href="javascript:flush()" style="margin:0 10 0 10">页面刷新</a>
 	<a class="btn btn-primary button-control" href="javascript:reminder('${table_id}')">催菜</a>
 </div>
 	<input type="hidden" id="txt1" value="66666 ">
 <script type="text/javascript">
+	
+	//付款的方法
+	function paymoney(tbid){
+		var flag = window.confirm("您确定结账吗?");
+		if(flag){
+			$.ajax({
+					url:"/Ordersystem/serv_checkfood.action",
+					data:{tableid:tbid,count:$("#countRMB").text()},
+					type:"post",
+					dataType:"text",
+					success:function(list){
+						//alert(list);
+						if(list=="true"){
+							alert("结账成功!");
+						}else{
+							alert("操作失败,您有未上完的菜品!");
+							/* var flag2 = window.confirm("您有未上完的菜品,确定结账吗?");
+							if(flag2){
+								$.ajax({
+									url:"/Ordersystem/serv_paymoney.action",
+									data:{tableid:tbid},
+									type:"post",
+									dataType:"text",
+									success:function(data){
+										//alert(list);
+										if(data=="true"){
+											alert("结账成功,您共计消费元!");
+										}else{
+											alert("结账操作失败!");
+											
+										}
+									}
+								})	//嵌套ajax结束 
+							
+							}*/
+							
+						}
+					}
+				})	//外层ajax结束
+		}
+	}
+	
 	//添加菜品的方法
 	function addfood(tbid){
 		var flag = window.confirm("确认添加选中菜品吗?");
