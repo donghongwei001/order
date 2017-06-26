@@ -26,7 +26,7 @@
 			<tr>
 				<td align="center" bgColor="#f5fafe" class="ta_01">菜品名称：</td>
 				<td class="ta_01" bgColor="#ffffff"><input type="text"
-					name="db.food_name" class="bg"/>
+					name="db.food_name" class="bg" onblur="dishesadd()" id="se"/>
 				</td>
 				<td align="center" bgColor="#f5fafe" class="ta_01">菜品单价：</td>
 				<td class="ta_01" bgColor="#ffffff"><input type="text"
@@ -116,7 +116,19 @@
 					}
 				},"json");
 		})
-	
+	function dishesadd(){
+		$.ajax({
+			url:"/Ordersystem/dishe_se.action",
+			data:{tbname:$("#se").val()},
+			type:"post",
+			dataType:"text",
+			success:function(list){
+				 if(list=="false"){
+				 	alert("此菜已存在");
+				 }
+			}
+		}); 
+	}
 	</script>
 	
 </body>

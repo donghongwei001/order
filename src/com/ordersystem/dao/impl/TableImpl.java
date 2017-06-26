@@ -101,4 +101,11 @@ public class TableImpl {
 		String sql="delete from table_table where table_id=?";
 		dt.executeUpdate(sql, pa);
 	}
+	
+	public int sltbname(String tbname) {
+		Object[] arr=new Object[]{tbname};
+		String sql="select table_name from table_table where table_name=?";
+		int fl=dt.execQuery(sql, arr).get(0).size();
+		return fl;
+	}
 }

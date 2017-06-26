@@ -40,4 +40,8 @@ public class TableService {
 	public void seleid(TableBean tb,ser_tabBean st,String id) {
 		tq.deltable(tb,st, id);
 	}
+	public int seidcar(String tbname) {
+		int fll = tq.sltbname(tbname);
+		return fll;
+	}
 }

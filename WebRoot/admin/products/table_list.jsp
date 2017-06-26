@@ -112,8 +112,8 @@
 				</tr>
 			</TBODY>
 		</table>
-	<button onclick="shang()">上一页</button>
-	<button onclick="xia()">下一页</button><span></span>
+	<button onclick="tableshang()">上一页</button>
+	<button onclick="tablexia()">下一页</button><span id="tablegong">第1页</span><span id="tablegong">共1页</span>
 </body>
 </HTML>
 

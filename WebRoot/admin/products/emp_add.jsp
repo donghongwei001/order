@@ -159,7 +159,7 @@
 			<tr>
 				<td align="center" bgColor="#f5fafe" class="ta_01">身份证号：</td>
 				<td class="ta_01" bgColor="#ffffff"><input type="text"
-					name="emp.emp_idcar" class="bg" /></td>
+					name="emp.emp_idcar" id="idcard" class="bg" onblur="seleidcar()"/></td>
 			</tr>
 			<tr>
 				<td align="center" bgColor="#f5fafe" class="ta_01">家庭住址：</td>
@@ -290,6 +290,18 @@
 						$("#posSelect").append(str);
 					}
 				},"json");})
-		
+	function seleidcar(){
+		$.ajax({
+			url:"/Ordersystem/emp_selidcar.action",
+			data:{emp_idcar:$("#idcard").val()},
+			type:"post",
+			dataType:"text",
+			success:function(list){
+				 if(list=="false"){
+				 	alert("身份证号已存在，请再次确认！")
+				 }
+			}
+		}); 
+	}
 </script>
 </HTML>

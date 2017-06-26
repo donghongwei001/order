@@ -56,5 +56,9 @@ public class DisheService {
 		String sql = "delete food_table where food_id=?";
 		di.del_dishe(sql,del_id);
 	}
+	public int seidcar(String tbname) {
+		int fll = di.sltbname(tbname);
+		return fll;
+	}
 	
 }

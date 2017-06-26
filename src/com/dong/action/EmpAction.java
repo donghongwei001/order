@@ -150,21 +150,21 @@ public class EmpAction extends BaseAction implements ModelDriven<EmpBeam>{
 		String emp_name = super.getparameter("emp_name");
 		String emp_gender = super.getparameter("emp_gender");
 		String emp_idcar = super.getparameter("emp_idcar");
-		String pageNo = super.getparameter("pageNo");
-		Integer pageNb=null;
+		String pageNo = super.getparameter("pageNo");	
+		Integer pageNb=null; 	//当前页数
 		try {
-			pageNb = Integer.parseInt(pageNo);
+			pageNb = Integer.parseInt(pageNo);   
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		pageNb = pageNb==null?1:pageNb;
-		String startIndex = (pageNb-1)*5+"";
+		pageNb = pageNb==null?1:pageNb;  //判断当前页的值
+		String startIndex = (pageNb-1)*5+"";   //屏蔽的条数
 		Map<String , String> map = new HashMap<String , String>();
 		if(emp_id!=null&&!emp_id.equals("")) map.put("et.emp_id", emp_id);
 		if(emp_name!=null&&!emp_name.equals(""))map.put("et.emp_name", emp_name);
 		if(emp_gender!=null&&!emp_gender.equals(""))map.put("et.emp_gender", emp_gender);
 		if(emp_idcar!=null&&!emp_idcar.equals(""))map.put("et.emp_idcar", emp_idcar);
-		int pageSize = 5;
+		int pageSize = 5;  //每页显示的条数
 		List list = es.queryEmp(map,pageSize+"",startIndex);
 		List<EmpBeam> empList = (List<EmpBeam>) list.get(0);
 		String str = JSON.toJSONString(empList);
@@ -234,6 +234,14 @@ public class EmpAction extends BaseAction implements ModelDriven<EmpBeam>{
 		return null;
 	}
 	
+	public String selidcar() {
+		String idcar=super.getparameter("emp_idcar");
+		int flag=es.seidcar(idcar);
+		if (flag>0) {
+			super.write("false");
+		}else super.write("true");
+		return null;
+	}
 }
 
 

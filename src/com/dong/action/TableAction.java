@@ -138,4 +138,18 @@ public class TableAction extends BaseAction {
 		seleAll();
 		return "ss";
 	}
+	
+	/** 
+	 * 方法功能说明：  编辑桌子信息失焦查询桌子名称是否存在
+	 * 
+	 */
+	public String sltbname() {
+		String tbname=super.getparameter("tbname");
+		int flag=ts.seidcar(tbname);
+		if (flag>0) {
+			super.write("false");
+		}else super.write("true");
+		return null;
+	}
+	
 }

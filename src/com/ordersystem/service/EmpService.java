@@ -69,8 +69,9 @@ public void del_emp(String del_id) {
 	ei.delEmp(del_id);
 }
 
-
-
-
+public int seidcar(String idcar) {
+	int fll = ei.sidcar(idcar);
+	return fll;
+}
 
 }

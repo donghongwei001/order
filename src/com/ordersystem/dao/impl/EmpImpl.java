@@ -17,6 +17,7 @@ import com.ordersystem.domain.RoleBean;
 public class EmpImpl implements EmpDao{
 	Connpool  cp = new Connpool();
 	QueryRunner qr = new QueryRunner(cp.getDataSource());
+	DaoFactory dt=new DaoFactory();
 	
 	/**添加员工的方法
 	 * @author hcb
@@ -104,7 +105,17 @@ public class EmpImpl implements EmpDao{
 			e.printStackTrace();
 		}*/
 	}
-
+	
+	/**
+	 * 
+	 * 方法功能说明：  增加员工时查询身份证号是否存在
+	 */
+	public int sidcar(String idcar) {
+		Object[] arr=new Object[]{idcar};
+		String sql="select emp_idcar from emp_table where emp_idcar=?";
+		int fl=dt.execQuery(sql, arr).get(0).size();
+		return fl;
+	}
 	
 
 }

@@ -207,6 +207,15 @@ public class DisheAction extends BaseAction implements ModelDriven<DisheBean> {
 			return "edit";
 		}
 		return "error";
-		
 	}
+	public String se() {
+		String tbname=super.getparameter("tbname");
+		int flag=ds.seidcar(tbname);
+		if (flag>0) {
+			super.write("false");
+		}else super.write("true");
+		return null;
+	} 
+	
+	
 }

@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<% request.setCharacterEncoding("UTF-8"); %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 
@@ -12,7 +12,7 @@
     <link href="css/dataTables.bootstrap.css" rel="stylesheet">
     <!-- DataTables Responsive CSS -->
     <link href="css/dataTables.responsive.css" rel="stylesheet">
-	 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script> 
+	 <script src="..//js/jquery-2.1.3.js"></script> 
 	
 	
 	
@@ -40,7 +40,7 @@
 			</tr>
 			<tr>
 				<td align="center" bgColor="#f5fafe" class="ta_01">餐桌名称：</td>
-				<td class="ta_01" bgColor="#ffffff"><input type="text" name="t_name" class="bg"  value="${name}" />
+				<td class="ta_01" bgColor="#ffffff"><input type="text" name="t_name" class="bg"  value="${name}" onblur="seletbnam()" id="tbname" />
 				</td>
 			</tr>
 			<TR>
@@ -83,6 +83,18 @@
 					}
 				},"json");
 		}); 
-
+	function seletbnam(){
+		$.ajax({
+			url:"/Ordersystem/Table_sltbname.action",
+			data:{tbname:$("#tbname").val()},
+			type:"post",
+			dataType:"text",
+			success:function(list){
+				 if(list=="false"){
+				 	alert("该桌子名称已存在,请重新输入");
+				 }
+			}
+		}); 
+	}
 </script>
 </html>

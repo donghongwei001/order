@@ -28,7 +28,8 @@
 			</tr>
 			<tr>
 				<td align="center" bgColor="#f5fafe" class="ta_01">餐桌名称：</td>
-				<td class="ta_01" bgColor="#ffffff"><input type="text" name="table_name" class="bg" />
+				<td class="ta_01" bgColor="#ffffff">
+				<input type="text" name="table_name" class="bg" onblur="seletbname()" id="tbname"/>
 				</td>
 			</tr>
 			<TR>
@@ -77,6 +78,18 @@
 					}
 				},"json");
 		});
-
+	function seletbname(){
+		$.ajax({
+			url:"/Ordersystem/Table_sltbname.action",
+			data:{tbname:$("#tbname").val()},
+			type:"post",
+			dataType:"text",
+			success:function(list){
+				 if(list=="false"){
+				 	alert("该桌子名称已存在,请重新输入");
+				 }
+			}
+		}); 
+	}
 </script>
 </HTML>
