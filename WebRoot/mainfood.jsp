@@ -87,13 +87,13 @@ span {
 }
 
 #wodiandecai {
-	margin-rifht:200px;;
+	margin-rifht: 200px;;
 	position: absolute;
 }
 
 .navbar-default {
 	margin-left: 1200px;
-	margin-top:80px;
+	margin-top: 80px;
 }
 
 .modal3-body {
@@ -106,24 +106,28 @@ span {
 }
 
 .navbar-default {
-	width:0 ;
+	width: 0;
 }
 
 #myModal3 {
 	margin-top: 100px;
-	margin-left:-300px;
+	margin-left: -300px;
 }
 
 .nav-tabs li {
 	width: 20%;
 }
-.navbar-default{
-	margin-bottom:100px;
+
+.navbar-default {
+	margin-bottom: 100px;
 }
-.div1{
-	margin-top:500px;
-}.navbar-default1{
-	margin-left:-200px;
+
+.div1 {
+	margin-top: 500px;
+}
+
+.navbar-default1 {
+	margin-left: -200px;
 }
 </style>
 </head>
@@ -147,9 +151,11 @@ span {
 			<button type="button"  id="${b.food_id}" onclick="tianjia(this)"
 				class="btn btn-danger btn-sm">+</button>
 			<button type="button"  id="${b.food_id}" class="btn btn-success btn-sm">确定</button> --%>
-			<a href="/Ordersystem/foodintro.action?id=${b.food_id}"><button type="button" onclick="xiangqing"><span><FONT SIZE="2" COLOR="red"><B>菜品介绍</B>
-							</FONT></button></span>
-			</a>
+			<a href="/Ordersystem/foodintro.action?id=${b.food_id}"><button
+					type="button" onclick="xiangqing">
+					<span><FONT SIZE="2" COLOR="red"><B>菜品介绍</B> </FONT>
+				</button>
+				</span> </a>
 		</div>
 	</c:forEach>
 	<nav class="navbar navbar-default navbar-fixed-bottom">
@@ -177,11 +183,9 @@ span {
 						<!-- Nav tabs -->
 						<ul class="nav nav-tabs" role="tablist">
 							<li role="presentation" class="active"><a href="#home"
-								aria-controls="home" role="tab" data-toggle="tab">未下单</a>
-							</li>
+								aria-controls="home" role="tab" data-toggle="tab">未下单</a></li>
 							<li role="presentation"><a href="#profile"
-								aria-controls="profile" role="tab" data-toggle="tab">已下单</a>
-							</li>
+								aria-controls="profile" role="tab" data-toggle="tab">已下单</a></li>
 
 						</ul>
 						<div class="tab-content">
@@ -198,8 +202,9 @@ span {
 											<td id="aaa" width="250">${a.name}</td>
 											<td width="250">${a.count}</td>
 											<td width="250">${a.price}</td>
-											<td width="250"><button type="button"
-													class="btn btn-danger">删除</button></td>
+											<td width="250"><a href="/Ordersystem/shanchucai.action?caiid=${a.id}"><button type="button"
+													class="btn btn-danger">删除</button></a>
+											</td>
 
 										</tr>
 									</c:forEach>
@@ -217,17 +222,11 @@ span {
 											<td width="250">${a.food_name}</td>
 											<td width="250">${a.order_food_num}</td>
 											<td width="250">${a.food_price}</td>
-											
-
 										</tr>
 									</c:forEach>
 								</table>
 							</div>
-
 						</div>
-
-
-
 						<nav class="navbar navbar-default1 navbar-fixed-bottom">
 						<div class="container">
 
@@ -254,34 +253,35 @@ span {
 		<script src="js/bootstrap.min.js"></script>
 		<script type="text/javascript">
 			function xiadan() {
-				var aaa=document.getElementById("aaa").innerHTML;
-				alert(aaa);
-				if(aaa!=""){
-				$.ajax({ //发送了一个新的请求，与按钮这个请求完全不是一马事
-					type : "post", //请求方式
-					url : "/Ordersystem/xiadan.action", //请求地址
-					data : {},
-					dataType : "text",
-					//async : false,
+				var aaa = document.getElementById("aaa").innerHTML;
+				if (aaa != "") {
+					$.ajax({ //发送了一个新的请求，与按钮这个请求完全不是一马事
+						type : "post", //请求方式
+						url : "/Ordersystem/xiadan.action", //请求地址
+						data : {},
+						dataType : "text",
+						//async : false,
 
-					success : function(data) { //请求成功后调用的回调函数，参数1【data】 请求返回的数据，这个数据类型是dataType  制定
-						if (data!="true") {
-							alert("下单成功");
+						success : function(data) { //请求成功后调用的回调函数，参数1【data】 请求返回的数据，这个数据类型是dataType  制定
+							if (data != "true") {
+								alert("下单成功");
 
-							document.getElementById("home").innerHTML="";
-							
-						} else {
-							alert("请开台");
+								document.getElementById("home").innerHTML = "";
+								
+								  parent.location.reload();   
+
+							} else {
+								$("#myModal3").modal("hide");
+								alert("请开台");
+							}
 						}
-					}
 
-				})
-				}else{
+					})
+				} else {
 					alert("请开台");
 				}
-				
+
 			}
-			
 		</script>
 </body>
 </html>

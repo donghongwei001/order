@@ -3,7 +3,7 @@ package com.dong.interceptor;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+
 
 import org.apache.struts2.ServletActionContext;
 
@@ -12,7 +12,6 @@ import com.opensymphony.xwork2.interceptor.MethodFilterInterceptor;
 import com.ordersystem.dao.impl.Userdaoimpl;
 
 public class DongInterceptor extends MethodFilterInterceptor{
-
 	@Override
 	protected String doIntercept(ActionInvocation arg0) throws Exception {
 		// TODO Auto-generated method stub
@@ -33,6 +32,7 @@ public class DongInterceptor extends MethodFilterInterceptor{
 			index=1;
 		}
 		if (index==0) {
+			
 			String result=arg0.invoke();
 			return result;
 		}

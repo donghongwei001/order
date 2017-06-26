@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
 
+import com.daofactory.DaoFactory;
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.MethodFilterInterceptor;
 import com.ordersystem.dao.impl.Userdaoimpl;
@@ -22,10 +23,13 @@ public class DongInterceptor2 extends MethodFilterInterceptor{
 		for (int i = 0; i < tableList.size(); i++) {
 			ArrayList list=(ArrayList) tableList.get(i);
 			if (user.equals(list.get(0))&&pass.equals(list.get(1))) {
+					/*Object[]params=new Object[]{user};
+					ArrayList list2=new DaoFactory().execQuery("select order_status  from cus_table,order_table where cus_table.cus_id=order_table.order_fk_cusid and cus_name=? and order_table.order_status=11", params);
+					if (list2==null) {*/
+						String resultp=arg0.invoke();
+						return resultp;
+					/*}*/
 					
-					String resultp=arg0.invoke();
-					return 
-							resultp;
 			}
 		}
 		return "login";

@@ -14,7 +14,15 @@ public class OrderBean {
 	private int order_dt_score;
 	private String oeder_dt_mark;
 	private Date order_lasttime;
+	private String code_name;
 	
+	
+	public String getCode_name() {
+		return code_name;
+	}
+	public void setCode_name(String code_name) {
+		this.code_name = code_name;
+	}
 	public Date getOrder_lasttime() {
 		return order_lasttime;
 	}

@@ -142,7 +142,7 @@ carousel-inner {
 						</div>
 						<div class="form-group">
 							<label for="exampleInputPassword1">请输入您的密码</label> <input
-								type="text" name="password" onblur="dengluyanzheng()" class="form-control" id="password"
+								type="password" name="password" onblur="dengluyanzheng()" class="form-control" id="password"
 								placeholder="Password" aria-describedby="basic-addon1"style="width:60%">
 						</div>
 						
@@ -190,8 +190,8 @@ carousel-inner {
 						<div class="form-group">
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label
 								for="exampleInputPassword1">&nbsp;&nbsp;&nbsp;请输入您的密码</label> <input
-								type="text" class="form-control" name="u.pass"
-								placeholder="Password" aria-describedby="basic-addon1"style="width:60%">
+								type="password" class="form-control" name="u.pass"
+								placeholder="Password" id="mima" aria-describedby="basic-addon1"style="width:60%">
 						</div>
 						<div>
 							<input type="text" id="Txtidcode" class="txtVerification">
@@ -274,6 +274,7 @@ carousel-inner {
 					success : function(data) { //请求成功后调用的回调函数，参数1【data】 请求返回的数据，这个数据类型是dataType  制定
 						if(data=="ture"){
 						$("#zhuce").val("");
+						$("#mima").val("");
 							alert("用户名已存在");
 							
 						}
