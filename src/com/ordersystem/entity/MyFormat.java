@@ -27,12 +27,12 @@ public class MyFormat {
 		return sddf;
 	}
 	
-	/**获取时间格式为yyyy-MM-dd hh:mm:ss
+	/**获取时间格式为yyyy-MM-dd HH:mm:ss HH为24小时制
 	 * @author hcb
 	 * 
 	 */
 	public static SimpleDateFormat getLastServingFormat(){
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		return sdf;
 	}
 	

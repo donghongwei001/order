@@ -9,9 +9,16 @@ public class ServiceOrderListBean {
 	private String order_food_mark;		//订单菜品表中的口味备注
 	private Integer order_food_id;		//订单菜品表中的菜编号
 	private Integer order_id; 			//订单表中的订单编号
+	private String code_name;			//订单菜品表中的该菜订单状态
 	private Integer cus_id;				//顾客表中的顾客编号  查出来记录消费详情的时候可能会 用到
 	private String cus_name;			//顾客表中的顾客姓名 查出来 能显示在订单详情页的角落上
 	
+	public String getCode_name() {
+		return code_name;
+	}
+	public void setCode_name(String code_name) {
+		this.code_name = code_name;
+	}
 	public Integer getCus_id() {
 		return cus_id;
 	}

@@ -52,7 +52,7 @@ public class DongAction3 {
 	public void setPass(String pass) {
 		this.pass = pass;
 	}
-
+	//后台登录
 	public String houtaidenglu() throws IOException{
 		ArrayList list=new Userdaoimpl().executeQuery("select account_number,account_psw from account");
 		int flag=0;
@@ -66,7 +66,7 @@ public class DongAction3 {
 		response.getWriter().print(str);
 		return null;
 	}
-	
+	//财务时间搜索
 	public String update() throws IOException{
 		
 		String shijian1=request.getParameter("shijiankuang1");
@@ -81,7 +81,7 @@ public class DongAction3 {
 	
 	
 	
-	
+	//分页
 	private NaturalPersonService personService=new NaturalPersonService();
 	public String query1() throws IOException{
 		/*String sql = "select o.order_id,o.order_time,o.order_fk_tabid,o.order_money,e.emp_name,c.cus_name,o.order_dt_score,o.oeder_dt_mark from order_table o,emp_table e,cus_table c where o.order_fk_empid=e.emp_id and o.order_fk_cusid=c.cus_id";
@@ -103,6 +103,7 @@ public class DongAction3 {
 		String pageSizeStr=request.getParameter("pageSize");
 		Integer currPage=null;
 		Integer pageSize=null;
+		System.out.println(request.getRequestURI());
 		try {
 			currPage=Integer.parseInt(currPageStr);
 			pageSize=Integer.parseInt(pageSizeStr);

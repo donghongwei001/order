@@ -26,9 +26,11 @@
 body {
 	font-size: 30px;
 }
-table{
+
+table {
 	font-size: 30px;
 }
+
 #search_he {
 	border: 0px solid red;
 	position: absolute;
@@ -118,52 +120,52 @@ td {
 
 
 	<h1>财务统计查询</h1>
-	<table cellSpacing="1"class="table table-border table-bordered table-bg table-hover table-sort" cellPadding="0" width="100%" align="center"
-		bgColor="#f5fafe" border="0">
+	<table cellSpacing="1"
+		class="table table-border table-bordered table-bg table-hover table-sort"
+		cellPadding="0" width="100%" align="center" bgColor="#f5fafe"
+		border="0">
 
 		<tr>
 			<td class="ta_01" align="center" bgColor="#afd1f3"><strong>查
-					询 条 件</strong>
-			</td>
+					询 条 件</strong></td>
 		</tr>
 		<tr>
 			<td class="shijian">
 				<div class="container" id="shijian1">
 					<form action="/Ordersystem/chaxun.action" class="form-horizontal">
-
-						<legend></legend>
-						<div class="control-group" id="shijian1">
-							<label class="control-label"> 初始时间</label>
-							<div class="controls input-append date form_datetime"
-								data-date="2017-06-16T00:00:00Z" data-date-format="yyyy-MM-dd"
-								data-link-field="dtp_input1">
-								<input id="shijiankuang1" name="shijiankuang1" size="25"
-									type="text" value="" readonly> <span class="add-on"><i
-									class="icon-remove"></i> </span> <span class="add-on"><i
-									class="icon-th"></i> </span>
+						<fieldset>
+							<legend></legend>
+							<div class="control-group" id="shijian1">
+								<label class="control-label"> 初始时间</label>
+								<div class="controls input-append date form_datetime"
+									data-date="2017-06-16T00:00:00Z" data-date-format="yyyy-MM-dd"
+									data-link-field="dtp_input1">
+									<input id="shijiankuang1" name="shijiankuang1" size="25"
+										type="text" value="" readonly> <span class="add-on"><i
+										class="icon-remove"></i> </span> <span class="add-on"><i
+										class="icon-th"></i> </span>
+								</div>
+								<input type="hidden" id="dtp_input1" value="" /><br />
 							</div>
-							<input type="hidden" id="dtp_input1" value="" /><br />
-						</div>
 
-						<div class="control-group" id="shijian2">
-							<label class="control-label">截止时间</label>
-							<div class="controls input-append date form_datetime"
-								data-date="2017-06-16T00:00:00Z" data-date-format="yyyy-MM-dd"
-								data-link-field="dtp_input1">
-								<input id="shijiankuang2" name="shijiankuang2" size="25"
-									type="text" value="" readonly> <span class="add-on"><i
-									class="icon-remove"></i> </span> <span class="add-on"><i
-									class="icon-th"></i> </span>
+							<div class="control-group" id="shijian2">
+								<label class="control-label">截止时间</label>
+								<div class="controls input-append date form_datetime"
+									data-date="2017-06-16T00:00:00Z" data-date-format="yyyy-MM-dd"
+									data-link-field="dtp_input1">
+									<input id="shijiankuang2" name="shijiankuang2" size="25"
+										type="text" value="" readonly> <span class="add-on"><i
+										class="icon-remove"></i> </span> <span class="add-on"><i
+										class="icon-th"></i> </span>
+								</div>
+								<input type="hidden" id="dtp_input1" value="" /><br />
 							</div>
-							<input type="hidden" id="dtp_input1" value="" /><br />
-						</div>
 
 
-						<input type="submit"  class="btn btn-info"
-							value="查询">
+							<input type="submit" class="btn btn-info" value="查询">
+						</fieldset>
 					</form>
-				</div>
-			</td>
+				</div></td>
 
 		</tr>
 		<tr>
@@ -174,7 +176,9 @@ td {
 		</tr>
 		<tr>
 			<td class="jin"><div>
-					<table class="table table-border table-bordered table-bg table-hover table-sort" align="center" width=100%>
+					<table
+						class="table table-border table-bordered table-bg table-hover table-sort"
+						align="center" width=100%>
 						<tr>
 							<td align="center">今日总订单数</td>
 							<td align="center">今日总金额</td>
@@ -190,7 +194,8 @@ td {
 						</c:forEach>
 
 					</table>
-				</div></td>
+				</div>
+			</td>
 		</tr>
 		<tr>
 			<td class="ta_01" align="center" bgColor="#afd1f3"><strong>查询结果</strong>
@@ -205,7 +210,8 @@ td {
 	</table>
 	<div></div>
 
-	<table class="table table-border table-bordered table-bg table-hover table-sort">
+	<table
+		class="table table-border table-bordered table-bg table-hover table-sort">
 		<tr>
 			<td align="center">查询总订单数</td>
 			<td align="center">查询总金额</td>
@@ -214,7 +220,7 @@ td {
 			<c:forEach items="${a}" var="b">
 				<td align="center">${b}</td>
 			</c:forEach>
-			
+
 		</c:forEach>
 	</table>
 
@@ -231,7 +237,7 @@ td {
 	<script type="text/javascript"
 		src="../js/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
 	<script type="text/javascript">
-		$('.form_datetime').datetimepicker({
+		$(".form_datetime").datetimepicker({
 			//language:  'fr',
 			weekStart : 1,
 			todayBtn : 1,
@@ -241,8 +247,8 @@ td {
 			forceParse : 0,
 			showMeridian : 1
 		});
-		$('.form_date').datetimepicker({
-			language : 'fr',
+		$(".form_date").datetimepicker({
+			language : "fr",
 			weekStart : 1,
 			todayBtn : 1,
 			autoclose : 1,
@@ -251,25 +257,6 @@ td {
 			minView : 2,
 			forceParse : 0
 		});
-
-		/* function chaxun() {
-			$.ajax({ //发送了一个新的请求，与按钮这个请求完全不是一马事
-				type : "post", //请求方式
-				url : "/Ordersystem/chaxun.action", //请求地址
-				dataType : "json",
-				data : {
-					shijian1 : $("#shijiankuang1").val(),
-					shijian2 : $("#shijiankuang2").val()
-				},
-				//async : false,
-
-				success : function(data) { //请求成功后调用的回调函数，参数1【data】 请求返回的数据，这个数据类型是dataType  制定
-
-				}
-
-			})
-
-		} */
 	</script>
 
 

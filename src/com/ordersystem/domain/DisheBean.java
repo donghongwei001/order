@@ -1,15 +1,16 @@
 package com.ordersystem.domain;
 
 public class DisheBean {
-	private int food_id;		//菜单编号
-	private String food_name;		//菜名
-	private int food_price;		//价格
-	private int food_fk_dishes_id;	//菜系外键
-	private int food_merge;		//最大并菜数
-	private int food_time;		//做菜耗时
-	private String dishes_name;		//菜系名
-	private String food_pic;		//图片路径
+	private int food_id;				//菜单编号
+	private String food_name;			//菜名
+	private int food_price;				//价格
+	private int food_fk_dishes_id;		//菜系外键
+	private String dishes_name;			//菜系名
+	private int food_merge;				//最大并菜数
+	private int food_time;				//做菜耗时
+	private String food_pic;			//图片路径
 	private String food_description;	//菜品描述 db.description
+	
 	public String getFood_description() {
 		return food_description;
 	}

@@ -43,8 +43,9 @@
 		d.add(26,25,'前台管理','${pageContext.request.contextPath}/serv_showTable.action ','','mainFrame');
 		d.add(14,4,'权限分配','${pageContext.request.contextPath}/admin/products/show_right.jsp','','mainFrame');
 		d.add(15,4,'修改权限','${pageContext.request.contextPath}/admin/products/show_right.jsp','','mainFrame');
-		d.add(16,5,'菜品排序','${pageContext.request.contextPath}/kitchen_findFood.action','','mainFrame');
-		/* d.add(17,5,'菜目估清','${pageContext.request.contextPath}/booklistservice','','mainFrame'); */
+		d.add(16,5,'综合排序','${pageContext.request.contextPath}/kitchen_findFood.action','','mainFrame');
+		d.add(17,5,'先后排序','${pageContext.request.contextPath}/kitchen_secFindFood.action','','mainFrame'); 
+		d.add(33,5,'按桌排序','${pageContext.request.contextPath}/kitchen_thrFindFood.action','','mainFrame'); 
 		d.add(18,6,'菜品信息','${pageContext.request.contextPath}/dishe_queryAllDishes.action','','mainFrame');
 		/* d.add(19,6,'菜品查询','${pageContext.request.contextPath}/admin/products/food_info.jsp','','mainFrame'); */
 		/* d.add(20,7,'餐桌信息','${pageContext.request.contextPath}/admin/products/table_info.jsp','','mainFrame'); */

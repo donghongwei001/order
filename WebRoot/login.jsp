@@ -142,13 +142,17 @@ carousel-inner {
 						</div>
 						<div class="form-group">
 							<label for="exampleInputPassword1">请输入您的密码</label> <input
-								type="text" name="password" onblur="dengluyanzheng()" class="form-control" id="password"
+								type="password" name="password" onblur="dengluyanzheng()" class="form-control" id="password"
 								placeholder="Password" aria-describedby="basic-addon1"style="width:60%">
 						</div>
-						<select id="category" name="zhuohao">
-							
-							
-						</select>
+						
+						<div>
+							<input type="text" id="Txtidcode" class="txtVerification">
+							&nbsp;&nbsp;&nbsp;&nbsp;<span id="idcode"></span> <input
+								type="button" id="butn" value="提交">
+
+
+						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">关闭</button>
@@ -186,8 +190,8 @@ carousel-inner {
 						<div class="form-group">
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label
 								for="exampleInputPassword1">&nbsp;&nbsp;&nbsp;请输入您的密码</label> <input
-								type="text" class="form-control" name="u.pass"
-								placeholder="Password" aria-describedby="basic-addon1"style="width:60%">
+								type="password" class="form-control" name="u.pass"
+								placeholder="Password" id="mima" aria-describedby="basic-addon1"style="width:60%">
 						</div>
 						<div>
 							<input type="text" id="Txtidcode" class="txtVerification">
@@ -270,6 +274,7 @@ carousel-inner {
 					success : function(data) { //请求成功后调用的回调函数，参数1【data】 请求返回的数据，这个数据类型是dataType  制定
 						if(data=="ture"){
 						$("#zhuce").val("");
+						$("#mima").val("");
 							alert("用户名已存在");
 							
 						}
@@ -291,13 +296,6 @@ carousel-inner {
 								$("#username").val("");
 								$("#password").val("");
 								alert("用户名或密码错误，请从新输入");
-							}else if (data!=0) {
-								$("#category").empty();
-								$("#category").append("<option  check='checked'>请选择桌号</option>");
-								for(var i=0;i<data.length;i++){
-									var op=$("<option id='id'>"+data[i].table_id+"</option>");
-									$("#category").append(op);
-								}
 							}
 							
 					}

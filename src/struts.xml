@@ -31,6 +31,8 @@
 		<action name="kitchen_*" method="{1}" class="com.dong.action.KitchenAction">
 			<result name="flush">admin/products/Kitchen.jsp</result>
 			<result name="pass" type="redirect">admin/products/Kitchen.jsp</result>
+			<result name="secpass" type="redirect">admin/products/kitchSec.jsp</result>
+			<result name="thrpass" type="redirect">admin/products/kitchThr.jsp</result>
 			<result name="error">l.jsp</result>
 		</action>
 	</package>
@@ -48,7 +50,7 @@
 		</action>
 		<action name="serv_*" method="{1}" class="com.dong.action.ServicePageAction">
 			<result name="succ" type="redirect">admin/products/servicer.jsp</result>
-			<result name="details">admin/products/OrderDetails.jsp</result>
+			<result name="details">/admin/products/OrderDetails.jsp</result>
 			<result name="edit">admin/products/dishes_edit.jsp</result>
 		</action>
 		
