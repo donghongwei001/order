@@ -12,7 +12,7 @@
     <link href="css/dataTables.bootstrap.css" rel="stylesheet">
     <!-- DataTables Responsive CSS -->
     <link href="css/dataTables.responsive.css" rel="stylesheet">
-	 <script src="..//js/jquery-2.1.3.js"></script> 
+	 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 	
 	
 	
