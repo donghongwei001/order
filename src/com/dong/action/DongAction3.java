@@ -103,6 +103,7 @@ public class DongAction3 {
 		String pageSizeStr=request.getParameter("pageSize");
 		Integer currPage=null;
 		Integer pageSize=null;
+		System.out.println(request.getRequestURI());
 		try {
 			currPage=Integer.parseInt(currPageStr);
 			pageSize=Integer.parseInt(pageSizeStr);

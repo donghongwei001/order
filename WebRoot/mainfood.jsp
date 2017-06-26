@@ -128,6 +128,10 @@ span {
 
 .navbar-default1 {
 	margin-left: -200px;
+
+}
+.navbar-default{
+	width:0px;
 }
 </style>
 </head>
