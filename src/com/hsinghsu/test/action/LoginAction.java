@@ -17,7 +17,7 @@ public class LoginAction extends ActionSupport {
         if (null != username && null != password && username.equals("hsing") && password.equals("hsu")) {  
   
             ActionContext ctx = ActionContext.getContext();  
-            Map<String, Object> session = ctx.getSession();  
+             <String, Object> session = ctx.getSession();  
               
             //保存用户信息session  
             session.put("user", getUsername());  
