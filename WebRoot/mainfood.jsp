@@ -89,8 +89,7 @@ span {
 #wodiandecai {
 	margin-left: ;
 	position: absolute;
-	top:300px;
-	right:300px;
+	
 }
 .navbar-default{
 	margin-left:1340px;
@@ -100,6 +99,9 @@ span {
   overflow:scroll;
 }.modal-footer{
 	margin-top:300px;
+}
+.navbar-default{
+	width:0px;
 }
 </style>
 </head>

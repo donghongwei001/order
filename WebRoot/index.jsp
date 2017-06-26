@@ -39,7 +39,7 @@ body {
 
 .kuangjia2 {
 	margin-left: 20%;
-	margin-top: -67%;
+	margin-top: -50%;
 }
 
 #nav-tabs {
@@ -245,7 +245,7 @@ body {
 					</div>
 				</div>
 			</div>
-			<iframe class="kuangjia1" src="left.jsp" width="20%" height="1000px"
+			<iframe class="kuangjia1" src="left.jsp" width="20%" height="860px"
 				scrolling="auto"> </iframe>
 			<iframe class="kuangjia2" src="mainfood.jsp" name="main" width="80%"
 				height="1000px" scrolling="auto"> </iframe>

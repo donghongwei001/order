@@ -59,7 +59,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    <c:forEach items="${foodintro}" var="b">
     	<form action="wei_addshopcars.action?id=${b.food_id}&price=${b.food_price}" method="post">
 		<div 
-			style="float:left;margin-left:27%;margin-top:10%;width:500px;height:600px;background:url('uploadFile/${b.food_pic}') no-repeat;background-size:100%">
+			style="float:left;margin-left:27%;margin-top:10%;width:700px;height:600px;background:url('uploadFile/${b.food_pic}') no-repeat;background-size:100%">
 			<div id="name" class="name">${b.food_name}</div>
 			<div class="aaa">Price:¥<div id="jiage">${b.food_price}</div></div>
 			<a href="mainfood.jsp"><button class="btn btn-warning btn-lg">返回</button></a>
