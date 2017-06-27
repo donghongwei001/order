@@ -17,6 +17,7 @@ import com.ordersystem.domain.FoodCategoryBean;
 public class DisheImpl implements DisheDao {
 	Connpool cp = new Connpool();
 	QueryRunner qr = new QueryRunner(cp.getDataSource());
+	DaoFactory dt=new DaoFactory();
 	
 	/**向数据库中插入菜品记录
 	 * @author hcb
@@ -81,6 +82,13 @@ public class DisheImpl implements DisheDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public int sltbname(String tbname) {
+		Object[] arr=new Object[]{tbname};
+		String sql="select food_name from food_table where food_name=?";
+		int fl=dt.execQuery(sql, arr).get(0).size();
+		return fl;
 	}
 
 	/**更新数据库的方法

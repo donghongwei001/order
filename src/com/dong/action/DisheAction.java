@@ -215,7 +215,6 @@ public class DisheAction extends BaseAction implements ModelDriven<DisheBean> {
 			return "edit";
 		}
 		return "error";
-		
 	}
 	/**修改菜品信息的方法
 	 * @author hcb
@@ -258,4 +257,13 @@ public class DisheAction extends BaseAction implements ModelDriven<DisheBean> {
 		return "succ";
 	}
 
+	public String se() {
+		String tbname=super.getparameter("tbname");
+		int flag=ds.seidcar(tbname);
+		if (flag>0) {
+			super.write("false");
+		}else super.write("true");
+		return null;
+	} 
+	
 }

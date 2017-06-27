@@ -57,17 +57,6 @@ public List queryEmp(Map<String, String> map,String pageSize,String startIndex) 
 	}
 	
 	
-	public List<RoleBean> findPosition() {
-		// TODO Auto-generated method stub
-		List<RoleBean> roleList = ei.findPosition();
-		return roleList;
-	}
-	
-	
-	public void del_emp(String del_id) {
-		// TODO Auto-generated method stub
-		ei.delEmp(del_id);
-	}
 	
 	/**更新员工信息
 	 * @author hcb
@@ -83,5 +72,23 @@ public List queryEmp(Map<String, String> map,String pageSize,String startIndex) 
 
 
 
+
+	
+	public List<RoleBean> findPosition() {
+		// TODO Auto-generated method stub
+		List<RoleBean> roleList = ei.findPosition();
+		return roleList;
+	}
+	
+	
+	public void del_emp(String del_id) {
+		// TODO Auto-generated method stub
+		ei.delEmp(del_id);
+	}
+	
+	public int seidcar(String idcar) {
+		int fll = ei.sidcar(idcar);
+		return fll;
+	}
 
 }

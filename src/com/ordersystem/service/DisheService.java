@@ -75,4 +75,9 @@ public class DisheService {
 		return di.updatedb(sql, params);
 	}
 	
+	public int seidcar(String tbname) {
+		int fll = di.sltbname(tbname);
+		return fll;
+	}
+	
 }

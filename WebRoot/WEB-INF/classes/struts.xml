@@ -112,6 +112,7 @@
 		</action>
 		<action name="Table_*" method="{1}" class="com.dong.action.TableAction">
 			<result name="ss">/admin/products/table_list.jsp</result>
+			<result name="up">/admin/products/table_info.jsp</result>
 			<result name="error">l.jsp</result>
 		</action>
 	</package>

@@ -157,10 +157,10 @@ public class EmpAction extends BaseAction implements ModelDriven<EmpBeam>{
 		String emp_name = super.getparameter("emp_name");
 		String emp_gender = super.getparameter("emp_gender");
 		String emp_idcar = super.getparameter("emp_idcar");
-		String pageNo = super.getparameter("pageNo");
-		Integer pageNb=null;
+		String pageNo = super.getparameter("pageNo");	
+		Integer pageNb=null; 	//µ±Ç°Ò³Êý
 		try {
-			pageNb = Integer.parseInt(pageNo);
+			pageNb = Integer.parseInt(pageNo);   
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -278,6 +278,14 @@ public class EmpAction extends BaseAction implements ModelDriven<EmpBeam>{
 		return null;
 	}
 	
+	public String selidcar() {
+		String idcar=super.getparameter("emp_idcar");
+		int flag=es.seidcar(idcar);
+		if (flag>0) {
+			super.write("false");
+		}else super.write("true");
+		return null;
+	}
 }
 
 

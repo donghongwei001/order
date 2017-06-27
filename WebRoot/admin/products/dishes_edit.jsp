@@ -32,7 +32,7 @@
 			<tr>
 				<td align="center" bgColor="#f5fafe" class="ta_01">菜品名称：</td>
 				<td class="ta_01" bgColor="#ffffff"><input type="text"
-					name="db.food_name" class="bg" value="${disheInfo.food_name} "/>
+					name="db.food_name" class="bg" value="${disheInfo.food_name}" />
 				</td>
 				<!-- 上传图片预览 --><!-- 上传图片预览 --><!-- 上传图片预览 -->
 				<!-- 上传图片预览 --><!-- 上传图片预览 --><!-- 上传图片预览 -->

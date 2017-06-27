@@ -11,6 +11,10 @@ import com.ordersystem.domain.ser_tabBean;
 public class TableService {
 	TableImpl tq = new TableImpl();
 	
+	/**
+	 * 
+	 * 方法功能说明：  查询所有桌子信息
+	 */
 	public List<TableBean> seleA() {
 		return tq.seleall();
 	}
@@ -25,5 +29,19 @@ public class TableService {
 	
 	public void addtable( TableBean tb,ser_tabBean st) {
 		tq.addzhuo(tb,st);
+	}
+	/**
+	 * 方法功能说明： 修改桌子信息
+	 */
+	public void updatee(TableBean tb,ser_tabBean st,String tb_id) {
+		tq.update(tb,st,tb_id);
+	}
+	
+	public void seleid(TableBean tb,ser_tabBean st,String id) {
+		tq.deltable(tb,st, id);
+	}
+	public int seidcar(String tbname) {
+		int fll = tq.sltbname(tbname);
+		return fll;
 	}
 }

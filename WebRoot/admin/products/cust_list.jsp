@@ -103,10 +103,7 @@
 					</td>
 
 				</tr>
-				<!-- <tr>
-					<td class="ta_01" align="center" bgColor="#afd1f3"><strong>商品列表</strong>
-					</TD>
-				</tr> -->
+			
 
 				<tr>
 					<td class="ta_01" align="center" bgColor="#f5fafe">
@@ -136,7 +133,8 @@
 				</tr>
 			</TBODY>
 		</table>
-	
+	<button onclick="cusshang()">上一页</button>
+	<button onclick="cusxia()">下一页</button><span id="cusgong">第1页</span><span id="cusgong">共1页</span>
 </body>
 </HTML>
 
