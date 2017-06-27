@@ -166,7 +166,7 @@
 			<tr>
 				<td align="center" bgColor="#f5fafe" class="ta_01">身份证号：</td>
 				<td class="ta_01" bgColor="#ffffff" colspan="3"><input type="text"
-					name="emp.emp_idcar" onblur="seleidcar()"
+					name="emp.emp_idcar" onblur="seleidcar()"  id="idcar"
 					class="bg" />
 				</td>
 			</tr>
@@ -339,10 +339,12 @@
 						$("#posSelect").append(str);
 					}
 				},"json");})
+	
+	
 	function seleidcar(){
 		$.ajax({
 			url:"/Ordersystem/emp_selidcar.action",
-			data:{emp_idcar:$("#idcard").val()},
+			data:{emp_idcar:$("#idcar").val()},
 			type:"post",
 			dataType:"text",
 			success:function(list){

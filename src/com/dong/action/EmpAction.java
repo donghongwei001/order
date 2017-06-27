@@ -156,6 +156,7 @@ public class EmpAction extends BaseAction implements ModelDriven<EmpBeam>{
 		String emp_id = super.getparameter("emp_id");
 		String emp_name = super.getparameter("emp_name");
 		String emp_gender = super.getparameter("emp_gender");
+		System.out.println(emp_gender);
 		String emp_idcar = super.getparameter("emp_idcar");
 		String pageNo = super.getparameter("pageNo");	
 		Integer pageNb=null; 	//当前页数
@@ -278,6 +279,10 @@ public class EmpAction extends BaseAction implements ModelDriven<EmpBeam>{
 		return null;
 	}
 	
+	/**身份证号重复性验证
+	 * @author yhl
+	 * 
+	 */
 	public String selidcar() {
 		String idcar=super.getparameter("emp_idcar");
 		int flag=es.seidcar(idcar);
