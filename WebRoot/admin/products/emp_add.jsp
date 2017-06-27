@@ -8,12 +8,21 @@
 	type="text/css" rel="stylesheet">
 
 
-<script type="text/javascript" src="../js/jquery-2.1.3.js"></script></HEAD>
+<script type="text/javascript" src="../js/jquery-2.1.3.js"></script>
+
+  <style type="text/css">
+		#id1, .img, img {border:0px solid red;
+			width:120px;
+			height:180px;
+		}
+		.aa1{width:900px;}
+	</style>
+
+</HEAD>
 
 <body>
 	<form id="userAction_save_do" name="Form1"
 		action="${pageContext.request.contextPath}/emp_addEmp.action" method="post" enctype="multipart/form-data">
-		&nbsp;
 		<table cellSpacing="1" cellPadding="5" width="100%" align="center"
 			bgColor="#eeeeee" style="border: 1px solid #8ba7e3" border="0">
 			<tr>
@@ -24,28 +33,22 @@
 
 
 			<tr>
-				<td align="center" bgColor="#f5fafe" class="ta_01">员工编号：</td>
-				<td class="ta_01" bgColor="#ffffff"><input type="text"
-					name="emp.emp_id" class="bg"/>
-				</td>
-			</tr>
-			<tr>
 				<td align="center" bgColor="#f5fafe" class="ta_01">姓名：</td>
-				<td class="ta_01" bgColor="#ffffff"><input type="text"
+				<td class="ta_01" bgColor="#ffffff" colspan="3"><input type="text"
 					name="emp.emp_name" 
 					class="bg" />
 				</td>
 			</tr>
 			<tr>
 				<td align="center" bgColor="#f5fafe" class="ta_01">性别：</td>
-				<td class="ta_01" bgColor="#ffffff">
+				<td class="ta_01" bgColor="#ffffff" colspan="3">
 				<input type="radio" name="emp.emp_gender" checked="checked" value="男" />男
 				<input type="radio"name="emp.emp_gender" value="女" />女
 				</td>
 			</tr>
 			<tr>
 				<td align="center" bgColor="#f5fafe" class="ta_01">出生年月：</td>
-				<td class="ta_01" bgColor="#ffffff">
+				<td class="ta_01" bgColor="#ffffff" colspan="3">
 				<select name="emp.emp_birday">
 							<option value="--请选择--">--请选择--</option>
 							<option value="1972">1972</option>
@@ -130,7 +133,7 @@
 
 			<tr>
 				<td align="center" bgColor="#f5fafe" class="ta_01">年龄：</td>
-				<td class="ta_01" bgColor="#ffffff">
+				<td class="ta_01" bgColor="#ffffff" colspan="3">
 				<select  name="emp.emp_age">
 						<option value="--请选择--">--请选择--</option>
 						<option value="20">20</option>
@@ -165,14 +168,14 @@
 			
 			<tr>
 				<td align="center" bgColor="#f5fafe" class="ta_01">身份证号：</td>
-				<td class="ta_01" bgColor="#ffffff"><input type="text"
+				<td class="ta_01" bgColor="#ffffff" colspan="3"><input type="text"
 					name="emp.emp_idcar" 
 					class="bg" />
 				</td>
 			</tr>
 			<tr>
 				<td align="center" bgColor="#f5fafe" class="ta_01">家庭住址：</td>
-				<td class="ta_01" bgColor="#ffffff"><input type="text"
+				<td class="ta_01" bgColor="#ffffff" colspan="3"><input type="text"
 					name="emp.emp_address" 
 					class="bg" />
 				</td>
@@ -240,6 +243,12 @@
 						<option  value="31">31</option>
 					</select>	
 				</td>
+				<td id="id1" bgColor="#ffffff" rowspan="5">
+					 <div id="preview"></div> 					<!-- 添加图片预览位置 --><!-- 添加图片预览位置 --><!-- 添加图片预览位置 -->
+				</td>
+				<td class="aa1"bgColor="#ffffff">
+				</td>
+				
 			</tr>
 			<tr>
 				<td align="center" bgColor="#f5fafe" class="ta_01">职位：</td>
@@ -247,6 +256,8 @@
 					<select  name="emp.emp_fk_pos_id" id="posSelect">
 						<option value="--请选择--" selected="selected">--请选择--</option>
 					</select>
+				</td>
+				<td class="aa1" bgColor="#ffffff">
 				</td>
 			</tr>
 			<tr>
@@ -260,11 +271,16 @@
 						<option value="6">离职</option>
 					</select>
 				</td>
+				<td class="aa1" bgColor="#ffffff">
+				</td>
+				
 			</tr>
 			<tr>
 				<td align="center" bgColor="#f5fafe" class="ta_01">电话：</td>
 				<td class="ta_01" bgColor="#ffffff"><input type="text"
 					name="emp.emp_phone" class="bg" />
+				</td>
+				<td class="aa1" bgColor="#ffffff">
 				</td>
 			</tr>
 			
@@ -276,10 +292,12 @@
 					class="bg" /></td>
 			</TR> -->
 			<tr>
-				<td align="center" bgColor="#f5fafe" class="ta_01">头像：</td>
-				<td class="ta_01" bgColor="#ffffff">
-				<img id="img" ><br>
-				<input type="file" name="emppic"  class="bg" />
+				<td align="center" bgColor="#f5fafe" class="ta_01">上传照片：</td>
+				<td class="ta_01" bgColor="#ffffff" >
+				<!-- <img id="img" ><br> -->
+				<input type="file" name="emppic"  onchange="preview(this)"  class="bg" />
+				</td>
+				<td  class="aa1" bgColor="#ffffff">
 				</td>
 			</tr>
 
@@ -308,6 +326,24 @@
 	</form>
 </body>
 <script type="text/javascript">
+	//添加图片预览的js方法
+	 function preview(file)  
+		 {  
+		 var prevDiv = document.getElementById('preview');  
+		 if (file.files && file.files[0]){  
+		 var reader = new FileReader();  
+			 reader.onload = function(evt){  
+			 	prevDiv.innerHTML = '<img src="' + evt.target.result + '" />';  
+			 }    
+			 reader.readAsDataURL(file.files[0]);  
+		}  
+		 else {  
+			 prevDiv.innerHTML = '<div class="img" style="filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale,src=\'' + file.value + '\'"></div>';  
+		 }  
+	}  
+
+
+	//动态显示数据库中的职位信息
 	$(document).ready(function(){
 			$.post("emp_showPosition.action",
 				function(data){

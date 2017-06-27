@@ -63,5 +63,16 @@ public class DisheService {
 		String sql = "delete food_table where food_id=?";
 		di.del_dishe(sql,del_id);
 	}
+
+	/**更新菜品信息
+	 * @author hcb
+	 * 
+	 */
+	public Integer updateDishes(DisheBean db) {
+		// TODO Auto-generated method stub
+		String sql = "update food_table set food_name=?,food_price=?,food_fk_dishes_id=?,food_merge=?,food_pic=?,food_description=?,food_time=? where food_id=?";
+		Object[] params = new Object[]{db.getFood_name(),db.getFood_price(),db.getFood_fk_dishes_id(),db.getFood_merge(),db.getFood_pic(),db.getFood_description(),db.getFood_time(),db.getFood_id()};
+		return di.updatedb(sql, params);
+	}
 	
 }

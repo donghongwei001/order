@@ -130,7 +130,7 @@
 
 <body>
 	<!-- <div id="search_he"></div> -->
-	<br>
+	
 	<form id="Form1" name="Form1"
 		action="${pageContext.request.contextPath}/emp_queryEmp.action"
 		method="post">

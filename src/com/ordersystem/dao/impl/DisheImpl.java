@@ -83,4 +83,11 @@ public class DisheImpl implements DisheDao {
 		}
 	}
 
+	/**更新数据库的方法
+	 * @author hcb
+	 * 
+	 */
+	public Integer updatedb(String sql,Object[] params){
+		return DaoFactory.executeUpdate(sql, params);
+	}
 }

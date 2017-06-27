@@ -5,6 +5,8 @@ import java.io.Serializable;
 public class FoodCategoryBean implements Serializable{
 	private int dishes_id;
 	private String dishes_name;
+	
+	
 	public int getDishes_id() {
 		return dishes_id;
 	}

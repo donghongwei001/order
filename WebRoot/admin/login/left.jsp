@@ -34,7 +34,7 @@
 		d.add(7,0,'餐桌管理','','','mainFrame');
 		d.add(8,0,'客户管理','','','mainFrame');
 		
-		//子目录添加
+		//子目录添加${empinfo.name}
 		d.add(9,1,'员工信息','${pageContext.request.contextPath}/emp_queryEmp.action','','mainFrame');
 		/* d.add(10,1,'查看信息','${pageContext.request.contextPath}/admin/products/emp_info.jsp','','mainFrame'); */
 		d.add(11,2,'订单列表','${pageContext.request.contextPath}/Ordersystem/wei_query1.action','','mainFrame');

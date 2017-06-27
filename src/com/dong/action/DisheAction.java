@@ -22,6 +22,15 @@ public class DisheAction extends BaseAction implements ModelDriven<DisheBean> {
 	private DisheBean db;
 	private File food_pic;
 	private String food_picFileName;
+	private String oldpic;				//旧图片的名字    如果没有更新 就用旧的
+	public String getOldpic() {
+		return oldpic;
+	}
+
+	public void setOldpic(String oldpic) {
+		this.oldpic = oldpic;
+	}
+
 	public File getFood_pic() {
 		return food_pic;
 	}
@@ -86,7 +95,7 @@ public class DisheAction extends BaseAction implements ModelDriven<DisheBean> {
 		db.setFood_description(description);
 		db.setFood_pic(fileName);
 		ds.addDishes(db);		//调用添加的方法
-		System.out.println(db+"****"+food_picFileName+"*****"+description);
+		queryAllDishes();
 		return "succ";
 	}
 
@@ -108,7 +117,7 @@ public class DisheAction extends BaseAction implements ModelDriven<DisheBean> {
 		if(category!=null&&!category.equals("")) ma.put("dt.dishes_id", category);
 		if(minprice!=null&&!minprice.equals("")) price.put("minprice", minprice);
 		if(maxprice!=null&&!maxprice.equals("")) price.put("maxprice", maxprice);
-		Integer pageSize = 10;
+		Integer pageSize = 12;
 		Integer pageStart = 0;
 		List dishList = ds.queryDishe(ma,price,pageSize+"",pageStart+"");
 		List<DisheBean> disheInfo = (List<DisheBean>) dishList.get(0);
@@ -119,7 +128,7 @@ public class DisheAction extends BaseAction implements ModelDriven<DisheBean> {
 		super.setsession("total", total);
 		super.setsession("food_name", food_name);
 		super.setsession("food_id", food_id);
-		super.setsession("category", category);
+		super.setsession("food_fk_dishes_id", category);
 		super.setsession("minprice", minprice);
 		super.setsession("maxprice", maxprice);
 		return "succ";
@@ -140,10 +149,10 @@ public class DisheAction extends BaseAction implements ModelDriven<DisheBean> {
 		Map<String, String> price = new HashMap<String, String>();
 		if(food_name!=null&&!food_name.equals(""))ma.put("food_name", food_name);
 		if(food_id!=null&&!food_id.equals("")) ma.put("food_id", food_id);
-		if(category!=null&&!category.equals("")) ma.put("category", category);
+		if(category!=null&&!category.equals("")) ma.put("food_fk_dishes_id", category);
 		if(minprice!=null&&!minprice.equals("")) price.put("minprice", minprice);
 		if(maxprice!=null&&!maxprice.equals("")) price.put("maxprice", maxprice);
-		Integer pageSize = 10;
+		Integer pageSize = 12;
 		Integer pageStart = 0;
 		Integer pageNum = null;
 		try {
@@ -158,7 +167,7 @@ public class DisheAction extends BaseAction implements ModelDriven<DisheBean> {
 		Integer total = count/pageSize;
 		if(count%pageSize>0)total++;
 		String dish = JSON.toJSONString(disheInfo);		//转换为json字符串
-		super.write(dish);			//写出json字符串
+		super.write(dish);								//写出json字符串
 		super.setsession("disheInfo", disheInfo);
 		super.setsession("total", total);
 		super.setsession("food_name", food_name);
@@ -174,9 +183,7 @@ public class DisheAction extends BaseAction implements ModelDriven<DisheBean> {
 	 * 
 	 */
 	public String findCategory(){
-		System.out.println("11111");
 		List<FoodCategoryBean> fcb = ds.findCategory();
-		System.out.println("fcb"+fcb.size());
 		String str = JSON.toJSONString(fcb);
 		super.write(str);
 		return null;
@@ -190,7 +197,6 @@ public class DisheAction extends BaseAction implements ModelDriven<DisheBean> {
 		String del_id = super.getparameter("del_id");
 		ds.del_dishe(del_id);
 		ajaxQueryDishes();
-		System.out.println("------delDishe-------");
 		return null;
 	}
 	
@@ -211,4 +217,45 @@ public class DisheAction extends BaseAction implements ModelDriven<DisheBean> {
 		return "error";
 		
 	}
+	/**修改菜品信息的方法
+	 * @author hcb
+	 * 
+	 */
+	public String updateDishe(){
+		String description = super.getparameter("description");
+		String fileName = "";
+		Integer food_picnum = (int) (food_pic==null?0:food_pic.length());
+		if (food_picnum!=0) {
+			String suffix = food_picFileName.substring(food_picFileName.lastIndexOf('.')).toLowerCase();		//获取上传文件格式
+			if (suffix.equals(".jpg")||suffix.equals(".jpeg")||suffix.equals(".gif")||suffix.equals(".png")) {
+				try {
+					FileInputStream is = new FileInputStream(food_pic);
+					String path = ServletActionContext.getRequest().getRealPath("/");
+					fileName = new Date().getTime()+suffix;
+					FileOutputStream os = new FileOutputStream(new File(path+"uploadFile\\"+fileName));
+					byte[] b = new byte[1024];
+					int n = -1;
+					while ((n = is.read(b))>0) {
+						os.write(b, 0, n);
+					}
+					os.flush();
+					os.close();
+					is.close();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					fileName=oldpic;
+					e.printStackTrace();
+				}
+			}
+		}else {
+			fileName=oldpic;
+		}
+		db.setFood_description(description);
+		db.setFood_pic(fileName);
+		System.out.println(db);
+		int i = ds.updateDishes(db);		//调用更新的方法
+		queryAllDishes();
+		return "succ";
+	}
+
 }
