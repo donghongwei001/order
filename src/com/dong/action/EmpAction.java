@@ -214,6 +214,7 @@ public class EmpAction extends BaseAction implements ModelDriven<EmpBeam>{
 	 * 
 	 */
 	public String editEmp(){
+		
 		String empId = super.getparameter("emp_id");
 		Map<String, String> ma = new HashMap<String, String>();
 		ma.put("emp_id", empId);
@@ -221,7 +222,6 @@ public class EmpAction extends BaseAction implements ModelDriven<EmpBeam>{
 		if(empli.size()!=0){
 			EmpBeam empinfo = (EmpBeam)((List) empli.get(0)).get(0);
 			super.setsession("empinfo", empinfo);
-			System.out.println("info"+empinfo);
 			return "edit";
 		}
 		return "error";
@@ -232,12 +232,12 @@ public class EmpAction extends BaseAction implements ModelDriven<EmpBeam>{
 	 * 
 	 */
 	public String updateInfo(){
+		
 		HttpServletRequest request=ServletActionContext.getRequest();
 		String filename = "";
 		Integer filenum=(int) (emppic==null?0:emppic.length());
 		try {
 			if (filenum>0) {	//判断有文件
-				System.out.println("有文件");
 				String suffix = emppicFileName.substring(emppicFileName.lastIndexOf('.')).toLowerCase();	//取图片格式名并转换成
 				if(suffix.equals(".jpg")||suffix.equals(".jpeg")||suffix.equals(".gif")||suffix.equals(".png")){
 					String path = request.getRealPath("/");		//得到文件的真实路径
@@ -257,16 +257,13 @@ public class EmpAction extends BaseAction implements ModelDriven<EmpBeam>{
 					return "error";
 				}
 			}else {
-					System.out.println("输入了老的照片");
 					emp.setEmp_pic(oldemppic);
 				}
 		} catch (Exception e) {
-			System.out.println("进了catch*************");
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println(emp);
-		System.out.println(es.updateEmp(emp)+"添加结果"+oldemppic);
+		
 		//listEmp();
 		queryEmp();		//添加完成后需要调用查询的方法更新显示列表
 		return "succ";		//转发到list页面
@@ -277,7 +274,6 @@ public class EmpAction extends BaseAction implements ModelDriven<EmpBeam>{
 	 * 
 	 */
 	public String delEmp(){
-		System.out.println(request.getRequestURI());
 		String del_id = super.getparameter("del_id");
 		es.del_emp(del_id);
 		ajxQueryEmp();
