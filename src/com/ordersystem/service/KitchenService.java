@@ -39,6 +39,20 @@ public class KitchenService {
 		return kdi.showFood(sql);
 	}
 
+	/**查询状态为3 的菜品总数 应为sql语句不同 所以要分开 
+	 * @author hcb
+	 * 
+	 */
+	public String findPageCountdone() {
+		// TODO Auto-generated method stub
+		Timestamp dayBegin = MyFormat.getDayBegin();
+		String nowtime = MyFormat.getDateformat().format(new Date());
+		String sql = "select count(*) from order_food odf,order_table ot,emp_table et,food_table ft,table_table tt where odf.fk_food_id = ft.food_id and odf.fk_order_id = ot.order_id  and ot.order_fk_empid = et.emp_id and ot.order_fk_tabid = tt.table_id and odf.order_food_status=3 and odf.servingtime between '"+dayBegin+"' and '"+nowtime+"'"; 
+				/*"select odf.order_food_id,odf.order_food_weight,ot.order_id 'fk_order_id',tt.table_id 'table_name' , ft.food_name 'food_name',odf.order_food_mark 'order_food_mark',DATEDIFF(minute,ot.order_lasttime,GETDATE()) 'lasttime',DATEDIFF(minute,ot.order_time,GETDATE()) 'time',et.emp_name 'emp_name',odf.order_press 'order_press',ft.food_time 'food_time',odf.order_food_num 'food_num',ft.food_merge 'food_maxcb' from order_food odf,order_table ot,emp_table et,food_table ft,table_table tt"+
+				" where odf.fk_food_id = ft.food_id and odf.fk_order_id = ot.order_id  and ot.order_fk_empid = et.emp_id and ot.order_fk_tabid = tt.table_id and odf.order_food_status="+status+" order by order_food_weight desc";*/
+		return kdi.findCount(sql);
+	}
+	
 	/**查找厨房待做的菜品总数量(status 为状态 徽章显示部分,或分页总数查询)	
 	 * @author hcb
 	 * 

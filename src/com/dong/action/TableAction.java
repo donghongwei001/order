@@ -1,6 +1,7 @@
 package com.dong.action;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,7 +62,6 @@ public class TableAction extends BaseAction {
 	 * 方法功能说明：  根据桌号查询桌子信息
 	 */
 	public String selezhuo() {
-		System.out.println(request.getRequestURI());
 		String table_id = super.getparameter("zhuohao");
 		List<TableBean> li=ts.selezhuohao(table_id);
 		super.setsession("list", li);
@@ -95,7 +95,6 @@ public class TableAction extends BaseAction {
 	 * 方法功能说明： 增加桌子 
 	 */
 	public String addzhuozi() {
-		System.out.println(request.getRequestURI());
 		int table_state=8;
 		TableBean tb=new TableBean();
 		ser_tabBean st=new ser_tabBean();
@@ -122,14 +121,13 @@ public class TableAction extends BaseAction {
 	/**
 	 * 
 	 * 方法功能说明： 餐桌信息编辑时获得桌子ID
+	 * @throws UnsupportedEncodingException 
 	 */
-	public String seid() {
+	public String seid() throws UnsupportedEncodingException {
 		String id=super.getparameter("tabled");
-		String name=super.getparameter("name");
-		String capacity=super.getparameter("capacity");
-		super.setsession("taleid", id);
-		super.setsession("name", name);
-		super.setsession("capacity", capacity);
+		List<TableBean> onetb = ts.findonetab(id);
+		System.out.println(onetb.get(0).getFk_emp_id());
+		super.setsession("tab", onetb.get(0));
 		return "up";
 	}
 
