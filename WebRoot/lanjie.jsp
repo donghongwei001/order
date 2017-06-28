@@ -19,10 +19,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-
+	<style type="text/css">
+		.lanjie{
+			margin-left:600px;
+			margin-top:200px;
+			width:500px;
+			height:auto;
+		}
+	</style>
   </head>
   
   <body>
-    您没有权限访问该界面 <br>
+   <div class="lanjie"><img src="uploadFile/98.gif" width="100%"></img></div>
   </body>
 </html>
