@@ -72,8 +72,9 @@
 </script>
 
 <body>
-	<div id="search_he"></div>
-	<br>
+	<!-- <div id="search_he"></div> -->
+<!-- 	<br> -->
+	<input type="hidden" value="${food_fk_dishes_id}" id="cate">
 	<form id="Form1" name="Form1"
 		action="${pageContext.request.contextPath}/dishe_queryAllDishes.action"
 		method="post">
@@ -192,7 +193,24 @@
 	<input type="hidden" value="${total }" id="allpage">
 	
 	<script type="text/javascript">
+	//回填后台查询出来的菜系类别
+	function databack() {
+		//alert("565");
+		var pos = document.getElementById("cate").value;		//得到返回的菜系id
+		//alert(pos+"ppp");
+		var category = document.getElementById("category");
+		var ops = category.options;
+		for ( var i = 0; i < ops.length; i++) {
+			//alert(ops[i].value);
+			if (ops[i].value == pos) {
+				ops[i].selected = true;
+				return;
+			}
+		}
+	};
+	
 	var pageNo = 1;
+	
 	//动态显示下拉框中的选项
 	$(document).ready(function(){
 		$.post("dishe_findCategory.action",
@@ -202,7 +220,7 @@
 				for(var i=0;i<data.length;i++){
 					var str = $("<option value="+data[i].dishes_id+">"+data[i].dishes_name+"</option>");
 					$("#category").append(str);
-				}
+				};databack();
 			},"json");
 		})
 	//上一页按钮分页

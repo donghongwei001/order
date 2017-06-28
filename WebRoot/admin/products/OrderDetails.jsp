@@ -85,11 +85,9 @@
 		</div>
 		<div class="collg5">
 			<div class="mymenu">
-				<form action="/Ordersystem/serv_orderDetails.action?tableid=${table_id}" >
 					<b style="font-size:15">菜单目录</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<input type="text" id="foodname" name="foodname" value="${userseach }" style="width:120px">
-					<input type="submit" value="搜索"  placeholder="请输入菜名">
-				  </form>
+					<button  id="searchfood" >搜索</button>
 				<table class="table table-striped table-condensed table-hover">
 					<tr>
 						<td>序号</td><td>菜目名称</td><td>菜系</td><td>单价</td><td>耗时</td><td>选择</td>
@@ -108,7 +106,7 @@
 					</tbody>
 				  </table>
 				  <button class="pre" onclick="bac()">上一页</button>
-				  <button class="bac" onclick="pre()">下一页</button><span id="currentpage">第1页</span><span>共${pageCount }页</span>
+				  <button class="bac" onclick="pre()">下一页</button><span id="currentpage">第1页</span><span id="pagetotal">共${pageCount }页</span>
 				  <input type="hidden" value="${pageCount }" id="allpage">
 			</div>
 		</div>
@@ -124,6 +122,32 @@
 </div>
 	<input type="hidden" id="txt1" value="66666 ">
 <script type="text/javascript">
+	$("#searchfood").click(function(){
+		$.ajax({
+			url:"/Ordersystem/dishe_ajaxQueryDishes.action",
+			data:{pageNo:pageNo,food_name:$("#foodname").val()},
+			type:"post",
+			dataType:"json",
+			success:function(list){
+				 $("#tbody").empty();
+				 var total = list.length/12;
+				 var pagecount=list.length%12>0?total+1:total;
+				 for(var i=0;i<list.length;i++){
+					  var tr = $("<tr><td>"+(parseInt((pageNo-1))*12+i+1)+"</td>"+
+						"<td>"+list[i].food_name+"</td>"+
+						"<td>"+list[i].dishes_name+"</td>"+
+						"<td>"+list[i].food_price+"</td>"+
+						"<td>"+list[i].food_time+"</td>"+
+						"<td><input type='checkbox' name='addmenu' value='"+list[i].food_id+"'></td></tr>");
+					$("#tbody").append(tr);	 
+				}  
+				$("#currentpage").text("第"+pageNo+"页"); 
+				$("#allpage").val(pagecount); 
+				document.getElementById("pagetotal").innerHTML="共"+parseInt(pagecount)+"页";
+				//$("#pagetotal").text("共"+pagecount+"页"); 
+			}
+		}); 
+	})
 	
 	//付款的方法
 	function paymoney(tbid){
@@ -262,7 +286,7 @@
 	function bac(){
 		pageNo = --pageNo<1?1:pageNo;
 		 $.ajax({
-			url:"/Ordersystem/serv_ajaxDetails.action",
+			url:"/Ordersystem/dishe_ajaxQueryDishes.action",
 			data:{pageNo:pageNo,food_name:$("#foodname").val()},
 			type:"post",
 			dataType:"json",
@@ -287,7 +311,7 @@
 		var total = $("#allpage").val();
 		pageNo = ++pageNo>total?total:pageNo;
 		 $.ajax({
-			url:"/Ordersystem/serv_ajaxDetails.action",
+			url:"/Ordersystem/dishe_ajaxQueryDishes.action",
 			data:{pageNo:pageNo,food_name:$("#foodname").val()},
 			type:"post",
 			dataType:"json",

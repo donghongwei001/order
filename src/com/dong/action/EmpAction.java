@@ -20,10 +20,18 @@ import com.ordersystem.domain.RoleBean;
 import com.ordersystem.service.EmpService;
 
 public class EmpAction extends BaseAction implements ModelDriven<EmpBeam>{
+	HttpServletRequest request=ServletActionContext.getRequest();
 	EmpService es = new EmpService();
 	private EmpBeam emp;
 	private File emppic;	//文件上传
 	private String emppicFileName;		//文件名字
+	private String oldemppic;		//修改信息是如果没有更新照片则在前端页面中获取原来的图片名字
+	public String getOldemppic() {
+		return oldemppic;
+	}
+	public void setOldemppic(String oldemppic) {
+		this.oldemppic = oldemppic;
+	}
 	public String getEmppicFileName() {
 		return emppicFileName;
 	}
@@ -65,6 +73,7 @@ public class EmpAction extends BaseAction implements ModelDriven<EmpBeam>{
 	 * 
 	 */
 	public String addEmp(){
+		System.out.println(request.getRequestURI());
 		HttpServletRequest request=ServletActionContext.getRequest();
 		String filename = "";
 		try {
@@ -103,11 +112,13 @@ public class EmpAction extends BaseAction implements ModelDriven<EmpBeam>{
 	 * 
 	 */
 	public String queryEmp(){
+		System.out.println(request.getRequestURI());
 		String emp_id = super.getparameter("emp_id");
 		String emp_name = super.getparameter("emp_name");
 		String emp_gender = super.getparameter("emp_gender");
 		String emp_idcar = super.getparameter("emp_idcar");
 		String pageNo = super.getparameter("pageNo");
+		
 		Integer pageNb=null;
 		try {
 			pageNb = Integer.parseInt(pageNo);
@@ -115,7 +126,7 @@ public class EmpAction extends BaseAction implements ModelDriven<EmpBeam>{
 			// TODO: handle exception
 		}
 		pageNb = pageNb==null?1:pageNb;
-		int pageSize = 5;
+		int pageSize = 10;
 		String startIndex = (pageNb-1)*pageSize+"";
 		Map<String , String> map = new HashMap<String , String>();
 		if(emp_id!=null&&!emp_id.equals("")) map.put("et.emp_id", emp_id);
@@ -150,6 +161,7 @@ public class EmpAction extends BaseAction implements ModelDriven<EmpBeam>{
 		String emp_id = super.getparameter("emp_id");
 		String emp_name = super.getparameter("emp_name");
 		String emp_gender = super.getparameter("emp_gender");
+		System.out.println(emp_gender);
 		String emp_idcar = super.getparameter("emp_idcar");
 		String pageNo = super.getparameter("pageNo");	
 		Integer pageNb=null; 	//当前页数
@@ -158,14 +170,14 @@ public class EmpAction extends BaseAction implements ModelDriven<EmpBeam>{
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		pageNb = pageNb==null?1:pageNb;  //判断当前页的值
-		String startIndex = (pageNb-1)*5+"";   //屏蔽的条数
+		pageNb = pageNb==null?1:pageNb;
 		Map<String , String> map = new HashMap<String , String>();
 		if(emp_id!=null&&!emp_id.equals("")) map.put("et.emp_id", emp_id);
 		if(emp_name!=null&&!emp_name.equals(""))map.put("et.emp_name", emp_name);
 		if(emp_gender!=null&&!emp_gender.equals(""))map.put("et.emp_gender", emp_gender);
 		if(emp_idcar!=null&&!emp_idcar.equals(""))map.put("et.emp_idcar", emp_idcar);
-		int pageSize = 5;  //每页显示的条数
+		int pageSize = 10;
+		String startIndex = (pageNb-1)*pageSize+"";
 		List list = es.queryEmp(map,pageSize+"",startIndex);
 		List<EmpBeam> empList = (List<EmpBeam>) list.get(0);
 		String str = JSON.toJSONString(empList);
@@ -203,6 +215,7 @@ public class EmpAction extends BaseAction implements ModelDriven<EmpBeam>{
 	 * 
 	 */
 	public String editEmp(){
+		
 		String empId = super.getparameter("emp_id");
 		Map<String, String> ma = new HashMap<String, String>();
 		ma.put("emp_id", empId);
@@ -220,31 +233,41 @@ public class EmpAction extends BaseAction implements ModelDriven<EmpBeam>{
 	 * 
 	 */
 	public String updateInfo(){
-		/*EmpBeam eb=new EmpBeam();
-		String emp_id=super.getparameter("id");
-		String emp_name=super.getparameter("emp_name");
-		String emp_gender=super.getparameter("emp_gender");
-		String emp_birday=super.getparameter("emp_birday");
-		String emp_age=super.getparameter("emp_age");
-		String emp_idcar=super.getparameter("emp_idcar");
-		String emp_address=super.getparameter("emp_address");
-		String emp_hire_date=super.getparameter("emp_hire_date");
-		String emp_fk_pos_id=super.getparameter("emp_fk_pos_id");
-		String emp_state=super.getparameter("emp_state");
-		String emp_phone=super.getparameter("emp_phone");
-		String emp_photo=super.getparameter("emp_photo");
+		
+		HttpServletRequest request=ServletActionContext.getRequest();
+		String filename = "";
+		Integer filenum=(int) (emppic==null?0:emppic.length());
 		try {
-			eb.setEmp_id(Integer.parseInt(emp_id));
-			eb.setEmp_name(emp_name); 
-			eb.setEmp_gender(emp_gender);
-			eb.setEmp_birday(emp_birday);
-			eb.setEmp_age(Integer.parseInt(emp_age));
-			eb.setEmp_idcar(emp_idcar);
-			eb.setEmp_address(emp_address);
+			if (filenum>0) {	//判断有文件
+				String suffix = emppicFileName.substring(emppicFileName.lastIndexOf('.')).toLowerCase();	//取图片格式名并转换成
+				if(suffix.equals(".jpg")||suffix.equals(".jpeg")||suffix.equals(".gif")||suffix.equals(".png")){
+					String path = request.getRealPath("/");		//得到文件的真实路径
+					filename = new Date().getTime()+suffix;
+					FileInputStream is = new FileInputStream(emppic);
+					FileOutputStream os = new FileOutputStream(new File(path+"uploadFile\\"+filename));
+					byte[] b = new byte[1024];
+					int n = -1;
+					while((n=is.read(b))>0){
+						os.write(b, 0, n);
+					}
+					os.flush();
+					os.close();
+					is.close();
+					emp.setEmp_pic(filename);
+				}else{
+					return "error";
+				}
+			}else {
+					emp.setEmp_pic(oldemppic);
+				}
 		} catch (Exception e) {
-			// TODO: handle exception
-		}*/
-		return null;
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		//listEmp();
+		queryEmp();		//添加完成后需要调用查询的方法更新显示列表
+		return "succ";		//转发到list页面
 	}
 	
 	/**删除员工信息
@@ -258,6 +281,10 @@ public class EmpAction extends BaseAction implements ModelDriven<EmpBeam>{
 		return null;
 	}
 	
+	/**身份证号重复性验证
+	 * @author yhl
+	 * 
+	 */
 	public String selidcar() {
 		String idcar=super.getparameter("emp_idcar");
 		int flag=es.seidcar(idcar);

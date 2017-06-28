@@ -3,6 +3,15 @@ package com.ordersystem.domain;
 public class RoleBean {
 	private int role_id;
 	private String role_name;
+	private String code_name;
+	
+	
+	public String getCode_name() {
+		return code_name;
+	}
+	public void setCode_name(String code_name) {
+		this.code_name = code_name;
+	}
 	public int getRole_id() {
 		return role_id;
 	}

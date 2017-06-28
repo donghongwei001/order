@@ -9,6 +9,15 @@
 
 
 <script type="text/javascript" src="../js/jquery-2.1.3.js"></script></HEAD>
+<style>
+
+#preview, .img , img
+ {  
+ width:200px;  
+ height:200px;  
+ }  
+
+</style>
 
 <body>
 	<form id="userAction_save_do" name="Form1"
@@ -25,43 +34,53 @@
 
 			<tr>
 				<td align="center" bgColor="#f5fafe" class="ta_01">菜品名称：</td>
-				<td class="ta_01" bgColor="#ffffff"><input type="text"
-					name="db.food_name" class="bg" onblur="dishesadd()" id="se"/>
-				</td>
-				<td align="center" bgColor="#f5fafe" class="ta_01">菜品单价：</td>
-				<td class="ta_01" bgColor="#ffffff"><input type="text"
-					name="db.food_price" 
-					class="bg" />
-				</td>
+				<td class="ta_01" bgColor="#ffffff"><input  onblur="dishesadd()" id="se" type="text" name="db.food_name" class="bg"/></td>
+				
+				<td  bgColor="#ffffff" class="ta_01" colspan="2" rowspan="6"> <div id="preview"></div>  </td>
+				
+				
 			</tr>
+			<tr>
+				<td align="center" bgColor="#f5fafe" class="ta_01">菜品单价：</td>
+				<td class="ta_01" bgColor="#ffffff"><input type="text" name="db.food_price" class="bg" />
+				</td>
+				
+			</tr>
+			
 			<tr>
 				<td align="center" bgColor="#f5fafe" class="ta_01">最大并菜数：</td>
 				<td class="ta_01" bgColor="#ffffff"><input type="text"
 					name="db.food_merge" 
 					class="bg" />
 				</td>
-				<td align="center" bgColor="#f5fafe" class="ta_01">所属菜系：</td>
+				
+			</tr>
+
+		<tr>
+		<td align="center" bgColor="#f5fafe" class="ta_01">加工时间:</td>
+		<td class="ta_01" bgColor="#ffffff" ><input type="text"
+					name="db.food_time" 
+					class="bg" />
+				</td>
+		
+		</tr>
+		
+		<tr>
+		<td align="center" bgColor="#f5fafe" class="ta_01">所属菜系：</td>
 				<td class="ta_01" bgColor="#ffffff"><select name="db.food_fk_dishes_id"
 					id="category">
 						<option value="" selected="selected">--选择菜品类--</option>
 									
 				</select>
 				</td>
-			</tr>
-
-		<tr>
-		<td align="center" bgColor="#f5fafe" class="ta_01">加工时间:</td>
-		<td class="ta_01" bgColor="#ffffff" colSpan="3"><input type="text"
-					name="db.food_time" 
-					class="bg" />
-				</td>
+		
 		
 		</tr>
 			<tr>
 				<td align="center" bgColor="#f5fafe" class="ta_01">上传图片：</td>
 				<td class="ta_01" bgColor="#ffffff" colSpan="3">
 				<input
-					type="file" name="food_pic" size="30" value=""/>
+					type="file" name="food_pic" size="30"  onchange="preview(this)"  value=""/>
 				</td>
 			</tr>
 			
@@ -73,11 +92,11 @@
 						style="WIDTH: 96%"></textarea>
 				</TD>
 			</TR>
-			<TR>
+			<%-- <TR>
 				<td align="center" colSpan="4" class="sep1"><img
 					src="${pageContext.request.contextPath}/admin/images/shim.gif">
 				</td>
-			</TR>
+			</TR> --%>
 
 
 			<tr>
@@ -105,6 +124,23 @@
 	</form>
 	
 	<script type="text/javascript">
+	//图片动态预览
+	 function preview(file)  
+		 {  
+		 var prevDiv = document.getElementById('preview');  
+		 if (file.files && file.files[0]){  
+		 var reader = new FileReader();  
+			 reader.onload = function(evt){  
+			 	prevDiv.innerHTML = '<img src="' + evt.target.result + '" />';  
+			 }    
+			 reader.readAsDataURL(file.files[0]);  
+		}  
+		 else {  
+			 prevDiv.innerHTML = '<div class="img" style="filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale,src=\'' + file.value + '\'"></div>';  
+		 }  
+	}  
+	
+	//联动显示数据库中的菜系类别
 	$(document).ready(function(){
 			$.post("dishe_findCategory.action",
 				function (data){

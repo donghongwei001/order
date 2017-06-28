@@ -130,7 +130,7 @@
 
 <body>
 	<!-- <div id="search_he"></div> -->
-	<br>
+	
 	<form id="Form1" name="Form1"
 		action="${pageContext.request.contextPath}/emp_queryEmp.action"
 		method="post">
@@ -160,8 +160,10 @@
 								<td height="22" align="center" bgColor="#f5fafe" class="ta_01">
 									性别：</td>
 								<td class="ta_01" bgColor="#ffffff">
-									<input type="radio" name="emp_gender" id="emp_gender" value="" />男
-									<input type="radio"name="emp_gender"  id="emp_gender" value=""/>女
+									<input type="radio" name="emp_gender" value="男" />男
+									<input type="radio" name="emp_gender" value="女"/>女
+									<input type="hidden" id="emp_gender" value="${emp_gender }"/>
+									
 								</td>
 								<td height="22" align="center" bgColor="#f5fafe" class="ta_01">
 									身份证号：</td>
@@ -284,6 +286,17 @@
 	<input type="hidden" value="${total }" id="allpage">
 </body>
 <script type="text/javascript">
+
+	//回填单选框男女信息
+	window.onload=function(){
+		var val = document.getElementById("emp_gender").value;
+		var gend = document.getElementsByName("emp_gender");
+		for(var i=0;i<gend.length;i++){
+			if(gend[i].value==val){
+				gend[i].checked = true;
+			}
+		}
+	}
 
 var pageNo=1;
 

@@ -23,6 +23,37 @@ import com.ordersystem.service.TableService;
 
 
 public class TableAction extends BaseAction {
+	/*	HttpServletRequest request = ServletActionContext.getRequest();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		TableService ts=new TableService();
+		public String selezhuo() {
+			String table_id = super.getparameter("zhuohao");
+			List<TableBean> li=ts.selezhuohao(table_id);
+			super.setsession("list", li);
+			System.out.println("11111");
+			return "ss";
+		}
+		
+		public String seleAll() { 
+			List<TableBean> li=ts.seleA();
+			super.setsession("list", li);
+			
+			try {
+				request.getRequestDispatcher("/admin/products/table_list.jsp").forward(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return "ss";
+		}
+		*//**
+		 * 用json得到查出的服务员的
+		 *//*
+		public String sewaiter() {
+			List<Table_indent> li=ts.selwaiter();
+			String str = com.alibaba.fastjson.JSON.toJSONString(li);
+			super.write(str);
+			return null;*/
 	HttpServletRequest request = ServletActionContext.getRequest();
 	HttpServletResponse response = ServletActionContext.getResponse();
 	TableService ts=new TableService();
