@@ -56,6 +56,7 @@ public class CookService {
 		public void modify(String dishes_id, String newname) {
 			// TODO Auto-generated method stub
 			String sql="update dishes_table set dishes_name='"+newname+"' where dishes_id="+dishes_id;
+			ci.update(sql);
 		}
 		
 		public List<CookBean> findonebyname(String cookname) {

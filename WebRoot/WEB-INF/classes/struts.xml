@@ -104,6 +104,7 @@
 		<global-results>
 		<result name="lanjie" type="redirect">/lanjie.jsp</result>
 		</global-results>
+		
 		<action name="emp_*" method="{1}" class="com.dong.action.EmpAction">
 			<result name="flush">admin/products/Kitchen.jsp</result>
 			<result name="succ" type="redirect">admin/products/emp_list.jsp</result>
@@ -139,6 +140,12 @@
 		<action name="account_*" method="{1}" class="com.dong.action.accountAction">
 			<result name="acfun">/admin/products/account_list.jsp</result>
 			<result name="blili">/admin/products/account_info.jsp</result>
+		</action>
+		<action name="cook_*" method="{1}" class="com.dong.action.CookAction">
+			<result name="succ" type="redirect">admin/products/cook.jsp</result>
+			<result name="cook">admin/products/cook.jsp</result>
+			<result name="error">l.jsp</result>
+			<result name="edit">admin/products/cook_edit.jsp</result>
 		</action>
 	</package>
 	

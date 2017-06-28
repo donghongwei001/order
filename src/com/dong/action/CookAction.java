@@ -8,6 +8,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.apache.struts2.ServletActionContext;
 
 import com.alibaba.fastjson.JSON;
@@ -18,10 +21,13 @@ import com.ordersystem.domain.DisheBean;
 import com.ordersystem.domain.FoodCategoryBean;
 import com.ordersystem.service.CookService;
 import com.ordersystem.service.DisheService;
+import com.sun.org.apache.bcel.internal.generic.NEW;
+import com.sun.org.apache.regexp.internal.recompile;
 
 
 
 public class CookAction extends BaseAction implements ModelDriven<CookBean>{
+	HttpServletRequest request=ServletActionContext.getRequest();
 	CookService cs=new CookService();
 	private CookBean cb;
 	public CookBean getCb() {
@@ -38,7 +44,8 @@ public class CookAction extends BaseAction implements ModelDriven<CookBean>{
 	 * @author an
 	 * 
 	 */
-	public String addCook(){		
+	public String addCook(){
+		System.out.println(request.getRequestURI());
 		cs.addCook(cb);		//调用添加的方法
 		findCook();
 		return "succ";
@@ -47,6 +54,7 @@ public class CookAction extends BaseAction implements ModelDriven<CookBean>{
 	 * 查询所有
 	 */
 	public String findCook(){
+		System.out.println(request.getRequestURI());
 		List<CookBean> cook = cs.findCook();
 		super.setsession("cookInfo", cook);
 		return "cook";
@@ -59,6 +67,7 @@ public class CookAction extends BaseAction implements ModelDriven<CookBean>{
 	 * 
 	 */
 	public String editcook(){
+		System.out.println(request.getRequestURI());
 		String dishes_id = super.getparameter("cookid");
 		List<CookBean> oneCook =  cs.findone(dishes_id);
 		if(oneCook!=null){
@@ -84,6 +93,7 @@ public class CookAction extends BaseAction implements ModelDriven<CookBean>{
 	 * @return
 	 */
 	public String delcook(){
+		System.out.println(request.getRequestURI());
 		String dishes_id = super.getparameter("cookid");
 		cs.del_cook(dishes_id);
 		findCook();
