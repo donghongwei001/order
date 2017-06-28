@@ -122,6 +122,7 @@ public class TableAction extends BaseAction {
 	 * 方法功能说明： 餐桌信息编辑时获得桌子ID
 	 */
 	public String seid() {
+		ServletActionContext.getResponse().setCharacterEncoding("UTF-8");
 		String id=super.getparameter("tabled");
 		String name=super.getparameter("name");
 		String capacity=super.getparameter("capacity");
