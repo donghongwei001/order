@@ -114,11 +114,11 @@
 			</TBODY>
 		</table>
 	<button  class="pre" onclick="bac()">上一页</button>
-	<button  class="bac" onclick="pre(4)">下一页</button><span id="currentpage">第1页</span><span>共${total}页</span>
+	<button  class="bac" onclick="pre(4)">下一页</button><span id="currentpage">第1页</span><span>共1页</span>
 	<input type="hidden" value="${total }" id="allpage">
 <script type="text/javascript">
 var pageNo=1;
-	function bac(){
+	/* function bac(){
 		pageNo = --pageNo<1?1:pageNo;
 		 $.ajax({
 			url:"/Ordersystem/emp_ajxQueryEmp.action",
@@ -156,7 +156,7 @@ var pageNo=1;
 				 $("#currentpage").text("第"+pageNo+"页");
 			}
 		}); 
-	};
+	}; */
 	
 </script>
 

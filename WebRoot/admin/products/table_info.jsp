@@ -28,19 +28,20 @@
 			</tr>
 			<tr>
 				<td>
-					您要修改的桌号为:${taleid} 
+					您要修改的桌号为:${tab.table_id} 
 				</td>
 			</tr>
 			<tr>
 				
 				<td align="center" bgColor="#f5fafe" class="ta_01">可供餐人数：</td>
-				<td class="ta_01" bgColor="#ffffff"><input type="text" name="people" class="bg" value="${capacity}"  />
-				<input type="hidden" name="id" value="${taleid}">
+				<td class="ta_01" bgColor="#ffffff"><input type="text" name="people" class="bg" value="${tab.table_Capacity}"  />
+				<input type="hidden" name="id" value="${tab.table_id}">
+				<input type="hidden" id="empid" value="${tab.fk_emp_id}">
 				</td>
 			</tr>
 			<tr>
 				<td align="center" bgColor="#f5fafe" class="ta_01">餐桌名称：</td>
-				<td class="ta_01" bgColor="#ffffff"><input type="text" name="t_name" class="bg"  value="${name}" onblur="seletbnam()" id="tbname" />
+				<td class="ta_01" bgColor="#ffffff"><input type="text" name="t_name" class="bg"  value="${tab.table_name}" onblur="seletbnam()" id="tbname" />
 				</td>
 			</tr>
 			<TR>
@@ -71,6 +72,16 @@
 	/* $(function(){
 		alert("ddd");
 	}); */
+	function backemp(){
+		var empid = document.getElementById("empid").value;
+		var opt = document.getElementById("posSelect").options;
+		for(var i=0;i<opt.length;i++){
+			if(opt[i].value==empid){
+				opt[i].selected = true;
+			}
+		}
+	}
+	
 	 $(document).ready(
 		function(){
 			$.post("Table_sewaiter.action",
@@ -80,7 +91,7 @@
 					for(var i = 0;i<data.length;i++){
 						var str = $("<option value="+data[i].emp_id+">"+data[i].waiter+"</option>");
 						$("#posSelect").append(str);
-					}
+					};backemp();
 				},"json");
 		}); 
 	function seletbnam(){
