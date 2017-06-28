@@ -19,15 +19,20 @@ public class Quanxianinterceptor extends MethodFilterInterceptor{
 		// TODO Auto-generated method stub
 		System.out.println(request.getSession().getAttribute("quanxian"));
 		List<Object> list=(List) request.getSession().getAttribute("quanxian");
-		System.out.println(request.getRequestURI());
-		for (int i = 0; i < list.size(); i++) {
-			
-			if (list.get(i).equals(request.getRequestURI())) {
-				String resultp=arg0.invoke();
-				return resultp;
+		try {
+			for (int i = 0; i < list.size(); i++) {
+				
+				if (list.get(i).equals(request.getRequestURI())) {
+					String resultp=arg0.invoke();
+					return resultp;
+				}
 			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			return "lanjie";
 		}
 		return "lanjie";
+		
 		
 		
 	}
