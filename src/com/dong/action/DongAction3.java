@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.ColumnListHandler;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
 
@@ -28,10 +29,22 @@ import com.ordersystem.domain.TableBean;
 
 public class DongAction3 {
 	Connpool cp = new Connpool();
+	QueryRunner qr = new QueryRunner(cp.getDataSource());
 	HttpSession session=ServletActionContext.getRequest().getSession();
 	HttpServletRequest request=ServletActionContext.getRequest();
 	HttpServletResponse response=ServletActionContext.getResponse();
 	public String save(){
+		String user=request.getParameter("username");
+		List<Object> query = null;
+		try {
+			query = qr.query("select right_url from account a,emp_table e,role_right r,right_table o where a.account_fk_emp_id=e.emp_id and e.emp_fk_pos_id=r.role_right_roleid and r.role_right_rightid=o.right_id and a.account_status=15 and a.account_number='"+user+"'", new ColumnListHandler(1));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		session.setAttribute("quanxian", query);
+		session.setAttribute("user", user);
+		System.out.println(session.getAttribute("quanxian"));
 		return "ok";
 	}
 	private String user;
@@ -99,24 +112,41 @@ public class DongAction3 {
 		
 		session.setAttribute("count", list1);
 		return "aaa";*/
-		String currPageStr=request.getParameter("currPage");
-		String pageSizeStr=request.getParameter("pageSize");
-		Integer currPage=null;
-		Integer pageSize=null;
-		System.out.println(request.getRequestURI());
+		System.out.println("11");
+		String user=(String) session.getAttribute("user");
+		System.out.println(user);
+		List<Object> query = null;
 		try {
-			currPage=Integer.parseInt(currPageStr);
-			pageSize=Integer.parseInt(pageSizeStr);
-		} catch (Exception e) {
-			// TODO: handle exception
-			
+			query = qr.query("select right_url from account a,emp_table e,role_right r,right_table o where a.account_fk_emp_id=e.emp_id and e.emp_fk_pos_id=r.role_right_roleid and r.role_right_rightid=o.right_id and a.account_status=15 and a.account_number='"+user+"'", new ColumnListHandler(1));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		HttpSession session = request.getSession();
-		PageUtil util=personService.select(currPage, pageSize);
-		session.setAttribute("list", util);
-		List list1=util.getRows();
-		session.setAttribute("List1", list1);
-		response.sendRedirect("/Ordersystem/admin/products/order_list.jsp");
+		System.out.println(query.size());
+		for (int i = 0; i < query.size(); i++) {
+			if (query.get(i).equals(request.getRequestURI())) {
+				System.out.println(session.getAttribute("quanxian"));
+				String currPageStr=request.getParameter("currPage");
+				String pageSizeStr=request.getParameter("pageSize");
+				Integer currPage=null;
+				Integer pageSize=null;
+				try {
+					currPage=Integer.parseInt(currPageStr);
+					pageSize=Integer.parseInt(pageSizeStr);
+				} catch (Exception e) {
+					// TODO: handle exception
+					
+				}
+				HttpSession session = request.getSession();
+				PageUtil util=personService.select(currPage, pageSize);
+				session.setAttribute("list", util);
+				List list1=util.getRows();
+				session.setAttribute("List1", list1);
+				response.sendRedirect("/Ordersystem/admin/products/order_list.jsp");
+				return null;
+			}
+		}
+		response.sendRedirect("/Ordersystem/lanjie.jsp");
 		return null;
 	}
 	

@@ -19,6 +19,7 @@ import com.ordersystem.domain.RoleBean;
 import com.ordersystem.service.EmpService;
 
 public class EmpAction extends BaseAction implements ModelDriven<EmpBeam>{
+	HttpServletRequest request=ServletActionContext.getRequest();
 	EmpService es = new EmpService();
 	private EmpBeam emp;
 	private File emppic;	//文件上传
@@ -64,6 +65,7 @@ public class EmpAction extends BaseAction implements ModelDriven<EmpBeam>{
 	 * 
 	 */
 	public String addEmp(){
+		System.out.println(request.getRequestURI());
 		HttpServletRequest request=ServletActionContext.getRequest();
 		String filename = "";
 		try {
@@ -102,11 +104,13 @@ public class EmpAction extends BaseAction implements ModelDriven<EmpBeam>{
 	 * 
 	 */
 	public String queryEmp(){
+		System.out.println(request.getRequestURI());
 		String emp_id = super.getparameter("emp_id");
 		String emp_name = super.getparameter("emp_name");
 		String emp_gender = super.getparameter("emp_gender");
 		String emp_idcar = super.getparameter("emp_idcar");
 		String pageNo = super.getparameter("pageNo");
+		
 		Integer pageNb=null;
 		try {
 			pageNb = Integer.parseInt(pageNo);
@@ -228,6 +232,7 @@ public class EmpAction extends BaseAction implements ModelDriven<EmpBeam>{
 	 * 
 	 */
 	public String delEmp(){
+		System.out.println(request.getRequestURI());
 		String del_id = super.getparameter("del_id");
 		es.del_emp(del_id);
 		ajxQueryEmp();

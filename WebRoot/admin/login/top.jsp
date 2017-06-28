@@ -27,26 +27,7 @@ TH {
 <link href="${pageContext.request.contextPath}/admin/css/Style.css"
 	rel="stylesheet" type="text/css">
 
-<script type="text/javascript">
-	function exitSys() {
-	alert("1212");
-		$.ajax({ //发送了一个新的请求，与按钮这个请求完全不是一马事
-				type : "post", //请求方式
-				url : "/Ordersystem/dongtuichu.action", //请求地址
-				dataType : "text",
-				
-				//async : false,
 
-				success : function(data) { //请求成功后调用的回调函数，参数1【data】 请求返回的数据，这个数据类型是dataType  制定
-					alert("212121212");
-				}
-
-			})
-		
-		
-
-	}
-</script>
 </HEAD>
 <body>
 	<table width="100%" height="70%" border="0" cellspacing="0"
@@ -64,7 +45,7 @@ TH {
 				background="${pageContext.request.contextPath}/admin/images/mis_01.jpg">
 				<table width="100%" border="0" cellspacing="0" cellpadding="0">
 					<tr>
-						<td width="85%" align="left">
+						<td width="10%" align="left">
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <font color="#000000">
 								<script language="JavaScript">
 								<!--
@@ -96,6 +77,7 @@ TH {
 								// -->
 								</script> </font>
 						</td>
+						<td>您的用户名为:<font size="5" color="#000000">${user}</font></td>
 						<td width="15%">
 							<table width="100%" border="0" cellspacing="0" cellpadding="0">
 								<tr>
@@ -107,8 +89,7 @@ TH {
 									</td>
 									<td width="155" valign="bottom"
 										background="${pageContext.request.contextPath}/admin/images/mis_05b.jpg">
-										<font color="blue"><button
-											onclick="exitSys()">退出系统</button> </font></td>
+										<font color="blue"><a target="_parent" href="/Ordersystem/cust_tuichu.action"><button>注销</button></a></font></td>
 									<td width="10" align="right"
 										background="${pageContext.request.contextPath}/admin/images/mis_05b.jpg">
 										<img
@@ -125,4 +106,7 @@ TH {
 		</tr>
 	</table>
 </body>
+<script type="text/javascript">
+	
+</script>
 </HTML>

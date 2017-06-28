@@ -1,118 +1,133 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="zh-CN">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
-	<title>Starter Template for Bootstrap</title>
-	<style type="text/css">
-	#table_center{
-		text-align:center;
-		width:100%;
-		}
-	#top1_left{
-		float:left;
-		}
-	#button_size{
-		margin-top:0px;
-		}
-	</style>
-    <!-- Bootstrap core CSS -->
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
-	  
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="../js/jquery-2.1.3.js"></script>
-      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-	
-  </head>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="icon" href="../../favicon.ico">
+<title>Starter Template for Bootstrap</title>
+<style type="text/css">
+.table-hover {
+	margin-top: 200px;
+	width: 1000px;
+}
 
-  <body>
-	<!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="../js/jquery-2.1.3.js"></script>
-    <script src="../js/bootstrap.min.js">
-	
-	</script>
-     <nav class="navbar navbar-default navbar-fixed-top" style="width:100%" id="table_center">
-  <div class="container"  style="width:100%" id="table_center">
-  <div>
-  	<div id="top1_left">
-    查询：<input type="text"/>
-  	</div>
-    </div>
-  </div>
-    </nav>
-  <br/>
-    <br/>
-<!--模态框-->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        
-        <h4 class="modal-title" id="exampleModalLabel">新员工信息</h4>
-      </div>
-      <div class="modal-body">
-        <form>
-         <div class="input-group">
- 	 <span class="input-group-addon" id="basic-addon1">姓名</span>
- 	 <input type="text" class="form-control" placeholder="请输入姓名" aria-describedby="basic-addon1">
+.table-hover td {
+	text-align: center;
+	border: 1px solid gray;
+}
+</style>
+
+<link href="../css/bootstrap.min.css" rel="stylesheet">
+
+
+</head>
+
+<body>
+	<table class="table table-hover">
+		<tr>
+			<td style="font-size:30px;color:brown;">角色</td>
+			<td style="font-size:30px;color:brown;">权限</td>
+		</tr>
+		<c:forEach items="${list}" var="a">
+			<tr>
+				<td id="id">${a}</td>
+				<td><button type="button" onclick="xiugaiquanxian('${a}')"
+						class="btn btn-primary" data-toggle="modal"
+						data-target=".bs-example-modal-sm">修改权限</button>
+				</td>
+			</tr>
+
+		</c:forEach>
+
+	</table>
+	<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog"
+		aria-labelledby="mySmallModalLabel">
+		<div class="modal-dialog modal-sm" role="document">
+			<div class="modal-content">
+				<form action="/Ordersystem/cust_xiugaiquanxian.action" method="post">
+					<span style="margin-left:120px;font-size:20px;color:gray">权限修改</span>
+					<br> <br> <br> <input type="checkbox" value="1"
+						name="box">员工管理 <input style="margin-left:120px;"
+						type="checkbox" name="box" value="2">订单管理<br> <input
+						type="checkbox" name="box" value="3">财务管理 <input
+						style="margin-left:120px;" type="checkbox" name="box" value="4">前台管理<br>
+					<input type="checkbox" name="box" value="5">角色权限 <input
+						style="margin-left:120px;" type="checkbox" name="box" value="6">综合排序<br>
+					<input type="checkbox" name="box" value="7">先后排序 <input
+						style="margin-left:120px;" type="checkbox" name="box" value="8">按桌排序<br>
+					<input type="checkbox" name="box" value="9">菜品管理 <input
+						style="margin-left:120px;" type="checkbox" name="box" value="10">餐桌管理<br>
+					<input type="checkbox" name="box" value="11">顾客管理 
+					<input style="margin-left:120px;" type="checkbox" name="box" value="12">角色管理<br>
+					
+					<input type="checkbox" name="box" value="30">员工查询
+					<input style="margin-left:120px;" type="checkbox" name="box" value="13">员工添加<br>
+					<input type="checkbox" name="box" value="14">员工删除 
+					<input style="margin-left:120px;" type="checkbox" name="box" value="15">员工修改<br>
+					<input type="checkbox" name="box" value="16">修改权限
+					<input style="margin-left:120px;" type="checkbox" name="box" value="17">增加角色<br>
+					<input type="checkbox" name="box" value="18">修改角色
+					<input style="margin-left:120px;" type="checkbox" name="box" value="19">菜品查询<br>
+					<input type="checkbox" name="box" value="20">菜品修改
+					<input style="margin-left:120px;" type="checkbox" name="box" value="21">菜品增加<br>
+					<input type="checkbox" name="box" value="22">菜品删除
+					<input style="margin-left:120px;" type="checkbox" name="box" value="23">菜系查询<br>
+					<input type="checkbox" name="box" value="24">菜系增加
+					<input style="margin-left:120px;" type="checkbox" name="box" value="25">菜系删除<br>
+					<input type="checkbox" name="box" value="26">餐桌查询
+					<input style="margin-left:120px;" type="checkbox" name="box" value="27">餐桌添加<br>
+					<input type="checkbox" name="box" value="28">餐桌修改
+					<input style="margin-left:120px;" type="checkbox" name="box" value="29">餐桌删除<br>
+					
+
+					<br>
+					<br>
+					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+					<button type="submit" style="margin-left:150px;"
+						class="btn btn-success">确定添加</button>
+				</form>
+			</div>
+		</div>
 	</div>
-	 <div class="input-group">
- 	 <span class="input-group-addon" id="basic-addon1">性别</span>
- 	 <input type="text" class="form-control" placeholder="请输入性别" aria-describedby="basic-addon1">
-	</div>	
-     <div class="input-group">
- 	 <span class="input-group-addon" id="basic-addon1">年龄</span>
- 	 <input type="text" class="form-control" placeholder="请输入年龄" aria-describedby="basic-addon1">
-	</div>
-     <div class="input-group">
- 	 <span class="input-group-addon" id="basic-addon1">手机号</span>
- 	 <input type="text" class="form-control" placeholder="请输入手机号" aria-describedby="basic-addon1">
-	</div>
-     <div class="input-group">
- 	 <span class="input-group-addon" id="basic-addon1">家庭住址</span>
- 	 <input type="text" class="form-control" placeholder="请输入家庭住址" aria-describedby="basic-addon1">
-	</div>
-    <div class="input-group">
- 	 <span class="input-group-addon" id="basic-addon1">身份证号</span>
- 	 <input type="text" class="form-control" placeholder="请输入身份证号" aria-describedby="basic-addon1">
-	</div>
-    </form>
-      </div>
-      <div class="modal-footer">
-      <button type="button" class="btn btn-primary">提交</button>
-      </div>
-    </div>
-  </div>
-</div>
-    
-<table class="table table-striped" id="table_center">
-	<tr>
-	<td>员工编号</td>
-	<td>姓名</td>
-	<td>当前权限</td>
-	<td>更改权限</td>
-  </tr>
- <tr >
-	<td>110101</td>
-	<td>张晓明</td>
-	<td>服务员</td>
-    <td>
-   	<button  type="button" class="btn btn-primary  btn btn-info btn-xm">修改</button>
-    
-    </td>
-  </tr>
-  
-  </table>
-	</body>
+</body>
+<script src="../js/jquery-2.1.3.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script type="text/javascript">
+	function xiugaiquanxian(index) {
+		var box = document.getElementsByName("box");
+		//alert(box.length);
+		$.ajax({
+			type : "post",
+			url : "/Ordersystem/cust_xiugaijuese.action",
+			data : {
+				quanxianname : index
+			},
+			dataType : "text",
+			success : function(data) {
+				var arr = data.split(",");
+
+				//alert("555");
+				for ( var i = 0; i < box.length; i++) {
+					box[i].checked = false;
+					if (arr.indexOf(box[i].value) >= 0) {
+						box[i].checked = true;
+					}
+				}
+			}
+
+		})
+
+	}
+</script>
+
+
+
+
 </html>

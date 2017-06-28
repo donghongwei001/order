@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.struts2.ServletActionContext;
 
 import com.alibaba.fastjson.JSON;
@@ -17,7 +19,7 @@ import com.ordersystem.service.ServicePageService;
 
 public class ServicePageAction extends BaseAction implements ModelDriven<ServiceTable> {
 	ServicePageService sps = new ServicePageService();
-	
+	HttpServletRequest request=ServletActionContext.getRequest();
 	public ServiceTable getModel() {
 		// TODO Auto-generated method stub
 		return null;
@@ -42,6 +44,7 @@ public class ServicePageAction extends BaseAction implements ModelDriven<Service
 		super.setsession("dirty", dirty);
 		super.setsession("total", total);
 		super.setsession("payed", payed);
+
 		return "succ";
 	}
 	

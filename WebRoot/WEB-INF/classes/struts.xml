@@ -22,37 +22,18 @@
 		<action name="dong_*" class="com.dong.action.dongAction" method="{1}">
 			<result name="ok" type="redirect">/index.jsp</result>
 		</action>
+		
 		</package>
 	
 	
 	
 	
 	<package name="hcbdefault1" extends="struts-default" >
-		<action name="kitchen_*" method="{1}" class="com.dong.action.KitchenAction">
-			<result name="flush">admin/products/Kitchen.jsp</result>
-			<result name="pass" type="redirect">admin/products/Kitchen.jsp</result>
-			<result name="secpass" type="redirect">admin/products/kitchSec.jsp</result>
-			<result name="thrpass" type="redirect">admin/products/kitchThr.jsp</result>
-			<result name="error">l.jsp</result>
-		</action>
+		
 	</package>
 	<package name="hcbdefault2" extends="struts-default" >
-		<action name="emp_*" method="{1}" class="com.dong.action.EmpAction">
-			<result name="flush">admin/products/Kitchen.jsp</result>
-			<result name="succ" type="redirect">admin/products/emp_list.jsp</result>
-			<result name="error">l.jsp</result>
-			<result name="edit">admin/products/emp_edit.jsp</result>
-		</action>
-		<action name="dishe_*" method="{1}" class="com.dong.action.DisheAction">
-			<result name="succ" type="redirect">admin/products/dishes_list.jsp</result>
-			<result name="error">l.jsp</result>
-			<result name="edit">admin/products/dishes_edit.jsp</result>
-		</action>
-		<action name="serv_*" method="{1}" class="com.dong.action.ServicePageAction">
-			<result name="succ" type="redirect">admin/products/servicer.jsp</result>
-			<result name="details">/admin/products/OrderDetails.jsp</result>
-			<result name="edit">admin/products/dishes_edit.jsp</result>
-		</action>
+		
+		
 		
 		
 	</package>
@@ -106,6 +87,50 @@
 		</action>
 	</package>
 	<package name="default" extends="struts-default">
+		
+	</package>
+	<package name="default5" extends="struts-default" >
+		<interceptors>
+			<interceptor name="donginter" class="com.dong.interceptor.Quanxianinterceptor">
+				<!-- 不拦截的方法 -->
+				<param name="includeMethods">changerole,addrole,addDishe,queryAllDishes,delDishe,editDishe,addEmp,queryEmp,delEmp,xiugaiquanxian,quanxian,jiaose,queryEmp,showTable,findFood,secFindFood,thrFindFood,queryAllDishes,seleAll,showAllCust</param>
+			</interceptor>
+			<!-- 构建一个拦截器栈 -->
+			<interceptor-stack name="aaabbb">
+				<interceptor-ref name="donginter"></interceptor-ref>
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		
+		
+		<!-- 配置默认的拦截器 -->
+		<default-interceptor-ref name="aaabbb"></default-interceptor-ref>
+		<global-results>
+		<result name="lanjie" type="redirect">/lanjie.jsp</result>
+		</global-results>
+		<action name="emp_*" method="{1}" class="com.dong.action.EmpAction">
+			<result name="flush">admin/products/Kitchen.jsp</result>
+			<result name="succ" type="redirect">admin/products/emp_list.jsp</result>
+			<result name="error">l.jsp</result>
+			<result name="edit">admin/products/emp_edit.jsp</result>
+		</action>
+		<action name="kitchen_*" method="{1}" class="com.dong.action.KitchenAction">
+			<result name="flush">admin/products/Kitchen.jsp</result>
+			<result name="pass" type="redirect">admin/products/Kitchen.jsp</result>
+			<result name="secpass" type="redirect">admin/products/kitchSec.jsp</result>
+			<result name="thrpass" type="redirect">admin/products/kitchThr.jsp</result>
+			<result name="error">l.jsp</result>
+		</action>
+		<action name="dishe_*" method="{1}" class="com.dong.action.DisheAction">
+			<result name="succ" type="redirect">admin/products/dishes_list.jsp</result>
+			<result name="error">l.jsp</result>
+			<result name="edit">admin/products/dishes_edit.jsp</result>
+		</action>
+		<action name="serv_*" method="{1}" class="com.dong.action.ServicePageAction">
+			<result name="succ" type="redirect">admin/products/servicer.jsp</result>
+			<result name="details">/admin/products/OrderDetails.jsp</result>
+			<result name="edit">admin/products/dishes_edit.jsp</result>
+		</action>
 		<action name="cust_*" method="{1}" class="com.dong.action.CustAction">
 			<result name="successs">/admin/products/cust_add.jsp</result>
 			
@@ -114,6 +139,6 @@
 			<result name="ss">/admin/products/table_list.jsp</result>
 			<result name="error">l.jsp</result>
 		</action>
-	</package>
+		</package>
 	
 </struts>    

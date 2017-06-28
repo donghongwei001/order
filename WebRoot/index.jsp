@@ -528,7 +528,7 @@ body {
 					setTimeout(function() {
 						window.location.reload();//页面刷新
 					}, 100); */
-					if (data == "1") {
+					if (data == "0") {
 						alert("修改成功");
 						$("#gerenxinxi").modal("toggle");
 						setTimeout(function() {

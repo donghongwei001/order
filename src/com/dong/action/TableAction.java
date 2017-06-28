@@ -37,6 +37,7 @@ public class TableAction extends BaseAction {
 		public String seleAll() { 
 			List<TableBean> li=ts.seleA();
 			super.setsession("list", li);
+			
 			try {
 				request.getRequestDispatcher("/admin/products/table_list.jsp").forward(request, response);
 			} catch (Exception e) {
