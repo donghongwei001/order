@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.management.StringValueExp;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.ServletActionContext;
@@ -214,12 +215,35 @@ public class EmpAction extends BaseAction implements ModelDriven<EmpBeam>{
 		return "error";
 	}
 	
-	/**更新员工信息方法
+	/**更新员工信息方法 
 	 * @author hcb
 	 * 
 	 */
 	public String updateInfo(){
-		
+		/*EmpBeam eb=new EmpBeam();
+		String emp_id=super.getparameter("id");
+		String emp_name=super.getparameter("emp_name");
+		String emp_gender=super.getparameter("emp_gender");
+		String emp_birday=super.getparameter("emp_birday");
+		String emp_age=super.getparameter("emp_age");
+		String emp_idcar=super.getparameter("emp_idcar");
+		String emp_address=super.getparameter("emp_address");
+		String emp_hire_date=super.getparameter("emp_hire_date");
+		String emp_fk_pos_id=super.getparameter("emp_fk_pos_id");
+		String emp_state=super.getparameter("emp_state");
+		String emp_phone=super.getparameter("emp_phone");
+		String emp_photo=super.getparameter("emp_photo");
+		try {
+			eb.setEmp_id(Integer.parseInt(emp_id));
+			eb.setEmp_name(emp_name); 
+			eb.setEmp_gender(emp_gender);
+			eb.setEmp_birday(emp_birday);
+			eb.setEmp_age(Integer.parseInt(emp_age));
+			eb.setEmp_idcar(emp_idcar);
+			eb.setEmp_address(emp_address);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}*/
 		return null;
 	}
 	
@@ -242,6 +266,8 @@ public class EmpAction extends BaseAction implements ModelDriven<EmpBeam>{
 		}else super.write("true");
 		return null;
 	}
+	
+	
 }
 
 

@@ -115,6 +115,10 @@
 			<result name="up">/admin/products/table_info.jsp</result>
 			<result name="error">l.jsp</result>
 		</action>
+		<action name="account_*" method="{1}" class="com.dong.action.accountAction">
+			<result name="acfun">/admin/products/account_list.jsp</result>
+			<result name="blili">/admin/products/account_info.jsp</result>
+		</action>
 	</package>
 	
 </struts>    

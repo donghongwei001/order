@@ -15,14 +15,14 @@
 
 <body onload = "setPageInfo()">
 	<form id="userAction_save_do" name="Form1"
-		action="${pageContext.request.contextPath}/emp_updateInfo.action?id=${empinfo.emp_id}" method="post">
-		 <input type="hidden" value="${empinfo.emp_state }" id="sta" />
+		action="${pageContext.request.contextPath}/emp_updateInfo.action?id=${empinfo.emp_id}" method="post"> 
+			<input type="hidden" value="${empinfo.emp_state }" id="sta" />
 		<input type="hidden" value="${empinfo.emp_fk_pos_id }" id="poid" />
 		<input type="hidden" value="${empinfo.emp_gender }" id="gend" />
 		<table cellSpacing="1" cellPadding="5" width="100%" align="center"
 			bgColor="#eeeeee" style="border: 1px solid #8ba7e3" border="0">
 			<tr>
-				<td class="ta_01" align="center" bgColor="#afd1f3" colSpan="4"
+				<td class="ta_01" align="center" bgColor="#afd1f3" colSpan="6"
 					height="26"><strong><STRONG>编辑员工信息</STRONG> </strong><!-- 编辑员工信息 -->
 				</td>
 			</tr>
@@ -33,13 +33,15 @@
 				<td class="ta_01" bgColor="#ffffff"><span>${empinfo.emp_id }</span>
 				</td>
 				<td align="center" bgColor="#f5fafe" class="ta_01">姓名：</td>
-				<td class="ta_01" bgColor="#ffffff"><input type="text"
+				<td class="ta_01" bgColor="#ffffff" width="20%"><input type="text"
 					name="emp_name" value="${empinfo.emp_name }" class="bg" />
 				</td>
+				<td bgColor="#f5fafe" class="ta_01" rowspan="5"  width="8%"></td>
+				<td class="ta_01" bgColor="#ffffff" width="8%"></td>
 			</tr>
 			<tr>
 				<td align="center" bgColor="#f5fafe" class="ta_01">性别：</td>
-				<td class="ta_01" bgColor="#ffffff">
+				<td class="ta_01" bgColor="#ffffff" >
 					<input type="radio" name="emp_gender" value="男"/>男
 					<input type="radio"name="emp_gender" value="女"/>女
 				</td>
@@ -47,17 +49,19 @@
 				<td class="ta_01" bgColor="#ffffff">
 				<input type = "text" value="${empinfo.emp_birday }" name="emp_birday">
 				</td>
+				<td class="ta_01" bgColor="#ffffff"></td>
 			</tr>
 
 
 			<tr>
 				<td align="center" bgColor="#f5fafe" class="ta_01">年龄：</td>
 				<td class="ta_01" bgColor="#ffffff">
-					<input type="text" value="${empinfo.emp_age }">
+					<input type="text" value="${empinfo.emp_age }" name="emp_age">
 				</td>
 				<td align="center" bgColor="#f5fafe" class="ta_01">身份证号：</td>
 				<td class="ta_01" bgColor="#ffffff"><input type="text" value="${empinfo.emp_idcar }"	name="emp_idcar" class="bg" />
 				</td>
+				<td class="ta_01" bgColor="#ffffff"></td>
 			</tr>
 			<tr>
 				<td align="center" bgColor="#f5fafe" class="ta_01">家庭住址：</td>
@@ -67,7 +71,8 @@
 				<td align="center" bgColor="#f5fafe" class="ta_01">入职时间：</td>
 				<td class="ta_01" bgColor="#ffffff">
 					<input type="text" value="${empinfo.emp_hire_date }" name="emp_hire_date" />
-				</td>
+				</td class="ta_01" bgColor="#ffffff">
+				<td class="ta_01" bgColor="#ffffff"></td>
 			</tr>
 			<tr>
 				<td align="center" bgColor="#f5fafe" class="ta_01">职位：</td>
@@ -85,6 +90,8 @@
 						<option value="6">离职</option>
 					</select>
 				</td>
+			
+			<td class="ta_01" bgColor="#ffffff"></td>
 			</tr>
 			
 			<TR>
@@ -92,12 +99,15 @@
 				</td>
 				<td class="ta_01" colSpan="3"><input type="text"
 					name="emp_phone" class="bg" value="${empinfo.emp_phone }"/></td>
+				<td width="10%" class="ta_01"  colspan="2">
+				<input type="file" name="emp_photo">
+				</td>	
 			</TR>
 
 
 			<tr>
 				<td class="ta_01" style="WIDTH: 100%" align="center"
-					bgColor="#f5fafe" colSpan="4">
+					bgColor="#f5fafe" colSpan="6">
 					<input type="submit"
 					class="button_ok" value="确定"> <FONT face="宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
 

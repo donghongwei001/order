@@ -34,9 +34,10 @@
 		d.add(7,0,'餐桌管理','','','mainFrame');
 		d.add(8,0,'客户管理','','','mainFrame');
 		
+		
 		//子目录添加
 		d.add(9,1,'员工信息','${pageContext.request.contextPath}/emp_queryEmp.action','','mainFrame');
-		/* d.add(10,1,'查看信息','${pageContext.request.contextPath}/admin/products/emp_info.jsp','','mainFrame'); */
+		d.add(10,1,'账号管理','${pageContext.request.contextPath}/account_selac.action','','mainFrame');
 		d.add(11,2,'订单列表','${pageContext.request.contextPath}/Ordersystem/wei_query1.action','','mainFrame');
 		/* d.add(12,2,'订单查询','${pageContext.request.contextPath}/booklistservice','','mainFrame'); */
 		d.add(13,24,'财务报表','${pageContext.request.contextPath}/fenye.action ','','mainFrame');
