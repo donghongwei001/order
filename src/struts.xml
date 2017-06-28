@@ -75,12 +75,7 @@
 		<global-results>
 			<result name="login" type="redirect">/admin/login/denglu.jsp</result>
 		</global-results>
-		<action name="wei_*" class="com.dong.action.DongAction3" method="{1}">
-			<result name="ok" type="redirect">/admin/login/home.jsp</result>
-			<result name="error">/admin/products/money_list.jsp</result>
-			<result name="aaa">/admin/products/order_list.jsp</result>
-			<result name="cart">mainfood.jsp</result>
-		</action>
+		
 	</package>
 	<package name="default" extends="struts-default">
 		
@@ -88,8 +83,8 @@
 	<package name="default5" extends="struts-default" >
 		<interceptors>
 			<interceptor name="donginter" class="com.dong.interceptor.Quanxianinterceptor">
-				<!-- 不拦截的方法 -->
-				<param name="includeMethods">editEmp,changerole,addrole,addDishe,queryAllDishes,delDishe,editDishe,addEmp,queryEmp,delEmp,xiugaiquanxian,quanxian,jiaose,queryEmp,showTable,findFood,secFindFood,thrFindFood,queryAllDishes,seleAll,showAllCust</param>
+				<!-- 拦截的方法 -->
+				<param name="includeMethods">query1,editEmp,changerole,addrole,addDishe,queryAllDishes,delDishe,editDishe,addEmp,queryEmp,delEmp,xiugaiquanxian,quanxian,jiaose,queryEmp,showTable,findFood,secFindFood,thrFindFood,queryAllDishes,seleAll,showAllCust</param>
 			</interceptor>
 			<!-- 构建一个拦截器栈 -->
 			<interceptor-stack name="aaabbb">
@@ -146,6 +141,12 @@
 			<result name="cook">admin/products/cook.jsp</result>
 			<result name="error">l.jsp</result>
 			<result name="edit">admin/products/cook_edit.jsp</result>
+		</action>
+		<action name="wei_*" class="com.dong.action.DongAction3" method="{1}">
+			<result name="ok" type="redirect">/admin/login/home.jsp</result>
+			<result name="error">/admin/products/money_list.jsp</result>
+			<result name="aaa">/admin/products/order_list.jsp</result>
+			<result name="cart">mainfood.jsp</result>
 		</action>
 	</package>
 	
