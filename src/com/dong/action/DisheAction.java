@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.struts2.ServletActionContext;
 
 import com.alibaba.fastjson.JSON;
@@ -18,6 +20,7 @@ import com.ordersystem.domain.FoodCategoryBean;
 import com.ordersystem.service.DisheService;
 
 public class DisheAction extends BaseAction implements ModelDriven<DisheBean> {
+	HttpServletRequest request=ServletActionContext.getRequest();
 	DisheService ds = new DisheService();
 	private DisheBean db;
 	private File food_pic;
@@ -66,6 +69,7 @@ public class DisheAction extends BaseAction implements ModelDriven<DisheBean> {
 	 * 
 	 */
 	public String addDishe(){
+		System.out.println(request.getRequestURI());
 		String description = super.getparameter("description");
 		String fileName = "";
 		if (food_pic.length()!=0) {
@@ -105,6 +109,7 @@ public class DisheAction extends BaseAction implements ModelDriven<DisheBean> {
 	 * 
 	 */
 	public String queryAllDishes(){
+		System.out.println(request.getRequestURI());
 		String food_name = super.getparameter("food_name");
 		String food_id = super.getparameter("food_id");
 		String category = super.getparameter("category");
@@ -119,6 +124,7 @@ public class DisheAction extends BaseAction implements ModelDriven<DisheBean> {
 		if(maxprice!=null&&!maxprice.equals("")) price.put("maxprice", maxprice);
 		Integer pageSize = 12;
 		Integer pageStart = 0;
+		
 		List dishList = ds.queryDishe(ma,price,pageSize+"",pageStart+"");
 		List<DisheBean> disheInfo = (List<DisheBean>) dishList.get(0);
 		Integer count = (Integer) dishList.get(1);
@@ -194,6 +200,7 @@ public class DisheAction extends BaseAction implements ModelDriven<DisheBean> {
 	 * 
 	 */
 	public String delDishe(){
+		System.out.println(request.getRequestURI());
 		String del_id = super.getparameter("del_id");
 		ds.del_dishe(del_id);
 		ajaxQueryDishes();
@@ -205,6 +212,7 @@ public class DisheAction extends BaseAction implements ModelDriven<DisheBean> {
 	 * 
 	 */
 	public String editDishe(){
+		System.out.println(request.getRequestURI());
 		String food_id = super.getparameter("food_id");
 		Map<String, String> ma = new HashMap<String, String>();
 		ma.put("food_id", food_id);

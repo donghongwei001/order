@@ -23,6 +23,7 @@ public class KitchenDaoImpl implements KitchenDao {
 	
 	private static Connpool cp = new Connpool();
 	private static QueryRunner qr = new QueryRunner(cp.getDataSource());
+	
 	/** À„∑®1:◊€∫œ≈≈–Ú
 	 * @see com.ordersystem.dao.KitchenDao#showWaitFood()
 	 */
@@ -160,7 +161,7 @@ public class KitchenDaoImpl implements KitchenDao {
 			QueryRunner qr = new QueryRunner(cp.getDataSource());
 			String upsql = "update order_food set order_food_weight=? where order_food_id=?";
 			try {
-				qr.update(upsql, weight,wfb.get(i).getOrder_food_id());
+				System.out.println(qr.update(upsql, weight,wfb.get(i).getOrder_food_id()));
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				System.out.println(e.getMessage());

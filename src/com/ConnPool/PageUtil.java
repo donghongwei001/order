@@ -35,10 +35,10 @@ public class PageUtil {//分页
 			flag2=getAllPage();
 		}
 		StringBuffer sb = new StringBuffer();
-		sb.append("<a  href='${pageContext.request.contextPath}/Ordersystem/wei_query1.action?currPage=1&pageSize="+getPage()+"'>首页</a>");
-		sb.append("<a  href='${pageContext.request.contextPath}/Ordersystem/wei_query1.action?currPage="+flag1+"&pageSize="+getPage()+"'>上一页</a>");	
-		sb.append("<a  href='${pageContext.request.contextPath}/Ordersystem/wei_query1.action?currPage="+flag2+"&pageSize="+getPage()+"'>下一页</a>");
-		sb.append("<a  href='${pageContext.request.contextPath}/Ordersystem/wei_query1.action?currPage="+getAllPage()+"&pageSize="+getPage()+"'>尾页</a>");
+		sb.append("<a  href='/Ordersystem/Ordersystem/wei_query1.action?currPage=1&pageSize="+getPage()+"'>首页</a>");
+		sb.append("<a  href='/Ordersystem/Ordersystem/wei_query1.action?currPage="+flag1+"&pageSize="+getPage()+"'>上一页</a>");	
+		sb.append("<a  href='/Ordersystem/Ordersystem/wei_query1.action?currPage="+flag2+"&pageSize="+getPage()+"'>下一页</a>");
+		sb.append("<a  href='/Ordersystem/Ordersystem/wei_query1.action?currPage="+getAllPage()+"&pageSize="+getPage()+"'>尾页</a>");
 		return sb.toString(); 	
 		
 	}

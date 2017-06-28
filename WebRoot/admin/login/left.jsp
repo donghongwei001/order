@@ -34,23 +34,25 @@
 		d.add(7,0,'餐桌管理','','','mainFrame');
 		d.add(8,0,'客户管理','','','mainFrame');
 		
-		//子目录添加${empinfo.name}
-		d.add(9,1,'员工信息','${pageContext.request.contextPath}/emp_queryEmp.action','','mainFrame');
-		/* d.add(10,1,'查看信息','${pageContext.request.contextPath}/admin/products/emp_info.jsp','','mainFrame'); */
-		d.add(11,2,'订单列表','${pageContext.request.contextPath}/Ordersystem/wei_query1.action','','mainFrame');
+		
+		//子目录添加
+		d.add(9,1,'员工管理','${pageContext.request.contextPath}/emp_queryEmp.action','','mainFrame');
+		d.add(10,1,'账号管理','${pageContext.request.contextPath}/account_selac.action','','mainFrame');
+		d.add(11,2,'订单管理','${pageContext.request.contextPath}/Ordersystem/wei_query1.action','','mainFrame');
 		/* d.add(12,2,'订单查询','${pageContext.request.contextPath}/booklistservice','','mainFrame'); */
-		d.add(13,24,'财务报表','${pageContext.request.contextPath}/fenye.action ','','mainFrame');
+		d.add(13,24,'财务管理','${pageContext.request.contextPath}/Ordersystem/fenye.action ','','mainFrame');
 		d.add(26,25,'前台管理','${pageContext.request.contextPath}/serv_showTable.action ','','mainFrame');
-		d.add(14,4,'权限分配','${pageContext.request.contextPath}/admin/products/show_right.jsp','','mainFrame');
-		d.add(15,4,'修改权限','${pageContext.request.contextPath}/admin/products/show_right.jsp','','mainFrame');
+		d.add(14,4,'角色权限','${pageContext.request.contextPath}/Ordersystem/cust_quanxian.action','','mainFrame');
+		d.add(15,4,'角色管理','${pageContext.request.contextPath}/Ordersystem/cust_jiaose.action','','mainFrame');
 		d.add(16,5,'综合排序','${pageContext.request.contextPath}/kitchen_findFood.action','','mainFrame');
 		d.add(17,5,'先后排序','${pageContext.request.contextPath}/kitchen_secFindFood.action','','mainFrame'); 
 		d.add(33,5,'按桌排序','${pageContext.request.contextPath}/kitchen_thrFindFood.action','','mainFrame'); 
-		d.add(18,6,'菜品信息','${pageContext.request.contextPath}/dishe_queryAllDishes.action','','mainFrame');
+		d.add(23,6,'菜系信息','${pageContext.request.contextPath}/cook_findCook.action','','mainFrame');
+		d.add(18,6,'菜品管理','${pageContext.request.contextPath}/dishe_queryAllDishes.action','','mainFrame');
 		/* d.add(19,6,'菜品查询','${pageContext.request.contextPath}/admin/products/food_info.jsp','','mainFrame'); */
 		/* d.add(20,7,'餐桌信息','${pageContext.request.contextPath}/admin/products/table_info.jsp','','mainFrame'); */
-		d.add(21,7,'餐桌信息','${pageContext.request.contextPath}/Table_seleAll.action','','mainFrame');
-		d.add(22,8,'顾客信息','${pageContext.request.contextPath}/cust_showAllCust.action','','mainFrame');
+		d.add(21,7,'餐桌管理','${pageContext.request.contextPath}/Table_seleAll.action','','mainFrame');
+		d.add(22,8,'顾客管理','${pageContext.request.contextPath}/cust_showAllCust.action','','mainFrame');
 		/* d.add(23,8,'积分查询','${pageContext.request.contextPath}/booklistservice','','mainFrame'); */
 
 	

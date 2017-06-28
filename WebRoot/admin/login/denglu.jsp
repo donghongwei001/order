@@ -65,12 +65,11 @@
 	</div>
 	<div class="input-group" id="mima">
 	  <span class="input-group-addon" id="basic-addon1">请&nbsp;输&nbsp;入&nbsp;密&nbsp;码</span>
-	  <input type="text" name="password"id="password" onblur="houtaidenglu()" class="form-control" placeholder="Password" aria-describedby="basic-addon1">
+	  <input type="password" name="password"id="password" onblur="houtaidenglu()" class="form-control" placeholder="Password" aria-describedby="basic-addon1">
 	</div>
 	<div id="erweima">
 		<div id="erweima1">请输入验证码</div><input type="text" id ="Txtidcode" class ="txtVerification"><span id="idcode"></span>
-		<input type="button" id="butn" value="提交">
-		<input type="submit" value="提交">
+		<input type="submit" id="butn" value="提交">
 	</div>
 	</form>
     <!-- Bootstrap core JavaScript

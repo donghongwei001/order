@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.management.StringValueExp;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.ServletActionContext;
@@ -19,6 +20,7 @@ import com.ordersystem.domain.RoleBean;
 import com.ordersystem.service.EmpService;
 
 public class EmpAction extends BaseAction implements ModelDriven<EmpBeam>{
+	HttpServletRequest request=ServletActionContext.getRequest();
 	EmpService es = new EmpService();
 	private EmpBeam emp;
 	private File emppic;	//文件上传
@@ -71,6 +73,7 @@ public class EmpAction extends BaseAction implements ModelDriven<EmpBeam>{
 	 * 
 	 */
 	public String addEmp(){
+		System.out.println(request.getRequestURI());
 		HttpServletRequest request=ServletActionContext.getRequest();
 		String filename = "";
 		try {
@@ -109,11 +112,13 @@ public class EmpAction extends BaseAction implements ModelDriven<EmpBeam>{
 	 * 
 	 */
 	public String queryEmp(){
+		System.out.println(request.getRequestURI());
 		String emp_id = super.getparameter("emp_id");
 		String emp_name = super.getparameter("emp_name");
 		String emp_gender = super.getparameter("emp_gender");
 		String emp_idcar = super.getparameter("emp_idcar");
 		String pageNo = super.getparameter("pageNo");
+		
 		Integer pageNb=null;
 		try {
 			pageNb = Integer.parseInt(pageNo);
@@ -210,6 +215,7 @@ public class EmpAction extends BaseAction implements ModelDriven<EmpBeam>{
 	 * 
 	 */
 	public String editEmp(){
+		
 		String empId = super.getparameter("emp_id");
 		Map<String, String> ma = new HashMap<String, String>();
 		ma.put("emp_id", empId);
@@ -217,23 +223,22 @@ public class EmpAction extends BaseAction implements ModelDriven<EmpBeam>{
 		if(empli.size()!=0){
 			EmpBeam empinfo = (EmpBeam)((List) empli.get(0)).get(0);
 			super.setsession("empinfo", empinfo);
-			System.out.println("info"+empinfo);
 			return "edit";
 		}
 		return "error";
 	}
 	
-	/**更新员工信息方法
+	/**更新员工信息方法 
 	 * @author hcb
 	 * 
 	 */
 	public String updateInfo(){
+		
 		HttpServletRequest request=ServletActionContext.getRequest();
 		String filename = "";
 		Integer filenum=(int) (emppic==null?0:emppic.length());
 		try {
 			if (filenum>0) {	//判断有文件
-				System.out.println("有文件");
 				String suffix = emppicFileName.substring(emppicFileName.lastIndexOf('.')).toLowerCase();	//取图片格式名并转换成
 				if(suffix.equals(".jpg")||suffix.equals(".jpeg")||suffix.equals(".gif")||suffix.equals(".png")){
 					String path = request.getRealPath("/");		//得到文件的真实路径
@@ -253,16 +258,13 @@ public class EmpAction extends BaseAction implements ModelDriven<EmpBeam>{
 					return "error";
 				}
 			}else {
-					System.out.println("输入了老的照片");
 					emp.setEmp_pic(oldemppic);
 				}
 		} catch (Exception e) {
-			System.out.println("进了catch*************");
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println(emp);
-		System.out.println(es.updateEmp(emp)+"添加结果"+oldemppic);
+		
 		//listEmp();
 		queryEmp();		//添加完成后需要调用查询的方法更新显示列表
 		return "succ";		//转发到list页面
@@ -291,6 +293,8 @@ public class EmpAction extends BaseAction implements ModelDriven<EmpBeam>{
 		}else super.write("true");
 		return null;
 	}
+	
+	
 }
 
 

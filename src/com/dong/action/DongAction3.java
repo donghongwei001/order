@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.ColumnListHandler;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
 
@@ -28,15 +29,27 @@ import com.ordersystem.domain.TableBean;
 
 public class DongAction3 {
 	Connpool cp = new Connpool();
+	QueryRunner qr = new QueryRunner(cp.getDataSource());
 	HttpSession session=ServletActionContext.getRequest().getSession();
 	HttpServletRequest request=ServletActionContext.getRequest();
 	HttpServletResponse response=ServletActionContext.getResponse();
 	public String save(){
+		String user=request.getParameter("username");
+		List<Object> query = null;
+		try {
+			query = qr.query("select right_url from account a,emp_table e,role_right r,right_table o where a.account_fk_emp_id=e.emp_id and e.emp_fk_pos_id=r.role_right_roleid and r.role_right_rightid=o.right_id and a.account_status=15 and a.account_number='"+user+"'", new ColumnListHandler(1));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		session.setAttribute("quanxian", query);
+		session.setAttribute("user", user);
+		System.out.println(session.getAttribute("quanxian"));
 		return "ok";
 	}
 	private String user;
 	private String pass;
-	
+
 	public String getUser() {
 		return user;
 	}
@@ -68,48 +81,37 @@ public class DongAction3 {
 	}
 	//财务时间搜索
 	public String update() throws IOException{
-		
+
 		String shijian1=request.getParameter("shijiankuang1");
 		String shijian2=request.getParameter("shijiankuang2");
-		
+
 		Object[] objects=new Object[]{shijian1,shijian2};
 		ArrayList list =new DaoFactory().execQuery("select count(*), sum(order_money) from order_table where order_time between ? and ?", objects);
 		session.setAttribute("list1", list);
 		return "error";
 	}
-	
-	
-	
-	
+
+
+
+
 	//分页
 	private NaturalPersonService personService=new NaturalPersonService();
 	public String query1() throws IOException{
-		/*String sql = "select o.order_id,o.order_time,o.order_fk_tabid,o.order_money,e.emp_name,c.cus_name,o.order_dt_score,o.oeder_dt_mark from order_table o,emp_table e,cus_table c where o.order_fk_empid=e.emp_id and o.order_fk_cusid=c.cus_id";
-		//ArrayList tableList=new Userdaoimpl().executeQuery(sql);
-		QueryRunner qr = new QueryRunner(cp.getDataSource());
-		List<OrderBean> tableList = null;
-		try {
-			tableList = qr.query(sql, new BeanListHandler<OrderBean>(OrderBean.class));
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		session.setAttribute("list1", tableList);
-		ArrayList list1=new Userdaoimpl().executeQuery("select count(*) from order_table");
-		
-		session.setAttribute("count", list1);
-		return "aaa";*/
+
+		System.out.println(request.getRequestURI());
+		String user=(String) session.getAttribute("user");
+		System.out.println(user);
+
 		String currPageStr=request.getParameter("currPage");
 		String pageSizeStr=request.getParameter("pageSize");
 		Integer currPage=null;
 		Integer pageSize=null;
-		System.out.println(request.getRequestURI());
 		try {
 			currPage=Integer.parseInt(currPageStr);
 			pageSize=Integer.parseInt(pageSizeStr);
 		} catch (Exception e) {
 			// TODO: handle exception
-			
+
 		}
 		HttpSession session = request.getSession();
 		PageUtil util=personService.select(currPage, pageSize);
@@ -118,12 +120,12 @@ public class DongAction3 {
 		session.setAttribute("List1", list1);
 		response.sendRedirect("/Ordersystem/admin/products/order_list.jsp");
 		return null;
+
 	}
-	
 	//购物车
 	public String addshopcars() throws IOException, ServletException{
-		
-		
+
+
 		String id=request.getParameter("id");
 		String count=request.getParameter("count");
 		String price=request.getParameter("price");
@@ -140,10 +142,10 @@ public class DongAction3 {
 			he=he+sum;
 			session.setAttribute("he", he);
 		}
-		
+
 		Object[]params=new Object[]{id};
 		ArrayList list=new DaoFactory().execQuery("select food_name from food_table where food_id=?", params);
-		
+
 		GouwucheBean gBean=new GouwucheBean();
 		gBean.setId(id1);
 		gBean.setName(list);
@@ -161,8 +163,8 @@ public class DongAction3 {
 			session.setAttribute("cart", list1);
 		}
 		return "cart";
-		
+
 	}
-	
-	
+
+
 }

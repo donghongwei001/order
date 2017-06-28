@@ -15,6 +15,7 @@ import javax.swing.text.DefaultEditorKit.InsertBreakAction;
 
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.ColumnListHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
@@ -47,6 +48,7 @@ public class dongAction4 extends ActionSupport{
 	//private Dongchaxun dongchaxun;
 
 	Connpool cp = new Connpool();
+	QueryRunner qr = new QueryRunner(cp.getDataSource());
 	/*HttpServletRequest request=ServletActionContext.getRequest();
 	public String save() throws ParseException{
 	String shijian1=request.getParameter("shijiankuang1");
@@ -66,18 +68,33 @@ public class dongAction4 extends ActionSupport{
 
 	@Action("fenye")
 	public String save() throws ServletException, IOException{
+		System.out.println("11");
+		String user=(String) session.getAttribute("user");
+		System.out.println(user);
+		List<Object> query = null;
+		try {
+			query = qr.query("select right_url from account a,emp_table e,role_right r,right_table o where a.account_fk_emp_id=e.emp_id and e.emp_fk_pos_id=r.role_right_roleid and r.role_right_rightid=o.right_id and a.account_status=15 and a.account_number='"+user+"'", new ColumnListHandler(1));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(query.size());
+		System.out.println(request.getRequestURI());
+		for (int i = 0; i < query.size(); i++) {
+			if (query.get(i).equals(request.getRequestURI())) {
+				String shijian2=MyFormat.getDateformat().format(new Date());
+				String shijian=MyFormat.getDateFormata().format(new Date());
+				String shijian1=shijian+" 00:00:00";
 
-		String shijian2=MyFormat.getDateformat().format(new Date());
-		String shijian=MyFormat.getDateFormata().format(new Date());
-		String shijian1=shijian+" 00:00:00";
 
-
-		Object[]params=new Object[]{shijian1,shijian2};
-		ArrayList list=new DaoFactory().execQuery("select count(*) ,sum(order_money) from order_table where order_time between ? and ?", params);
-		session.setAttribute("list", list);
-		response.sendRedirect("/Ordersystem/admin/products/money_list.jsp");
-
-
+				Object[]params=new Object[]{shijian1,shijian2};
+				ArrayList list=new DaoFactory().execQuery("select count(*) ,sum(order_money) from order_table where order_time between ? and ?", params);
+				session.setAttribute("list", list);
+				response.sendRedirect("/Ordersystem/admin/products/money_list.jsp");
+				return null;
+			}
+		}
+		response.sendRedirect("/Ordersystem/lanjie.jsp");
 		return null;
 	}
 	private String nameha;
@@ -375,7 +392,7 @@ public class dongAction4 extends ActionSupport{
 	//ÏÂµ¥
 	@Action("xiadan")
 	public String gouwuchegengxin(){
-
+			
 		try {
 			String zhuahao=(String) session.getAttribute("zhuohao");
 			if (zhuahao==null) {
@@ -386,15 +403,20 @@ public class dongAction4 extends ActionSupport{
 			String user=(String) session.getAttribute("user");
 			String shijian=MyFormat.getDateformat().format(new Date());
 			Integer money=(Integer) session.getAttribute("he");
-
+			System.out.println(user+"***");
 			Object[]params=new Object[]{user};
-			ArrayList<ArrayList> list=new DaoFactory().execQuery("select cus_id from cus_table where cus_name=?", params);
+			//ArrayList<ArrayList> list=new DaoFactory().execQuery("select cus_id from cus_table where cus_name='"+user+"'",null);
+			Integer list = (Integer) qr.query("select cus_id from cus_table where cus_name='"+user+"'", new ScalarHandler(1));
+			System.out.println(list+"*********");
 			Object[]params1=new Object[]{zhuahao};
-			ArrayList<ArrayList> list1=new DaoFactory().execQuery("select fk_emp_id from ser_tab where fk_table_id=?", params1);
-
+			Integer list1 = (Integer) qr.query("select fk_emp_id from ser_tab where fk_table_id='"+zhuahao+"'", new ScalarHandler(1));
+			//ArrayList<ArrayList> list1=new DaoFactory().execQuery("select fk_emp_id from ser_tab where fk_table_id=?", params1);
+			System.out.println(list1+"************");
 			ArrayList list5=(ArrayList) session.getAttribute("cart1");
+			
 			if (list5==null) {
-				Object[]params2=new Object[]{shijian,zhuahao,money,list1.get(0).get(0),shijian,list.get(0).get(0)};
+				Object[]params2=new Object[]{shijian,zhuahao,money,list1,shijian,list};
+				System.out.println("555");
 				int flag=new DaoFactory().executeUpdate("insert into order_table(order_time,order_fk_tabid,order_money,order_fk_empid,order_lasttime,order_fk_cusid) values (?,?,?,?,?,?)", params2);
 			}else {
 				Object[]params5=new Object[]{money};
@@ -508,6 +530,7 @@ public class dongAction4 extends ActionSupport{
 			int flag1=new DaoFactory().executeUpdate("update table_table set table_state=9 where table_id=? ", params1);
 			System.out.println(flag1);
 			try {
+				session.invalidate();
 				response.sendRedirect("login.jsp");
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -679,7 +702,7 @@ public class dongAction4 extends ActionSupport{
 	public String hujiao(){
 		String zhuohao=(String) session.getAttribute("zhuohao");
 		Object[]params=new Object[]{zhuohao};
-		int flag=new DaoFactory().executeUpdate("update table_table set call_emp=13 where table_id=?", params);
+		int flag=new DaoFactory().executeUpdate("update table_table set table_state=13 where table_id=?", params);
 		try {
 			response.getWriter().print(flag);
 		} catch (IOException e) {
@@ -688,9 +711,9 @@ public class dongAction4 extends ActionSupport{
 		}
 		return null;
 	}
-	
-	
-	
+
+
+
 }
 
 

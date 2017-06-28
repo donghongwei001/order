@@ -1,6 +1,7 @@
 package com.dong.action;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +24,37 @@ import com.ordersystem.service.TableService;
 
 
 public class TableAction extends BaseAction {
+	/*	HttpServletRequest request = ServletActionContext.getRequest();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		TableService ts=new TableService();
+		public String selezhuo() {
+			String table_id = super.getparameter("zhuohao");
+			List<TableBean> li=ts.selezhuohao(table_id);
+			super.setsession("list", li);
+			System.out.println("11111");
+			return "ss";
+		}
+		
+		public String seleAll() { 
+			List<TableBean> li=ts.seleA();
+			super.setsession("list", li);
+			
+			try {
+				request.getRequestDispatcher("/admin/products/table_list.jsp").forward(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return "ss";
+		}
+		*//**
+		 * 用json得到查出的服务员的
+		 *//*
+		public String sewaiter() {
+			List<Table_indent> li=ts.selwaiter();
+			String str = com.alibaba.fastjson.JSON.toJSONString(li);
+			super.write(str);
+			return null;*/
 	HttpServletRequest request = ServletActionContext.getRequest();
 	HttpServletResponse response = ServletActionContext.getResponse();
 	TableService ts=new TableService();
@@ -89,14 +121,13 @@ public class TableAction extends BaseAction {
 	/**
 	 * 
 	 * 方法功能说明： 餐桌信息编辑时获得桌子ID
+	 * @throws UnsupportedEncodingException 
 	 */
-	public String seid() {
+	public String seid() throws UnsupportedEncodingException {
 		String id=super.getparameter("tabled");
-		String name=super.getparameter("name");
-		String capacity=super.getparameter("capacity");
-		super.setsession("taleid", id);
-		super.setsession("name", name);
-		super.setsession("capacity", capacity);
+		List<TableBean> onetb = ts.findonetab(id);
+		System.out.println(onetb.get(0).getFk_emp_id());
+		super.setsession("tab", onetb.get(0));
 		return "up";
 	}
 
@@ -108,6 +139,7 @@ public class TableAction extends BaseAction {
 	 *tb_id:获取桌子ID 
 	 */
 	public String updatezhuozi(){
+		System.out.println(request.getRequestURI());
 		TableBean tb=new TableBean();
 		ser_tabBean st=new ser_tabBean();
 		String tb_id=super.getparameter("id");
@@ -131,6 +163,7 @@ public class TableAction extends BaseAction {
 	 * id:要删除的桌子的id
 	 */
 	public String del(){
+		System.out.println(request.getRequestURI());
 		String id=super.getparameter("tab");
 		TableBean tb=new TableBean();
 		ser_tabBean st=new ser_tabBean();

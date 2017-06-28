@@ -17,38 +17,39 @@
 	
 	
 <body>
-	<form id="userAction_save_do" name="Form1" action="${pageContext.request.contextPath}/Table_updatezhuozi.action" method="post">
+	<form id="userAction_save_do" name="Form1" action="${pageContext.request.contextPath}/account_ed.action" method="post">
 		&nbsp;
 		<table cellSpacing="1" cellPadding="5" width="100%" align="center"
 			bgColor="#eeeeee" style="border: 1px solid #8ba7e3" border="0">
 			<tr>
 				<td class="ta_01" align="center" bgColor="#afd1f3" colSpan="4"
-					height="26"><strong><STRONG>编辑餐桌信息</STRONG> </strong>
+					height="26"><strong><STRONG>编辑员工状态信息</STRONG> </strong>
 				</td>
 			</tr>
 			<tr>
 				<td>
-					您要修改的桌号为:${tab.table_id} 
+					您要修改的员工状态编号为:${account_fk_emp_id}
 				</td>
 			</tr>
 			<tr>
 				
-				<td align="center" bgColor="#f5fafe" class="ta_01">可供餐人数：</td>
-				<td class="ta_01" bgColor="#ffffff"><input type="text" name="people" class="bg" value="${tab.table_Capacity}"  />
-				<input type="hidden" name="id" value="${tab.table_id}">
-				<input type="hidden" id="empid" value="${tab.fk_emp_id}">
+				<td align="center" bgColor="#f5fafe" class="ta_01">员工账号：</td>
+				<td class="ta_01" bgColor="#ffffff"><input type="text" name="account_number" class="bg" value="${account_number}"  />
+				<input type="hidden" name="account_fk_emp_id" value="${account_fk_emp_id}">
 				</td>
 			</tr>
 			<tr>
-				<td align="center" bgColor="#f5fafe" class="ta_01">餐桌名称：</td>
-				<td class="ta_01" bgColor="#ffffff"><input type="text" name="t_name" class="bg"  value="${tab.table_name}" onblur="seletbnam()" id="tbname" />
+				<td align="center" bgColor="#f5fafe" class="ta_01">员工密码：</td>
+				<td class="ta_01" bgColor="#ffffff"><input type="text" name="account_psw" class="bg"  value="${account_psw}" id="tbname" />
 				</td>
 			</tr>
 			<TR>
-				<TD class="ta_01" align="center" bgColor="#f5fafe">餐桌服务员：</TD>
+				<TD class="ta_01" align="center" bgColor="#f5fafe">员工状态：</TD>
 				<TD class="ta_01" bgColor="#ffffff" colSpan="3" >
-				<select name="emp_fk_pos_id" id="posSelect" >
-				<option value="--请选择--" selected="selected">--请选择--</option>
+				<select name="zhuangtai"  >
+				<option value="--请选择--">--请选择--</option>
+				<option value="14">14</option>
+				<option value="15">15</option>
 				</select>
 				</TD>
 			</TR>
@@ -72,16 +73,6 @@
 	/* $(function(){
 		alert("ddd");
 	}); */
-	function backemp(){
-		var empid = document.getElementById("empid").value;
-		var opt = document.getElementById("posSelect").options;
-		for(var i=0;i<opt.length;i++){
-			if(opt[i].value==empid){
-				opt[i].selected = true;
-			}
-		}
-	}
-	
 	 $(document).ready(
 		function(){
 			$.post("Table_sewaiter.action",
@@ -91,7 +82,7 @@
 					for(var i = 0;i<data.length;i++){
 						var str = $("<option value="+data[i].emp_id+">"+data[i].waiter+"</option>");
 						$("#posSelect").append(str);
-					};backemp();
+					}
 				},"json");
 		}); 
 	function seletbnam(){
