@@ -133,7 +133,6 @@ public class ServicePageService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}	//更新订单状态为已结账与订单表中的金额	以及更新该订单编号的状态为已结账
-		System.out.println(count+"**count**"+orderId+"***"+tbid);
 		if (status==1) {
 			spi.updateStatus(sql,params);		//更新桌子状态
 		}
@@ -167,8 +166,6 @@ public class ServicePageService {
 		Integer j = 0;
 		String sql2 = "update table_table set table_state=9 where table_id=? and table_state=8";
 		Object[] param = new Object[]{tableid};
-		System.out.println(i+" iiiii");
-		System.out.println(date+"///"+tableid+"***"+"----"+0+"+++++"+empid+"****"+date+"*****"+11);
 		if(i>0){
 			j=spi.updateStatus(sql2, param);
 		}
