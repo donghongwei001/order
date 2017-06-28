@@ -46,6 +46,7 @@
 		d.add(16,5,'综合排序','${pageContext.request.contextPath}/kitchen_findFood.action','','mainFrame');
 		d.add(17,5,'先后排序','${pageContext.request.contextPath}/kitchen_secFindFood.action','','mainFrame'); 
 		d.add(33,5,'按桌排序','${pageContext.request.contextPath}/kitchen_thrFindFood.action','','mainFrame'); 
+		d.add(23,6,'菜系信息','${pageContext.request.contextPath}/cook_findCook.action','','mainFrame');
 		d.add(18,6,'菜品信息','${pageContext.request.contextPath}/dishe_queryAllDishes.action','','mainFrame');
 		/* d.add(19,6,'菜品查询','${pageContext.request.contextPath}/admin/products/food_info.jsp','','mainFrame'); */
 		/* d.add(20,7,'餐桌信息','${pageContext.request.contextPath}/admin/products/table_info.jsp','','mainFrame'); */

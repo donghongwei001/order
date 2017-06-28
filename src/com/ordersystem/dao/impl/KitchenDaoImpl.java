@@ -23,6 +23,7 @@ public class KitchenDaoImpl implements KitchenDao {
 	
 	private static Connpool cp = new Connpool();
 	private static QueryRunner qr = new QueryRunner(cp.getDataSource());
+	
 	/** 算法1:综合排序
 	 * @see com.ordersystem.dao.KitchenDao#showWaitFood()
 	 */
@@ -161,14 +162,12 @@ public class KitchenDaoImpl implements KitchenDao {
 		//对从数据库取出的每个菜品list集合进行 遍历并菜封装
 		List<SortKitchenFoodBean> list = new ArrayList<SortKitchenFoodBean>();	//用来存放封装的菜品类对象
 		for (int i = 0; i < wfb.size(); i++) {
-			//System.out.println(wfb.get(i));
 			double weight = 0;	//定义权重变量
 			weight = (0.15*wfb.get(i).getLasttime()+0.35*wfb.get(i).getTime()+0.5*wfb.get(i).getOrder_press()*50)*wfb.get(i).getFood_time();
-			//System.out.println(weight);
 			QueryRunner qr = new QueryRunner(cp.getDataSource());
 			String upsql = "update order_food set order_food_weight=? where order_food_id=?";
 			try {
-				qr.update(upsql, weight,wfb.get(i).getOrder_food_id());
+				System.out.println(qr.update(upsql, weight,wfb.get(i).getOrder_food_id()));
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				System.out.println(e.getMessage());
