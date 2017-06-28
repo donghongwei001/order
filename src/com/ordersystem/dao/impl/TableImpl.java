@@ -8,7 +8,8 @@ import java.util.Map;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 
-import com.ConnPool.ConnPool;
+
+import com.daofactory.Connpool;
 import com.daofactory.DaoFactory;
 import com.ordersystem.domain.CustBean;
 import com.ordersystem.domain.TableBean;
@@ -17,7 +18,7 @@ import com.ordersystem.domain.ser_tabBean;
 
 public class TableImpl {
 	DaoFactory dt=new DaoFactory();
-	ConnPool cp = new ConnPool();
+	Connpool cp = new Connpool();
 	QueryRunner qr = new QueryRunner(cp.getDataSource());
 	public List<TableBean> ss(String table_id){
 		Object[] param=new Object[]{table_id};
