@@ -120,15 +120,9 @@ public class KitchenDaoImpl implements KitchenDao {
 					//if (food_name.equals(MergeList.get(j).getWfb().getFood_name())&&order_food_mark.equals(MergeList.get(j).getWfb().getOrder_food_mark())&&maxMerge > MergeList.get(j).getFoodnum()) {
 						flag = 1;
 						String megerNumStr= MergeList.get(j).getFoodnum()+"-"+fNum;
-						//fNum = MergeList.get(j).getFoodnum();	//更新数量为拼字符串的形式
-						//fNum += MergeList.get(j).getFoodnum();	//更新数量
-						
-						
-						System.out.println("fNum+"+fNum);
 						tNum = MergeList.get(j).getTabid()+","+tNum;//更新桌号
 						idString = MergeList.get(j).getOrder_food_id()+"-"+idString;//更新id编号
 						orderId = MergeList.get(j).getOrderId()+"-"+orderId;	//更新订单id
-						System.out.println("合并后的订单编号是:"+orderId);
 						MergeList.get(j).setFoodnum(megerNumStr);			//更新菜品数目
 						MergeList.get(j).setOrder_food_id(idString);
 						MergeList.get(j).setTabid(tNum);

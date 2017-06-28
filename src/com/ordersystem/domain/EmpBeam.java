@@ -12,8 +12,15 @@ public class EmpBeam {
 	private String role_name;	//职位名称
 	private Integer emp_fk_pos_id;		//外键职位id
 	private String emp_state;	//状态(在职或离职\请假)
+	private Integer code_id;	//状态编号
 	private String emp_phone;	//电话号码
 	private String emp_pic;		//图片路径
+	public Integer getCode_id() {
+		return code_id;
+	}
+	public void setCode_id(Integer code_id) {
+		this.code_id = code_id;
+	}
 	public String getEmp_pic() {
 		return emp_pic;
 	}

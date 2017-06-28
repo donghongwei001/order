@@ -1,5 +1,6 @@
 package com.ordersystem.service;
 
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
@@ -30,9 +31,11 @@ public class KitchenService {
 	 */
 	public List<WaitFoodBean> showDoneFood(Integer pagesize,Integer startIndex ) {
 		// TODO Auto-generated method stub
+		Timestamp dayBegin = MyFormat.getDayBegin();
+		String nowtime = MyFormat.getDateformat().format(new Date());
 		String sql = "select top "+pagesize+" odf.order_food_id,odf.order_food_weight,odf.servingtime,ot.order_id 'fk_order_id',tt.table_id 'table_name' , ft.food_name 'food_name',odf.order_food_mark 'order_food_mark',DATEDIFF(SS,ot.order_lasttime,GETDATE()) 'lasttime',DATEDIFF(SS,ot.order_time,GETDATE()) 'time',et.emp_name 'emp_name',odf.order_press 'order_press',ft.food_time 'food_time',odf.order_food_num 'food_num',ft.food_merge 'food_maxcb' from order_food odf,order_table ot,emp_table et,food_table ft,table_table tt"+
-				" where odf.fk_food_id = ft.food_id and odf.fk_order_id = ot.order_id  and ot.order_fk_empid = et.emp_id and ot.order_fk_tabid = tt.table_id and odf.order_food_status=3 and odf.servingtime not in(select top "+startIndex+" odf.servingtime from order_food odf,order_table ot,emp_table et,food_table ft,table_table tt "+
-						"where odf.fk_food_id = ft.food_id and odf.fk_order_id = ot.order_id  and ot.order_fk_empid = et.emp_id and ot.order_fk_tabid = tt.table_id and odf.order_food_status=3 order by odf.servingtime desc) order by servingtime desc";
+				" where odf.fk_food_id = ft.food_id and odf.fk_order_id = ot.order_id  and ot.order_fk_empid = et.emp_id and ot.order_fk_tabid = tt.table_id and odf.order_food_status=3 and odf.servingtime between '"+dayBegin+"' and '"+nowtime+"' and odf.servingtime not in(select top "+startIndex+" odf.servingtime from order_food odf,order_table ot,emp_table et,food_table ft,table_table tt "+
+						"where odf.fk_food_id = ft.food_id and odf.fk_order_id = ot.order_id  and ot.order_fk_empid = et.emp_id and ot.order_fk_tabid = tt.table_id and odf.servingtime between '"+dayBegin+"' and '"+nowtime+"' and odf.order_food_status=3 order by odf.servingtime desc) order by servingtime desc";
 		return kdi.showFood(sql);
 	}
 
@@ -94,7 +97,6 @@ public class KitchenService {
 		String date = MyFormat.getLastServingFormat().format(new Date());
 		if (orderId.indexOf("-")>0) {
 			String[] params = orderId.split("-");
-			System.out.println("params³¤¶È:"+params.length);
 			for (int i = 0; i < params.length; i++) {
 				System.out.println(params[i]);
 				kdi.updateDataBase(sql,date,params[i]);

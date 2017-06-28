@@ -147,9 +147,7 @@
 						
 					</form>
 					<div class="cl pd-5 bg-1 bk-gray mt-20">
-						<span class="l"><a href="javascript:;" onclick="datadel()"
-							class="btn btn-danger radius"> <i class="Hui-iconfont">&#xe6e2;</i>
-								批量删除</a> <span class="r">共有数据：<strong style="font-size:25px">${list.total }</strong> 条</span>
+						<span class="l"> <span class="r">共有数据：<strong style="font-size:25px">${list.total }</strong> 条</span>
 					</div>
 					<div class="mt-20">
 						<table
@@ -185,9 +183,7 @@
 										<th width="100"
 										onmouseover="this.style.backgroundColor = '#5F9F9F ';"
 										onmouseout="this.style.backgroundColor = '#afd1f3 ';">状态</th>
-									<th width="100"
-										onmouseover="this.style.backgroundColor = '#5F9F9F ';"
-										onmouseout="this.style.backgroundColor = '#afd1f3 ';">删除</th>
+									
 								</tr>
 
 							</thead>
@@ -206,7 +202,7 @@
 										<td>${b.order_dt_score}</td>
 										<td>${b.oeder_dt_mark}</td>
 										<td><span class="label label-success radius">${b.code_name}</span></td>
-										<td><button onclick="shanchu(${b.order_id})">删除</button></td>
+										
 									</tr>
 								</c:forEach>
 							</tbody>

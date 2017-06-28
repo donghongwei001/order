@@ -54,7 +54,6 @@ public class KitchenAction extends BaseAction{
 	public String doFood(){
 		String orderfoodid = super.getparameter("orderfoodid");
 		String status = super.getparameter("status");
-		System.out.println("update:"+orderfoodid);
 		ks.updateStatus(orderfoodid,status);
 		findFood();
 		return "pass";
@@ -95,7 +94,6 @@ public class KitchenAction extends BaseAction{
 		pageSize = pageSize==null?10:pageSize;	//设置默认每页显示条数
 		int startIndex=(currPage-1)*pageSize;	//设置默认
 		Integer count = Integer.parseInt(ks.findPageCount("3"));//
-		System.out.println(count+"////count");
 		List<WaitFoodBean> doneFood = ks.showDoneFood(pageSize,startIndex);//查询状态为3的已做菜品
 		pu.setRows(doneFood);
 		pu.setTotal(count);
@@ -141,7 +139,6 @@ public class KitchenAction extends BaseAction{
 			super.setsession("list", list);
 			List<SortKitchenFoodBean> doingFood = ks.secShowWaitFood("2");//查询状态为2的正做菜品
 			super.setsession("doing", doingFood);		
-			//System.out.println("doneFood:"+doneFood.size());
 			PageUtil paging = paging();		//分页封装查询状态为3的已做菜品
 			super.setsession("done", paging);		
 			String count = ks.findCount("1");
@@ -158,7 +155,6 @@ public class KitchenAction extends BaseAction{
 		public String secDoFood(){
 			String orderfoodid = super.getparameter("orderfoodid");
 			String status = super.getparameter("status");
-			System.out.println("update:"+orderfoodid);
 			ks.updateStatus(orderfoodid,status);
 			secFindFood();
 			return "secpass";
@@ -191,13 +187,11 @@ public class KitchenAction extends BaseAction{
 		 */
 		//@Action(value="sortwaitfood",results={@Result(name="pass",location= "admin/products/Kitchen.jsp")})
 		public String thrFindFood(){
-			System.out.println("List<SortKitchenFoodBean> list");
 			List<SortKitchenFoodBean> list = ks.ThrShowWaitFood("1");//查询状态为1的待做菜品
 			super.setsession("list", list);
 			List<SortKitchenFoodBean> doingFood = ks.ThrShowWaitFood("2");//查询状态为2的正做菜品
 			super.setsession("doing", doingFood);		
 			
-			//System.out.println("doneFood:"+doneFood.size());
 			PageUtil paging = paging();		//分页封装查询状态为3的已做菜品
 			super.setsession("done", paging);		
 			String count = ks.findCount("1");
@@ -214,7 +208,6 @@ public class KitchenAction extends BaseAction{
 		public String thrDoFood(){
 			String orderfoodid = super.getparameter("orderfoodid");
 			String status = super.getparameter("status");
-			System.out.println("update:"+orderfoodid);
 			ks.updateStatus(orderfoodid,status);
 			thrFindFood();
 			return "thrpass";

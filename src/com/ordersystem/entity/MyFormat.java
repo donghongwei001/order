@@ -69,6 +69,7 @@ public class MyFormat {
 		System.out.println(getDayBegin()+"****");
 		System.out.println(getDayBeginTimestamp()+"-----");
 		 try {
+			 Timestamp dayBegin = getDayBegin();
 			getDateformat().parse("2017.12.12");
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block

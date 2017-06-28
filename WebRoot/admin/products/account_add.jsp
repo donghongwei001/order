@@ -12,31 +12,40 @@
 
 <body>
 	<form id="userAction_save_do" name="Form1"
-		action="${pageContext.request.contextPath}/Table_addzhuozi.action" method="post">
-		&nbsp;
+		action="${pageContext.request.contextPath}/account_add.action" method="post">&nbsp; 
 		<table cellSpacing="1" cellPadding="5" width="100%" align="center"
 			bgColor="#eeeeee" style="border: 1px solid #8ba7e3" border="0">
 			<tr>
 				<td class="ta_01" align="center" bgColor="#afd1f3" colSpan="4"
-					height="26"><strong><STRONG>添加餐桌</STRONG> </strong>
+					height="26"><strong><STRONG>添加员工账号状态</STRONG> </strong>
 				</td>
 			</tr>
 			<tr>
-				<td align="center" bgColor="#f5fafe" class="ta_01">可供餐人数：</td>
-				<td class="ta_01" bgColor="#ffffff"><input type="text" name="pnum" class="bg" />
+				<td align="center" bgColor="#f5fafe" class="ta_01">账号：</td>
+				<td class="ta_01" bgColor="#ffffff"><input type="text" name="account_number" class="bg" />
 				</td>
 			</tr>
 			<tr>
-				<td align="center" bgColor="#f5fafe" class="ta_01">餐桌名称：</td>
+				<td align="center" bgColor="#f5fafe" class="ta_01">密码：</td>
 				<td class="ta_01" bgColor="#ffffff">
-				<input type="text" name="table_name" class="bg" onblur="seletbname()" id="tbname"/>
+				<input type="text" name="account_psw" class="bg"  id="tbname"/>
 				</td>
 			</tr>
 			<TR>
-				<TD class="ta_01" align="center" bgColor="#f5fafe">餐桌服务员：</TD>
+				<TD class="ta_01" align="center" bgColor="#f5fafe">员工编号：</TD>
 				<TD class="ta_01" bgColor="#ffffff" colSpan="3">
-				<select name="emp_fk_pos_id" id="posSelect">
+				<select name="account_fk_emp_id" id="posSelect">
 				<option value="--请选择--" selected="selected">--请选择--</option>
+				</select>
+				</TD>
+			</TR>
+			<TR>
+				<TD class="ta_01" align="center" bgColor="#f5fafe">状态：</TD>
+				<TD class="ta_01" bgColor="#ffffff" colSpan="3">
+				<select name="account_status" id="posSelect">
+				<option value="--请选择--" selected="selected">--请选择--</option>
+				<option value="14">14</option>
+				<option value="15">15</option>
 				</select>
 				</TD>
 			</TR>
@@ -68,28 +77,16 @@
 
 	$(document).ready(
 		function(){
-			$.post("Table_sewaiter.action",
+			$.post("account_selemp.action",
 				function(data){
 					$("#posSelect").empty();
 					$("#posSelect").append("<option value='qingxuanze' selected='selected'>--请选择--</option>");
 					for(var i = 0;i<data.length;i++){
-						var str = $("<option value="+data[i].emp_id+">"+data[i].waiter+"</option>");
+						var str = $("<option value="+data[i].emp_id+">"+data[i].emp_id+"</option>");
 						$("#posSelect").append(str);
 					}
 				},"json");
 		});
-	function seletbname(){
-		$.ajax({
-			url:"/Ordersystem/Table_sltbname.action",
-			data:{tbname:$("#tbname").val()},
-			type:"post",
-			dataType:"text",
-			success:function(list){
-				 if(list=="false"){
-				 	alert("该桌子名称已存在,请重新输入");
-				 }
-			}
-		}); 
-	}
+	
 </script>
 </HTML>
