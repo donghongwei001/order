@@ -48,8 +48,8 @@
 				<TD class="ta_01" bgColor="#ffffff" colSpan="3" >
 				<select name="zhuangtai"  >
 				<option value="--请选择--">--请选择--</option>
-				<option value="14">14</option>
-				<option value="15">15</option>
+				<option value="14">禁用</option>
+				<option value="15">启用</option>
 				</select>
 				</TD>
 			</TR>
