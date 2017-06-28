@@ -112,6 +112,7 @@ div {
 				<a href="javascript:starteat()" class="btn btn-info button-control" role="button">开台</a><BR>
 				<a href="javascript:reminder()" class="btn btn-warning button-control" role="button">催菜</a>
 				<a href="ManagementTable.jsp" target="main" class="btn btn-primary button-control" role="button">餐桌管理</a>
+				<a href="javascript:cancelCall()" class="btn btn-danger button-control" role="button">取消呼叫</a>
 				<a href="${pageContext.request.contextPath}/serv_showTable.action" class="btn btn-success button-control" role="button">刷新页面</a>
 				<a href="javascript:clear()" class="btn btn-danger button-control" role="button">清扫结束</a>
 				
@@ -184,12 +185,37 @@ div {
 
 
 	<script type="text/javascript">
+	
+	//取消呼叫的方法
+	function cancelCall(){
+		var tabid = getValue();
+		if(tabid.length==0){alert("请选择您要取消呼叫的桌号!"); return;}
+		var flag = window.confirm("确认取消呼叫服务员吗?");
+		if(flag){
+			for(var i=0;i<tabid.length;i++){
+				$.ajax({
+						url:"/Ordersystem/serv_cancelcall.action",
+						data:{tableid:tabid[i]},
+						type:"post",
+						dataType:"text",
+						success:function(list){
+							//alert(list);
+							if(list=="true"){
+								alert("操作成功!");
+							}else{
+								alert("操作失败,服务器忙,请稍后再试!");
+							}
+						}
+				});
+			}
+		}
+	}
+	
 	//开台的方法
 	function starteat(){
 		var flag = window.confirm("您确认开台吗?");
 		if(flag){
 			var tabid = getValue();
-			alert(tabid.length);
 			for(var i=0;i<tabid.length;i++){
 				$.ajax({
 					url:"/Ordersystem/serv_starteat.action",

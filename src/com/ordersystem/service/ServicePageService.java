@@ -174,6 +174,17 @@ public class ServicePageService {
 		}
 		return j;
 	}
+
+	/**取消呼叫服务员的方法 更改桌子状态为占用
+	 * @author hcb
+	 * 
+	 */
+	public Integer cancelcall(String tableid) {
+		// TODO Auto-generated method stub
+		String sql = "update table_table set table_state=9 where table_state=13 and table_id=?";
+		Object[] params = new Object[]{tableid};
+		return spi.updateStatus(sql, params);
+	}
 	
 
 }

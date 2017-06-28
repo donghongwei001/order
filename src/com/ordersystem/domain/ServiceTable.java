@@ -5,7 +5,7 @@ public class ServiceTable {
 	private int table_Capacity;
 	private int table_state;		//桌子状态外键
 	private String table_name;		//餐桌名字
-	private int emp_id;		//服务员id外键
+	private int emp_id;				//服务员id外键
 	private String emp_name;		//服务员名字
 	private String code_name;		//桌子状态
 	

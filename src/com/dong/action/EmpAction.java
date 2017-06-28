@@ -24,6 +24,13 @@ public class EmpAction extends BaseAction implements ModelDriven<EmpBeam>{
 	private EmpBeam emp;
 	private File emppic;	//文件上传
 	private String emppicFileName;		//文件名字
+	private String oldemppic;		//修改信息是如果没有更新照片则在前端页面中获取原来的图片名字
+	public String getOldemppic() {
+		return oldemppic;
+	}
+	public void setOldemppic(String oldemppic) {
+		this.oldemppic = oldemppic;
+	}
 	public String getEmppicFileName() {
 		return emppicFileName;
 	}
@@ -118,7 +125,7 @@ public class EmpAction extends BaseAction implements ModelDriven<EmpBeam>{
 			// TODO: handle exception
 		}
 		pageNb = pageNb==null?1:pageNb;
-		int pageSize = 5;
+		int pageSize = 10;
 		String startIndex = (pageNb-1)*pageSize+"";
 		Map<String , String> map = new HashMap<String , String>();
 		if(emp_id!=null&&!emp_id.equals("")) map.put("et.emp_id", emp_id);
@@ -153,22 +160,23 @@ public class EmpAction extends BaseAction implements ModelDriven<EmpBeam>{
 		String emp_id = super.getparameter("emp_id");
 		String emp_name = super.getparameter("emp_name");
 		String emp_gender = super.getparameter("emp_gender");
+		System.out.println(emp_gender);
 		String emp_idcar = super.getparameter("emp_idcar");
-		String pageNo = super.getparameter("pageNo");
-		Integer pageNb=null;
+		String pageNo = super.getparameter("pageNo");	
+		Integer pageNb=null; 	//当前页数
 		try {
-			pageNb = Integer.parseInt(pageNo);
+			pageNb = Integer.parseInt(pageNo);   
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
 		pageNb = pageNb==null?1:pageNb;
-		String startIndex = (pageNb-1)*5+"";
 		Map<String , String> map = new HashMap<String , String>();
 		if(emp_id!=null&&!emp_id.equals("")) map.put("et.emp_id", emp_id);
 		if(emp_name!=null&&!emp_name.equals(""))map.put("et.emp_name", emp_name);
 		if(emp_gender!=null&&!emp_gender.equals(""))map.put("et.emp_gender", emp_gender);
 		if(emp_idcar!=null&&!emp_idcar.equals(""))map.put("et.emp_idcar", emp_idcar);
-		int pageSize = 5;
+		int pageSize = 10;
+		String startIndex = (pageNb-1)*pageSize+"";
 		List list = es.queryEmp(map,pageSize+"",startIndex);
 		List<EmpBeam> empList = (List<EmpBeam>) list.get(0);
 		String str = JSON.toJSONString(empList);
@@ -213,6 +221,7 @@ public class EmpAction extends BaseAction implements ModelDriven<EmpBeam>{
 		if(empli.size()!=0){
 			EmpBeam empinfo = (EmpBeam)((List) empli.get(0)).get(0);
 			super.setsession("empinfo", empinfo);
+			System.out.println("info"+empinfo);
 			return "edit";
 		}
 		return "error";
@@ -223,8 +232,44 @@ public class EmpAction extends BaseAction implements ModelDriven<EmpBeam>{
 	 * 
 	 */
 	public String updateInfo(){
-		
-		return null;
+		HttpServletRequest request=ServletActionContext.getRequest();
+		String filename = "";
+		Integer filenum=(int) (emppic==null?0:emppic.length());
+		try {
+			if (filenum>0) {	//判断有文件
+				System.out.println("有文件");
+				String suffix = emppicFileName.substring(emppicFileName.lastIndexOf('.')).toLowerCase();	//取图片格式名并转换成
+				if(suffix.equals(".jpg")||suffix.equals(".jpeg")||suffix.equals(".gif")||suffix.equals(".png")){
+					String path = request.getRealPath("/");		//得到文件的真实路径
+					filename = new Date().getTime()+suffix;
+					FileInputStream is = new FileInputStream(emppic);
+					FileOutputStream os = new FileOutputStream(new File(path+"uploadFile\\"+filename));
+					byte[] b = new byte[1024];
+					int n = -1;
+					while((n=is.read(b))>0){
+						os.write(b, 0, n);
+					}
+					os.flush();
+					os.close();
+					is.close();
+					emp.setEmp_pic(filename);
+				}else{
+					return "error";
+				}
+			}else {
+					System.out.println("输入了老的照片");
+					emp.setEmp_pic(oldemppic);
+				}
+		} catch (Exception e) {
+			System.out.println("进了catch*************");
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(emp);
+		System.out.println(es.updateEmp(emp)+"添加结果"+oldemppic);
+		//listEmp();
+		queryEmp();		//添加完成后需要调用查询的方法更新显示列表
+		return "succ";		//转发到list页面
 	}
 	
 	/**删除员工信息
@@ -239,6 +284,18 @@ public class EmpAction extends BaseAction implements ModelDriven<EmpBeam>{
 		return null;
 	}
 	
+	/**身份证号重复性验证
+	 * @author yhl
+	 * 
+	 */
+	public String selidcar() {
+		String idcar=super.getparameter("emp_idcar");
+		int flag=es.seidcar(idcar);
+		if (flag>0) {
+			super.write("false");
+		}else super.write("true");
+		return null;
+	}
 }
 
 

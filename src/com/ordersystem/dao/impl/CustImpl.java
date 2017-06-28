@@ -22,30 +22,33 @@ public class CustImpl {
 			CustBean ct=new CustBean();
 			ct.setCus_id((Integer) arr.get(i).get(0));
 			ct.setCus_name((String) arr.get(i).get(1));
-			ct.setXiaofei( (String) arr.get(i).get(2).toString());
-			list.add(ct);
-		}
-		return list;
-	}
-	
-	/*
-	 * 查询数据库中所有顾客信息
-	 */
-	public List<CustBean> showAllCust() {
-		String sql="select b.cus_id,b.cus_name,c.xiaofei from cus_id_money c,cus_table b where c.cus_id = b.cus_id";
-		ArrayList<ArrayList> arr = ss.execQuery(sql, null);
-		ArrayList<CustBean> list=new ArrayList<CustBean>();
-		for (int i = 0; i < arr.size(); i++) {
-			CustBean ct=new CustBean();
-			ct.setCus_id((Integer) arr.get(i).get(0));
-			ct.setCus_name((String) arr.get(i).get(1));
 			ct.setXiaofei((String) arr.get(i).get(2).toString());
 			list.add(ct);
 		}
 		return list;
 	}
 	
-/*
+	/*   
+	 * 查询数据库中所有顾客信息
+	 */
+	public List<CustBean> showAllCust() {
+		String sql="select b.cus_id,b.cus_name,c.xiaofei from cus_id_money c,cus_table b where c.cus_id = b.cus_id";
+		ArrayList<ArrayList> arr = ss.execQuery(sql, null);
+		ArrayList<CustBean> list=new ArrayList<CustBean>();
+		
+		for (int i = 0; i < arr.size(); i++) {
+			CustBean ct=new CustBean();
+		
+				ct.setCus_id((Integer) arr.get(i).get(0));
+				ct.setCus_name((String) arr.get(i).get(1));
+				ct.setXiaofei((String) arr.get(i).get(2).toString());
+				list.add(ct);
+			
+		}
+		return list;
+	}
+	
+/* 
  * 	查询某位顾客消费情况
  *  
  * 
