@@ -182,6 +182,23 @@ public class ServicePageService {
 		Object[] params = new Object[]{tableid};
 		return spi.updateStatus(sql, params);
 	}
+
+	/**更新数据库订单中的菜品数量 服务员界面中的修改菜品数量
+	 * @author hcb
+	 * 1.需先查询出当桌号前吃饭的订单编号
+	 * 2.查询出该菜名的菜品序号
+	 * 3.更新该菜的数量
+	 * 
+	 */
+	public Integer updatefoodnum(String tabid, String foodname, String newnum) {
+		// TODO Auto-generated method stub
+		Integer orderId = spi.searchOrderId(tabid);		//得到该桌子的正在吃饭的订单id
+		String sql1 = "select food_id from food_table where food_name='"+foodname+"'";		//获得指定菜名的菜品序号
+		Integer foodid = spi.findone(sql1);    			//得到需更改菜品的序号
+		String sql = "update order_food set order_food_num=? where fk_order_id=? and fk_food_id=? and order_food_status=1";
+		Object[] params = new Object[]{newnum,orderId,foodid};
+		return spi.updateStatus(sql, params);
+	}
 	
 
 }
