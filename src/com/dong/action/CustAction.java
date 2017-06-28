@@ -153,7 +153,7 @@ public class CustAction extends BaseAction{
 				Object[]params=new Object[]{rolename,zhuangtai};
 				int flag=new DaoFactory().executeUpdate("insert into role_table(role_name,role_mark) values(?,?) ", params);
 				
-				response.sendRedirect("/Ordersystem/cust_jiaose.action");
+				response.sendRedirect("/Ordersystem/Ordersystem/cust_jiaose.action");
 				
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
