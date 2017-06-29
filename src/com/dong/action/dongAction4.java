@@ -527,7 +527,7 @@ public class dongAction4 extends ActionSupport{
 			int flag=new DaoFactory().executeUpdate("update order_table set order_status=12 where order_id=?", params);
 			System.out.println(flag);
 			Object[]params1=new Object[]{zhuohao};
-			int flag1=new DaoFactory().executeUpdate("update table_table set table_state=9 where table_id=? ", params1);
+			int flag1=new DaoFactory().executeUpdate("update table_table set table_state=10 where table_id=? ", params1);
 			System.out.println(flag1);
 			try {
 				session.invalidate();

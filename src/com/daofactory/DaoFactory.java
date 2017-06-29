@@ -27,7 +27,7 @@ public class DaoFactory {
 	 */
 	public static Connection getConnection(String databasename){
 		Connection con = null;
-		String URL="jdbc:sqlserver://172.16.22.78:1433; DatabaseName="+databasename;
+		String URL="jdbc:sqlserver://172.16.22.32:1433; DatabaseName="+databasename;
 		try {			
 			con = DriverManager.getConnection(URL,"sa","818716");
 		} catch (Exception e) {
