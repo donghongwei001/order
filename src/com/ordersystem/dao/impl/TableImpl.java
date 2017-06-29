@@ -1,9 +1,15 @@
 package com.ordersystem.dao.impl;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.BeanListHandler;
+
+
+import com.daofactory.Connpool;
 import com.daofactory.DaoFactory;
 import com.ordersystem.domain.CustBean;
 import com.ordersystem.domain.TableBean;
@@ -12,6 +18,8 @@ import com.ordersystem.domain.ser_tabBean;
 
 public class TableImpl {
 	DaoFactory dt=new DaoFactory();
+	Connpool cp = new Connpool();
+	QueryRunner qr = new QueryRunner(cp.getDataSource());
 	public List<TableBean> ss(String table_id){
 		Object[] param=new Object[]{table_id};
 		String sql="select table_id,table_name,table_Capacity,code_name,emp_name from  table_table,ser_tab,emp_table,role_table,code_table where emp_fk_pos_id=role_id and emp_id = fk_emp_id and fk_table_id=table_id and code_id=table_state and emp_fk_pos_id='2' and table_id=?";
@@ -90,7 +98,6 @@ public class TableImpl {
 		Object[] pa=new Object[]{tb_id};
 		Object[] pe=new Object[]{st.getFk_emp_id(),tb_id};
 		dt.executeUpdate(sql, pa);
-		System.out.println(st.getFk_emp_id()+"*****");
 		String sq="update ser_tab set fk_emp_id=? where fk_table_id=?";
 		int flag =dt.executeUpdate(sq,pe);
 		System.out.println(flag);
@@ -107,5 +114,17 @@ public class TableImpl {
 		String sql="select table_name from table_table where table_name=?";
 		int fl=dt.execQuery(sql, arr).get(0).size();
 		return fl;
+	}
+
+	public List<TableBean> findonetb(String sql) {
+		// TODO Auto-generated method stub
+		
+		try {
+			return qr.query(sql, new BeanListHandler<TableBean>(TableBean.class));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 }

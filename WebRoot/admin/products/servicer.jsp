@@ -26,6 +26,8 @@ div {
 
 #allpage-back {
 	background: url(../images/000001.jpg);
+	width:100%;
+	height:auto;
 }
 
 .button-control {
@@ -58,8 +60,8 @@ div {
 </HEAD>
 
 <BODY>
-	<div class="page-back" id="allpage-back"></div>
-	<div class="container">
+	
+	<div class="container" style="width:100%;">
 		<nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<div class="navbar-header">
@@ -95,12 +97,12 @@ div {
 
 		<!-- 功能区 -->
 		<div class="rowone">
-			<div class="col-md-10" style="width:83%;height:100%" backgroun="red">
+			<div class="col-lg-10" style="width:83%;height:100%" backgroun="red">
 			<iframe id="main" name="main" width="100%" frameborder=0
 				height="100%" scrolling="auto" src="ManagementTable.jsp" onload="setIframeHeight(this)">
 			</iframe>
 			</div>
-			<div class="col-md-2" style="width:17%">
+			<div class="col-lg-2" style="width:17%">
 				<div class="list-group">
 					<!-- <a href="ManagementTable.jsp" target="main" class="list-group-item">餐桌管理</a> -->
 					<!-- <a href="ReservationTable.jsp" target="main"
@@ -110,10 +112,10 @@ div {
 
 				</div>
 				<a href="javascript:starteat()" class="btn btn-info button-control" role="button">开台</a><BR>
-				<a href="javascript:reminder()" class="btn btn-warning button-control" role="button">催菜</a>
-				<a href="ManagementTable.jsp" target="main" class="btn btn-primary button-control" role="button">餐桌管理</a>
-				<a href="javascript:cancelCall()" class="btn btn-danger button-control" role="button">取消呼叫</a>
-				<a href="${pageContext.request.contextPath}/serv_showTable.action" class="btn btn-success button-control" role="button">刷新页面</a>
+				<a href="javascript:reminder()" class="btn btn-warning button-control" role="button">催菜</a><BR>
+				<a href="ManagementTable.jsp" target="main" class="btn btn-primary button-control" role="button">餐桌管理</a><BR>
+				<a href="javascript:cancelCall()" class="btn btn-danger button-control" role="button">取消呼叫</a><BR>
+				<a href="${pageContext.request.contextPath}/serv_showTable.action" class="btn btn-success button-control" role="button">刷新页面</a><BR>
 				<a href="javascript:clear()" class="btn btn-danger button-control" role="button">清扫结束</a>
 				
 				<!-- <a href="###" class="btn btn-primary button-control" role="button" data-toggle="modal" data-target="#myModal2">买单</a> <a href="###"

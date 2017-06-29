@@ -93,7 +93,7 @@ public class KitchenAction extends BaseAction{
 		currPage =currPage==null?1:currPage;	//设置默认页数
 		pageSize = pageSize==null?10:pageSize;	//设置默认每页显示条数
 		int startIndex=(currPage-1)*pageSize;	//设置默认
-		Integer count = Integer.parseInt(ks.findPageCount("3"));//
+		Integer count = Integer.parseInt(ks.findPageCountdone());//
 		List<WaitFoodBean> doneFood = ks.showDoneFood(pageSize,startIndex);//查询状态为3的已做菜品
 		pu.setRows(doneFood);
 		pu.setTotal(count);

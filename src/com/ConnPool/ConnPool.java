@@ -6,6 +6,12 @@ import org.apache.commons.dbcp.BasicDataSource;
 
 public class ConnPool {
 	private static BasicDataSource dataSource=null;
+	public static BasicDataSource getDataSource() {
+		return dataSource;
+	}
+	public static void setDataSource(BasicDataSource dataSource) {
+		ConnPool.dataSource = dataSource;
+	}
 	static{
 		dataSource=new BasicDataSource();
 		dataSource.setDriverClassName("com.microsoft.sqlserver.jdbc.SQLServerDriver");

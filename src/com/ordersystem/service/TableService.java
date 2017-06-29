@@ -44,4 +44,10 @@ public class TableService {
 		int fll = tq.sltbname(tbname);
 		return fll;
 	}
+	
+	public List<TableBean> findonetab(String id) {
+		// TODO Auto-generated method stub
+		String sql = "select * from table_table,ser_tab where table_id=fk_table_id and table_id="+id;
+		return tq.findonetb(sql);
+	}
 }
