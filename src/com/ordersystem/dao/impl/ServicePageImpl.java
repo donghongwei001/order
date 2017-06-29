@@ -200,7 +200,7 @@ public class ServicePageImpl {
 			//Integer i = (Integer) DaoFactory.execQuery(sql1, params).get(0).get(0);
 			//Integer j = (Integer) DaoFactory.execQuery(sql2, params).get(0).get(0);
 			i=i==null?0:i;
-			j=j==null?0:j;
+			j=j==null?0:0;
 			r=i+j;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
