@@ -1,6 +1,7 @@
 package com.dong.action;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,6 +62,7 @@ public class TableAction extends BaseAction {
 	 * 方法功能说明：  根据桌号查询桌子信息
 	 */
 	public String selezhuo() {
+		System.out.println(request.getRequestURI());
 		String table_id = super.getparameter("zhuohao");
 		List<TableBean> li=ts.selezhuohao(table_id);
 		super.setsession("list", li);
@@ -94,6 +96,7 @@ public class TableAction extends BaseAction {
 	 * 方法功能说明： 增加桌子 
 	 */
 	public String addzhuozi() {
+		System.out.println(request.getRequestURI());
 		int table_state=8;
 		TableBean tb=new TableBean();
 		ser_tabBean st=new ser_tabBean();
@@ -122,7 +125,8 @@ public class TableAction extends BaseAction {
 	 * 方法功能说明： 餐桌信息编辑时获得桌子ID
 	 */
 	public String seid() {
-		ServletActionContext.getResponse().setCharacterEncoding("UTF-8");
+		
+		/*ServletActionContext.getResponse().setCharacterEncoding("UTF-8");*/
 		String id=super.getparameter("tabled");
 		String name=super.getparameter("name");
 		String capacity=super.getparameter("capacity");
@@ -140,6 +144,7 @@ public class TableAction extends BaseAction {
 	 *tb_id:获取桌子ID 
 	 */
 	public String updatezhuozi(){
+		System.out.println(request.getRequestURI());
 		TableBean tb=new TableBean();
 		ser_tabBean st=new ser_tabBean();
 		String tb_id=super.getparameter("id");
@@ -163,6 +168,7 @@ public class TableAction extends BaseAction {
 	 * id:要删除的桌子的id
 	 */
 	public String del(){
+		System.out.println(request.getRequestURI());
 		String id=super.getparameter("tab");
 		TableBean tb=new TableBean();
 		ser_tabBean st=new ser_tabBean();

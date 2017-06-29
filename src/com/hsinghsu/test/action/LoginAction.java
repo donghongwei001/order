@@ -2,6 +2,10 @@ package com.hsinghsu.test.action;
 
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
+import org.apache.struts2.ServletActionContext;
+
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -11,22 +15,22 @@ public class LoginAction extends ActionSupport {
     private String username;// 登录用户名  
     private String password;// 登录密码  
     private String prePage;// 登录前页面  
-  
+    HttpSession session=ServletActionContext.getRequest().getSession();
     public String execute() throws Exception {  
           
         if (null != username && null != password && username.equals("hsing") && password.equals("hsu")) {  
   
             ActionContext ctx = ActionContext.getContext();  
-            Map<String, Object> session = ctx.getSession();  
+              session = (HttpSession) ctx.getSession();  
               
             //保存用户信息session  
-            session.put("user", getUsername());  
+            ((ActionContext) session).put("user", getUsername());  
   
             // 获取跳转到登陆界面之前的页面地址，由拦截器提供  
-            prePage = (String) session.get("prePage");  
+            prePage = (String) ((ActionContext) session).get("prePage");  
   
             // 清除session中的数据  
-            session.remove("prePage");  
+            session.removeValue("prePage");  
   
             if (null == prePage) {  
                 return "usercenter";// 不是拦截器跳转到登陆页面的，直接访问的登陆页面  

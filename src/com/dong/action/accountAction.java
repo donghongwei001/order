@@ -12,7 +12,7 @@ import com.ordersystem.domain.accountBean;
 import com.ordersystem.service.accountService;
 
 public class accountAction extends BaseAction{
-		
+		HttpServletRequest request=ServletActionContext.getRequest();
 	accountService ac=new accountService();
 	
 		
@@ -20,6 +20,7 @@ public class accountAction extends BaseAction{
 	 * 方法功能说明： 查询所有登录账号信息状态 
 	 */
 	public String selac(){
+		System.out.println(request.getRequestURI());
 		List<accountBean> list=ac.seleAll();
 		super.setsession("list", list);
 		return "acfun";
@@ -30,6 +31,7 @@ public class accountAction extends BaseAction{
 	 */
 	
 	public String edit() {
+		System.out.println(request.getRequestURI());
 		String account_number=super.getparameter("account_number");
 		String account_psw=super.getparameter("account_psw");
 		String account_fk_emp_id=super.getparameter("account_fk_emp_id");
@@ -65,6 +67,7 @@ public class accountAction extends BaseAction{
 	}
 	
 	public String add() {
+		System.out.println(request.getRequestURI());
 		String account_number=super.getparameter("account_number");
 		String account_psw=super.getparameter("account_psw");
 		String account_fk_emp_id=super.getparameter("account_fk_emp_id");

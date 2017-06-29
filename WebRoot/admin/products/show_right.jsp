@@ -85,6 +85,10 @@
 					<input style="margin-left:120px;" type="checkbox" name="box" value="27">餐桌添加<br>
 					<input type="checkbox" name="box" value="28">餐桌修改
 					<input style="margin-left:120px;" type="checkbox" name="box" value="29">餐桌删除<br>
+					<input type="checkbox" name="box" value="31">菜系修改
+					<input style="margin-left:120px;" type="checkbox" name="box" value="32">帐号管理<br>
+					<input type="checkbox" name="box" value="33">帐号修改
+					<input style="margin-left:120px;" type="checkbox" name="box" value="34">帐号添加<br>
 					
 
 					<br>
