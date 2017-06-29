@@ -230,6 +230,23 @@ public class ServicePageAction extends BaseAction implements ModelDriven<Service
 		return null;
 	}
 	
+	/**服务员界面修改菜品数量的方法
+	 * @author hcb
+	 * 
+	 */
+	public String updatenum(){
+		String tabid = super.getparameter("tbid");
+		String foodname = super.getparameter("foodname");
+		String newnum = super.getparameter("newnum");
+		System.out.println(tabid+"**"+foodname+"**"+newnum);
+		Integer i = sps.updatefoodnum(tabid,foodname,newnum);
+		System.out.println(i+"uiuuu");
+		if(i==1){
+			super.write("true");
+		}else super.write("false");
+		return null;
+	}
+	
 }
 
 

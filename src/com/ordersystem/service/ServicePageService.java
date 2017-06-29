@@ -133,7 +133,6 @@ public class ServicePageService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}	//更新订单状态为已结账与订单表中的金额	以及更新该订单编号的状态为已结账
-		System.out.println(count+"**count**"+orderId+"***"+tbid);
 		if (status==1) {
 			spi.updateStatus(sql,params);		//更新桌子状态
 		}
@@ -167,8 +166,6 @@ public class ServicePageService {
 		Integer j = 0;
 		String sql2 = "update table_table set table_state=9 where table_id=? and table_state=8";
 		Object[] param = new Object[]{tableid};
-		System.out.println(i+" iiiii");
-		System.out.println(date+"///"+tableid+"***"+"----"+0+"+++++"+empid+"****"+date+"*****"+11);
 		if(i>0){
 			j=spi.updateStatus(sql2, param);
 		}
@@ -183,6 +180,23 @@ public class ServicePageService {
 		// TODO Auto-generated method stub
 		String sql = "update table_table set table_state=9 where table_state=13 and table_id=?";
 		Object[] params = new Object[]{tableid};
+		return spi.updateStatus(sql, params);
+	}
+
+	/**更新数据库订单中的菜品数量 服务员界面中的修改菜品数量
+	 * @author hcb
+	 * 1.需先查询出当桌号前吃饭的订单编号
+	 * 2.查询出该菜名的菜品序号
+	 * 3.更新该菜的数量
+	 * 
+	 */
+	public Integer updatefoodnum(String tabid, String foodname, String newnum) {
+		// TODO Auto-generated method stub
+		Integer orderId = spi.searchOrderId(tabid);		//得到该桌子的正在吃饭的订单id
+		String sql1 = "select food_id from food_table where food_name='"+foodname+"'";		//获得指定菜名的菜品序号
+		Integer foodid = spi.findone(sql1);    			//得到需更改菜品的序号
+		String sql = "update order_food set order_food_num=? where fk_order_id=? and fk_food_id=? and order_food_status=1";
+		Object[] params = new Object[]{newnum,orderId,foodid};
 		return spi.updateStatus(sql, params);
 	}
 	

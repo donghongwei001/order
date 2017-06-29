@@ -47,7 +47,8 @@
 	}
   </style>
   <script type="text/javascript">
-  	$(document).ready(function(){
+  	//统计菜品总价
+  	function countprice(){
   		var numb = document.getElementsByName("numb");
   		var price = document.getElementsByName("price");
   		var count = 0;
@@ -56,13 +57,13 @@
   			count +=   parseInt(numb[i].innerText)* parseInt(price[i].innerText);
   		}
   		val.innerHTML=count;
-  	})
+  	}
   
   </script>
   
  </HEAD>
 
- <BODY>
+ <BODY onload="countprice()">
  
 	<div class="rowee">
 		<div class="collg7">
@@ -75,8 +76,10 @@
 				<c:forEach items="${solb }" var="sb" varStatus="sob">
 				<tr>
 					<td>${sob.count }</td>
-					<td>${sb.food_name }</td><td name="numb">${sb.order_food_num }</td>
-					<td name="price">${sb.food_price }</td><td>${sb.code_name }</td>
+					<td>${sb.food_name }</td>
+					<td name="numb" class="numb">${sb.order_food_num }</td>
+					<td name="price">${sb.food_price }</td>
+					<td>${sb.code_name }</td>
 					<td><input type="checkbox" name="foodmenu" value="${sb.order_food_id }"></td>
 				</tr>
 				</c:forEach>
@@ -108,6 +111,7 @@
 				  <button class="pre" onclick="bac()">上一页</button>
 				  <button class="bac" onclick="pre()">下一页</button><span id="currentpage">第1页</span><span id="pagetotal">共${pageCount }页</span>
 				  <input type="hidden" value="${pageCount }" id="allpage">
+				  <input type="hidden" value="${table_id}" id="tbid">
 			</div>
 		</div>
 	</div>
@@ -122,6 +126,56 @@
 </div>
 	<input type="hidden" id="txt1" value="66666 ">
 <script type="text/javascript">
+	
+
+	//jq修改数量的方法
+	$(".numb").click(
+			function(){
+				var self=$(this);
+				var trEle=$(this).text();
+				var foodname = $(this).prev().text();
+				var tbid = $("#tbid").val();
+				$(this).text("");
+				var newinput=$("<input type='text' value="+trEle+">");
+				$(newinput).width("20");
+				$(newinput).height("20");
+				$(this).append(newinput);
+				$(newinput).click(
+					function(){return false;}
+				);
+				$(newinput).blur(
+					function(){
+						var flag = window.confirm("您确定修改菜品数量吗?");
+						if(flag){
+							var vl=$(this).val();
+							$.ajax({			//调用ajax修改数据库订单数量
+								url:"/Ordersystem/serv_updatenum.action",
+								data:{foodname:foodname,tbid:tbid,newnum:vl},
+								type:"post",
+								dataType:"text",
+								success:function(list){
+										$(this).remove();
+									if(list=="true"){
+										alert("修改数量成功!");
+										$(self).text(vl);
+										countprice();
+									}else{
+										alert("操作失败,请稍后再试!");
+										$(self).text(trEle);
+									}
+									
+								}
+							})
+							
+						}
+					}
+				);
+			}
+		)
+	
+
+
+	//菜品搜索功能
 	$("#searchfood").click(function(){
 		$.ajax({
 			url:"/Ordersystem/dishe_ajaxQueryDishes.action",
