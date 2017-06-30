@@ -38,8 +38,7 @@ public class TableImpl {
 	}
 	
 	public  List<TableBean> seleall() {
-		/*String sql="select table_id,table_name,table_Capacity,code_name,emp_name from  table_table,ser_tab,emp_table,role_table,code_table where emp_fk_pos_id=role_id and emp_id = fk_emp_id and fk_table_id=table_id and code_id=table_state and emp_fk_pos_id='2' ";*/
-		String sql="select table_id,table_name,table_Capacity,code_name,emp_name from  table_table,ser_tab,emp_table,role_table,code_table where emp_fk_pos_id=role_id and emp_id = fk_emp_id and fk_table_id=table_id and code_id=table_state ";
+		String sql="select table_id,table_name,table_Capacity,code_name,emp_name from  table_table,ser_tab,emp_table,role_table,code_table where emp_fk_pos_id=role_id and emp_id = fk_emp_id and fk_table_id=table_id and code_id=table_state order by table_id desc";
 		ArrayList<ArrayList> arr=dt.execQuery(sql, null);
 		ArrayList<TableBean> list=new ArrayList<TableBean>();
 		for (int i = 0; i < arr.size(); i++) {
