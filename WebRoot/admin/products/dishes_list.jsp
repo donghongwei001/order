@@ -193,6 +193,48 @@
 	<input type="hidden" value="${total }" id="allpage">
 	
 	<script type="text/javascript">
+	//自动补全搜索框的方法
+	function autoback(data){
+		var val = data.value;
+		var top = $("#foodname").offset().top;
+		var left = $("#foodname").offset().left;
+		var width = $("#foodname").outerWidth();
+		var height = $("#foodname").height();
+		$("#autoback").css("top",top+height);
+		$("#autoback").css("left",left);
+		$("#autoback").css("width",width);
+		if(val=="")return;
+		$.ajax({
+					url:"/Ordersystem/serv_autoshow.action",
+					data:{foodname:val},
+					type:"post",
+					dataType:"text",
+					success:function(list){
+						var arr = list.split(",");
+						$("#autoback").empty();					//先清空div
+						$("#autoback").css("display","block");	//按块状显示div
+						var str = "";
+						for(var i=0;i<arr.length;i++){
+							str += "<div onmouseover='bgco(this)' onmouseout='bgcot(this)' onclick='pushval(this)'>"+arr[i]+"</div>";
+						}
+						$("#autoback").append(str);
+					}
+				})
+	}
+		function pushval(di){
+			//alert($(di).text());
+			$("#foodname").val($(di).text());
+			$("#autoback").empty();	
+		}
+		function bgco(div){
+			div.style.backgroundColor="green";
+		}
+		function bgcot(div){
+			div.style.backgroundColor="white";
+		} 
+	
+	
+	
 	//回填后台查询出来的菜系类别
 	function databack() {
 		//alert("565");
