@@ -20,7 +20,7 @@ public class AccountImpl {
 	 * @throws
 	 */
 	public List<accountBean> seleAll() {
-		String sql="select a.account_number,a.account_psw,a.account_fk_emp_id,e.emp_name,a.account_status from account a,emp_table e where a.account_fk_emp_id=e.emp_id";
+		String sql="select a.account_number,a.account_psw,a.account_fk_emp_id,e.emp_name,c.code_name from account a,emp_table e,code_table c where a.account_fk_emp_id=e.emp_id and a.account_status=c.code_id";
 		ArrayList<ArrayList> arr=dt.execQuery(sql, null);
 		ArrayList<accountBean> list=new ArrayList<accountBean>();
 		for (int i = 0; i < arr.size(); i++) {
