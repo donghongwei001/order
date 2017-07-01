@@ -44,8 +44,8 @@
 				<TD class="ta_01" bgColor="#ffffff" colSpan="3">
 				<select name="account_status" id="posSelect">
 				<option value="--请选择--" selected="selected">--请选择--</option>
-				<option value="14">14</option>
-				<option value="15">15</option>
+				<option value="14">禁用</option>
+				<option value="15">正常</option>
 				</select>
 				</TD>
 			</TR>

@@ -74,23 +74,25 @@
 							style="BORDER-RIGHT: gray 1px solid; BORDER-TOP: gray 1px solid; BORDER-LEFT: gray 1px solid; WIDTH: 100%; WORD-BREAK: break-all; BORDER-BOTTOM: gray 1px solid; BORDER-COLLAPSE: collapse; BACKGROUND-COLOR: #f5fafe; WORD-WRAP: break-word">
 							<tr
 								style="FONT-WEIGHT: bold; FONT-SIZE: 12pt; HEIGHT: 25px; BACKGROUND-COLOR: #afd1f3">
-								<td align="center" width="15%">桌号</td>
-								<td align="center" width="15%">桌名</td>
-								<td align="center" width="10%">可供就餐人数</td>
-								<td align="center" width="20%">服务员</td>
-								<td width="15%" align="center">状态</td>
-								<td width="9%" align="center">编辑</td>
-								<td width="9%" align="center">删除</td>
+								<td align="center" width="13%">桌号</td>
+								<td align="center" width="13%">桌名</td>
+								<td width="13%" align="center">桌子状态</td>
+								<td align="center" width="13%">可供就餐人数</td>
+								<td align="center" width="13%">服务员</td>
+								<td align="center" width="13%">服务员状态</td>
+								<td width="7%" align="center">编辑</td>
+								<td width="7%" align="center">删除</td>
 							</tr>
 							
 							 <c:forEach items="${list}" var="row">
 									<tr style="FONT-WEIGHT: bold; HEIGHT:33px;FONT-WEIGHT: bold;FONT-SIZE: 12pt; HEIGHT: 25px;">
-										<td align="center" width="15%">${row.table_id}</td>
-										<td align="center" width="10%">${row.table_name}</td>
-										<td align="center" width="10%">${row.table_Capacity}</td>
-										<td align="center" width="20%">${row.fk_emp_id}</td>
-										<td align="center" width="15%">${row.table_state }</td>
-										<td width="9%" align="center">
+										<td align="center" width="13%">${row.table_id}</td>
+										<td align="center" width="13%">${row.table_name}</td>
+										<td align="center" width="13%">${row.table_state }</td>
+										<td align="center" width="13%">${row.table_Capacity}</td>
+										<td align="center" width="13%">${row.fk_emp_id}</td>
+										<td align="center" width="13%">${row.emp_state}</td>
+										<td width="7%" align="center">
 										 <a href="${pageContext.request.contextPath}/Table_seid.action?tabled=${row.table_id}&name=${row.table_name}&capacity=${row.table_Capacity}" > 
 											<img
 											src="${pageContext.request.contextPath}/admin/images/i_edit.gif"
@@ -98,7 +100,7 @@
 									</a>
 									
 								</td>
-								<td width="9%" align="center">
+								<td width="7%" align="center">
 									<a
 										href="${pageContext.request.contextPath}/Table_del.action?tab=${row.table_id}">
 											<img

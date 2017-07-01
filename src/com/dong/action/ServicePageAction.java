@@ -115,7 +115,7 @@ public class ServicePageAction extends BaseAction implements ModelDriven<Service
 		return null;
 	}
 	
-	/**删除前台取消的菜品
+	/**删除前台取消的菜品  //(删除已点菜品的方法修改为更改数据库状态为退菜)
 	 * @author hcb
 	 * 
 	 */
@@ -199,20 +199,21 @@ public class ServicePageAction extends BaseAction implements ModelDriven<Service
 		Integer i = sps.updateTable(tableid);
 		if(i>0){
 			super.write("true");
+			showTable();
 		}else super.write("false");
 		return null;
 	}
 	
-	/**前台服务员开台的方法
+	/**前台服务员开台的方法		//(需修改服务员id为该桌负责的服务员)(为完成)
 	 * @author hcb
 	 * 
 	 */
 	public String starteat(){
 		String tableid = super.getparameter("tableid");
-		String empid = "1003";
-		Integer i = sps.starteat(tableid,empid);
+		Integer i = sps.starteat(tableid);
 		if(i>0){
 			super.write("true");
+			showTable();
 		}else super.write("false");
 		return null;
 	}
@@ -226,6 +227,7 @@ public class ServicePageAction extends BaseAction implements ModelDriven<Service
 		Integer i = sps.cancelcall(tableid);
 		if(i>0){
 			super.write("true");
+			showTable();
 		}else super.write("false");
 		return null;
 	}
@@ -235,15 +237,30 @@ public class ServicePageAction extends BaseAction implements ModelDriven<Service
 	 * 
 	 */
 	public String updatenum(){
-		String tabid = super.getparameter("tbid");
-		String foodname = super.getparameter("foodname");
+		String odfid = super.getparameter("odfid");
+		
 		String newnum = super.getparameter("newnum");
-		System.out.println(tabid+"**"+foodname+"**"+newnum);
-		Integer i = sps.updatefoodnum(tabid,foodname,newnum);
+		System.out.println(odfid+"****"+newnum);
+		Integer i = sps.updatefoodnum(odfid,newnum);
 		System.out.println(i+"uiuuu");
 		if(i==1){
 			super.write("true");
 		}else super.write("false");
+		return null;
+	}
+	
+	/**实现菜品搜索自动补全的方法
+	 * @author hcb
+	 * 
+	 */
+	public String autoshow(){
+		System.out.println("autoshow");
+		String foodname = super.getparameter("foodname");
+		System.out.println(foodname);
+		String foodnamestr = sps.showfoodname(foodname);
+		System.out.println(foodnamestr+"***foodnamestr");
+		if(foodnamestr!=null)
+		super.write(foodnamestr);
 		return null;
 	}
 	
