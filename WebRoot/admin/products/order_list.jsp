@@ -87,6 +87,10 @@
 #name {
 	
 }
+
+#xinxi td {
+	text-align: center;
+}
 </style>
 </head>
 <body id="test">
@@ -101,53 +105,54 @@
 		<div id="n1">
 
 			<div>
-				
+
 				<section class="Hui-article-box"> <nav class="breadcrumb">
-				 <a
+				<a
 					href="${pageContext.request.contextPath}/Ordersystem/wei_query1.action"><button
-							
-							style="background:#000; class="label label-success radius" filter:alpha(opacity:0); opacity:0.2;">全部订单</button>
+						style="background:#000; class="labellabel-successradius" filter:alpha(opacity:0); opacity:0.2;">全部订单</button>
 				</a> </nav>
 				<div class="Hui-article">
 					<article class="cl pd-20">
 					<form action="/Ordersystem/dongdingdan.action" method="post">
-						
 
-							<span id="riqi">日期范围</span>：
-							<div class="control-group" id="shijian1">
-								<label class="control-label"> 初始时间</label>
-								<div class="controls input-append date form_datetime"
-									data-date="2017-06-16T00:00:00Z" data-date-format="yyyy-MM-dd"
-									data-link-field="dtp_input1">
-									<input id="shijiankuang3" name="shijiankuang3" size="25"
-										type="text" value="" readonly> <span class="add-on"><i
-										class="icon-remove"></i> </span> <span class="add-on"><i
-										class="icon-th"></i> </span>
-								</div>
-								<input type="hidden" id="dtp_input1" value="" /><br />
-							</div>
-							<div class="control-group" id="shijian2">
-								<label class="control-label"> 初始时间</label>
-								<div class="controls input-append date form_datetime"
-									data-date="2017-06-16T00:00:00Z" data-date-format="yyyy-MM-dd"
-									data-link-field="dtp_input1">
-									<input id="shijiankuang4" name="shijiankuang4" size="25"
-										type="text" value="" readonly> <span class="add-on"><i
-										class="icon-remove"></i> </span> <span class="add-on"><i
-										class="icon-th"></i> </span>
-								</div>
-								<input type="hidden" id="dtp_input1" value="" /><br />
-							</div>
-							<input type="text" name="ordername" id="ordername"
-								placeholder=" 订单编号" style="width:250px" class="input-text">
-							<button name="" id="" type="submit" class="btn btn-success">
-								<i class="Hui-iconfont">&#xe665;</i> 搜订单
-							</button>
 
-						
+						<span id="riqi">日期范围</span>：
+						<div class="control-group" id="shijian1">
+							<label class="control-label"> 初始时间</label>
+							<div class="controls input-append date form_datetime"
+								data-date="2017-06-16T00:00:00Z" data-date-format="yyyy-MM-dd"
+								data-link-field="dtp_input1">
+								<input id="shijiankuang3" name="shijiankuang3" size="25"
+									type="text" value="" readonly> <span class="add-on"><i
+									class="icon-remove"></i> </span> <span class="add-on"><i
+									class="icon-th"></i> </span>
+							</div>
+							<input type="hidden" id="dtp_input1" value="" /><br />
+						</div>
+						<div class="control-group" id="shijian2">
+							<label class="control-label"> 初始时间</label>
+							<div class="controls input-append date form_datetime"
+								data-date="2017-06-16T00:00:00Z" data-date-format="yyyy-MM-dd"
+								data-link-field="dtp_input1">
+								<input id="shijiankuang4" name="shijiankuang4" size="25"
+									type="text" value="" readonly> <span class="add-on"><i
+									class="icon-remove"></i> </span> <span class="add-on"><i
+									class="icon-th"></i> </span>
+							</div>
+							<input type="hidden" id="dtp_input1" value="" /><br />
+						</div>
+						<input type="text" name="ordername" id="ordername"
+							placeholder=" 订单编号" style="width:250px" class="input-text">
+						<button name="" id="" type="submit" class="btn btn-success">
+							<i class="Hui-iconfont">&#xe665;</i> 搜订单
+						</button>
+
+
 					</form>
 					<div class="cl pd-5 bg-1 bk-gray mt-20">
-						<span class="l"> <span class="r">共有数据：<strong style="font-size:25px">${list.total }</strong> 条</span>
+						<input type="hidden" id="jishu" value="${jishu}"> <span
+							class="l"> <span class="r">共有数据：<strong
+								style="font-size:25px">${list.total }</strong> 条</span>
 					</div>
 					<div class="mt-20">
 						<table
@@ -164,7 +169,7 @@
 										onmouseout="this.style.backgroundColor = '#afd1f3 ';">订单时间</th>
 									<th width="150"
 										onmouseover="this.style.backgroundColor = '#5F9F9F ';"
-										onmouseout="this.style.backgroundColor = '#afd1f3 ';">桌子id</th>
+										onmouseout="this.style.backgroundColor = '#afd1f3 ';">桌子编号</th>
 									<th width="60"
 										onmouseover="this.style.backgroundColor = '#5F9F9F ';"
 										onmouseout="this.style.backgroundColor = '#afd1f3 ';">消费金额</th>
@@ -173,44 +178,52 @@
 										onmouseout="this.style.backgroundColor = '#afd1f3 ';">服务员</th>
 									<th width="100"
 										onmouseover="this.style.backgroundColor = '#5F9F9F ';"
-										onmouseout="this.style.backgroundColor = '#afd1f3 ';">顾客</th>
-									<th width="100"
-										onmouseover="this.style.backgroundColor = '#5F9F9F ';"
 										onmouseout="this.style.backgroundColor = '#afd1f3 ';">评分</th>
 									<th width="100"
 										onmouseover="this.style.backgroundColor = '#5F9F9F ';"
 										onmouseout="this.style.backgroundColor = '#afd1f3 ';">评价</th>
-										<th width="100"
+									<th width="100"
 										onmouseover="this.style.backgroundColor = '#5F9F9F ';"
 										onmouseout="this.style.backgroundColor = '#afd1f3 ';">状态</th>
-									
+									<th width="100"
+										onmouseover="this.style.backgroundColor = '#5F9F9F ';"
+										onmouseout="this.style.backgroundColor = '#afd1f3 ';">消费详情</th>
+
 								</tr>
 
 							</thead>
 							<tbody id="xinxi">
-								
-								
+
+
 								<c:forEach items="${List1}" var="b">
 									<tr>
-										<td><input type="checkbox"></td>
+										<td><input type="checkbox">
+										</td>
 										<td>${b.order_id}</td>
 										<td>${b.order_time}</td>
 										<td>${b.order_fk_tabid}</td>
 										<td>${b.order_money}</td>
 										<td>${b.emp_name}</td>
-										<td>${b.cus_name}</td>
 										<td>${b.order_dt_score}</td>
 										<td>${b.oeder_dt_mark}</td>
-										<td><span class="label label-success radius">${b.code_name}</span></td>
-										
+										<td><span class="label label-success radius">${b.code_name}</span>
+										</td>
+										<td><button type="button"
+												onclick="xiaofeixiangqing('${b.order_id}')"
+												class="btn btn-primary" data-toggle="modal"
+												data-target=".bs-example-modal-lg">消费详情</button>
+										</td>
+
 									</tr>
 								</c:forEach>
 							</tbody>
 						</table>
-										<span style="margin-left:700px;">${list.pageStr}   第${list.currPage }页     共${list.allPage}页</span>
-						
-						
-						
+						<span style="margin-left:700px;">${list.pageStr}
+							第${list.currPage }页 共${list.allPage}页</span> <br /> <!-- <span><button
+								onclick="del()">上一页</button> <input id="yeshu" type="text"
+							value="1">
+							<button onclick="add()">下一页</button> </span> -->
+
 					</div>
 					</article>
 				</div>
@@ -220,7 +233,23 @@
 
 		</div>
 	</div>
-	
+	<div class="modal fade bs-example-modal-lg" id="mymodel"data-backdrop="false" tabindex="-1"
+		role="dialog" aria-labelledby="myLargeModalLabel">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<table class="table table-hover">
+					<c:forEach items="${xiangqing}" var="a">
+						<tr>
+							<c:forEach items="${a}" var="b">
+								<td>${b}</td>
+							</c:forEach>
+						</tr>
+					</c:forEach>
+				</table>
+				<button type="button" class="btn btn-danger btn-xm"onclick="quxiao()" data-dismiss="modal">取消</button>
+			</div>
+		</div>
+	</div>
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script type="text/javascript" src="../js/jquery-2.1.3.js"
 		charset="UTF-8"></script>
@@ -229,10 +258,10 @@
 		charset="UTF-8"></script>
 	<script type="text/javascript"
 		src="../js/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
-		
-	
+
+
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
-	
+
 	<script type="text/javascript" src="../js/jquery-2.1.3.js"
 		charset="UTF-8"></script>
 	<script type="text/javascript" src="../js/bootstrap.min.js"></script>
@@ -241,7 +270,7 @@
 	<script type="text/javascript"
 		src="../js/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
 	<script type="text/javascript">
-		 $(".form_datetime").datetimepicker({
+		$(".form_datetime").datetimepicker({
 			//language:  'fr',
 			weekStart : 1,
 			todayBtn : 1,
@@ -251,6 +280,72 @@
 			forceParse : 0,
 			showMeridian : 1,
 		})
+		function del() {
+			var totol = document.getElementById("jishu").value;
+			var index = document.getElementById("yeshu").value;
+			if (index > 1) {
+				index = index * 1 - 1
+			} else {
+				index = 1
+			}
+			$("#yeshu").val(index);
+			$.ajax({
+				type : "post",
+				url : "/Ordersystem/del.action",
+				dataType : "text",
+				data : {
+					count : index,
+
+				},
+				success : function(data) {
+					alert("1111");
+				}
+
+			})
+
+		}
+		function add() {
+			var totol = document.getElementById("jishu").value;
+			var index = document.getElementById("yeshu").value;
+			index = index * 1 + 1;
+			$("#yeshu").val(index);
+			$.ajax({
+				type : "post",
+				url : "/Ordersystem/del.action",
+				dataType : "text",
+				data : {
+					count : index,
+
+				},
+				success : function(data) {
+					alert("1111");
+				}
+			})
+		}
+		function xiaofeixiangqing(index) {
+			$.ajax({
+				type : "post",
+				url : "/Ordersystem/xiaofeixiangqing.action",
+				dataType : "text",
+				data : {
+					xiaofeiid : index,
+				},
+				success : function(data) {
+				}
+			})
+		}
+		function quxiao(){
+
+			window.location.reload();
+			
+		}
+		/* $("#mymodel").on("hidden.bs.modal", function(e) {
+			window.location.reload();//页面刷新
+		}) */
+		/* $("#mymodel").modal({
+			show : false,
+			backdrop : "static"
+		}); */
 	</script>
 </body>
 </html>

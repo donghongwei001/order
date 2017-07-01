@@ -226,6 +226,7 @@ span {
 											<td width="250">${a.food_name}</td>
 											<td width="250">${a.order_food_num}</td>
 											<td width="250">${a.food_price}</td>
+											<td width="250">${a.code_name}</td>
 										</tr>
 									</c:forEach>
 								</table>
