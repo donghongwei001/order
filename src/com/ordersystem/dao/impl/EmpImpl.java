@@ -64,7 +64,7 @@ public class EmpImpl implements EmpDao{
 	 */
 	public List queryEmp(String sta,String pageSize,String startIndex) {
 		// TODO Auto-generated method stub
-		String sql = "select top "+pageSize+" et.emp_id,et.emp_name,et.emp_gender,et.emp_birday,et.emp_age,et.emp_idcar,et.emp_address,et.emp_hire_date,et.emp_fk_pos_id,ct.code_id,ct.code_name emp_state,et.emp_phone,rt.role_name,et.emp_fk_pos_id,et.emp_pic from role_table rt,emp_table et,code_table ct where rt.role_id=et.emp_fk_pos_id and ct.code_id=et.emp_state "+sta+" and et.emp_id not in(select top "+startIndex+" et.emp_id from role_table rt,emp_table et,code_table ct where rt.role_id=et.emp_fk_pos_id and ct.code_id=et.emp_state "+sta+" order by et.emp_id asc) order by et.emp_id asc";
+		String sql = "select top "+pageSize+" et.emp_id,et.emp_name,et.emp_gender,et.emp_birday,et.emp_age,et.emp_idcar,et.emp_address,et.emp_hire_date,et.emp_fk_pos_id,ct.code_id,ct.code_name emp_state,et.emp_phone,rt.role_name,et.emp_fk_pos_id,et.emp_pic from role_table rt,emp_table et,code_table ct where rt.role_id=et.emp_fk_pos_id and ct.code_id=et.emp_state "+sta+" and et.emp_id not in(select top "+startIndex+" et.emp_id from role_table rt,emp_table et,code_table ct where rt.role_id=et.emp_fk_pos_id and ct.code_id=et.emp_state "+sta+" order by et.emp_id desc) order by et.emp_id desc";
 		String sql2 = "select count(*) from role_table rt,emp_table et,code_table ct where rt.role_id=et.emp_fk_pos_id and ct.code_id=et.emp_state "+sta+"";
 		List page = new ArrayList();
 		try {

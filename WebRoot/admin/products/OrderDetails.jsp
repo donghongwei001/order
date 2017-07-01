@@ -46,6 +46,13 @@
 		overflow:auto;
 		margin:20px;
 	}
+	#autoback{
+		border:0px solid red;
+		position:absolute;
+		background-color:white;
+		height:auto;
+		display:none;
+	}
   </style>
   <script type="text/javascript">
   	//统计菜品总价
@@ -90,7 +97,7 @@
 		<div class="collg5">
 			<div class="mymenu">
 					<b style="font-size:18">菜单目录</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<input type="text" id="foodname" name="foodname" value="${userseach }" style="width:160px">
+					<input type="text" id="foodname" name="foodname" value="${userseach }" onkeyup="autoback(this)" style="width:160px">
 					<button  id="searchfood" >搜索</button>
 				<table class="table table-striped table-condensed table-hover">
 					<tr>
@@ -124,9 +131,49 @@
 	<a class="btn btn-primary button-control" href="javascript:paymoney('${table_id}')">结账</a>
 	<a class="btn btn-success button-control" href="${pageContext.request.contextPath}/serv_showTable.action" style="margin:0 10 0 10">返回</a>
 	<a class="btn btn-primary button-control" href="javascript:reminder('${table_id}')">催菜</a>
+	<div id="autoback" onclick=""></div>
 </div>
 <script type="text/javascript">
 	
+	//自动补全搜索框的方法
+	function autoback(data){
+		var val = data.value;
+		var top = $("#foodname").offset().top;
+		var left = $("#foodname").offset().left;
+		var width = $("#foodname").outerWidth();
+		var height = $("#foodname").height();
+		$("#autoback").css("top",top+height);
+		$("#autoback").css("left",left);
+		$("#autoback").css("width",width);
+		if(val=="")return;
+		$.ajax({
+					url:"/Ordersystem/serv_autoshow.action",
+					data:{foodname:val},
+					type:"post",
+					dataType:"text",
+					success:function(list){
+						var arr = list.split(",");
+						$("#autoback").empty();					//先清空div
+						$("#autoback").css("display","block");	//按块状显示div
+						var str = "";
+						for(var i=0;i<arr.length;i++){
+							str += "<div onmouseover='bgco(this)' onmouseout='bgcot(this)' onclick='pushval(this)'>"+arr[i]+"</div>";
+						}
+						$("#autoback").append(str);
+					}
+				})
+	}
+		function pushval(di){
+			//alert($(di).text());
+			$("#foodname").val($(di).text());
+			$("#autoback").empty();	
+		}
+		function bgco(div){
+			div.style.backgroundColor="green";
+		}
+		function bgcot(div){
+			div.style.backgroundColor="white";
+		} 
 
 	//jq修改数量的方法
 	$(".numb").click(function(){

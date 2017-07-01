@@ -152,7 +152,7 @@
 							style="BORDER-RIGHT: gray 1px solid; BORDER-TOP: gray 1px solid; BORDER-LEFT: gray 1px solid; WIDTH: 100%; WORD-BREAK: break-all; BORDER-BOTTOM: gray 1px solid; BORDER-COLLAPSE: collapse; BACKGROUND-COLOR: #f5fafe; WORD-WRAP: break-word">
 							<tr
 								style="FONT-WEIGHT: bold; FONT-SIZE: 12pt; HEIGHT: 25px; BACKGROUND-COLOR: #afd1f3">
-								<th align="center" width="14%">编号</th>
+								<th align="center" width="14%">序号</th>
 								<th align="center" width="18%">菜品名称</th>
 								<th align="center" width="9%">菜品价格</th>
 								<th width="8%" align="center">所属菜系</th>
@@ -162,9 +162,9 @@
 								<th width="8%" align="center">删除</th>
 							</tr>
 							<tbody id = "tbody">
-							<c:forEach items="${disheInfo }" var="di">
+							<c:forEach items="${disheInfo }" var="di" varStatus="die">
 							<tr	style="FONT-WEIGHT: bold; FONT-SIZE: 12pt; HEIGHT: 25px; BACKGROUND-COLOR: #afd1f3">
-								<td align="center" width="14%">${di.food_id }</td>
+								<td align="center" width="14%">${die.count }</td>
 								<td align="center" width="18%">${di.food_name }</td>
 								<td align="center" width="9%">${di.food_price }</td>
 								<td align="center" width="9%">${di.dishes_name }</td>
@@ -235,7 +235,7 @@
 				 $("#tbody").empty();
 				 for(var i=0;i<list.length;i++){
 					  var tr = $("<tr style='FONT-WEIGHT: bold; FONT-SIZE: 12pt; HEIGHT: 25px; BACKGROUND-COLOR: #afd1f3'>"+
-								"<td align='center' width='14%'>"+list[i].food_id+"</td>"+
+								"<td align='center' width='14%'>"+((pageNo-1)*12+i+1)+"</td>"+
 								"<td align='center' width='18%'>"+list[i].food_name+"</td>"+
 								"<td align='center' width='9%'>"+list[i].food_price+"</td>"+
 								"<td align='center' width='9%'>"+list[i].dishes_name+"</td>"+
@@ -263,7 +263,7 @@
 				 $("#tbody").empty();
 				 for(var i=0;i<list.length;i++){
 						  var tr = $("<tr style='FONT-WEIGHT: bold; FONT-SIZE: 12pt; HEIGHT: 25px; BACKGROUND-COLOR: #afd1f3'>"+
-								"<td align='center' width='14%'>"+list[i].food_id+"</td>"+
+								"<td align='center' width='14%'>"+((pageNo-1)*12+i+1)+"</td>"+
 								"<td align='center' width='18%'>"+list[i].food_name+"</td>"+
 								"<td align='center' width='9%'>"+list[i].food_price+"</td>"+
 								"<td align='center' width='9%'>"+list[i].dishes_name+"</td>"+
@@ -291,7 +291,7 @@
 				 $("#tbody").empty();
 				 for(var i=0;i<list.length;i++){
 						  var tr = $("<tr style='FONT-WEIGHT: bold; FONT-SIZE: 12pt; HEIGHT: 25px; BACKGROUND-COLOR: #afd1f3'>"+
-								"<td align='center' width='14%'>"+list[i].food_id+"</td>"+
+								"<td align='center' width='14%'>"+((pageNo-1)*12+i+1)+"</td>"+
 								"<td align='center' width='18%'>"+list[i].food_name+"</td>"+
 								"<td align='center' width='9%'>"+list[i].food_price+"</td>"+
 								"<td align='center' width='9%'>"+list[i].dishes_name+"</td>"+

@@ -211,6 +211,28 @@ public class ServicePageService {
 		Object[] params = new Object[]{newnum,odfid};
 		return spi.updateStatus(sql, params);
 	}
+
+	/**服务员界面搜索自动补全
+	 * @author hcb
+	 * @return 
+	 * 
+	 */
+	public String showfoodname(String foodname) {
+		// TODO Auto-generated method stub
+		String sql="select food_name from food_table where food_name like ?";
+		List<Object> showfoodname = spi.showfoodname(sql,foodname);
+		if (showfoodname==null) {
+			return null;
+		}
+		String namestr = "";
+		for (int i=0;i<showfoodname.size();i++) {
+			if (i>0) {
+				namestr += ",";
+			}
+			namestr += showfoodname.get(i);
+		}
+		return namestr;
+	}
 	
 
 }

@@ -249,6 +249,21 @@ public class ServicePageAction extends BaseAction implements ModelDriven<Service
 		return null;
 	}
 	
+	/**实现菜品搜索自动补全的方法
+	 * @author hcb
+	 * 
+	 */
+	public String autoshow(){
+		System.out.println("autoshow");
+		String foodname = super.getparameter("foodname");
+		System.out.println(foodname);
+		String foodnamestr = sps.showfoodname(foodname);
+		System.out.println(foodnamestr+"***foodnamestr");
+		if(foodnamestr!=null)
+		super.write(foodnamestr);
+		return null;
+	}
+	
 }
 
 

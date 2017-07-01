@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.ColumnListHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import com.daofactory.Connpool;
@@ -231,6 +232,23 @@ public class ServicePageImpl {
 			e.printStackTrace();
 		}
 		return num;
+	}
+
+	/**实现自动补全的方法
+	 * @author hcb
+	 * @return 
+	 * 
+	 */
+	public List<Object> showfoodname(String sql, String foodname) {
+		// TODO Auto-generated method stub
+		List<Object> query=null;
+		try {
+			query = qr.query(sql, new ColumnListHandler(1), "%"+foodname+"%");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return query;
 	}
 	
 	
