@@ -77,16 +77,16 @@ public class ServicePageImpl {
 		//sql1 为查到该桌号下正在吃饭的订单编号
 		//sql2 为查询sql1查到的订单编号下所有菜品的信息记录
 		
-		String sql1 = "select ot.order_id from table_table tt,order_table ot where table_state=9 and ot.order_status=11 and ot.order_fk_tabid=tt.table_id and tt.table_id=?";
+		/*String sql1 = "select ot.order_id from table_table tt,order_table ot where table_state=9 and ot.order_status=11 and ot.order_fk_tabid=tt.table_id and tt.table_id=?";
 		String sql2 = "select ft.food_name,ft.food_price,tt.table_name,tt.table_id,odf.order_food_num,ct.code_name,odf.order_food_mark,odf.order_food_id,ot.order_id from code_table ct,"+
 				"order_table ot,order_food odf,food_table ft,table_table tt where ot.order_id=odf.fk_order_id and odf.fk_food_id = ft.food_id and ct.code_id=odf.order_food_status and "+
-				"ot.order_fk_tabid=tt.table_id and ot.order_status=11 and ot.order_id=?";
-		Integer odId = null;
+				"ot.order_fk_tabid=tt.table_id and ot.order_status=11 and ot.order_id=?";*/
+		//Integer odId = null;
 		List<ServiceOrderListBean> solb = null;
 		try {
-			odId = (Integer) qr.query(sql1, new ScalarHandler(1), table_id);		//获取当前桌号为table_id未付款的订单编号
-			odId = odId==null?0:odId;
-			solb = qr.query("select ft.food_name,ft.food_price,tt.table_name,tt.table_id,odf.order_food_num,ct.code_name,odf.order_food_mark,odf.order_food_id,ot.order_id from code_table ct,order_table ot,order_food odf,food_table ft,table_table tt where ot.order_id=odf.fk_order_id and odf.fk_food_id = ft.food_id and ct.code_id=odf.order_food_status and ot.order_fk_tabid=tt.table_id and ot.order_status=11 and ot.order_id="+odId, new BeanListHandler<ServiceOrderListBean>(ServiceOrderListBean.class));
+			//odId = (Integer) qr.query(sql1, new ScalarHandler(1), table_id);		//获取当前桌号为table_id未付款的订单编号
+			//odId = odId==null?0:odId;
+			solb = qr.query("select ft.food_name,ft.food_price,tt.table_name,tt.table_id,odf.order_food_num,ct.code_name,odf.order_food_mark,odf.order_food_id,ot.order_id from code_table ct,order_table ot,order_food odf,food_table ft,table_table tt where ot.order_id=odf.fk_order_id and odf.fk_food_id = ft.food_id and ct.code_id=odf.order_food_status and ot.order_fk_tabid=tt.table_id and odf.order_food_status not in (16) and ot.order_status=11 and ot.order_id=(select ot.order_id from table_table tt,order_table ot where table_state=9 and ot.order_status=11 and ot.order_fk_tabid=tt.table_id and tt.table_id="+table_id+")", new BeanListHandler<ServiceOrderListBean>(ServiceOrderListBean.class));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

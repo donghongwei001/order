@@ -113,7 +113,7 @@ div {
 				</div>
 				<a href="javascript:starteat()" class="btn btn-info button-control" role="button">开台</a><BR>
 				<a href="javascript:reminder()" class="btn btn-warning button-control" role="button">催菜</a><BR>
-				<a href="ManagementTable.jsp" target="main" class="btn btn-primary button-control" role="button">餐桌管理</a><BR>
+				<a href="${pageContext.request.contextPath}/serv_showTable.action" target="main" class="btn btn-primary button-control" role="button">餐桌管理</a><BR>
 				<a href="javascript:cancelCall()" class="btn btn-danger button-control" role="button">取消呼叫</a><BR>
 				<a href="${pageContext.request.contextPath}/serv_showTable.action" class="btn btn-success button-control" role="button">刷新页面</a><BR>
 				<a href="javascript:clear()" class="btn btn-danger button-control" role="button">清扫结束</a>
@@ -204,6 +204,7 @@ div {
 							//alert(list);
 							if(list=="true"){
 								alert("操作成功!");
+								flush();
 							}else{
 								alert("操作失败,服务器忙,请稍后再试!");
 							}
@@ -228,6 +229,7 @@ div {
 						//alert(list);
 						if(list=="true"){
 							alert("开台成功,开始点菜吧!");
+							flush();
 						}else{
 							alert("操作失败,服务器忙,请稍后再试!");
 						}
@@ -279,6 +281,7 @@ div {
 							//alert(list);
 							if(list=="true"){
 								alert("操作成功,桌台已为可用!");
+								flush();
 							}else{
 								alert("操作失败,服务器忙,请稍后再试!");
 								
@@ -288,6 +291,15 @@ div {
 				}
 			}
 		}
+		
+		//刷新页面重新加载
+		function flush(){
+		$("input[name='checkbox']").each(function(){
+		
+			$(this).attr("checked","false"); 
+		})
+		location.reload(); 
+	}
 		
 		//公用方法 用来获取frame框中选中的checkbox value
 		function getValue() {

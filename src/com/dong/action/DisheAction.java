@@ -259,7 +259,7 @@ public class DisheAction extends BaseAction implements ModelDriven<DisheBean> {
 		}
 		db.setFood_description(description);
 		db.setFood_pic(fileName);
-		System.out.println(db);
+		//System.out.println(db);
 		int i = ds.updateDishes(db);		//调用更新的方法
 		queryAllDishes();
 		return "succ";

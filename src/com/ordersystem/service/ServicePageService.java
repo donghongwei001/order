@@ -5,8 +5,10 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import com.daofactory.Connpool;
+import com.daofactory.DaoFactory;
 import com.ordersystem.dao.impl.ServicePageImpl;
 import com.ordersystem.domain.DisheBean;
 import com.ordersystem.domain.ServiceOrderListBean;
@@ -59,14 +61,15 @@ public class ServicePageService {
 		return solb;
 	}
 
-	/**通过order_food_id移除数据库中的该菜
+	/**通过order_food_id移除数据库中的该菜 //(方法修改为修改数据库状态为退菜)
 	 * @author hcb
 	 * 
 	 */
 	public int delOrderfood(String foodid) {
 		// TODO Auto-generated method stub
-		int i = spi.delOrderfood(foodid);
-		return i;
+		String sql = "update order_food set order_food_status=16 where order_food_id=? and order_food_status=1";
+		Object[] params = new Object[]{foodid};
+		return spi.updateStatus(sql, params);
 	}
 
 
@@ -146,21 +149,29 @@ public class ServicePageService {
 	 */
 	public Integer updateTable(String tableid) {
 		// TODO Auto-generated method stub
-		String sql = "update  table_table set table_state=8 where table_id= ? and table_state=10";
+		String sql = "update table_table set table_state=8 where table_id= ? and table_state=10";
 		Object[] params = new Object[]{tableid};
 		return spi.updateStatus(sql, params);
 	}
 
 	/**服务员界面开台的方法
 	 * @author hcb
+	 * 插入订单前应先判断该桌号的桌子状态是否为空闲
 	 * 向订单表中插入一条订单信息
 	 * 把桌子状态改为占用
 	 */
-	public Integer starteat(String tableid,String empid) {
+	public Integer starteat(String tableid) {
 		// TODO Auto-generated method stub
 		
 		String sql = "insert into order_table (order_time,order_fk_tabid,order_money,order_fk_empid,order_lasttime,order_status) values (?,?,?,?,?,?)";
 		String date = MyFormat.getLastServingFormat().format(new Date());
+		String sql1 = "select fk_emp_id from ser_tab,table_table where table_id=fk_table_id and table_id="+tableid;
+		Integer empid = spi.findone(sql1);				//获得该桌子对应的服务员编号
+		String sql3 = "select table_state from table_table where table_id="+tableid;	//获得该桌子编号的桌子状态
+		Integer tabstatus = spi.findone(sql3);				//获得该桌子对应的服务员编号
+		if (tabstatus!=8) {
+			return -1;
+		}
 		Object[] params = new Object[]{date,tableid,0,empid,date,11};
 		Integer i = spi.updateStatus(sql, params);		//向订单表中插入一条订单记录
 		Integer j = 0;
@@ -190,13 +201,14 @@ public class ServicePageService {
 	 * 3.更新该菜的数量
 	 * 
 	 */
-	public Integer updatefoodnum(String tabid, String foodname, String newnum) {
+	public Integer updatefoodnum(String odfid,String newnum) {
 		// TODO Auto-generated method stub
-		Integer orderId = spi.searchOrderId(tabid);		//得到该桌子的正在吃饭的订单id
+		/*Integer orderId = spi.searchOrderId(tabid);		//得到该桌子的正在吃饭的订单id
 		String sql1 = "select food_id from food_table where food_name='"+foodname+"'";		//获得指定菜名的菜品序号
 		Integer foodid = spi.findone(sql1);    			//得到需更改菜品的序号
-		String sql = "update order_food set order_food_num=? where fk_order_id=? and fk_food_id=? and order_food_status=1";
-		Object[] params = new Object[]{newnum,orderId,foodid};
+		
+*/		String sql = "update order_food set order_food_num=? where order_food_id=? and order_food_status=1";
+		Object[] params = new Object[]{newnum,odfid};
 		return spi.updateStatus(sql, params);
 	}
 	
