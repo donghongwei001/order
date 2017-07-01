@@ -69,6 +69,9 @@ public class TableAction extends BaseAction {
 		return "ss";
 	}
 
+		/** 
+		 * 方法功能说明：查询所有桌子信息  
+		 */
 	public String seleAll() { 
 		List<TableBean> li=ts.seleA();
 		super.setsession("list", li);
