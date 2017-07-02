@@ -52,6 +52,7 @@
 		background-color:white;
 		height:auto;
 		display:none;
+		border-radius:10px;
 	}
   </style>
   <script type="text/javascript">
@@ -79,7 +80,7 @@
 			<div class="mytable">
 			  <table class="table table-striped table-condensed table-hover">
 				<tr>
-					<th>序号</th><th>菜目名称</th><th>数量</th><th>单价</th><th>状态</th><th>删除</th>
+					<th>序号</th><th>菜目名称</th><th>数量</th><th>单价</th><th>状态</th><th>备注</th><th>删除</th>
 				</tr>
 				<c:forEach items="${solb }" var="sb" varStatus="sob">
 				<tr>
@@ -88,6 +89,7 @@
 					<td name="numb" class="numb" id="${sb.order_food_id }" >${sb.order_food_num }</td>
 					<td name="price">${sb.food_price }</td>
 					<td>${sb.code_name }</td>
+					<td name="mark" class="mymark" id="${sb.order_food_id }" >${sb.order_food_mark }</td>
 					<td><input type="checkbox" name="foodmenu" value="${sb.order_food_id }"></td>
 				</tr>
 				</c:forEach>
@@ -131,7 +133,7 @@
 	<a class="btn btn-primary button-control" href="javascript:paymoney('${table_id}')">结账</a>
 	<a class="btn btn-success button-control" href="${pageContext.request.contextPath}/serv_showTable.action" style="margin:0 10 0 10">返回</a>
 	<a class="btn btn-primary button-control" href="javascript:reminder('${table_id}')">催菜</a>
-	<div id="autoback" onclick=""></div>
+	<div id="autoback" ></div>
 </div>
 <script type="text/javascript">
 	
@@ -157,11 +159,11 @@
 						$("#autoback").css("display","block");	//按块状显示div
 						var str = "";
 						for(var i=0;i<arr.length;i++){
-							str += "<div onmouseover='bgco(this)' onmouseout='bgcot(this)' onclick='pushval(this)'>"+arr[i]+"</div>";
+							str += "<div style='padding-left:10px' onmouseover='bgco(this)' onmouseout='bgcot(this)' onclick='pushval(this)'>"+arr[i]+"</div>";
 						}
 						$("#autoback").append(str);
 					}
-				})
+				});
 	}
 		function pushval(di){
 			//alert($(di).text());
@@ -175,6 +177,59 @@
 			div.style.backgroundColor="white";
 		} 
 
+	//jq修改口味备注的方法
+	$(".mymark").click(function(){
+				var self=$(this);
+				var odfid = this.id;
+				var trEle=self.text();
+				//var foodname = $(this).prev().text();
+				//var tbid = $("#tbid").val();
+				$(this).text("");
+				var newinput=$("<input type='text' value="+trEle+">");
+				$(newinput).width("30");
+				$(newinput).height("20");
+				$(this).append(newinput);
+				$(newinput).click(
+					function(){return false;}	//阻止当再次点击td是调用此方法
+				);
+				$(newinput).blur(
+					function(){
+						var vl=$(this).val();
+						if(vl==trEle) {
+							$(this).remove();
+							$(self).text(trEle);
+							return;
+						}
+						var flag = window.confirm("您确定修改菜品备注吗?");
+						if(flag){
+							$.ajax({			//调用ajax修改数据库订单数量
+								url:"/Ordersystem/serv_updatemark.action",
+								data:{odfid:odfid,newmark:vl},
+								type:"post",
+								dataType:"text",
+								success:function(list){
+										$(this).remove();
+									if(list=="true"){
+										alert("修改备注成功!");
+										$(self).text(vl);
+										flush();
+										//countprice();
+									}else{
+										alert("操作失败,请稍后再试!");
+										$(self).text(trEle);
+									}
+									
+								}
+							});
+							
+						}else{
+							$(this).remove();
+							$(self).text(trEle);
+						}
+					}
+				);
+			});
+	
 	//jq修改数量的方法
 	$(".numb").click(function(){
 				var self=$(this);
@@ -218,12 +273,15 @@
 									}
 									
 								}
-							})
+							});
 							
+						}else{
+							$(this).remove();
+							$(self).text(trEle);
 						}
 					}
 				);
-			})
+			});
 	
 
 
@@ -253,7 +311,7 @@
 				//$("#pagetotal").text("共"+pagecount+"页"); 
 			}
 		}); 
-	})
+	});
 	
 	//付款的方法
 	function paymoney(tbid){

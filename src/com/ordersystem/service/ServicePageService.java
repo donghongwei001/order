@@ -1,6 +1,7 @@
 package com.ordersystem.service;
 
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
@@ -11,6 +12,7 @@ import com.daofactory.Connpool;
 import com.daofactory.DaoFactory;
 import com.ordersystem.dao.impl.ServicePageImpl;
 import com.ordersystem.domain.DisheBean;
+import com.ordersystem.domain.FantailvBean;
 import com.ordersystem.domain.ServiceOrderListBean;
 import com.ordersystem.domain.ServiceTable;
 import com.ordersystem.entity.MyFormat;
@@ -196,7 +198,6 @@ public class ServicePageService {
 
 	/**更新数据库订单中的菜品数量 服务员界面中的修改菜品数量
 	 * @author hcb
-	 * 1.需先查询出当桌号前吃饭的订单编号
 	 * 2.查询出该菜名的菜品序号
 	 * 3.更新该菜的数量
 	 * 
@@ -209,6 +210,19 @@ public class ServicePageService {
 		
 */		String sql = "update order_food set order_food_num=? where order_food_id=? and order_food_status=1";
 		Object[] params = new Object[]{newnum,odfid};
+		return spi.updateStatus(sql, params);
+	}
+	
+	/**更新数据库订单中的菜品数量 服务员界面中的修改菜品数量
+	 * @author hcb
+	 * 2.查询出该菜名的菜品序号
+	 * 3.更新该菜的数量
+	 * 
+	 */
+	public Integer updatefoodmark(String odfid, String newmark) {
+		// TODO Auto-generated method stub
+		String sql = "update order_food set order_food_mark=? where order_food_id=? and order_food_status=1";
+		Object[] params = new Object[]{newmark,odfid};
 		return spi.updateStatus(sql, params);
 	}
 
@@ -233,6 +247,29 @@ public class ServicePageService {
 		}
 		return namestr;
 	}
+
+	/**查询当天和通用查询的方法
+	 * @author hcb
+	 * 
+	 */
+	public List<FantailvBean> fantailv(String starttime, String endtime,Integer day) {
+		// TODO Auto-generated method stub
+		Timestamp todayStarttime = MyFormat.getDayBeginTimestamp();
+		String nowTime = MyFormat.getDateformat().format(new Date());
+		String sql = "select table_id,count(order_id) sailnum,SUM(order_money) countmoney from table_table left join order_table on order_fk_tabid=table_id and order_time between '"+todayStarttime+"' and '"+nowTime+"' group by table_id";
+		if (starttime!=null && endtime!=null) {
+			sql = "select table_id,count(order_id) sailnum,SUM(order_money) countmoney from table_table left join order_table on order_fk_tabid=table_id and order_time between '"+starttime+"' and '"+endtime+"' group by table_id";
+		}
+		if (day!=null) {
+			String dayBefore = MyFormat.getDayBefore(day);
+			sql = "select table_id,count(order_id) sailnum,SUM(order_money) countmoney from table_table left join order_table on order_fk_tabid=table_id and order_time between '"+dayBefore+"' and '"+nowTime+"' group by table_id";
+		}
+		System.out.println(sql);
+		List<FantailvBean> ftlList = spi.queryFantailv(sql);
+		return ftlList;
+	}
+
+	
 	
 
 }

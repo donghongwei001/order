@@ -12,12 +12,13 @@
 
   <style type="text/css">
 		#id1, .img, img {border:0px solid red;
-			width:120px;
+			width:130px;
 			height:180px;
 		}
 		.aa1{width:900px;}
 	</style>
 
+<script type="text/javascript" src="${pageContext.request.contextPath}/admin/js/shengshilianli.js"></script>
 </HEAD>
 
 <body>
@@ -42,7 +43,7 @@
 			<tr>
 				<td align="center" bgColor="#f5fafe" class="ta_01">性别：</td>
 				<td class="ta_01" bgColor="#ffffff" colspan="3">
-				<input type="radio" name="emp.emp_gender" checked="checked" value="男" />男
+				<input type="radio" name="emp.emp_gender" value="男" />男
 				<input type="radio"name="emp.emp_gender" value="女" />女
 				</td>
 			</tr>
@@ -50,7 +51,7 @@
 				<td align="center" bgColor="#f5fafe" class="ta_01">出生年月：</td>
 				<td class="ta_01" bgColor="#ffffff" colspan="3">
 				<select name="emp.emp_birday">
-							<option value="--请选择--">--请选择--</option>
+							<option value="">--请选择--</option>
 							<option value="1972">1972</option>
 							<option value="1973">1973</option>
 							<option value="1974">1974</option>
@@ -77,9 +78,9 @@
 							<option value="1995">1995</option>
 							<option value="1996">1996</option>
 							<option value="1997">1997</option>
-						</select>
+						</select>年
 						<select name="emp.emp_birday">
-						<option value="--请选择--">--请选择--</option>
+						<option value="">--请选择--</option>
 						<option value="1">1</option>
 						<option value="2">2</option>
 						<option value="3">3</option>
@@ -92,8 +93,8 @@
 						<option value="10">10</option>
 						<option value="11">11</option>
 						<option value="12">12</option>
-				</select> <select name="emp.emp_birday">
-						<option value="--请选择--">--请选择--</option>
+				</select> 月<select name="emp.emp_birday">
+						<option value="">--请选择--</option>
 						<option value="1">1</option>
 						<option value="2">2</option>
 						<option value="3">3</option>
@@ -125,7 +126,7 @@
 						<option value="29">29</option>
 						<option value="30">30</option>
 						<option value="31">31</option>
-				</select></td>
+				</select>日</td>
 			</tr>
 
 
@@ -172,16 +173,20 @@
 			</tr>
 			<tr>
 				<td align="center" bgColor="#f5fafe" class="ta_01">家庭住址：</td>
-				<td class="ta_01" bgColor="#ffffff" colspan="3"><input type="text"
-					name="emp.emp_address" 
-					class="bg" />
+				<td class="ta_01" bgColor="#ffffff" colspan="3">
+				<!-- <input type="text"	name="emp.emp_address" 	class="bg" /> -->
+					
+					<select id="cmbProvince" name="emp.emp_address"></select>  
+					<select id="cmbCity" name="emp.emp_address"></select>  
+					<select id="cmbArea" name="emp.emp_address"></select>  
+					<input type="text"	name="emp.emp_address" 	class="bg" />
 				</td>
 			</tr>
 			<tr>
 				<td align="center" bgColor="#f5fafe" class="ta_01">入职时间：</td>
 				<td class="ta_01" bgColor="#ffffff"><select
 					name="emp.emp_hire_date">
-						<option value="--请选择--">--请选择--</option>
+						<option value="">--请选择--</option>
 						<option value="2012">2012</option>
 						<option value="2013">2013</option>
 						<option value="2014">2014</option>
@@ -189,7 +194,7 @@
 						<option value="2016">2016</option>
 						<option value="2017">2017</option>
 				</select>年 <select name="emp.emp_hire_date">
-						<option value="--请选择--">--请选择--</option>
+						<option value="">--请选择--</option>
 						<option value="1">1</option>
 						<option value="2">2</option>
 						<option value="3">3</option>
@@ -202,8 +207,8 @@
 						<option value="10">10</option>
 						<option value="11">11</option>
 						<option value="12">12</option>
-				</select> <select name="emp.emp_hire_date">
-						<option value="--请选择--">--请选择--</option>
+				</select> 月<select name="emp.emp_hire_date">
+						<option value="">--请选择--</option>
 						<option value="1">1</option>
 						<option value="2">2</option>
 						<option value="3">3</option>
@@ -235,7 +240,7 @@
 						<option  value="29">29</option>
 						<option  value="30">30</option>
 						<option  value="31">31</option>
-					</select>	
+					</select>日	
 				</td>
 				<td id="id1" bgColor="#ffffff" rowspan="5">
 					 <div id="preview"></div> 					<!-- 添加图片预览位置 --><!-- 添加图片预览位置 --><!-- 添加图片预览位置 -->
@@ -248,7 +253,7 @@
 				<td align="center" bgColor="#f5fafe" class="ta_01">职位：</td>
 				<td class="ta_01" bgColor="#ffffff">
 					<select  name="emp.emp_fk_pos_id" id="posSelect">
-						<option value="--请选择--" selected="selected">--请选择--</option>
+						<option value="" selected="selected">--请选择--</option>
 					</select>
 				</td>
 				<td class="aa1" bgColor="#ffffff">
@@ -258,7 +263,7 @@
 				<td align="center" bgColor="#f5fafe" class="ta_01">状态：</td>
 				<td class="ta_01" bgColor="#ffffff"><select
 					name="emp.emp_state">
-						<option value="--请选择--" selected="selected">--请选择--</option>
+						<option value="" selected="selected">--请选择--</option>
 						<option value="4">在职</option>
 						<option value="5">请假</option>
 						<option value="7">调休</option>
@@ -313,6 +318,7 @@
 	</form>
 </body>
 <script type="text/javascript">
+  	addressInit('cmbProvince', 'cmbCity', 'cmbArea');  
 	//添加图片预览的js方法
 	 function preview(file)  
 		 {  

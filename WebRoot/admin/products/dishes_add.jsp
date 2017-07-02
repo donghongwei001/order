@@ -78,7 +78,7 @@
 		</tr>
 			<tr>
 				<td align="center" bgColor="#f5fafe" class="ta_01">上传图片：</td>
-				<td class="ta_01" bgColor="#ffffff" colSpan="3">
+				<td class="ta_01" bgColor="#ffffff">
 				<input
 					type="file" name="food_pic" size="30"  onchange="preview(this)"  value=""/>
 				</td>
