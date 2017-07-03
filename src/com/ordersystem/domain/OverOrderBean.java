@@ -4,6 +4,14 @@ public class OverOrderBean {
 	private String food_name;
 	private String food_price;
 	private String order_food_num;
+	private String code_name;
+	
+	public String getCode_name() {
+		return code_name;
+	}
+	public void setCode_name(String code_name) {
+		this.code_name = code_name;
+	}
 	public String getFood_name() {
 		return food_name;
 	}

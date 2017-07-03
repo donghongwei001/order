@@ -213,26 +213,36 @@ public class dongAction4 extends ActionSupport{
 		HttpServletRequest request=ServletActionContext.getRequest();
 		String shijian3=request.getParameter("shijiankuang3");
 		String shijian4=request.getParameter("shijiankuang4");
+		session.setAttribute("shijiankuang3", shijian3);
+		session.setAttribute("shijiankuang4", shijian4);
 		String name=request.getParameter("ordername");
 		if (name==""&&(shijian3!=""&&shijian4!="")) {
-			String sql = "select order_id,order_time,order_fk_tabid,order_money,order_fk_empid,order_fk_cusid,order_dt_score,oeder_dt_mark from order_table where order_time >=? and order_time<=?";
+			String sql = "select top 5 order_id,order_time,order_fk_tabid,order_money,emp_name,order_dt_score,oeder_dt_mark,code_name from order_table,emp_table,code_table where code_id=order_status and order_fk_empid=emp_id and order_id not in(select top 0 order_id from order_table ,emp_table where  order_fk_empid=emp_id and order_time >=? and order_time<=? order by order_id desc ) and order_time >=? and order_time<=? order by order_id desc";
 			//ArrayList tableList=new Userdaoimpl().executeQuery(sql);
 			QueryRunner qr = new QueryRunner(cp.getDataSource());
 			List<OrderBean> tableList = null;
 			try {
 
-				tableList = qr.query(sql, new BeanListHandler<OrderBean>(OrderBean.class),shijian3,shijian4);
-
+				tableList = qr.query(sql, new BeanListHandler<OrderBean>(OrderBean.class),shijian3,shijian4,shijian3,shijian4);
+				int sum = (Integer) qr.query("select count(*) from order_Table where order_time >=? and order_time<=?",new ScalarHandler(1),shijian3,shijian4);
+				int index=0;
+				if (sum%5!=0) {
+					index=(sum/5)+1;
+				}else {
+					index=sum/5;
+				}
+				session.setAttribute("jishu", index);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			
 			session.setAttribute("List1", tableList);
 
 
 		}
 		if (name!=""&&(shijian3==""&&shijian4=="")) {//select order_id,order_time,order_fk_tabid,order_money,order_fk_empid,order_fk_cusid,order_dt_score,oeder_dt_mark from order_table where order_id=?
-			String sql = "select order_id,order_time,order_fk_tabid,order_money,emp_name,cus_name,order_dt_score,oeder_dt_mark,code_name from order_table ,cus_table,emp_table,code_table  where order_table.order_fk_cusid=cus_table.cus_id and order_table.order_fk_empid=emp_table.emp_id and order_table.order_status=code_table.code_id and order_id=?";
+			String sql = "select order_id,order_time,order_fk_tabid,order_money,emp_name,order_dt_score,oeder_dt_mark,code_name from order_table,emp_table,code_table  where  order_table.order_fk_empid=emp_table.emp_id and order_table.order_status=code_table.code_id and order_id=?";
 			//ArrayList tableList=new Userdaoimpl().executeQuery(sql);
 			QueryRunner qr = new QueryRunner(cp.getDataSource());
 			List<OrderBean> tableList = null;
@@ -435,7 +445,7 @@ public class dongAction4 extends ActionSupport{
 			int flag2=new DaoFactory().executeUpdate("update table_table set table_state=9 where table_id=?", params4);
 			session.setAttribute("cart",null);
 			QueryRunner qr2 = new QueryRunner(cp.getDataSource());
-			List<OverOrderBean> tableList=qr2.query("select food_name, food_price,order_food_num from food_table,order_food where food_table.food_id=order_food.fk_food_id and order_food.fk_order_id=?", new BeanListHandler<OverOrderBean>(OverOrderBean.class),orderid);
+			List<OverOrderBean> tableList=qr2.query("select food_name,food_price,order_food_num,code_name from food_table,order_food,code_table  where code_id=order_food_status and food_id=fk_food_id and fk_order_id="+orderid, new BeanListHandler<OverOrderBean>(OverOrderBean.class));
 			session.setAttribute("cart1", tableList);
 			response.sendRedirect("index.jsp");
 		} catch (Exception e) {
@@ -527,7 +537,7 @@ public class dongAction4 extends ActionSupport{
 			int flag=new DaoFactory().executeUpdate("update order_table set order_status=12 where order_id=?", params);
 			System.out.println(flag);
 			Object[]params1=new Object[]{zhuohao};
-			int flag1=new DaoFactory().executeUpdate("update table_table set table_state=9 where table_id=? ", params1);
+			int flag1=new DaoFactory().executeUpdate("update table_table set table_state=10 where table_id=? ", params1);
 			System.out.println(flag1);
 			try {
 				session.invalidate();
@@ -711,8 +721,72 @@ public class dongAction4 extends ActionSupport{
 		}
 		return null;
 	}
+	private String  count;
+	
+	
+
+	public String getCount() {
+		return count;
+	}
 
 
+	public void setCount(String count) {
+		this.count = count;
+	}
+
+	//分页
+	@Action("del")
+	public String del(){
+		String shijian3=(String) session.getAttribute("shijiankuang3");
+		String shijian4=(String) session.getAttribute("shijiankuang4");
+		String count=getCount();
+		int count1=Integer.parseInt(count);
+		int count2=(count1-1)*5;
+		try {
+			String sql="select top 5 order_id,order_time,order_fk_tabid,order_money,emp_name,order_dt_score,oeder_dt_mark,code_name from order_table,emp_table,code_table where code_id=order_status and order_fk_empid=emp_id and order_id not in(select top "+count2+" order_id from order_table ,emp_table where  order_fk_empid=emp_id and order_time >="+shijian3+" and order_time<="+shijian4+" order by order_id desc ) and order_time >="+shijian3+" and order_time<="+shijian4+" order by order_id desc";
+			List<OrderBean> query = qr.query(sql,new BeanListHandler<OrderBean>(OrderBean.class));
+			session.setAttribute("list1", query);
+			response.sendRedirect("/Ordersystem/admin/products/order_list.jsp");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return null;
+		
+	}
+	
+	private String xiaofeiid;
+	
+	public String getXiaofeiid() {
+		return xiaofeiid;
+	}
+
+
+	public void setXiaofeiid(String xiaofeiid) {
+		this.xiaofeiid = xiaofeiid;
+	}
+
+	//消费详情
+	@Action("xiaofeixiangqing")
+	public  String xiaofeixiangqing(){
+		String id=request.getParameter("id");
+		String sql="select f.food_name,o.order_food_num,f.food_price,c.code_name from food_table f,order_food o,code_table c where f.food_id=o.fk_food_id and o.order_food_status=c.code_id and o.fk_order_id="+id;
+		ArrayList list=new DaoFactory().execQuery(sql, null);
+		String sql1="select order_time,order_lasttime,order_money from order_table where order_id="+id;
+		ArrayList list2=new DaoFactory().execQuery(sql1, null);
+		System.out.println(list.size());
+		session.setAttribute("shijian", list2);
+		session.setAttribute("xiangqing", list);
+		try {
+			response.sendRedirect("/Ordersystem/admin/products/order_xiangqing.jsp");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+		
+	}
 
 }
 
