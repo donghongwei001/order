@@ -107,7 +107,7 @@
 
 				<tr>
 					<td class="ta_01" align="center" bgColor="#f5fafe">
-						<table cellspacing="0" cellpadding="1" rules="all" bordercolor="gray" border="1" id="DataGrid1"
+						<table cellspacing="0" cellpadding="1" rules="all" bordercolor="gray" border="1" 
 							style="BORDER-RIGHT: gray 1px solid; BORDER-TOP: gray 1px solid; BORDER-LEFT: gray 1px solid; WIDTH: 100%; WORD-BREAK: break-all; BORDER-BOTTOM: gray 1px solid; BORDER-COLLAPSE: collapse; BACKGROUND-COLOR: #f5fafe; WORD-WRAP: break-word">
 							<tr style="FONT-WEIGHT: bold; FONT-SIZE: 12pt; HEIGHT: 25px; BACKGROUND-COLOR: #afd1f3">
 								<td align="center" width="25%">顾客编号</td>
@@ -115,6 +115,7 @@
 								<td align="center" width="25%">消费金额</td>
 								<td align="center" width="25%">详情</td>
 							</tr>
+							<tbody id="Datea">
 								<c:forEach items="${list}" var="row">
 									<tr style="FONT-WEIGHT: bold; HEIGHT:33px;FONT-WEIGHT: bold;FONT-SIZE: 12pt; HEIGHT: 25px;">
 										<td align="center" width="25%">${row.cus_id }</td>
@@ -128,13 +129,201 @@
 										</td>
 									</tr>
 								</c:forEach>
+								</tbody>
 						</table>
 					</td>
 				</tr>
 			</TBODY>
 		</table>
-	<button onclick="cusshang()">上一页</button>
-	<button onclick="cusxia()">下一页</button><span id="cusgong">第1页</span><span id="cusgong">共1页</span>
+	<div class="pagelist">
+		<span id="spanFirst" class="button border-main">首页</span> <span
+			id="spanPre" class="button border-main">上一页</span> <span
+			id="spanNext" class="button border-main">下一页</span> <span
+			id="spanLast" class="button border-main">尾页</span> 第<span
+			id="spanPageNum"></span>页/共 <span id="spanTotalPage"></span>页
+	</div>
+	<div style="display: none">
+		<span id="spanFirstt">首页</span> <span id="spanPret">上一页</span> <span
+			id="spanNextt"> 下一页</span> <span id="spanLastt">尾页</span> 第 <span
+			id="spanPageNumt"></span>页/共<span id="spanTotalPaget"></span>页
+	</div>
+<script type="text/javascript">
+	//分页
+	var theTable = document.getElementById("Datea");
+	var totalPage = document.getElementById("spanTotalPage");
+	var pageNum = document.getElementById("spanPageNum");
+
+	var spanPre = document.getElementById("spanPre");
+	var spanNext = document.getElementById("spanNext");
+	var spanFirst = document.getElementById("spanFirst");
+	var spanLast = document.getElementById("spanLast");
+
+	var totalPaget = document.getElementById("spanTotalPaget");
+	var pageNumt = document.getElementById("spanPageNumt");
+
+	var spanPret = document.getElementById("spanPret");
+	var spanNextt = document.getElementById("spanNextt");
+	var spanFirstt = document.getElementById("spanFirstt");
+	var spanLastt = document.getElementById("spanLastt");
+	
+
+
+	var numberRowsInTable = theTable.rows.length;
+	var pageSize = 5;
+	var page = 1;
+
+	//下一页     
+	function next() {
+
+		hideTable();
+
+		currentRow = pageSize * page;
+		maxRow = currentRow + pageSize;
+		if (maxRow > numberRowsInTable)
+			maxRow = numberRowsInTable;
+		for ( var i = currentRow; i < maxRow; i++) {
+			theTable.rows[i].style.display = '';
+		}
+		page++;
+
+		if (maxRow == numberRowsInTable) {
+			nextText();
+			lastText();
+		}
+		showPage();
+		preLink();
+		firstLink();
+	}
+
+	//上一页     
+	function pre() {
+
+		hideTable();
+
+		page--;
+
+		currentRow = pageSize * page;
+		maxRow = currentRow - pageSize;
+		if (currentRow > numberRowsInTable)
+			currentRow = numberRowsInTable;
+		for ( var i = maxRow; i < currentRow; i++) {
+			theTable.rows[i].style.display = '';
+		}
+
+		if (maxRow == 0) {
+			preText();
+			firstText();
+		}
+		showPage();
+		nextLink();
+		lastLink();
+	}
+
+	//第一页     
+	function first() {
+		hideTable();
+		page = 1;
+		for ( var i = 0; i < pageSize; i++) {
+			theTable.rows[i].style.display = '';
+		}
+		showPage();
+
+		preText();
+		nextLink();
+		lastLink();
+	}
+
+	//最后一页     
+	function last() {
+		hideTable();
+		page = pageCount();
+		currentRow = pageSize * (page - 1);
+		for ( var i = currentRow; i < numberRowsInTable; i++) {
+			theTable.rows[i].style.display = '';
+		}
+		showPage();
+
+		preLink();
+		nextText();
+		firstLink();
+	}
+
+	function hideTable() {
+		for ( var i = 0; i < numberRowsInTable; i++) {
+			theTable.rows[i].style.display = 'none';
+		}
+	}
+
+	//控制分页
+	function showPage() {
+		pageNum.innerHTML = page;
+		pageNumt.innerHTML = page;
+	}
+
+	//总共页数     
+	function pageCount() {
+        var count = 0;
+        if (numberRowsInTable % pageSize != 0) count = 1;
+        return parseInt(numberRowsInTable / pageSize) + count;
+    }
+
+	//显示链接     
+	function preLink() {
+		spanPre.innerHTML = "<a href='javascript:pre();' id='sasasaa'>上一页</a>";
+
+		spanPret.innerHTML = "<a href='javascript:pre();'>上一页</a>";
+	}
+	function preText() {
+		spanPre.innerHTML = "上一页";
+		spanPret.innerHTML = "上一页";
+	}
+
+	function nextLink() {
+		spanNext.innerHTML = "<a href='javascript:next();' id='sasasaa'>下一页</a>";
+
+		spanNextt.innerHTML = "<a href='javascript:next();'>下一页</a>";
+	}
+	function nextText() {
+		spanNext.innerHTML = "下一页";
+		spanNextt.innerHTML = "下一页";
+	}
+
+	function firstLink() {
+		spanFirst.innerHTML = "<a href='javascript:first();' id='sasasaa'>首页</a>";
+		spanFirstt.innerHTML = "<a href='javascript:first();'>首页</a>";
+	}
+	function firstText() {
+		spanFirst.innerHTML = "首页";
+		spanFirstt.innerHTML = "首页";
+	}
+
+	function lastLink() {
+		spanLast.innerHTML = "<a href='javascript:last();' id='sasasaa'>尾页";
+		spanLastt.innerHTML= "<a href='javascript:last();'>尾页</a>";
+	}
+	function lastText() {
+		spanLast.innerHTML = "尾页";
+		spanLastt.innerHTML = "尾页";
+	}
+
+	//隐藏表格     
+	function hide() {
+		for ( var i = pageSize; i < numberRowsInTable; i++) {
+			theTable.rows[i].style.display = 'none';
+		}
+
+		totalPage.innerHTML = pageCount();
+		pageNum.innerHTML = '1';
+
+		totalPaget.innerHTML = pageCount();
+		pageNumt.innerHTML = '1';
+
+		nextLink();
+		lastLink();
+	}
+	hide(); 
+</script>
+
 </body>
 </HTML>
 

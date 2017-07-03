@@ -5,6 +5,27 @@ public class TableBean {
 	private int table_Capacity;
 	private String  table_state;
 	private String fk_emp_id;
+	private String code_name;
+	private String emp_code_name;
+	public String getCode_name() {
+		return code_name;
+	}
+	public void setCode_name(String code_name) {
+		this.code_name = code_name;
+	}
+	public String getEmp_code_name() {
+		return emp_code_name;
+	}
+	public void setEmp_code_name(String emp_code_name) {
+		this.emp_code_name = emp_code_name;
+	}
+	public String getEmp_name() {
+		return emp_name;
+	}
+	public void setEmp_name(String emp_name) {
+		this.emp_name = emp_name;
+	}
+	private String emp_name;
 	private String table_name;
 	private String emp_state;
 	public String getEmp_state() {

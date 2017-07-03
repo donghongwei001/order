@@ -5,11 +5,12 @@ import java.text.DecimalFormat;
 public class CustBean {
 	private int cus_id;
 	private String cus_name;
-	private String  xiaofei;
-	public String getXiaofei() {
+	private Integer  xiaofei;
+	
+	public Integer getXiaofei() {
 		return xiaofei;
 	}
-	public void setXiaofei(String xiaofei) {
+	public void setXiaofei(Integer xiaofei) {
 		this.xiaofei = xiaofei;
 	}
 	public int getCus_id() {

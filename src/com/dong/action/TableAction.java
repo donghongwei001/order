@@ -3,7 +3,9 @@ package com.dong.action;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.mail.Session;
 import javax.servlet.ServletException;
@@ -73,16 +75,77 @@ public class TableAction extends BaseAction {
 		 * 方法功能说明：查询所有桌子信息  
 		 */
 	public String seleAll() { 
-		List<TableBean> li=ts.seleA();
+		String tabid = super.getparameter("tabid");
+		String pageNo = super.getparameter("pageNo");
+		Integer currentpage = null;
+		Map<String , String> ma = new HashMap<String, String>();
+		if (tabid!=null&&!tabid.equals("")) {
+			ma.put("table_id", tabid);
+		}
+		try {
+			currentpage = Integer.parseInt(pageNo);
+		} catch (Exception e) {
+			
+		}
+		currentpage = currentpage==null?1:currentpage;
+		Integer pagesize = 5;
+		Integer pageStart = (currentpage-1)*pagesize;
+		List arr = ts.ajaxlisttab(ma,pagesize,pageStart);
+		List<TableBean> li = (List<TableBean>) arr.get(0);
+		Integer count = (Integer) arr.get(1);
+		Integer total = count/pagesize;
+		if (count%pagesize>0) {
+			total++;
+		}
+		super.setsession("list", li);
+		super.setsession("total", total);
+		super.setsession("tabid", tabid);
+		
+		
+		/*List<TableBean> li=ts.seleA();
 		super.setsession("list", li);
 		try {
 			request.getRequestDispatcher("/admin/products/table_list.jsp").forward(request, response);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 		return "ss";
 	}
+	
+	/**分页查找
+	 * @author hcb
+	 * 
+	 */
+	public String ajaxlisttab(){
+		String tabid = super.getparameter("tabid");
+		String pageNo = super.getparameter("pageNo");
+		Integer currentpage = null;
+		Map<String , String> ma = new HashMap<String, String>();
+		if (tabid!=null&&!tabid.equals("")) {
+			ma.put("table_id", tabid);
+		}
+		try {
+			currentpage = Integer.parseInt(pageNo);
+		} catch (Exception e) {
+			
+		}
+		currentpage = currentpage==null?1:currentpage;
+		Integer pagesize = 5;
+		Integer pageStart = (currentpage-1)*pagesize;
+		List arr = ts.ajaxlisttab(ma,pagesize,pageStart);
+		List<TableBean> li = (List<TableBean>) arr.get(0);
+		Integer count = (Integer) arr.get(1);
+		Integer total = count/pagesize;
+		if (count%pagesize>0) {
+			total++;
+		}
+		String str = com.alibaba.fastjson.JSON.toJSONString(li);
+		System.out.println(str);
+		super.write(str);
+		return null;
+	}
+	
 	/**
 	 * 用json得到查出的服务员的
 	 */

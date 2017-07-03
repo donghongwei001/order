@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 
 import com.daofactory.Connpool;
@@ -58,7 +59,7 @@ public class TableImpl {
 	 * 方法功能说明：   增加桌子页面中查询数据库中服务员列表
 	 */
 	public List<Table_indent> selewaiter(){
-		String sql="select emp_name,emp_id from emp_table,role_table where emp_fk_pos_id=role_id and role_id='2'";
+		String sql="select emp_name,emp_id from emp_table,role_table where emp_fk_pos_id=role_id and role_id='2' and emp_state='4'";
 		ArrayList<ArrayList> arr=dt.execQuery(sql, null);
 		ArrayList<Table_indent> list=new ArrayList<Table_indent>();
 		for (int i = 0; i < arr.size(); i++) {
@@ -126,5 +127,36 @@ public class TableImpl {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	/**queryrune 的方法封装数据库中查询到的数据
+	 * @author hcb
+	 * 
+	 */
+	public List<TableBean> listtab(String sql) {
+		// TODO Auto-generated method stub
+		List<TableBean> lsit = null;
+		try {
+			lsit = qr.query(sql, new BeanListHandler<TableBean>(TableBean.class));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return lsit;
+	}
+	
+	/**数据库中查找单个单元格值的方法  可以 用来统计总的个数
+	 * @author hcb
+	 * 
+	 */
+	public Integer countNum(String sql){
+		Integer count = null;
+		try {
+			count = (Integer) qr.query(sql, new ScalarHandler(1));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return count;
 	}
 }
