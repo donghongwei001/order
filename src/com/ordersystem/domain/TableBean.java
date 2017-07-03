@@ -6,6 +6,13 @@ public class TableBean {
 	private String  table_state;
 	private String fk_emp_id;
 	private String table_name;
+	private String emp_state;
+	public String getEmp_state() {
+		return emp_state;
+	}
+	public void setEmp_state(String emp_state) {
+		this.emp_state = emp_state;
+	}
 	public String getTable_name() {
 		return table_name;
 	}

@@ -84,12 +84,12 @@ div {
 					已结单:<span class="badge" id="surplustable" style="background-color:green;" >${payed}</span>
 				</p>
 
-				<form class="navbar-form navbar-right" role="search">
+				<!-- <form class="navbar-form navbar-right" role="search">
 					<div class="form-group">
 						<input class="form-control" type="text" placeholder="搜索">
 					</div>
 					<button class="btn btn-default" type="submit">搜索</button>
-				</form>
+				</form> -->
 			</div>
 		</div>
 		</nav>
@@ -112,10 +112,10 @@ div {
 
 				</div>
 				<a href="javascript:starteat()" class="btn btn-info button-control" role="button">开台</a><BR>
-				<a href="javascript:reminder()" class="btn btn-warning button-control" role="button">催菜</a><BR>
-				<a href="ManagementTable.jsp" target="main" class="btn btn-primary button-control" role="button">餐桌管理</a><BR>
+				<!-- <a href="javascript:reminder()" class="btn btn-warning button-control" role="button">催菜</a><BR> -->
+				<a href="${pageContext.request.contextPath}/serv_fantailv.action" target="main" class="btn btn-primary button-control" role="button">翻台率</a><BR>
 				<a href="javascript:cancelCall()" class="btn btn-danger button-control" role="button">取消呼叫</a><BR>
-				<a href="${pageContext.request.contextPath}/serv_showTable.action" class="btn btn-success button-control" role="button">刷新页面</a><BR>
+				<a href="${pageContext.request.contextPath}/serv_showTable.action" class="btn btn-success button-control" role="button">刷新桌位</a><BR>
 				<a href="javascript:clear()" class="btn btn-danger button-control" role="button">清扫结束</a>
 				
 				<!-- <a href="###" class="btn btn-primary button-control" role="button" data-toggle="modal" data-target="#myModal2">买单</a> <a href="###"
@@ -204,6 +204,7 @@ div {
 							//alert(list);
 							if(list=="true"){
 								alert("操作成功!");
+								flush();
 							}else{
 								alert("操作失败,服务器忙,请稍后再试!");
 							}
@@ -215,9 +216,10 @@ div {
 	
 	//开台的方法
 	function starteat(){
+		var tabid = getValue();
+		if(tabid.length==0){alert("请选择您要开台的桌号!"); return;}
 		var flag = window.confirm("您确认开台吗?");
 		if(flag){
-			var tabid = getValue();
 			for(var i=0;i<tabid.length;i++){
 				$.ajax({
 					url:"/Ordersystem/serv_starteat.action",
@@ -228,6 +230,7 @@ div {
 						//alert(list);
 						if(list=="true"){
 							alert("开台成功,开始点菜吧!");
+							flush();
 						}else{
 							alert("操作失败,服务器忙,请稍后再试!");
 						}
@@ -266,9 +269,10 @@ div {
 		
 		//清台事件
 		function clear(){
+			var tab = getValue();
+			if(tab.length==0){alert("请选择您已清扫完毕的桌号!"); return;}
 			var flag = window.confirm("请确认此桌号已清扫完?");
 			if(flag){
-				var tab = getValue();
 				for(var i=0;i<tab.length;i++){
 					$.ajax({
 						url:"/Ordersystem/serv_clearTable.action",
@@ -279,6 +283,7 @@ div {
 							//alert(list);
 							if(list=="true"){
 								alert("操作成功,桌台已为可用!");
+								flush();
 							}else{
 								alert("操作失败,服务器忙,请稍后再试!");
 								
@@ -288,6 +293,15 @@ div {
 				}
 			}
 		}
+		
+		//刷新页面重新加载
+		function flush(){
+		$("input[name='checkbox']").each(function(){
+		
+			$(this).attr("checked","false"); 
+		})
+		location.reload(); 
+	}
 		
 		//公用方法 用来获取frame框中选中的checkbox value
 		function getValue() {

@@ -96,7 +96,7 @@
 			
 			<th>备注</th>
 			
-			<th>上菜</th>
+			<!-- <th>上菜</th> -->
 		</tr>
 				<tbody id="tbody">
 					<c:forEach items="${done.rows }" var="dg" varStatus="di">
@@ -108,9 +108,9 @@
 							<td>${dg.food_num }</td>
 							<td>${dg.servingtime }</td>
 							<td>${dg.order_food_mark }</td>
-							<td><a type="button" class="btn btn-success btn-xs"
+							<%-- <td><a type="button" class="btn btn-success btn-xs"
 								href="${pageContext.request.contextPath}/kitchen_doFood.action?orderfoodid=${dg.order_food_id }&status=1">查看</a>
-							</td>
+							</td> --%>
 						</tr>
 					</c:forEach>
 				</tbody>

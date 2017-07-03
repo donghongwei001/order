@@ -220,12 +220,14 @@ span {
 										<td width="250">名称</td>
 										<td width="250">数量</td>
 										<td width="250">单价</td>
+										<td width="250">状态</td>
 									</tr>
 									<c:forEach items="${cart1}" var="a">
 										<tr>
 											<td width="250">${a.food_name}</td>
 											<td width="250">${a.order_food_num}</td>
 											<td width="250">${a.food_price}</td>
+											<td width="250">${a.code_name}</td>
 										</tr>
 									</c:forEach>
 								</table>

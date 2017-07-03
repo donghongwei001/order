@@ -54,7 +54,7 @@ public class CustImpl {
  * 
  */
 	public List<CustBean_indent> xiaofei(String aa){
-		String sql="select order_id,order_time,order_fk_cusid,order_money,order_fk_empid,order_dt_score,oeder_dt_mark from order_table where order_fk_cusid=?";
+		String sql="select order_id,order_time,order_fk_cusid,order_money,emp_name,order_dt_score,oeder_dt_mark from order_table,emp_table where order_fk_empid=emp_id and order_fk_cusid=?";
 		Object[] para=new Object[]{aa};
 		ArrayList<ArrayList> arr = ss.execQuery(sql,para);
 		ArrayList<CustBean_indent> list=new ArrayList<CustBean_indent>();

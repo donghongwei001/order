@@ -1,4 +1,3 @@
-
 function CheckNull(strElem,strName)
 {
 	if(document.getElementById(strElem).value == "")

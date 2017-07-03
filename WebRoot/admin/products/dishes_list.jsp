@@ -15,13 +15,14 @@
 	}
 </script> 
 <style type="text/css">
-	#search_he{
+	
+	#autoback{
 		border:0px solid red;
 		position:absolute;
-		width:150;
-		top:66px;
-		left:108px;
 		background-color:white;
+		height:auto;
+		display:none;
+		border-radius:10px;
 	}
 </style>
 </HEAD>
@@ -72,8 +73,6 @@
 </script>
 
 <body>
-	<!-- <div id="search_he"></div> -->
-<!-- 	<br> -->
 	<input type="hidden" value="${food_fk_dishes_id}" id="cate">
 	<form id="Form1" name="Form1"
 		action="${pageContext.request.contextPath}/dishe_queryAllDishes.action"
@@ -106,7 +105,7 @@
 								<td height="22" align="center" bgColor="#f5fafe" class="ta_01">
 									菜品名称：</td>
 								<td class="ta_01" bgColor="#ffffff"><input type="text"
-									name="food_name" size="15" id="food_name" class="bg" value="${food_name }"/>
+									name="food_name" size="15" id="foodname" class="bg" onkeyup="autoback(this)" value="${food_name }"/>
 								</td>
 								<td height="22" align="center" bgColor="#f5fafe" class="ta_01">
 									价格区间(元)：</td>
@@ -152,7 +151,7 @@
 							style="BORDER-RIGHT: gray 1px solid; BORDER-TOP: gray 1px solid; BORDER-LEFT: gray 1px solid; WIDTH: 100%; WORD-BREAK: break-all; BORDER-BOTTOM: gray 1px solid; BORDER-COLLAPSE: collapse; BACKGROUND-COLOR: #f5fafe; WORD-WRAP: break-word">
 							<tr
 								style="FONT-WEIGHT: bold; FONT-SIZE: 12pt; HEIGHT: 25px; BACKGROUND-COLOR: #afd1f3">
-								<th align="center" width="14%">编号</th>
+								<th align="center" width="14%">序号</th>
 								<th align="center" width="18%">菜品名称</th>
 								<th align="center" width="9%">菜品价格</th>
 								<th width="8%" align="center">所属菜系</th>
@@ -162,9 +161,9 @@
 								<th width="8%" align="center">删除</th>
 							</tr>
 							<tbody id = "tbody">
-							<c:forEach items="${disheInfo }" var="di">
+							<c:forEach items="${disheInfo }" var="di" varStatus="die">
 							<tr	style="FONT-WEIGHT: bold; FONT-SIZE: 12pt; HEIGHT: 25px; BACKGROUND-COLOR: #afd1f3">
-								<td align="center" width="14%">${di.food_id }</td>
+								<td align="center" width="14%">${die.count }</td>
 								<td align="center" width="18%">${di.food_name }</td>
 								<td align="center" width="9%">${di.food_price }</td>
 								<td align="center" width="9%">${di.dishes_name }</td>
@@ -191,8 +190,50 @@
 	<button class="pre" onclick="bac()">上一页</button>
 	<button class="bac" onclick="pre(4)">下一页</button><span id="currentpage">第1页</span><span>共${total }页</span>
 	<input type="hidden" value="${total }" id="allpage">
-	
+	<div id="autoback" ></div>
 	<script type="text/javascript">
+	//自动补全搜索框的方法
+	function autoback(data){
+		var val = data.value;
+		var top = $("#foodname").offset().top;
+		var left = $("#foodname").offset().left;
+		var width = $("#foodname").outerWidth();
+		var height = $("#foodname").height();
+		$("#autoback").css("top",top+height);
+		$("#autoback").css("left",left);
+		$("#autoback").css("width",width);
+		if(val=="")return;
+		$.ajax({
+					url:"/Ordersystem/serv_autoshow.action",
+					data:{foodname:val},
+					type:"post",
+					dataType:"text",
+					success:function(list){
+						var arr = list.split(",");
+						$("#autoback").empty();					//先清空div
+						$("#autoback").css("display","block");	//按块状显示div
+						var str = "";
+						for(var i=0;i<arr.length;i++){
+							str += "<div style='padding-left:10px' onmouseover='bgco(this)' onmouseout='bgcot(this)' onclick='pushval(this)'>"+arr[i]+"</div>";
+						}
+						$("#autoback").append(str);
+					}
+				})
+	}
+		function pushval(di){
+			//alert($(di).text());
+			$("#foodname").val($(di).text());
+			$("#autoback").empty();	
+		}
+		function bgco(div){
+			div.style.backgroundColor="#BADAFB";
+		}
+		function bgcot(div){
+			div.style.backgroundColor="white";
+		} 
+	
+	
+	
 	//回填后台查询出来的菜系类别
 	function databack() {
 		//alert("565");
@@ -235,7 +276,7 @@
 				 $("#tbody").empty();
 				 for(var i=0;i<list.length;i++){
 					  var tr = $("<tr style='FONT-WEIGHT: bold; FONT-SIZE: 12pt; HEIGHT: 25px; BACKGROUND-COLOR: #afd1f3'>"+
-								"<td align='center' width='14%'>"+list[i].food_id+"</td>"+
+								"<td align='center' width='14%'>"+((pageNo-1)*12+i+1)+"</td>"+
 								"<td align='center' width='18%'>"+list[i].food_name+"</td>"+
 								"<td align='center' width='9%'>"+list[i].food_price+"</td>"+
 								"<td align='center' width='9%'>"+list[i].dishes_name+"</td>"+
@@ -263,7 +304,7 @@
 				 $("#tbody").empty();
 				 for(var i=0;i<list.length;i++){
 						  var tr = $("<tr style='FONT-WEIGHT: bold; FONT-SIZE: 12pt; HEIGHT: 25px; BACKGROUND-COLOR: #afd1f3'>"+
-								"<td align='center' width='14%'>"+list[i].food_id+"</td>"+
+								"<td align='center' width='14%'>"+((pageNo-1)*12+i+1)+"</td>"+
 								"<td align='center' width='18%'>"+list[i].food_name+"</td>"+
 								"<td align='center' width='9%'>"+list[i].food_price+"</td>"+
 								"<td align='center' width='9%'>"+list[i].dishes_name+"</td>"+
@@ -291,7 +332,7 @@
 				 $("#tbody").empty();
 				 for(var i=0;i<list.length;i++){
 						  var tr = $("<tr style='FONT-WEIGHT: bold; FONT-SIZE: 12pt; HEIGHT: 25px; BACKGROUND-COLOR: #afd1f3'>"+
-								"<td align='center' width='14%'>"+list[i].food_id+"</td>"+
+								"<td align='center' width='14%'>"+((pageNo-1)*12+i+1)+"</td>"+
 								"<td align='center' width='18%'>"+list[i].food_name+"</td>"+
 								"<td align='center' width='9%'>"+list[i].food_price+"</td>"+
 								"<td align='center' width='9%'>"+list[i].dishes_name+"</td>"+

@@ -207,7 +207,8 @@
 							style="BORDER-RIGHT: gray 1px solid; BORDER-TOP: gray 1px solid; BORDER-LEFT: gray 1px solid; WIDTH: 100%; WORD-BREAK: break-all; BORDER-BOTTOM: gray 1px solid; BORDER-COLLAPSE: collapse; BACKGROUND-COLOR: #f5fafe; WORD-WRAP: break-word">
 							<tr
 								style="FONT-WEIGHT: bold; FONT-SIZE: 12pt; HEIGHT: 25px; BACKGROUND-COLOR: #afd1f3">
-								<th align="center" width="7%">员工编号</th>
+								<th align="center" width="4%">序号</th>
+								<th align="center" width="6%">员工编号</th>
 								<th align="center" width="6%">姓名</th>
 								<th align="center" width="5%">性别</th>
 								<th align="center" width="8%">出生年月</th>
@@ -215,16 +216,17 @@
 								<th  align="center" width="17%">身份证号</th>
 								<th align="center" width="12%">家庭住址</th>
 								<th  align="center" width="8%">入职时间</th>
-								<th align="center" width="7%">职位</th>
+								<th align="center" width="6%">职位</th>
 								<th  align="center" width="6%">状态</th>
 								<th  align="center" width="9%">电话</th>
-								<th  align="center" width="5%">编辑</th>
-								<th  align="center" width="5%">删除</th>
+								<th  align="center" width="4%">编辑</th>
+								<th  align="center" width="4%">删除</th>
 							</tr>
 							<tbody id="tbody">
-							<c:forEach items="${allemp }" var = "li">
+							<c:forEach items="${allemp }" var = "li" varStatus="lie">
 							<tr onmouseover="this.style.backgroundColor = 'white'"
 									onmouseout="this.style.backgroundColor = '#F5FAFE';">
+									<td style="CURSOR: hand; HEIGHT: 22px" align="center" width="7%">${lie.count }</td>
 									<td style="CURSOR: hand; HEIGHT: 22px" align="center" width="7%">${li.emp_id }</td>
 									<td style="CURSOR: hand; HEIGHT: 22px" align="center" width="6%">${li.emp_name }</td>
 									<td style="CURSOR: hand; HEIGHT: 22px" align="center" width="5%">${li.emp_gender }</td>
@@ -311,7 +313,7 @@ function delEmp(name) {
 				success:function(list){
 					 $("#tbody").empty();
 					 for(var i=0;i<list.length;i++){
-						 var tr = $("<tr onmouseover='this.style.backgroundColor ='white''	onmouseout='this.style.backgroundColor = '#F5FAFE';'><td align='center'>"+list[i].emp_id+"</td><td align='center'>"+list[i].emp_name+"</td><td align='center'>"+list[i].emp_gender+"</td><td align='center'>"+list[i].emp_birday+"</td><td align='center'>"+list[i].emp_age+"</td><td align='center'>"+list[i].emp_idcar+"</td><td align='center'>"+list[i].emp_address+"</td><td align='center'>"+list[i].emp_hire_date+"</td><td align='center'>"+list[i].role_name+"</td><td align='center'>"+list[i].emp_state+"</td><td align='center'>"+list[i].emp_phone+
+						 var tr = $("<tr onmouseover='this.style.backgroundColor ='white''	onmouseout='this.style.backgroundColor = '#F5FAFE';'><td style='CURSOR: hand; HEIGHT: 22px' align='center' width='7%'>"+((pageNo-1)*10+i+1)+"</td><td align='center'>"+list[i].emp_id+"</td><td align='center'>"+list[i].emp_name+"</td><td align='center'>"+list[i].emp_gender+"</td><td align='center'>"+list[i].emp_birday+"</td><td align='center'>"+list[i].emp_age+"</td><td align='center'>"+list[i].emp_idcar+"</td><td align='center'>"+list[i].emp_address+"</td><td align='center'>"+list[i].emp_hire_date+"</td><td align='center'>"+list[i].role_name+"</td><td align='center'>"+list[i].emp_state+"</td><td align='center'>"+list[i].emp_phone+
 						 "</td><td align='center' style='HEIGHT: 22px' width='5%'><a href='${pageContext.request.contextPath}/emp_editEmp.action?emp_id="+list[i].emp_id+"'><img src='${pageContext.request.contextPath}/admin/images/i_edit.gif'	border='0' style='CURSOR: hand'> </a></td><td align='center' style='HEIGHT: 22px' width='5%'><img src='${pageContext.request.contextPath}/admin/images/i_del.gif' width='16' height='16' onclick = 'delEmp("+list[i].emp_id+")'"+
 						 " border='0' style='CURSOR: hand'>	</td></tr>");
 						$("#tbody").append(tr);	 
@@ -333,7 +335,7 @@ function delEmp(name) {
 			success:function(list){
 				 $("#tbody").empty();
 				 for(var i=0;i<list.length;i++){
-					  var tr = $("<tr onmouseover='this.style.backgroundColor ='white''	onmouseout='this.style.backgroundColor = '#F5FAFE';'><td align='center'>"+list[i].emp_id+"</td><td align='center'>"+list[i].emp_name+"</td><td align='center'>"+list[i].emp_gender+"</td><td align='center'>"+list[i].emp_birday+"</td><td align='center'>"+list[i].emp_age+"</td><td align='center'>"+list[i].emp_idcar+"</td><td align='center'>"+list[i].emp_address+"</td><td align='center'>"+list[i].emp_hire_date+"</td><td align='center'>"+list[i].role_name+"</td><td align='center'>"+list[i].emp_state+"</td><td align='center'>"+list[i].emp_phone+
+					  var tr = $("<tr onmouseover='this.style.backgroundColor ='white''	onmouseout='this.style.backgroundColor = '#F5FAFE';'><td style='CURSOR: hand; HEIGHT: 22px' align='center' width='7%'>"+((pageNo-1)*10+i+1)+"</td><td align='center'>"+list[i].emp_id+"</td><td align='center'>"+list[i].emp_name+"</td><td align='center'>"+list[i].emp_gender+"</td><td align='center'>"+list[i].emp_birday+"</td><td align='center'>"+list[i].emp_age+"</td><td align='center'>"+list[i].emp_idcar+"</td><td align='center'>"+list[i].emp_address+"</td><td align='center'>"+list[i].emp_hire_date+"</td><td align='center'>"+list[i].role_name+"</td><td align='center'>"+list[i].emp_state+"</td><td align='center'>"+list[i].emp_phone+
 						 "</td><td align='center' style='HEIGHT: 22px' width='5%'><a href='${pageContext.request.contextPath}/emp_editEmp.action?emp_id="+list[i].emp_id+"'><img src='${pageContext.request.contextPath}/admin/images/i_edit.gif'	border='0' style='CURSOR: hand'> </a></td><td align='center' style='HEIGHT: 22px' width='5%'><img src='${pageContext.request.contextPath}/admin/images/i_del.gif' width='16' height='16' onclick = 'delEmp("+list[i].emp_id+")'"+
 						 " border='0' style='CURSOR: hand'>	</td></tr>");
 					$("#tbody").append(tr);	 
@@ -353,7 +355,7 @@ function delEmp(name) {
 			success:function(list){
 				 $("#tbody").empty();
 				 for(var i=0;i<list.length;i++){
-						  var tr = $("<tr onmouseover='this.style.backgroundColor ='white''	onmouseout='this.style.backgroundColor = '#F5FAFE';'><td align='center'>"+list[i].emp_id+"</td><td align='center'>"+list[i].emp_name+"</td><td align='center'>"+list[i].emp_gender+"</td><td align='center'>"+list[i].emp_birday+"</td><td align='center'>"+list[i].emp_age+"</td><td align='center'>"+list[i].emp_idcar+"</td><td align='center'>"+list[i].emp_address+"</td><td align='center'>"+list[i].emp_hire_date+"</td><td align='center'>"+list[i].role_name+"</td><td align='center'>"+list[i].emp_state+"</td><td align='center'>"+list[i].emp_phone+
+						  var tr = $("<tr onmouseover='this.style.backgroundColor ='white''	onmouseout='this.style.backgroundColor = '#F5FAFE';'><td style='CURSOR: hand; HEIGHT: 22px' align='center' width='7%'>"+((pageNo-1)*10+i+1)+"</td><td align='center'>"+list[i].emp_id+"</td><td align='center'>"+list[i].emp_name+"</td><td align='center'>"+list[i].emp_gender+"</td><td align='center'>"+list[i].emp_birday+"</td><td align='center'>"+list[i].emp_age+"</td><td align='center'>"+list[i].emp_idcar+"</td><td align='center'>"+list[i].emp_address+"</td><td align='center'>"+list[i].emp_hire_date+"</td><td align='center'>"+list[i].role_name+"</td><td align='center'>"+list[i].emp_state+"</td><td align='center'>"+list[i].emp_phone+
 						 "</td><td align='center' style='HEIGHT: 22px' width='5%'><a href='${pageContext.request.contextPath}/emp_editEmp.action?emp_id="+list[i].emp_id+"'><img src='${pageContext.request.contextPath}/admin/images/i_edit.gif'	border='0' style='CURSOR: hand'> </a></td><td align='center' style='HEIGHT: 22px' width='5%'><img src='${pageContext.request.contextPath}/admin/images/i_del.gif' width='16' height='16' onclick = 'delEmp("+list[i].emp_id+")'"+
 						 " border='0' style='CURSOR: hand'>	</td></tr>");
 						$("#tbody").append(tr);	 

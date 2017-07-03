@@ -6,10 +6,12 @@ import java.util.List;
 
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.ColumnListHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import com.daofactory.Connpool;
 import com.daofactory.DaoFactory;
+import com.ordersystem.domain.FantailvBean;
 import com.ordersystem.domain.ServiceOrderListBean;
 import com.ordersystem.domain.ServiceTable;
 import com.ordersystem.entity.MyFormat;
@@ -77,16 +79,16 @@ public class ServicePageImpl {
 		//sql1 为查到该桌号下正在吃饭的订单编号
 		//sql2 为查询sql1查到的订单编号下所有菜品的信息记录
 		
-		String sql1 = "select ot.order_id from table_table tt,order_table ot where table_state=9 and ot.order_status=11 and ot.order_fk_tabid=tt.table_id and tt.table_id=?";
+		/*String sql1 = "select ot.order_id from table_table tt,order_table ot where table_state=9 and ot.order_status=11 and ot.order_fk_tabid=tt.table_id and tt.table_id=?";
 		String sql2 = "select ft.food_name,ft.food_price,tt.table_name,tt.table_id,odf.order_food_num,ct.code_name,odf.order_food_mark,odf.order_food_id,ot.order_id from code_table ct,"+
 				"order_table ot,order_food odf,food_table ft,table_table tt where ot.order_id=odf.fk_order_id and odf.fk_food_id = ft.food_id and ct.code_id=odf.order_food_status and "+
-				"ot.order_fk_tabid=tt.table_id and ot.order_status=11 and ot.order_id=?";
-		Integer odId = null;
+				"ot.order_fk_tabid=tt.table_id and ot.order_status=11 and ot.order_id=?";*/
+		//Integer odId = null;
 		List<ServiceOrderListBean> solb = null;
 		try {
-			odId = (Integer) qr.query(sql1, new ScalarHandler(1), table_id);		//获取当前桌号为table_id未付款的订单编号
-			odId = odId==null?0:odId;
-			solb = qr.query("select ft.food_name,ft.food_price,tt.table_name,tt.table_id,odf.order_food_num,ct.code_name,odf.order_food_mark,odf.order_food_id,ot.order_id from code_table ct,order_table ot,order_food odf,food_table ft,table_table tt where ot.order_id=odf.fk_order_id and odf.fk_food_id = ft.food_id and ct.code_id=odf.order_food_status and ot.order_fk_tabid=tt.table_id and ot.order_status=11 and ot.order_id="+odId, new BeanListHandler<ServiceOrderListBean>(ServiceOrderListBean.class));
+			//odId = (Integer) qr.query(sql1, new ScalarHandler(1), table_id);		//获取当前桌号为table_id未付款的订单编号
+			//odId = odId==null?0:odId;
+			solb = qr.query("select ft.food_name,ft.food_price,tt.table_name,tt.table_id,odf.order_food_num,ct.code_name,odf.order_food_mark,odf.order_food_id,ot.order_id from code_table ct,order_table ot,order_food odf,food_table ft,table_table tt where ot.order_id=odf.fk_order_id and odf.fk_food_id = ft.food_id and ct.code_id=odf.order_food_status and ot.order_fk_tabid=tt.table_id and odf.order_food_status not in (16) and ot.order_status=11 and ot.order_id=(select ot.order_id from table_table tt,order_table ot where table_state=9 and ot.order_status=11 and ot.order_fk_tabid=tt.table_id and tt.table_id="+table_id+")", new BeanListHandler<ServiceOrderListBean>(ServiceOrderListBean.class));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -231,6 +233,39 @@ public class ServicePageImpl {
 			e.printStackTrace();
 		}
 		return num;
+	}
+
+	/**实现自动补全的方法(查询一列数据库的方法)
+	 * @author hcb
+	 * @return 
+	 * 
+	 */
+	public List<Object> showfoodname(String sql, String foodname) {
+		// TODO Auto-generated method stub
+		List<Object> query=null;
+		try {
+			query = qr.query(sql, new ColumnListHandler(1), "%"+foodname+"%");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return query;
+	}
+
+	/**查询时间翻台率的方法
+	 * @author hcb
+	 * 
+	 */
+	public List<FantailvBean> queryFantailv(String sql) {
+		// TODO Auto-generated method stub
+		List<FantailvBean> ftlList = null;
+		try {
+			ftlList = qr.query(sql, new BeanListHandler<FantailvBean>(FantailvBean.class));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ftlList;
 	}
 	
 	

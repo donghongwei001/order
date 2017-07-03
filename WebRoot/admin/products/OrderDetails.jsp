@@ -11,6 +11,7 @@
   <META NAME="Description" CONTENT="">
   <link href = "../css/bootstrap.min.css" rel = "stylesheet">
   <script src="../js/jquery-2.1.3.js"></script>
+ <!-- <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script> -->
   <script src="../js/bootstrap.min.js"></script>
   <style>
 	.mytable{
@@ -43,7 +44,15 @@
 	}
 	.rowee{
 		overflow:auto;
-		margin:0 auto;
+		margin:20px;
+	}
+	#autoback{
+		border:0px solid red;
+		position:absolute;
+		background-color:white;
+		height:auto;
+		display:none;
+		border-radius:10px;
 	}
   </style>
   <script type="text/javascript">
@@ -64,22 +73,23 @@
  </HEAD>
 
  <BODY onload="countprice()">
- 
+ 	<div style="margin-bottom:20px;"></div>
 	<div class="rowee">
 		<div class="collg7">
-				<div align="center" style="font-size:16;"><b>已点菜单&nbsp;&nbsp;&nbsp;&nbsp;餐桌名字:${table_id}</b></div>
+				<div align="center" style="font-size:18;"><b>已点菜单&nbsp;&nbsp;&nbsp;&nbsp;餐桌名字:${table_id}</b></div>
 			<div class="mytable">
 			  <table class="table table-striped table-condensed table-hover">
 				<tr>
-					<th>序号</th><th>菜目名称</th><th>数量</th><th>单价</th><th>状态</th><th>删除</th>
+					<th>序号</th><th>菜目名称</th><th>数量</th><th>单价</th><th>状态</th><th>备注</th><th>删除</th>
 				</tr>
 				<c:forEach items="${solb }" var="sb" varStatus="sob">
 				<tr>
 					<td>${sob.count }</td>
 					<td>${sb.food_name }</td>
-					<td name="numb" class="numb">${sb.order_food_num }</td>
+					<td name="numb" class="numb" id="${sb.order_food_id }" >${sb.order_food_num }</td>
 					<td name="price">${sb.food_price }</td>
 					<td>${sb.code_name }</td>
+					<td name="mark" class="mymark" id="${sb.order_food_id }" >${sb.order_food_mark }</td>
 					<td><input type="checkbox" name="foodmenu" value="${sb.order_food_id }"></td>
 				</tr>
 				</c:forEach>
@@ -88,8 +98,8 @@
 		</div>
 		<div class="collg5">
 			<div class="mymenu">
-					<b style="font-size:15">菜单目录</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<input type="text" id="foodname" name="foodname" value="${userseach }" style="width:120px">
+					<b style="font-size:18">菜单目录</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<input type="text" id="foodname" name="foodname" value="${userseach }" onkeyup="autoback(this)" style="width:160px">
 					<button  id="searchfood" >搜索</button>
 				<table class="table table-striped table-condensed table-hover">
 					<tr>
@@ -115,42 +125,139 @@
 			</div>
 		</div>
 	</div>
-<div style="margin-top:10px">
+<div style="margin:10 20 auto 20;">
 	<div style="float:left;line-height:2" ><B>总计消费:</B></div><div id="countRMB" style="float:left;width:40px;line-height:2" ></div><span>元</span>&nbsp;&nbsp;
 &nbsp;&nbsp;&nbsp;	
-	<a class="btn btn-danger button-control" href="javascript:delfood()">移除菜品</a>
-	<a class="btn btn-primary button-control" href="javascript:addfood('${table_id}')">添加菜品</a>
+	<a class="btn btn-danger button-control" href="javascript:delfood()">取消菜品</a>
+	<a class="btn btn-info button-control" href="javascript:addfood('${table_id}')">添加菜品</a>
 	<a class="btn btn-primary button-control" href="javascript:paymoney('${table_id}')">结账</a>
-	<a class="btn btn-warning button-control" href="javascript:flush()" style="margin:0 10 0 10">页面刷新</a>
+	<a class="btn btn-success button-control" href="${pageContext.request.contextPath}/serv_showTable.action" style="margin:0 10 0 10">返回</a>
 	<a class="btn btn-primary button-control" href="javascript:reminder('${table_id}')">催菜</a>
+	<div id="autoback" ></div>
 </div>
-	<input type="hidden" id="txt1" value="66666 ">
 <script type="text/javascript">
 	
+	//自动补全搜索框的方法
+	function autoback(data){
+		var val = data.value;
+		var top = $("#foodname").offset().top;
+		var left = $("#foodname").offset().left;
+		var width = $("#foodname").outerWidth();
+		var height = $("#foodname").height();
+		$("#autoback").css("top",top+height);
+		$("#autoback").css("left",left);
+		$("#autoback").css("width",width);
+		if(val=="")return;
+		$.ajax({
+					url:"/Ordersystem/serv_autoshow.action",
+					data:{foodname:val},
+					type:"post",
+					dataType:"text",
+					success:function(list){
+						var arr = list.split(",");
+						$("#autoback").empty();					//先清空div
+						$("#autoback").css("display","block");	//按块状显示div
+						var str = "";
+						for(var i=0;i<arr.length;i++){
+							str += "<div style='padding-left:10px' onmouseover='bgco(this)' onmouseout='bgcot(this)' onclick='pushval(this)'>"+arr[i]+"</div>";
+						}
+						$("#autoback").append(str);
+					}
+				});
+	}
+		function pushval(di){
+			//alert($(di).text());
+			$("#foodname").val($(di).text());
+			$("#autoback").empty();	
+		}
+		function bgco(div){
+			div.style.backgroundColor="green";
+		}
+		function bgcot(div){
+			div.style.backgroundColor="white";
+		} 
 
-	//jq修改数量的方法
-	$(".numb").click(
-			function(){
+	//jq修改口味备注的方法
+	$(".mymark").click(function(){
 				var self=$(this);
-				var trEle=$(this).text();
-				var foodname = $(this).prev().text();
-				var tbid = $("#tbid").val();
+				var odfid = this.id;
+				var trEle=self.text();
+				//var foodname = $(this).prev().text();
+				//var tbid = $("#tbid").val();
+				$(this).text("");
+				var newinput=$("<input type='text' value="+trEle+">");
+				$(newinput).width("30");
+				$(newinput).height("20");
+				$(this).append(newinput);
+				$(newinput).click(
+					function(){return false;}	//阻止当再次点击td是调用此方法
+				);
+				$(newinput).blur(
+					function(){
+						var vl=$(this).val();
+						if(vl==trEle) {
+							$(this).remove();
+							$(self).text(trEle);
+							return;
+						}
+						var flag = window.confirm("您确定修改菜品备注吗?");
+						if(flag){
+							$.ajax({			//调用ajax修改数据库订单数量
+								url:"/Ordersystem/serv_updatemark.action",
+								data:{odfid:odfid,newmark:vl},
+								type:"post",
+								dataType:"text",
+								success:function(list){
+										$(this).remove();
+									if(list=="true"){
+										alert("修改备注成功!");
+										$(self).text(vl);
+										flush();
+										//countprice();
+									}else{
+										alert("操作失败,请稍后再试!");
+										$(self).text(trEle);
+									}
+									
+								}
+							});
+							
+						}else{
+							$(this).remove();
+							$(self).text(trEle);
+						}
+					}
+				);
+			});
+	
+	//jq修改数量的方法
+	$(".numb").click(function(){
+				var self=$(this);
+				var odfid = this.id;
+				var trEle=self.text();
+				//var foodname = $(this).prev().text();
+				//var tbid = $("#tbid").val();
 				$(this).text("");
 				var newinput=$("<input type='text' value="+trEle+">");
 				$(newinput).width("20");
 				$(newinput).height("20");
 				$(this).append(newinput);
 				$(newinput).click(
-					function(){return false;}
+					function(){return false;}	//阻止当再次点击td是调用此方法
 				);
 				$(newinput).blur(
 					function(){
+						var vl=$(this).val();
+						if(vl==trEle) {
+							$(this).remove();
+							$(self).text(trEle);
+							return;
+						}
 						var flag = window.confirm("您确定修改菜品数量吗?");
 						if(flag){
-							var vl=$(this).val();
 							$.ajax({			//调用ajax修改数据库订单数量
 								url:"/Ordersystem/serv_updatenum.action",
-								data:{foodname:foodname,tbid:tbid,newnum:vl},
+								data:{odfid:odfid,newnum:vl},
 								type:"post",
 								dataType:"text",
 								success:function(list){
@@ -158,20 +265,23 @@
 									if(list=="true"){
 										alert("修改数量成功!");
 										$(self).text(vl);
-										countprice();
+										flush();
+										//countprice();
 									}else{
 										alert("操作失败,请稍后再试!");
 										$(self).text(trEle);
 									}
 									
 								}
-							})
+							});
 							
+						}else{
+							$(this).remove();
+							$(self).text(trEle);
 						}
 					}
 				);
-			}
-		)
+			});
 	
 
 
@@ -201,7 +311,7 @@
 				//$("#pagetotal").text("共"+pagecount+"页"); 
 			}
 		}); 
-	})
+	});
 	
 	//付款的方法
 	function paymoney(tbid){
@@ -265,6 +375,7 @@
 						//alert(list);
 						if(list=="true"){
 							alert("添加菜品成功!");
+							flush();
 						}else{
 							alert("添加菜品失败!");
 							
@@ -277,7 +388,7 @@
 
 	//删除菜品的方法
 	function delfood(){
-		var flag = window.confirm("确认移除菜单信息吗?");
+		var flag = window.confirm("确认取消选中菜品吗?");
 		if(flag){
 			var foodmenu = document.getElementsByName("foodmenu");
 			var foodid = new Array();
@@ -295,9 +406,10 @@
 				success:function(list){
 					//alert(list);
 					if(list=="true"){
-						alert("移除菜品成功!");
+						alert("取消菜品成功!");
+						flush();
 					}else{
-						alert("移除菜品失败!");
+						alert("取消菜品失败!");
 						
 					}
 				}
@@ -308,6 +420,10 @@
 	}
 	
 	function flush(){
+		$("input[name='checkbox']").each(function(){
+		
+			$(this).attr("checked","false"); 
+		})
 		location.reload(); 
 	}
 	

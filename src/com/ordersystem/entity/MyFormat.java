@@ -62,12 +62,45 @@ public class MyFormat {
 		    * 1000);
 		  return new Timestamp(date2.getTime());
 		 }
+	 
+	 /**获得指定几天前的时间
+	 * @author hcb
+	 * 
+	 */
+	  public static Date getDateBefore(Date d, int day) {  
+	        Calendar now = Calendar.getInstance();  
+	        now.setTime(d);  
+	        now.set(Calendar.DATE, now.get(Calendar.DATE) - day);  
+	        return now.getTime();  
+	    } 
+	  
+	  /**获得指定几天前0点的时间
+	 * @author hcb
+	 * 
+	 */
+	  public static String getDayBefore(int day){
+		  Date date = new Date();
+		  GregorianCalendar gc = new GregorianCalendar();
+		  gc.setTime(date);
+		  Date date2 = new Date(date.getTime() - gc.get(gc.HOUR_OF_DAY) * 60 * 60
+		    * 1000 - gc.get(gc.MINUTE) * 60 * 1000 - gc.get(gc.SECOND)
+		    * 1000);
+		 return getDateformat().format(getDateBefore(date2,day));
+	  }
 	
 	public static void main(String[] args) {
 		System.out.println(getDateformat().format(new Date()));
 		System.out.println(new Date());
 		System.out.println(getDayBegin()+"****");
 		System.out.println(getDayBeginTimestamp()+"-----");
+		 Date date = new Date();
+		  GregorianCalendar gc = new GregorianCalendar();
+		  gc.setTime(date);
+		  Date date2 = new Date(date.getTime() - gc.get(gc.HOUR_OF_DAY) * 60 * 60
+		    * 1000 - gc.get(gc.MINUTE) * 60 * 1000 - gc.get(gc.SECOND)
+		    * 1000);
+		System.out.println(getDateBefore(date2,3)+"3天前时间");
+		System.out.println(getDayBefore(2));
 		 try {
 			 Timestamp dayBegin = getDayBegin();
 			getDateformat().parse("2017.12.12");

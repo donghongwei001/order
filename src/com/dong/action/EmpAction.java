@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.management.StringValueExp;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.ServletActionContext;
@@ -264,7 +263,7 @@ public class EmpAction extends BaseAction implements ModelDriven<EmpBeam>{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		es.updateEmp(emp);
 		//listEmp();
 		queryEmp();		//添加完成后需要调用查询的方法更新显示列表
 		return "succ";		//转发到list页面
