@@ -58,7 +58,7 @@ public class TableImpl {
 	 * 方法功能说明：   增加桌子页面中查询数据库中服务员列表
 	 */
 	public List<Table_indent> selewaiter(){
-		String sql="select emp_name,emp_id from emp_table,role_table where emp_fk_pos_id=role_id and role_id='2'";
+		String sql="select emp_name,emp_id from emp_table,role_table where emp_fk_pos_id=role_id and role_id='2' and emp_state='4'";
 		ArrayList<ArrayList> arr=dt.execQuery(sql, null);
 		ArrayList<Table_indent> list=new ArrayList<Table_indent>();
 		for (int i = 0; i < arr.size(); i++) {
