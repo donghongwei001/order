@@ -12,6 +12,7 @@ import com.alibaba.fastjson.JSON;
 import com.daofactory.DaoFactory;
 import com.opensymphony.xwork2.ModelDriven;
 import com.ordersystem.domain.DisheBean;
+import com.ordersystem.domain.FantailvBean;
 import com.ordersystem.domain.ServiceOrderListBean;
 import com.ordersystem.domain.ServiceTable;
 import com.ordersystem.service.DisheService;
@@ -238,10 +239,23 @@ public class ServicePageAction extends BaseAction implements ModelDriven<Service
 	 */
 	public String updatenum(){
 		String odfid = super.getparameter("odfid");
-		
 		String newnum = super.getparameter("newnum");
-		System.out.println(odfid+"****"+newnum);
 		Integer i = sps.updatefoodnum(odfid,newnum);
+		if(i==1){
+			super.write("true");
+		}else super.write("false");
+		return null;
+	}
+	
+	/**服务员界面修改菜品备注的方法
+	 * @author hcb
+	 * 
+	 */
+	public String updatemark(){
+		String odfid = super.getparameter("odfid");
+		String newmark = super.getparameter("newmark");
+		System.out.println(odfid+"+++"+newmark);
+		Integer i = sps.updatefoodmark(odfid,newmark);
 		System.out.println(i+"uiuuu");
 		if(i==1){
 			super.write("true");
@@ -254,14 +268,32 @@ public class ServicePageAction extends BaseAction implements ModelDriven<Service
 	 * 
 	 */
 	public String autoshow(){
-		System.out.println("autoshow");
 		String foodname = super.getparameter("foodname");
-		System.out.println(foodname);
 		String foodnamestr = sps.showfoodname(foodname);
-		System.out.println(foodnamestr+"***foodnamestr");
 		if(foodnamestr!=null)
 		super.write(foodnamestr);
 		return null;
+	}
+	
+	/**餐桌翻台率统计查询
+	 * @author hcb
+	 * 
+	 */
+	public String fantailv(){
+		String starttime = super.getparameter("starttime");
+		String endtime = super.getparameter("endtime");
+		System.out.println(starttime+"***"+endtime);
+		Integer day = null;
+		try {
+			day = Integer.parseInt(super.getparameter("day"));
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		List<FantailvBean> ftlList = sps.fantailv(starttime,endtime,day);
+		super.setsession("showftl", ftlList);
+		super.setsession("starttime", starttime);
+		super.setsession("endtime", endtime);
+		return "countftl";
 	}
 	
 }

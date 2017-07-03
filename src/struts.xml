@@ -121,7 +121,7 @@
 		<action name="serv_*" method="{1}" class="com.dong.action.ServicePageAction">
 			<result name="succ" type="redirect">admin/products/servicer.jsp</result>
 			<result name="details">/admin/products/OrderDetails.jsp</result>
-			<result name="edit">admin/products/dishes_edit.jsp</result>
+			<result name="countftl">admin/products/fantailv.jsp</result>
 		</action>
 		<action name="cust_*" method="{1}" class="com.dong.action.CustAction">
 			<result name="successs">/admin/products/cust_add.jsp</result>

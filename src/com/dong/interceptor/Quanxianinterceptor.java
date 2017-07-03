@@ -28,6 +28,7 @@ public class Quanxianinterceptor extends MethodFilterInterceptor{
 				}
 			}
 		} catch (Exception e) {
+			
 			// TODO: handle exception
 			return "lanjie";
 		}
