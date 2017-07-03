@@ -734,7 +734,7 @@ public class dongAction4 extends ActionSupport{
 		this.count = count;
 	}
 
-
+	//分页
 	@Action("del")
 	public String del(){
 		String shijian3=(String) session.getAttribute("shijiankuang3");
@@ -767,16 +767,19 @@ public class dongAction4 extends ActionSupport{
 		this.xiaofeiid = xiaofeiid;
 	}
 
-
+	//消费详情
 	@Action("xiaofeixiangqing")
 	public  String xiaofeixiangqing(){
-		session.setAttribute("xiangqing", null);
-		String sql="select f.food_name,o.order_food_num,c.code_name from food_table f,order_food o,code_table c where f.food_id=o.fk_food_id and o.order_food_status=c.code_id and o.fk_order_id="+getXiaofeiid()+"";
+		String id=request.getParameter("id");
+		String sql="select f.food_name,o.order_food_num,f.food_price,c.code_name from food_table f,order_food o,code_table c where f.food_id=o.fk_food_id and o.order_food_status=c.code_id and o.fk_order_id="+id;
 		ArrayList list=new DaoFactory().execQuery(sql, null);
+		String sql1="select order_time,order_lasttime,order_money from order_table where order_id="+id;
+		ArrayList list2=new DaoFactory().execQuery(sql1, null);
 		System.out.println(list.size());
+		session.setAttribute("shijian", list2);
 		session.setAttribute("xiangqing", list);
 		try {
-			response.sendRedirect("/Ordersystem/admin/products/order_list.jsp");
+			response.sendRedirect("/Ordersystem/admin/products/order_xiangqing.jsp");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
