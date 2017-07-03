@@ -26,9 +26,6 @@
 	}
 </style>
 </HEAD>
-<script type="text/javascript">
-	
-</script>
 <body>
 	<div id="search_he"></div>
 	
@@ -44,11 +41,13 @@
 					<td>
 						<table cellpadding="0" cellspacing="0" border="0" width="100%"> 
 						 	<tr>
-						 		<td>
-							<form action="Table_selezhuo.action" method="post">
-								桌号：<input type="text" name="zhuohao"/><br>
-								<input type="submit" value="查询"> 
-							</form>
+						 		<td style="padding-left:80px">
+							 		<div>
+										<form action="Table_seleAll.action" method="post">
+											桌号：<input type="text" name="tabid" id="tabidaa" value="${tabid}"/>&nbsp;&nbsp;&nbsp;&nbsp;
+											<input type="submit" value="查询"> 
+										</form>
+									</div>
 								</td>
 							</tr> 
 						 </table> 
@@ -83,56 +82,60 @@
 								<td width="7%" align="center">编辑</td>
 								<td width="7%" align="center">删除</td>
 							</tr>
-							
+							<tbody id="tbody">
 							 <c:forEach items="${list}" var="row">
-									<tr style="FONT-WEIGHT: bold; HEIGHT:33px;FONT-WEIGHT: bold;FONT-SIZE: 12pt; HEIGHT: 25px;">
-										<td align="center" width="13%">${row.table_id}</td>
-										<td align="center" width="13%">${row.table_name}</td>
-										<td align="center" width="13%">${row.table_state }</td>
-										<td align="center" width="13%">${row.table_Capacity}</td>
-										<td align="center" width="13%">${row.fk_emp_id}</td>
-										<td align="center" width="13%">${row.emp_state}</td>
-										<td width="7%" align="center">
-										 <a href="${pageContext.request.contextPath}/Table_seid.action?tabled=${row.table_id}&name=${row.table_name}&capacity=${row.table_Capacity}" > 
-											<img
-											src="${pageContext.request.contextPath}/admin/images/i_edit.gif"
-											width="16" height="16" border="0" style="CURSOR: hand" type="submit">
+								<tr style="FONT-WEIGHT: bold; HEIGHT:33px;FONT-WEIGHT: bold;FONT-SIZE: 12pt; HEIGHT: 25px;">
+									<td align="center" width="13%">${row.table_id}</td>
+									<td align="center" width="13%">${row.table_name}</td>
+									<td align="center" width="13%">${row.code_name }</td>
+									<td align="center" width="13%">${row.table_Capacity}</td>
+									<td align="center" width="13%">${row.emp_name}</td>
+									<td align="center" width="13%">${row.emp_code_name}</td>
+									<td width="7%" align="center">
+									 <a href="${pageContext.request.contextPath}/Table_seid.action?tabled=${row.table_id}&name=${row.table_name}&capacity=${row.table_Capacity}" > 
+										<img src="${pageContext.request.contextPath}/admin/images/i_edit.gif" width="16" height="16" border="0" style="CURSOR: hand" type="submit">
+									</a>								
+									</td>
+									<td width="7%" align="center">
+									<a href="${pageContext.request.contextPath}/Table_del.action?tab=${row.table_id}">
+										<img src="${pageContext.request.contextPath}/admin/images/i_del.gif" width="16" height="16" border="0" style="CURSOR: hand">
 									</a>
-									
-								</td>
-								<td width="7%" align="center">
-									<a
-										href="${pageContext.request.contextPath}/Table_del.action?tab=${row.table_id}">
-											<img
-											src="${pageContext.request.contextPath}/admin/images/i_del.gif"
-											width="16" height="16" border="0" style="CURSOR: hand">
-									</a>
-								</td> 
-									</tr>
-								</c:forEach>
+									</td> 
+								</tr>
+							</c:forEach>
+							</tbody>
 							</table>
 					</td>
 				</tr>
 			</TBODY>
 		</table>
 	<button  class="pre" onclick="bac()">上一页</button>
-	<button  class="bac" onclick="pre(4)">下一页</button><span id="currentpage">第1页</span><span>共1页</span>
+	<button  class="bac" onclick="pre(4)">下一页</button><span id="currentpage">第1页</span><span>共${total }页</span>
 	<input type="hidden" value="${total }" id="allpage">
 <script type="text/javascript">
 var pageNo=1;
-	/* function bac(){
+	 function bac(){
 		pageNo = --pageNo<1?1:pageNo;
 		 $.ajax({
-			url:"/Ordersystem/emp_ajxQueryEmp.action",
-			data:{pageNo:pageNo,emp_idcar:$("#emp_idcar").val(),emp_id:$("#emp_id").val(),emp_name:$("#emp_name").val(),emp_gender:$("#emp_gender").val()},
+			url:"/Ordersystem/Table_ajaxlisttab.action",
+			data:{pageNo:pageNo,tabid:$("#tabidaa").val()},
 			type:"post",
 			dataType:"json",
 			success:function(list){
 				 $("#tbody").empty();
 				 for(var i=0;i<list.length;i++){
-					  var tr = $("<tr onmouseover='this.style.backgroundColor ='white''	onmouseout='this.style.backgroundColor = '#F5FAFE';'><td align='center'>"+list[i].emp_id+"</td><td align='center'>"+list[i].emp_name+"</td><td align='center'>"+list[i].emp_gender+"</td><td align='center'>"+list[i].emp_birday+"</td><td align='center'>"+list[i].emp_age+"</td><td align='center'>"+list[i].emp_idcar+"</td><td align='center'>"+list[i].emp_address+"</td><td align='center'>"+list[i].emp_hire_date+"</td><td align='center'>"+list[i].role_name+"</td><td align='center'>"+list[i].emp_state+"</td><td align='center'>"+list[i].emp_phone+
-						 "</td><td align='center' style='HEIGHT: 22px' width='5%'><a href='${pageContext.request.contextPath}/emp_editEmp.action?emp_id="+list[i].emp_id+"'><img src='${pageContext.request.contextPath}/admin/images/i_edit.gif'	border='0' style='CURSOR: hand'> </a></td><td align='center' style='HEIGHT: 22px' width='5%'><img src='${pageContext.request.contextPath}/admin/images/i_del.gif' width='16' height='16' onclick = 'delEmp("+list[i].emp_id+")'"+
-						 " border='0' style='CURSOR: hand'>	</td></tr>");
+					  var tr = $("<tr style='FONT-WEIGHT: bold; HEIGHT:33px;FONT-WEIGHT: bold;FONT-SIZE: 12pt; HEIGHT: 25px;'>"+
+									"<td align='center' width='13%'>"+list[i].table_id+"</td>"+
+									"<td align='center' width='13%'>"+list[i].table_name+"</td>"+
+									"<td align='center' width='13%'>"+list[i].code_name+"</td>"+
+									"<td align='center' width='13%'>"+list[i].table_Capacity+"</td>"+
+									"<td align='center' width='13%'>"+list[i].emp_name+"</td>"+
+									"<td align='center' width='13%'>"+list[i].emp_code_name+"</td>"+
+									"<td width='7%' align='center'>"+
+									" <a href='${pageContext.request.contextPath}/Table_seid.action?tabled="+list[i].table_id+"&name="+list[i].table_name+"&capacity="+list[i].table_Capacity+"' >"+ 
+									"<img src='${pageContext.request.contextPath}/admin/images/i_edit.gif' width='16' height='16' border='0' style='CURSOR: hand' type='submit'></a></td>"+
+									"<td width='7%' align='center'><a href='${pageContext.request.contextPath}/Table_del.action?tab="+list[i].table_id+"'>"+
+									"<img src='${pageContext.request.contextPath}/admin/images/i_del.gif' width='16' height='16' border='0' style='CURSOR: hand'></a></td></tr>");
 					$("#tbody").append(tr);	 
 				}  
 				$("#currentpage").text("第"+pageNo+"页"); 
@@ -143,22 +146,31 @@ var pageNo=1;
 		var total = $("#allpage").val();
 		pageNo = ++pageNo>total?total:pageNo;
 		 $.ajax({
-			url:"/Ordersystem/emp_ajxQueryEmp.action",
-			data:{pageNo:pageNo,emp_idcar:$("#emp_idcar").val(),emp_id:$("#emp_id").val(),emp_name:$("#emp_name").val(),emp_gender:$("#emp_gender").val()},
+			url:"/Ordersystem/Table_ajaxlisttab.action",
+			data:{pageNo:pageNo,tabid:$("#tabidaa").val()},
 			type:"post",
 			dataType:"json",
 			success:function(list){
 				 $("#tbody").empty();
 				 for(var i=0;i<list.length;i++){
-						  var tr = $("<tr onmouseover='this.style.backgroundColor ='white''	onmouseout='this.style.backgroundColor = '#F5FAFE';'><td align='center'>"+list[i].emp_id+"</td><td align='center'>"+list[i].emp_name+"</td><td align='center'>"+list[i].emp_gender+"</td><td align='center'>"+list[i].emp_birday+"</td><td align='center'>"+list[i].emp_age+"</td><td align='center'>"+list[i].emp_idcar+"</td><td align='center'>"+list[i].emp_address+"</td><td align='center'>"+list[i].emp_hire_date+"</td><td align='center'>"+list[i].role_name+"</td><td align='center'>"+list[i].emp_state+"</td><td align='center'>"+list[i].emp_phone+
-						 "</td><td align='center' style='HEIGHT: 22px' width='5%'><a href='${pageContext.request.contextPath}/emp_editEmp.action?emp_id="+list[i].emp_id+"'><img src='${pageContext.request.contextPath}/admin/images/i_edit.gif'	border='0' style='CURSOR: hand'> </a></td><td align='center' style='HEIGHT: 22px' width='5%'><img src='${pageContext.request.contextPath}/admin/images/i_del.gif' width='16' height='16' onclick = 'delEmp("+list[i].emp_id+")'"+
-						 " border='0' style='CURSOR: hand'>	</td></tr>");
-						$("#tbody").append(tr);	 
+						  var tr = $("<tr style='FONT-WEIGHT: bold; HEIGHT:33px;FONT-WEIGHT: bold;FONT-SIZE: 12pt; HEIGHT: 25px;'>"+
+									"<td align='center' width='13%'>"+list[i].table_id+"</td>"+
+									"<td align='center' width='13%'>"+list[i].table_name+"</td>"+
+									"<td align='center' width='13%'>"+list[i].code_name+"</td>"+
+									"<td align='center' width='13%'>"+list[i].table_Capacity+"</td>"+
+									"<td align='center' width='13%'>"+list[i].emp_name+"</td>"+
+									"<td align='center' width='13%'>"+list[i].emp_code_name+"</td>"+
+									"<td width='7%' align='center'>"+
+									" <a href='${pageContext.request.contextPath}/Table_seid.action?tabled="+list[i].table_id+"&name="+list[i].table_name+"&capacity="+list[i].table_Capacity+"' >"+ 
+									"<img src='${pageContext.request.contextPath}/admin/images/i_edit.gif' width='16' height='16' border='0' style='CURSOR: hand' type='submit'></a></td>"+
+									"<td width='7%' align='center'><a href='${pageContext.request.contextPath}/Table_del.action?tab="+list[i].table_id+"'>"+
+									"<img src='${pageContext.request.contextPath}/admin/images/i_del.gif' width='16' height='16' border='0' style='CURSOR: hand'></a></td></tr>");
+					$("#tbody").append(tr);	
 				}   
 				 $("#currentpage").text("第"+pageNo+"页");
 			}
 		}); 
-	}; */
+	}; 
 	
 </script>
 
