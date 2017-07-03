@@ -123,7 +123,7 @@
 										<td align="center" width="25%">
 									 	<form action="cust_xiaofeixq.action" method="post">
 											<input type="hidden" name="cus_id"  value="${row.cus_id}">
-											<input type="submit" v alue="消费详情" />
+											<input type="submit" value="消费详情" />
 										</form> 
 										</td>
 									</tr>
