@@ -1,11 +1,18 @@
 package com.ordersystem.dao.impl;
 
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.BeanListHandler;
+
+import com.daofactory.Connpool;
 import com.daofactory.DaoFactory;
 import com.ordersystem.domain.CustBean;
 import com.ordersystem.domain.CustBean_indent;
+import com.sun.org.apache.bcel.internal.generic.NEW;
 
 /*
  * 根据输入的内容user进行条件查询
@@ -13,6 +20,8 @@ import com.ordersystem.domain.CustBean_indent;
 
 public class CustImpl {
 	DaoFactory ss=new DaoFactory();
+	Connpool cp = new Connpool();
+	QueryRunner qr = new QueryRunner(cp.getDataSource());
 	public List<CustBean> listCust(String user){
 		String sql="select b.cus_id,b.cus_name,c.xiaofei from cus_id_money c,cus_table b where c.cus_id = b.cus_id and b.cus_name like ?";
 		Object[] para =new Object[]{'%'+user+'%'};
@@ -22,7 +31,7 @@ public class CustImpl {
 			CustBean ct=new CustBean();
 			ct.setCus_id((Integer) arr.get(i).get(0));
 			ct.setCus_name((String) arr.get(i).get(1));
-			ct.setXiaofei((String) arr.get(i).get(2).toString());
+			ct.setXiaofei((Integer) arr.get(i).get(2));
 			list.add(ct);
 		}
 		return list;
@@ -32,18 +41,14 @@ public class CustImpl {
 	 * 查询数据库中所有顾客信息
 	 */
 	public List<CustBean> showAllCust() {
-		String sql="select b.cus_id,b.cus_name,c.xiaofei from cus_id_money c,cus_table b where c.cus_id = b.cus_id";
-		ArrayList<ArrayList> arr = ss.execQuery(sql, null);
-		ArrayList<CustBean> list=new ArrayList<CustBean>();
+		String sql="select b.cus_id,b.cus_name,c.xiaofei from cus_table b left join cus_id_money c on c.cus_id = b.cus_id";
 		
-		for (int i = 0; i < arr.size(); i++) {
-			CustBean ct=new CustBean();
-		
-				ct.setCus_id((Integer) arr.get(i).get(0));
-				ct.setCus_name((String) arr.get(i).get(1));
-				ct.setXiaofei((String) arr.get(i).get(2).toString());
-				list.add(ct);
-			
+		List<CustBean> list=null;
+		try {
+			list = qr.query(sql, new BeanListHandler<CustBean>(CustBean.class));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return list;
 	}
