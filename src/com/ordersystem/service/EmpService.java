@@ -36,6 +36,14 @@ public void addEmp(EmpBeam emp) {
 	// TODO Auto-generated method stub
 	emp.setEmp_hire_date(emp.getEmp_hire_date().replace(',','-'));
 	emp.setEmp_birday(emp.getEmp_birday().replace(',','-'));
+	String adress = emp.getEmp_address();
+	String afterAdress = "";
+	for (int i = 0; i < adress.length(); i++) {
+		if(adress.charAt(i)!=','){
+			afterAdress+=adress.charAt(i);
+		}
+	}
+	emp.setEmp_address(afterAdress);
 	ei.addEmp(emp);
 }
 

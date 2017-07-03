@@ -11,6 +11,7 @@ import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import com.daofactory.Connpool;
 import com.daofactory.DaoFactory;
+import com.ordersystem.domain.FantailvBean;
 import com.ordersystem.domain.ServiceOrderListBean;
 import com.ordersystem.domain.ServiceTable;
 import com.ordersystem.entity.MyFormat;
@@ -234,7 +235,7 @@ public class ServicePageImpl {
 		return num;
 	}
 
-	/**实现自动补全的方法
+	/**实现自动补全的方法(查询一列数据库的方法)
 	 * @author hcb
 	 * @return 
 	 * 
@@ -249,6 +250,22 @@ public class ServicePageImpl {
 			e.printStackTrace();
 		}
 		return query;
+	}
+
+	/**查询时间翻台率的方法
+	 * @author hcb
+	 * 
+	 */
+	public List<FantailvBean> queryFantailv(String sql) {
+		// TODO Auto-generated method stub
+		List<FantailvBean> ftlList = null;
+		try {
+			ftlList = qr.query(sql, new BeanListHandler<FantailvBean>(FantailvBean.class));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ftlList;
 	}
 	
 	

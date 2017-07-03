@@ -8,7 +8,8 @@
 	type="text/css" rel="stylesheet">
 
 
-<script type="text/javascript" src="../js/jquery-2.1.3.js"></script></HEAD>
+<script type="text/javascript" src="../js/jquery-2.1.3.js"></script>
+<script type="text/javascript" src="../js/check.js"></script></HEAD>
 <style>
 
 #preview, .img , img
@@ -34,24 +35,25 @@
 
 			<tr>
 				<td align="center" bgColor="#f5fafe" class="ta_01">菜品名称：</td>
-				<td class="ta_01" bgColor="#ffffff"><input  onblur="dishesadd()" id="se" type="text" name="db.food_name" class="bg"/></td>
-				
+				<td class="ta_01" bgColor="#ffffff"><input  onblur="CheckChinese(se,菜品名称)" id="se" type="text" name="db.food_name" class="bg"
+				onkeyup="value=value.replace(/[^\u4E00-\u9FA5]/g,'')"onpaste="value=value.replace(/[^\u4E00-\u9FA5]/g,'')" oncontextmenu="value=value.replace(/[^\u4E00-\u9FA5]/g,'')">
 				<td  bgColor="#ffffff" class="ta_01" colspan="2" rowspan="6"> <div id="preview"></div>  </td>
 				
 				
 			</tr>
 			<tr>
 				<td align="center" bgColor="#f5fafe" class="ta_01">菜品单价：</td>
-				<td class="ta_01" bgColor="#ffffff"><input type="text" name="db.food_price" class="bg" />
+				<td class="ta_01" bgColor="#ffffff"><input type="text" name="db.food_price" class="bg" 
+				onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"/>
 				</td>
 				
-			</tr>
+			</tr> 
 			
 			<tr>
 				<td align="center" bgColor="#f5fafe" class="ta_01">最大并菜数：</td>
 				<td class="ta_01" bgColor="#ffffff"><input type="text"
-					name="db.food_merge" 
-					class="bg" />
+					name="db.food_merge"  class="bg"
+					onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"/>
 				</td>
 				
 			</tr>
@@ -60,7 +62,7 @@
 		<td align="center" bgColor="#f5fafe" class="ta_01">加工时间:</td>
 		<td class="ta_01" bgColor="#ffffff" ><input type="text"
 					name="db.food_time" 
-					class="bg" />
+					class="bg" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"/>
 				</td>
 		
 		</tr>
@@ -78,9 +80,9 @@
 		</tr>
 			<tr>
 				<td align="center" bgColor="#f5fafe" class="ta_01">上传图片：</td>
-				<td class="ta_01" bgColor="#ffffff" colSpan="3">
+				<td class="ta_01" bgColor="#ffffff">
 				<input
-					type="file" name="food_pic" size="30"  onchange="preview(this)"  value=""/>
+					type="file" name="food_pic" size="30"  onchange="preview(this)"  value=""/>&nbsp;&nbsp;&nbsp;<span id="picsp"></span>
 				</td>
 			</tr>
 			
@@ -126,8 +128,14 @@
 	<script type="text/javascript">
 	//图片动态预览
 	 function preview(file)  
-		 {  
+		 { 
+		  
 		 var prevDiv = document.getElementById('preview');  
+		 $("#picsp").text("");
+	 	 var lastname = file.value.substring(file.value.indexOf(".")).toLowerCase();
+	 	 if(lastname!=".jpg"&&lastname!=".png"&&lastname!=".gif"){
+	 	 	$("#picsp").text("图片格式有误,请重新上传!").css("color","red");
+	 	 }
 		 if (file.files && file.files[0]){  
 		 var reader = new FileReader();  
 			 reader.onload = function(evt){  
@@ -165,6 +173,21 @@
 			}
 		}); 
 	}
+	//只能输入中文字
+		function CheckChinese(self) {
+			var foodname = self.value;
+			for ( var i = 0; i < foodname.length; i++) {
+				var strTmp = foodname.charAt(i);
+
+				if (document.getElementById("se").value
+						.indexOf('0123456789qwertyuiopasdfghjklzxcvbnm') != -1) {
+					window.alert(self + " 只能填写中文");
+					document.getElementById("se").focus();
+					return false;
+				}
+			}
+			return true;
+		}
 	</script>
 	
 </body>

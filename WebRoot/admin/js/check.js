@@ -13,7 +13,7 @@ function CheckMustNum(strElem,strName)
 {
 	if( document.getElementById(strElem).value == "" || isNaN(document.getElementById(strElem).value))
 	{
-		window.alert(strName + " 为必填项且必须是数值型");
+		window.alert(strName + "为必填项且必须是数值型");
 		document.getElementById(strElem).focus();
 		return false;
 	}
@@ -46,7 +46,7 @@ function CheckNumber(strElem,strName)
 }
 //只能输入中文字
 function CheckChinese(strElem,strName)
-{
+{	alert("12");
 	var str = document.getElementById(strElem).value ;
 	for(var i=0;i<str.length;i++)
 	{

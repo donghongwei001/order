@@ -26,7 +26,8 @@
 			<tr>
 				<td align="center" bgColor="#f5fafe" class="ta_01">菜系名称：</td>
 				<td class="ta_01" bgColor="#ffffff"><input type="text"
-					name="cb.dishes_name" id="cookname" class="bg"/>
+					name="cb.dishes_name" id="cookname" class="bg"
+					onkeyup="value=value.replace(/[^\u4E00-\u9FA5]/g,'')"onpaste="value=value.replace(/[^\u4E00-\u9FA5]/g,'')" oncontextmenu="value=value.replace(/[^\u4E00-\u9FA5]/g,'')"/>
 				</td>
 				<td cospan="2"></td>
 			</tr>

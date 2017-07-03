@@ -23,13 +23,15 @@
 			</tr>
 			<tr>
 				<td align="center" bgColor="#f5fafe" class="ta_01">可供餐人数：</td>
-				<td class="ta_01" bgColor="#ffffff"><input type="text" name="pnum" class="bg" />
+				<td class="ta_01" bgColor="#ffffff"><input type="text" name="pnum" class="bg" 
+				onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"/>
 				</td>
 			</tr>
 			<tr>
 				<td align="center" bgColor="#f5fafe" class="ta_01">餐桌名称：</td>
 				<td class="ta_01" bgColor="#ffffff">
-				<input type="text" name="table_name" class="bg" onblur="seletbname()" id="tbname"/>
+				<input type="text" name="table_name" class="bg" onblur="seletbname()" id="tbname"
+				onkeyup="value=value.replace(/[^\u4E00-\u9FA5]/g,'')"onpaste="value=value.replace(/[^\u4E00-\u9FA5]/g,'')" oncontextmenu="value=value.replace(/[^\u4E00-\u9FA5]/g,'')"/>
 				</td>
 			</tr>
 			<TR>

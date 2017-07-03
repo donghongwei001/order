@@ -12,16 +12,17 @@
 
   <style type="text/css">
 		#id1, .img, img {border:0px solid red;
-			width:120px;
+			width:130px;
 			height:180px;
 		}
 		.aa1{width:900px;}
 	</style>
 
+<script type="text/javascript" src="${pageContext.request.contextPath}/admin/js/shengshilianli.js"></script>
 </HEAD>
 
 <body>
-	<form id="userAction_save_do" name="Form1"
+	<form id="userAction_save_do" name="Form1"	
 		action="${pageContext.request.contextPath}/emp_addEmp.action" method="post" enctype="multipart/form-data">
 		<table cellSpacing="1" cellPadding="5" width="100%" align="center"
 			bgColor="#eeeeee" style="border: 1px solid #8ba7e3" border="0">
@@ -36,21 +37,21 @@
 				<td align="center" bgColor="#f5fafe" class="ta_01">姓名：</td>
 				<td class="ta_01" bgColor="#ffffff" colspan="3"><input type="text"
 					name="emp.emp_name" 
-					class="bg" />
+					class="bg" id="empname"/><span id="empnamesp"></span>
 				</td>
 			</tr>
 			<tr>
 				<td align="center" bgColor="#f5fafe" class="ta_01">性别：</td>
 				<td class="ta_01" bgColor="#ffffff" colspan="3">
-				<input type="radio" name="emp.emp_gender" checked="checked" value="男" />男
+				<input type="radio" name="emp.emp_gender" value="男" />男
 				<input type="radio"name="emp.emp_gender" value="女" />女
 				</td>
 			</tr>
 			<tr>
 				<td align="center" bgColor="#f5fafe" class="ta_01">出生年月：</td>
 				<td class="ta_01" bgColor="#ffffff" colspan="3">
-				<select name="emp.emp_birday">
-							<option value="--请选择--">--请选择--</option>
+				<select name="emp.emp_birday" id="birthyear">
+							<option value="">--请选择--</option>
 							<option value="1972">1972</option>
 							<option value="1973">1973</option>
 							<option value="1974">1974</option>
@@ -77,9 +78,9 @@
 							<option value="1995">1995</option>
 							<option value="1996">1996</option>
 							<option value="1997">1997</option>
-						</select>
-						<select name="emp.emp_birday">
-						<option value="--请选择--">--请选择--</option>
+						</select>年
+						<select name="emp.emp_birday"  id="birthmonth">
+						<option value="">--请选择--</option>
 						<option value="1">1</option>
 						<option value="2">2</option>
 						<option value="3">3</option>
@@ -92,8 +93,8 @@
 						<option value="10">10</option>
 						<option value="11">11</option>
 						<option value="12">12</option>
-				</select> <select name="emp.emp_birday">
-						<option value="--请选择--">--请选择--</option>
+				</select> 月<select name="emp.emp_birday"  id="birthday">
+						<option value="">--请选择--</option>
 						<option value="1">1</option>
 						<option value="2">2</option>
 						<option value="3">3</option>
@@ -125,7 +126,7 @@
 						<option value="29">29</option>
 						<option value="30">30</option>
 						<option value="31">31</option>
-				</select></td>
+				</select>日</td>
 			</tr>
 
 
@@ -167,21 +168,25 @@
 				<td align="center" bgColor="#f5fafe" class="ta_01">身份证号：</td>
 				<td class="ta_01" bgColor="#ffffff" colspan="3"><input type="text"
 					name="emp.emp_idcar" onblur="seleidcar()"  id="idcar"
-					class="bg" />
+					class="bg" /><span id="idcarsp"></span>
 				</td>
 			</tr>
 			<tr>
 				<td align="center" bgColor="#f5fafe" class="ta_01">家庭住址：</td>
-				<td class="ta_01" bgColor="#ffffff" colspan="3"><input type="text"
-					name="emp.emp_address" 
-					class="bg" />
+				<td class="ta_01" bgColor="#ffffff" colspan="3">
+				<!-- <input type="text"	name="emp.emp_address" 	class="bg" /> -->
+					
+					<select id="cmbProvince" name="emp.emp_address"></select>  
+					<select id="cmbCity" name="emp.emp_address"></select>  
+					<select id="cmbArea" name="emp.emp_address"></select>  
+					<input type="text"	name="emp.emp_address" 	class="bg" />
 				</td>
 			</tr>
 			<tr>
 				<td align="center" bgColor="#f5fafe" class="ta_01">入职时间：</td>
 				<td class="ta_01" bgColor="#ffffff"><select
 					name="emp.emp_hire_date">
-						<option value="--请选择--">--请选择--</option>
+						<option value="">--请选择--</option>
 						<option value="2012">2012</option>
 						<option value="2013">2013</option>
 						<option value="2014">2014</option>
@@ -189,7 +194,7 @@
 						<option value="2016">2016</option>
 						<option value="2017">2017</option>
 				</select>年 <select name="emp.emp_hire_date">
-						<option value="--请选择--">--请选择--</option>
+						<option value="">--请选择--</option>
 						<option value="1">1</option>
 						<option value="2">2</option>
 						<option value="3">3</option>
@@ -202,8 +207,8 @@
 						<option value="10">10</option>
 						<option value="11">11</option>
 						<option value="12">12</option>
-				</select> <select name="emp.emp_hire_date">
-						<option value="--请选择--">--请选择--</option>
+				</select> 月<select name="emp.emp_hire_date">
+						<option value="">--请选择--</option>
 						<option value="1">1</option>
 						<option value="2">2</option>
 						<option value="3">3</option>
@@ -235,7 +240,7 @@
 						<option  value="29">29</option>
 						<option  value="30">30</option>
 						<option  value="31">31</option>
-					</select>	
+					</select>日	
 				</td>
 				<td id="id1" bgColor="#ffffff" rowspan="5">
 					 <div id="preview"></div> 					<!-- 添加图片预览位置 --><!-- 添加图片预览位置 --><!-- 添加图片预览位置 -->
@@ -248,7 +253,7 @@
 				<td align="center" bgColor="#f5fafe" class="ta_01">职位：</td>
 				<td class="ta_01" bgColor="#ffffff">
 					<select  name="emp.emp_fk_pos_id" id="posSelect">
-						<option value="--请选择--" selected="selected">--请选择--</option>
+						<option value="" selected="selected">--请选择--</option>
 					</select>
 				</td>
 				<td class="aa1" bgColor="#ffffff">
@@ -258,7 +263,7 @@
 				<td align="center" bgColor="#f5fafe" class="ta_01">状态：</td>
 				<td class="ta_01" bgColor="#ffffff"><select
 					name="emp.emp_state">
-						<option value="--请选择--" selected="selected">--请选择--</option>
+						<option value="" selected="selected">--请选择--</option>
 						<option value="4">在职</option>
 						<option value="5">请假</option>
 						<option value="7">调休</option>
@@ -289,7 +294,7 @@
 				<td align="center" bgColor="#f5fafe" class="ta_01">上传照片：</td>
 				<td class="ta_01" bgColor="#ffffff" >
 				<!-- <img id="img" ><br> -->
-				<input type="file" name="emppic"  onchange="preview(this)"  class="bg" />
+				<input type="file" name="emppic"  onchange="preview(this)"  class="bg" />&nbsp;&nbsp;&nbsp;<span id="picsp"></span>
 				</td>
 				<td  class="aa1" bgColor="#ffffff">
 				</td>
@@ -300,7 +305,7 @@
 			<tr>
 				<td class="ta_01" style="WIDTH: 100%" align="center"
 					bgColor="#f5fafe" colSpan="4"><input type="submit"
-					class="button_ok" value="确定"> <FONT face="宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+					class="button_ok" id="formsub" value="确定"> <FONT face="宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
 
 
 
@@ -313,10 +318,76 @@
 	</form>
 </body>
 <script type="text/javascript">
+	//表单验证
+	$("#empname").focus(function(){
+		//alert("22");
+		 $("#empnamesp").text("");
+	})
+	$("#empname").blur(function(){
+		var name = $(this).val();
+		var sp = $("#empnamesp");
+		if(name==""){
+			sp.css("color","red")
+			sp.text("员工姓名不能为空!");
+			$("#formsub").disabled="true";
+			return;
+		}
+		sp.css("color","green")
+		sp.text("正确!");
+	})
+	function checkForm(){
+	 	return true;
+	}
+	 $("#idcar").focus(function(){
+	 	$("#idcarsp").text("");
+	 })
+	 $("#idcar").blur(function(){
+		var idcar = $(this).val();
+		var sp = $("#idcarsp");
+		var idcarreg=/^[1-9][0-9]{16}([0-9]|X){1}$/
+		if(idcar==""){
+			sp.text("员工身份证号不能为空!").css("color","red");
+			return;
+		}
+		if(!idcarreg.test(idcar)){
+			sp.text("员工身份证号格式有误!").css("color","red");
+			return;
+		}
+		var year = idcar.substring(6,10);
+		var month = idcar.substring(10,12);
+		var day = idcar.substring(12,14);
+		var yearopt = $("#birthyear option");
+		/* alert(year);
+		$("option[value="+year+"]").prop("checked",true); */
+		/* for(var i=0;i<yearopt.length;i++){
+			alert(yearopt[i].val());
+		
+			if(year==yearopt[i].val()){
+				yearopt[i].checked=true;
+			}
+		} */
+		
+	}) 
+	
+	/* var form = document.getElementById("userAction_save_do");
+		form.submitted = false;
+		form.onsubmit=function(){
+		if(form.submitted) return false;
+		form.submitted = true;
+		return true;
+	} */
+	
+	//省市级联
+  	addressInit('cmbProvince', 'cmbCity', 'cmbArea');  
+  	
 	//添加图片预览的js方法
-	 function preview(file)  
-		 {  
-		 var prevDiv = document.getElementById('preview');  
+	 function preview(file){  
+		 var prevDiv = document.getElementById('preview'); 
+		 $("#picsp").text("");
+	 	 var lastname = file.value.substring(file.value.indexOf(".")).toLowerCase();
+	 	 if(lastname!=".jpg"&&lastname!=".png"&&lastname!=".gif"){
+	 	 	$("#picsp").text("图片格式有误,请重新上传!").css("color","red");
+	 	 }
 		 if (file.files && file.files[0]){  
 		 var reader = new FileReader();  
 			 reader.onload = function(evt){  
@@ -351,7 +422,7 @@
 			dataType:"text",
 			success:function(list){
 				 if(list=="false"){
-				 	alert("身份证号已存在，请再次确认！")
+				 	var sp = $("#idcarsp").text("身份证号存在重复,不能再次录入!").css("color","red");
 				 }
 			}
 		}); 
