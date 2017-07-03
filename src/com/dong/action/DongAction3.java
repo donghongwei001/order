@@ -16,8 +16,7 @@ import org.apache.commons.dbutils.handlers.ColumnListHandler;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
 
-import com.ConnPool.NaturalPersonService;
-import com.ConnPool.PageUtil;
+
 import com.alibaba.fastjson.JSON;
 import com.daofactory.Connpool;
 import com.daofactory.DaoFactory;
@@ -94,30 +93,20 @@ public class DongAction3 {
 
 
 
-	//∑÷“≥
-	private NaturalPersonService personService=new NaturalPersonService();
+	//∂©µ•∑÷“≥
 	public String query1() throws IOException{
 
-		System.out.println(request.getRequestURI());
-		String user=(String) session.getAttribute("user");
-		System.out.println(user);
-
-		String currPageStr=request.getParameter("currPage");
-		String pageSizeStr=request.getParameter("pageSize");
-		Integer currPage=null;
-		Integer pageSize=null;
+		String sql="select o.order_id,o.order_time,o.order_fk_tabid,o.order_money,e.emp_name,o.order_dt_score,o.oeder_dt_mark,t.code_name from code_table t, order_table o,emp_table e where t.code_id=o.order_status and o.order_fk_empid=e.emp_id  order by order_id desc";
+		List<OrderBean> query;
 		try {
-			currPage=Integer.parseInt(currPageStr);
-			pageSize=Integer.parseInt(pageSizeStr);
-		} catch (Exception e) {
-			// TODO: handle exception
-
+			query = qr.query(sql,new BeanListHandler<OrderBean>(OrderBean.class));
+			session.setAttribute("List1", query);
+			System.out.println(query.size());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		HttpSession session = request.getSession();
-		PageUtil util=personService.select(currPage, pageSize);
-		session.setAttribute("list", util);
-		List list1=util.getRows();
-		session.setAttribute("List1", list1);
+		
 		response.sendRedirect("/Ordersystem/admin/products/order_list.jsp");
 		return null;
 
