@@ -80,7 +80,7 @@
 				<td align="center" bgColor="#f5fafe" class="ta_01">上传图片：</td>
 				<td class="ta_01" bgColor="#ffffff">
 				<input
-					type="file" name="food_pic" size="30"  onchange="preview(this)"  value=""/>
+					type="file" name="food_pic" size="30"  onchange="preview(this)"  value=""/>&nbsp;&nbsp;&nbsp;<span id="picsp"></span>
 				</td>
 			</tr>
 			
@@ -126,8 +126,14 @@
 	<script type="text/javascript">
 	//图片动态预览
 	 function preview(file)  
-		 {  
+		 { 
+		  
 		 var prevDiv = document.getElementById('preview');  
+		 $("#picsp").text("");
+	 	 var lastname = file.value.substring(file.value.indexOf(".")).toLowerCase();
+	 	 if(lastname!=".jpg"&&lastname!=".png"&&lastname!=".gif"){
+	 	 	$("#picsp").text("图片格式有误,请重新上传!").css("color","red");
+	 	 }
 		 if (file.files && file.files[0]){  
 		 var reader = new FileReader();  
 			 reader.onload = function(evt){  

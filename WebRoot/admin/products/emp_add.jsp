@@ -22,7 +22,7 @@
 </HEAD>
 
 <body>
-	<form id="userAction_save_do" name="Form1"
+	<form id="userAction_save_do" name="Form1"	
 		action="${pageContext.request.contextPath}/emp_addEmp.action" method="post" enctype="multipart/form-data">
 		<table cellSpacing="1" cellPadding="5" width="100%" align="center"
 			bgColor="#eeeeee" style="border: 1px solid #8ba7e3" border="0">
@@ -37,7 +37,7 @@
 				<td align="center" bgColor="#f5fafe" class="ta_01">姓名：</td>
 				<td class="ta_01" bgColor="#ffffff" colspan="3"><input type="text"
 					name="emp.emp_name" 
-					class="bg" />
+					class="bg" id="empname"/><span id="empnamesp"></span>
 				</td>
 			</tr>
 			<tr>
@@ -50,7 +50,7 @@
 			<tr>
 				<td align="center" bgColor="#f5fafe" class="ta_01">出生年月：</td>
 				<td class="ta_01" bgColor="#ffffff" colspan="3">
-				<select name="emp.emp_birday">
+				<select name="emp.emp_birday" id="birthyear">
 							<option value="">--请选择--</option>
 							<option value="1972">1972</option>
 							<option value="1973">1973</option>
@@ -79,7 +79,7 @@
 							<option value="1996">1996</option>
 							<option value="1997">1997</option>
 						</select>年
-						<select name="emp.emp_birday">
+						<select name="emp.emp_birday"  id="birthmonth">
 						<option value="">--请选择--</option>
 						<option value="1">1</option>
 						<option value="2">2</option>
@@ -93,7 +93,7 @@
 						<option value="10">10</option>
 						<option value="11">11</option>
 						<option value="12">12</option>
-				</select> 月<select name="emp.emp_birday">
+				</select> 月<select name="emp.emp_birday"  id="birthday">
 						<option value="">--请选择--</option>
 						<option value="1">1</option>
 						<option value="2">2</option>
@@ -168,7 +168,7 @@
 				<td align="center" bgColor="#f5fafe" class="ta_01">身份证号：</td>
 				<td class="ta_01" bgColor="#ffffff" colspan="3"><input type="text"
 					name="emp.emp_idcar" onblur="seleidcar()"  id="idcar"
-					class="bg" />
+					class="bg" /><span id="idcarsp"></span>
 				</td>
 			</tr>
 			<tr>
@@ -294,7 +294,7 @@
 				<td align="center" bgColor="#f5fafe" class="ta_01">上传照片：</td>
 				<td class="ta_01" bgColor="#ffffff" >
 				<!-- <img id="img" ><br> -->
-				<input type="file" name="emppic"  onchange="preview(this)"  class="bg" />
+				<input type="file" name="emppic"  onchange="preview(this)"  class="bg" />&nbsp;&nbsp;&nbsp;<span id="picsp"></span>
 				</td>
 				<td  class="aa1" bgColor="#ffffff">
 				</td>
@@ -305,7 +305,7 @@
 			<tr>
 				<td class="ta_01" style="WIDTH: 100%" align="center"
 					bgColor="#f5fafe" colSpan="4"><input type="submit"
-					class="button_ok" value="确定"> <FONT face="宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+					class="button_ok" id="formsub" value="确定"> <FONT face="宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
 
 
 
@@ -318,11 +318,76 @@
 	</form>
 </body>
 <script type="text/javascript">
+	//表单验证
+	$("#empname").focus(function(){
+		//alert("22");
+		 $("#empnamesp").text("");
+	})
+	$("#empname").blur(function(){
+		var name = $(this).val();
+		var sp = $("#empnamesp");
+		if(name==""){
+			sp.css("color","red")
+			sp.text("员工姓名不能为空!");
+			$("#formsub").disabled="true";
+			return;
+		}
+		sp.css("color","green")
+		sp.text("正确!");
+	})
+	function checkForm(){
+	 	return true;
+	}
+	 $("#idcar").focus(function(){
+	 	$("#idcarsp").text("");
+	 })
+	 $("#idcar").blur(function(){
+		var idcar = $(this).val();
+		var sp = $("#idcarsp");
+		var idcarreg=/^[1-9][0-9]{16}([0-9]|X){1}$/
+		if(idcar==""){
+			sp.text("员工身份证号不能为空!").css("color","red");
+			return;
+		}
+		if(!idcarreg.test(idcar)){
+			sp.text("员工身份证号格式有误!").css("color","red");
+			return;
+		}
+		var year = idcar.substring(6,10);
+		var month = idcar.substring(10,12);
+		var day = idcar.substring(12,14);
+		var yearopt = $("#birthyear option");
+		/* alert(year);
+		$("option[value="+year+"]").prop("checked",true); */
+		/* for(var i=0;i<yearopt.length;i++){
+			alert(yearopt[i].val());
+		
+			if(year==yearopt[i].val()){
+				yearopt[i].checked=true;
+			}
+		} */
+		
+	}) 
+	
+	/* var form = document.getElementById("userAction_save_do");
+		form.submitted = false;
+		form.onsubmit=function(){
+		if(form.submitted) return false;
+		form.submitted = true;
+		return true;
+	} */
+	
+	//省市级联
   	addressInit('cmbProvince', 'cmbCity', 'cmbArea');  
+  	
 	//添加图片预览的js方法
-	 function preview(file)  
-		 {  
-		 var prevDiv = document.getElementById('preview');  
+	 function preview(file){  
+		 var prevDiv = document.getElementById('preview'); 
+		 $("#picsp").text("");
+	 	 var lastname = file.value.substring(file.value.indexOf(".")).toLowerCase();
+	 	 if(lastname!=".jpg"&&lastname!=".png"&&lastname!=".gif"){
+	 	 	$("#picsp").text("图片格式有误,请重新上传!").css("color","red");
+	 	 }
 		 if (file.files && file.files[0]){  
 		 var reader = new FileReader();  
 			 reader.onload = function(evt){  
@@ -357,7 +422,7 @@
 			dataType:"text",
 			success:function(list){
 				 if(list=="false"){
-				 	alert("身份证号已存在，请再次确认！")
+				 	var sp = $("#idcarsp").text("身份证号存在重复,不能再次录入!").css("color","red");
 				 }
 			}
 		}); 
