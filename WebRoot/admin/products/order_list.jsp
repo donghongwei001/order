@@ -210,7 +210,7 @@
 										<td><span class="label label-success radius">${b.code_name}</span>
 										</td>
 										<td><a href="/Ordersystem/xiaofeixiangqing.action?id=${b.order_id}"><button type="button"
-												onclick="xiaofeixiangqing('${b.order_id}')"
+												
 												>消费详情</button></a>
 										</td>
 
@@ -233,23 +233,7 @@
 
 		</div>
 	</div>
-	<div class="modal fade bs-example-modal-lg" id="mymodel"data-backdrop="false" tabindex="-1"
-		role="dialog" aria-labelledby="myLargeModalLabel">
-		<div class="modal-dialog modal-lg" role="document">
-			<div class="modal-content">
-				<table class="table table-hover">
-					<c:forEach items="${xiangqing}" var="a">
-						<tr>
-							<c:forEach items="${a}" var="b">
-								<td>${b}</td>
-							</c:forEach>
-						</tr>
-					</c:forEach>
-				</table>
-				<button type="button" class="btn btn-danger btn-xm"onclick="quxiao()" data-dismiss="modal">取消</button>
-			</div>
-		</div>
-	</div>
+
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script type="text/javascript" src="../js/jquery-2.1.3.js"
 		charset="UTF-8"></script>
