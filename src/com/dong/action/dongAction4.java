@@ -23,9 +23,7 @@ import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 import org.omg.CORBA.PUBLIC_MEMBER;
 
-import com.ConnPool.NaturalPersonService;
 
-import com.ConnPool.PageUtil;
 import com.alibaba.fastjson.JSON;
 import com.daofactory.Connpool;
 import com.daofactory.DaoFactory;
@@ -57,7 +55,6 @@ public class dongAction4 extends ActionSupport{
 	Object[] objects=new Object[]{shijian1,shijian2};
 	ArrayList list =new DaoFactory().execQuery("select COUNT(*), sum(order_money) from order_table where order_time between ? and ? ", objects);
 	request.setAttribute("list", list);*/
-	private NaturalPersonService personService=new NaturalPersonService();
 
 	HttpServletRequest request=ServletActionContext.getRequest();	
 	HttpServletResponse response=ServletActionContext.getResponse();
@@ -217,21 +214,14 @@ public class dongAction4 extends ActionSupport{
 		session.setAttribute("shijiankuang4", shijian4);
 		String name=request.getParameter("ordername");
 		if (name==""&&(shijian3!=""&&shijian4!="")) {
-			String sql = "select top 5 order_id,order_time,order_fk_tabid,order_money,emp_name,order_dt_score,oeder_dt_mark,code_name from order_table,emp_table,code_table where code_id=order_status and order_fk_empid=emp_id and order_id not in(select top 0 order_id from order_table ,emp_table where  order_fk_empid=emp_id and order_time >=? and order_time<=? order by order_id desc ) and order_time >=? and order_time<=? order by order_id desc";
+			String sql = "select order_id,order_time,order_fk_tabid,order_money,emp_name,order_dt_score,oeder_dt_mark,code_name from order_table,emp_table,code_table where code_id=order_status and order_fk_empid=emp_id and order_time >='"+shijian3+"' and order_time<='"+shijian4+"' order by order_id desc";
 			//ArrayList tableList=new Userdaoimpl().executeQuery(sql);
 			QueryRunner qr = new QueryRunner(cp.getDataSource());
 			List<OrderBean> tableList = null;
 			try {
 
-				tableList = qr.query(sql, new BeanListHandler<OrderBean>(OrderBean.class),shijian3,shijian4,shijian3,shijian4);
-				int sum = (Integer) qr.query("select count(*) from order_Table where order_time >=? and order_time<=?",new ScalarHandler(1),shijian3,shijian4);
-				int index=0;
-				if (sum%5!=0) {
-					index=(sum/5)+1;
-				}else {
-					index=sum/5;
-				}
-				session.setAttribute("jishu", index);
+				tableList = qr.query(sql, new BeanListHandler<OrderBean>(OrderBean.class));
+				System.out.println(tableList.size());
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -734,27 +724,7 @@ public class dongAction4 extends ActionSupport{
 		this.count = count;
 	}
 
-	//·ÖÒ³
-	@Action("del")
-	public String del(){
-		String shijian3=(String) session.getAttribute("shijiankuang3");
-		String shijian4=(String) session.getAttribute("shijiankuang4");
-		String count=getCount();
-		int count1=Integer.parseInt(count);
-		int count2=(count1-1)*5;
-		try {
-			String sql="select top 5 order_id,order_time,order_fk_tabid,order_money,emp_name,order_dt_score,oeder_dt_mark,code_name from order_table,emp_table,code_table where code_id=order_status and order_fk_empid=emp_id and order_id not in(select top "+count2+" order_id from order_table ,emp_table where  order_fk_empid=emp_id and order_time >="+shijian3+" and order_time<="+shijian4+" order by order_id desc ) and order_time >="+shijian3+" and order_time<="+shijian4+" order by order_id desc";
-			List<OrderBean> query = qr.query(sql,new BeanListHandler<OrderBean>(OrderBean.class));
-			session.setAttribute("list1", query);
-			response.sendRedirect("/Ordersystem/admin/products/order_list.jsp");
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return null;
-		
-	}
+	
 	
 	private String xiaofeiid;
 	

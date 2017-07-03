@@ -152,8 +152,8 @@
 					</form>
 					<div class="cl pd-5 bg-1 bk-gray mt-20">
 						<input type="hidden" id="jishu" value="${jishu}"> <span
-							class="l"> <span class="r">共有数据：<strong
-								style="font-size:25px">${list.total }</strong> 条</span>
+							class="l"> <span class="r">共有数据：<strong id="aaaa"
+								style="font-size:25px"></strong> 条</span>
 					</div>
 					<div class="mt-20">
 						<table
@@ -217,13 +217,16 @@
 									</tr>
 								</c:forEach>
 							</tbody>
+							
 						</table>
-						<span style="margin-left:700px;">${list.pageStr}
-							第${list.currPage }页 共${list.allPage}页</span> <br /> <!-- <span><button
-								onclick="del()">上一页</button> <input id="yeshu" type="text"
-							value="1">
-							<button onclick="add()">下一页</button> </span> -->
-
+						<div class="pagelist">
+							<span id="spanFirst" class="button border-main">首页</span>
+ 							<span id="spanPre" class="button border-main">上一页</span> 
+ 							<span id="spanNext" class="button border-main">下一页</span> 
+ 							<span id="spanLast" class="button border-main">尾页</span>
+ 							 第<span	id="spanPageNum"></span>页/共 <span id="spanTotalPage"></span>页
+						</div>
+						
 					</div>
 					</article>
 				</div>
@@ -233,7 +236,12 @@
 
 		</div>
 	</div>
-
+	<div style="display: none">
+		<span id="spanFirstt">首页</span> <span id="spanPret">上一页</span> <span
+			id="spanNextt"> 下一页</span> <span id="spanLastt">尾页</span> 第 <span
+			id="spanPageNumt"></span>页/共<span id="spanTotalPaget"></span>页
+	</div>
+	
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script type="text/javascript" src="../js/jquery-2.1.3.js"
 		charset="UTF-8"></script>
@@ -264,47 +272,180 @@
 			forceParse : 0,
 			showMeridian : 1,
 		})
-		function del() {
-			var totol = document.getElementById("jishu").value;
-			var index = document.getElementById("yeshu").value;
-			if (index > 1) {
-				index = index * 1 - 1
-			} else {
-				index = 1
-			}
-			$("#yeshu").val(index);
-			$.ajax({
-				type : "post",
-				url : "/Ordersystem/del.action",
-				dataType : "text",
-				data : {
-					count : index,
-
-				},
-				success : function(data) {
-					alert("1111");
-				}
-
-			})
-
-		}
-		function add() {
-			var totol = document.getElementById("jishu").value;
-			var index = document.getElementById("yeshu").value;
-			index = index * 1 + 1;
-			$("#yeshu").val(index);
-			                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
-		}
-		
-		
-		
-		/* $("#mymodel").on("hidden.bs.modal", function(e) {
-			window.location.reload();//页面刷新
-		}) */
-		/* $("#mymodel").modal({
-			show : false,
-			backdrop : "static"
-		}); */
 	</script>
+	<script type="text/javascript">
+	  
+	var theTable = document.getElementById("xinxi");
+	var totalPage = document.getElementById("spanTotalPage");
+	var pageNum = document.getElementById("spanPageNum");
+
+	var spanPre = document.getElementById("spanPre");
+	var spanNext = document.getElementById("spanNext");
+	var spanFirst = document.getElementById("spanFirst");
+	var spanLast = document.getElementById("spanLast");
+	
+	var totalPaget = document.getElementById("spanTotalPaget");
+	var pageNumt = document.getElementById("spanPageNumt");
+
+	var spanPret = document.getElementById("spanPret");
+	var spanNextt = document.getElementById("spanNextt");
+	var spanFirstt = document.getElementById("spanFirstt");
+	var spanLastt = document.getElementById("spanLastt");
+	var numberRowsInTable = theTable.rows.length;
+	var pageSize = 6;
+	var page = 1;
+	$("#aaaa").text(numberRowsInTable);
+	//下一页     
+	function next() {
+
+		hideTable();
+
+		currentRow = pageSize * page;
+		maxRow = currentRow + pageSize;
+		
+		if (maxRow > numberRowsInTable)
+			maxRow = numberRowsInTable;
+		for ( var i = currentRow; i < maxRow; i++) {
+			theTable.rows[i].style.display = '';
+		}
+		page++;
+
+		if (maxRow == numberRowsInTable) {
+			nextText();
+			lastText();
+		}
+		showPage();
+		preLink();
+		firstLink();
+	}
+
+	//上一页     
+	function pre() {
+
+		hideTable();
+
+		page--;
+
+		currentRow = pageSize * page;
+		maxRow = currentRow - pageSize;
+		if (currentRow > numberRowsInTable)
+			currentRow = numberRowsInTable;
+		for ( var i = maxRow; i < currentRow; i++) {
+			theTable.rows[i].style.display = '';
+		}
+
+		if (maxRow == 0) {
+			preText();
+			firstText();
+		}
+		showPage();
+		nextLink();
+		lastLink();
+	}
+
+	//第一页     
+	function first() {
+		hideTable();
+		page = 1;
+		for ( var i = 0; i < pageSize; i++) {
+			theTable.rows[i].style.display = '';
+		}
+		showPage();
+
+		preText();
+		nextLink();
+		lastLink();
+	}
+
+	//最后一页     
+	function last() {
+		hideTable();
+		page = pageCount();
+		currentRow = pageSize * (page - 1);
+		for ( var i = currentRow; i < numberRowsInTable; i++) {
+			theTable.rows[i].style.display = '';
+		}
+		showPage();
+
+		preLink();
+		nextText();
+		firstLink();
+	}
+
+	function hideTable() {
+		for ( var i = 0; i < numberRowsInTable; i++) {
+			theTable.rows[i].style.display = 'none';
+		}
+	}
+
+	//控制分页
+	function showPage() {
+		pageNum.innerHTML = page;
+		pageNumt.innerHTML = page;
+	}
+
+	//总共页数     
+	function pageCount() {
+        var count = 0;
+        if (numberRowsInTable % pageSize != 0) count = 1;
+        return parseInt(numberRowsInTable / pageSize) + count;
+    }
+
+	//显示链接     
+	function preLink() {
+		spanPre.innerHTML = "<a href='javascript:pre();' id='sasasaa'>上一页</a>";
+
+		spanPret.innerHTML = "<a href='javascript:pre();'>上一页</a>";
+	}
+	function preText() {
+		spanPre.innerHTML = "上一页";
+		spanPret.innerHTML = "上一页";
+	}
+
+	function nextLink() {
+		spanNext.innerHTML = "<a href='javascript:next();' id='sasasaa'>下一页</a>";
+
+		spanNextt.innerHTML = "<a href='javascript:next();'>下一页</a>";
+	}
+	function nextText() {
+		spanNext.innerHTML = "下一页";
+		spanNextt.innerHTML = "下一页";
+	}
+
+	function firstLink() {
+		spanFirst.innerHTML = "<a href='javascript:first();' id='sasasaa'>首页</a>";
+		spanFirstt.innerHTML = "<a href='javascript:first();'>首页</a>";
+	}
+	function firstText() {
+		spanFirst.innerHTML = "首页";
+		spanFirstt.innerHTML = "首页";
+	}
+
+	function lastLink() {
+		spanLast.innerHTML = "<a href='javascript:last();' id='sasasaa'>尾页";
+		spanLastt.innerHTML= "<a href='javascript:last();'>尾页</a>";
+	}
+	function lastText() {
+		spanLast.innerHTML = "尾页";
+		spanLastt.innerHTML = "尾页";
+	}
+
+	//隐藏表格     
+	function hide() {
+		for ( var i = pageSize; i < numberRowsInTable; i++) {
+			theTable.rows[i].style.display = 'none';
+		}
+
+		totalPage.innerHTML = pageCount();
+		pageNum.innerHTML = '1';
+
+		totalPaget.innerHTML = pageCount();
+		pageNumt.innerHTML = '1';
+
+		nextLink();
+		lastLink();
+	}
+	hide();
+</script>
 </body>
 </html>
