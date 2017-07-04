@@ -115,7 +115,7 @@ div {
 				<!-- <a href="javascript:reminder()" class="btn btn-warning button-control" role="button">催菜</a><BR> -->
 				<a href="${pageContext.request.contextPath}/serv_fantailv.action" target="main" class="btn btn-primary button-control" role="button">翻台率</a><BR>
 				<a href="javascript:cancelCall()" class="btn btn-danger button-control" role="button">取消呼叫</a><BR>
-				<a href="${pageContext.request.contextPath}/serv_showTable.action" class="btn btn-success button-control" role="button">刷新桌位</a><BR>
+				<a href="${pageContext.request.contextPath}/serv_showTable.action" class="btn btn-success button-control" role="button">桌位管理</a><BR>
 				<a href="javascript:clear()" class="btn btn-danger button-control" role="button">清扫结束</a>
 				
 				<!-- <a href="###" class="btn btn-primary button-control" role="button" data-toggle="modal" data-target="#myModal2">买单</a> <a href="###"
