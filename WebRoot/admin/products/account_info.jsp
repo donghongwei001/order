@@ -86,18 +86,6 @@
 					}
 				},"json");
 		}); 
-	function seletbnam(){
-		$.ajax({
-			url:"/Ordersystem/Table_sltbname.action",
-			data:{tbname:$("#tbname").val()},
-			type:"post",
-			dataType:"text",
-			success:function(list){
-				 if(list=="false"){
-				 	alert("该桌子名称已存在,请重新输入");
-				 }
-			}
-		}); 
-	}
+	
 </script>
 </html>
