@@ -66,26 +66,23 @@
 						<input type="hidden" id="dtp_input2" value="" /><br/>
            			</div>
 					
-					<!-- <div class="form-group">
-						<label for="exampleInputEmail2">结束时间</label> 
-						<input type="text" class="form-control" name="endtime" id="exampleInputEmail2">
-					</div> -->
+					
 					<button type="submit" class="btn btn-success">查询</button>
 				</form>
 
-				<div style="margin-top:30px;border:1px solid gray;">
+				<div style="margin-top:30px;border:1px solid #aaa;">
 
 					<table class="table table-striped">
-						<tr>
-							<th>餐桌编号</th>
-							<th>订单数量</th>
-							<th>消费金额</th>
+						<tr align="center">
+							<th align="center">餐桌编号</th>
+							<th align="center">订单数量</th>
+							<th align="center">消费金额</th>
 						</tr>
 						<c:forEach items="${showftl }" var="ft">
 						<tr>
-							<td>${ft.table_id }</td>
-							<td>${ft.sailnum }</td>
-							<td>${ft.countmoney }</td>
+							<td align="center">${ft.table_id }</td>
+							<td align="center">${ft.sailnum }</td>
+							<td align="center">${ft.countmoney }</td>
 						</tr>	
 						</c:forEach>
 					</table>
@@ -97,7 +94,7 @@
 <script type="text/javascript">
     
 	$('.form_date').datetimepicker({
-        language:  'fr',
+        language:  'cn',
         weekStart: 1,
         todayBtn:  1,
 		autoclose: 1,
