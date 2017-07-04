@@ -120,25 +120,37 @@
 						<span id="riqi">日期范围</span>：
 						<div class="control-group" id="shijian1">
 							<label class="control-label"> 初始时间</label>
-							<div class="controls input-append date form_datetime"
+							<div class="controls input-append date form_date"
 								data-date="2017-06-16T00:00:00Z" data-date-format="yyyy-MM-dd"
 								data-link-field="dtp_input1">
 								<input id="shijiankuang3" name="shijiankuang3" size="25"
-									type="text" value="" readonly> <span class="add-on"><i
-									class="icon-remove"></i> </span> <span class="add-on"><i
-									class="icon-th"></i> </span>
+									type="text" value="" readonly> 
+									<button type="button" onclick="qingchu2()" class="btn btn-danger">×</button>
+									 <span class="add-on"><i class="icon-th"></i> </span>
 							</div>
 							<input type="hidden" id="dtp_input1" value="" /><br />
 						</div>
+						
+						<div class="form-group">
+                		<label for="dtp_input2" class="control-label">开始时间</label>
+                		<div class="input-group date form_date" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+	                    	<input class="form-control" size="16" name="starttime" type="text" value="${starttime}" readonly>
+	                   		<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+							<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+               			 </div>
+						<input type="hidden" id="dtp_input2" value="" /><br/>
+           			</div>
+						
+						
 						<div class="control-group" id="shijian2">
 							<label class="control-label"> 初始时间</label>
-							<div class="controls input-append date form_datetime"
+							<div class="controls input-append date form_date"
 								data-date="2017-06-16T00:00:00Z" data-date-format="yyyy-MM-dd"
 								data-link-field="dtp_input1">
 								<input id="shijiankuang4" name="shijiankuang4" size="25"
-									type="text" value="" readonly> <span class="add-on"><i
-									class="icon-remove"></i> </span> <span class="add-on"><i
-									class="icon-th"></i> </span>
+									type="text" value="" readonly> 
+									<button type="button" onclick="qingchu1()" class="btn btn-danger">×</button>
+									<span class="add-on"><i	class="icon-th"></i> </span>
 							</div>
 							<input type="hidden" id="dtp_input1" value="" /><br />
 						</div>
@@ -262,7 +274,13 @@
 	<script type="text/javascript"
 		src="../js/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
 	<script type="text/javascript">
-		$(".form_datetime").datetimepicker({
+		function qingchu1(){
+			$("#shijiankuang4").val("");
+		}
+		function qingchu2(){
+			$("#shijiankuang3").val("");
+		}
+		$(".form_date").datetimepicker({
 			//language:  'fr',
 			weekStart : 1,
 			todayBtn : 1,

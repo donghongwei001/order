@@ -148,7 +148,7 @@
 			success:function(list){
 				 $("#tbody").empty();
 				 for(var i=0;i<list.length;i++){
-					 var tr = $("<tr><td>"+((pageNo-1)*10+i+1)+"</td><td>"+list[i].table_name+"</td><td>"+list[i].emp_name+"</td><td>"+list[i].food_name+"</td><td>"+list[i].food_num+"</td><td>"+list[i].servingtime+"</td><td>"+list[i].order_food_mark+"</td><td><a type='button' class='btn btn-success btn-xs' href='${pageContext.request.contextPath}/kitchen_doFood.action?orderfoodid="+list[i].order_food_id+"&status=1'>查看</a></td>");
+					 var tr = $("<tr><td>"+((pageNo-1)*10+i+1)+"</td><td>"+list[i].table_name+"</td><td>"+list[i].emp_name+"</td><td>"+list[i].food_name+"</td><td>"+list[i].food_num+"</td><td>"+list[i].servingtime+"</td><td>"+list[i].order_food_mark+"</td>");
 					$("#tbody").append(tr);	 
 				}  
 				$("#currentpage").text("第"+pageNo+"页"); 
@@ -166,7 +166,7 @@
 			success:function(list){
 				 $("#tbody").empty();
 				 for(var i=0;i<list.length;i++){
-						 var tr = $("<tr><td>"+((pageNo-1)*10+i+1)+"</td><td>"+list[i].table_name+"</td><td>"+list[i].emp_name+"</td><td>"+list[i].food_name+"</td><td>"+list[i].food_num+"</td><td>"+list[i].servingtime+"</td><td>"+list[i].order_food_mark+"</td><td><a type='button' class='btn btn-success btn-xs' href='${pageContext.request.contextPath}/kitchen_doFood.action?orderfoodid="+list[i].order_food_id+"&status=1'>查看</a></td>");
+						 var tr = $("<tr><td>"+((pageNo-1)*10+i+1)+"</td><td>"+list[i].table_name+"</td><td>"+list[i].emp_name+"</td><td>"+list[i].food_name+"</td><td>"+list[i].food_num+"</td><td>"+list[i].servingtime+"</td><td>"+list[i].order_food_mark+"</td>");
 						$("#tbody").append(tr);	 
 				}   
 				 $("#currentpage").text("第"+pageNo+"页");

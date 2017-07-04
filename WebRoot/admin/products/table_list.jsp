@@ -26,9 +26,6 @@
 	}
 </style>
 </HEAD>
-<script type="text/javascript">
-	
-</script>
 <body>
 	<div id="search_he"></div>
 	
@@ -44,11 +41,13 @@
 					<td>
 						<table cellpadding="0" cellspacing="0" border="0" width="100%"> 
 						 	<tr>
-						 		<td>
-							<form action="Table_selezhuo.action" method="post">
-								桌号：<input type="text" name="zhuohao"/><br>
-								<input type="submit" value="查询"> 
-							</form>
+						 		<td style="padding-left:80px">
+							 		<div>
+										<form action="Table_seleAll.action" method="post">
+											桌号：<input type="text" name="tabid" id="tabidaa" value="${tabid}"/>&nbsp;&nbsp;&nbsp;&nbsp;
+											<input type="submit" value="查询"> 
+										</form>
+									</div>
 								</td>
 							</tr> 
 						 </table> 
@@ -81,226 +80,98 @@
 								<td width="7%" align="center">编辑</td>
 								<td width="7%" align="center">删除</td>
 							</tr>
-							<tbody  id="DataGrid1">
+							<tbody id="tbody">
 							 <c:forEach items="${list}" var="row">
-									<tr style="FONT-WEIGHT: bold; HEIGHT:33px;FONT-WEIGHT: bold;FONT-SIZE: 12pt; HEIGHT: 25px;">
-										<td align="center" width="13%">${row.table_id}</td>
-										<td align="center" width="13%">${row.table_name}</td>
-										<td align="center" width="13%">${row.table_state }</td>
-										<td align="center" width="13%">${row.table_Capacity}</td>
-										<td align="center" width="13%">${row.fk_emp_id}</td>
-										<td align="center" width="13%">${row.emp_state}</td>
-										<td width="7%" align="center">
-										 <a href="${pageContext.request.contextPath}/Table_seid.action?tabled=${row.table_id}&name=${row.table_name}&capacity=${row.table_Capacity}" > 
-											<img
-											src="${pageContext.request.contextPath}/admin/images/i_edit.gif"
-											width="16" height="16" border="0" style="CURSOR: hand" type="submit">
+								<tr style="FONT-WEIGHT: bold; HEIGHT:33px;FONT-WEIGHT: bold;FONT-SIZE: 12pt; HEIGHT: 25px;">
+									<td align="center" width="13%">${row.table_id}</td>
+									<td align="center" width="13%">${row.table_name}</td>
+									<td align="center" width="13%">${row.code_name }</td>
+									<td align="center" width="13%">${row.table_Capacity}</td>
+									<td align="center" width="13%">${row.emp_name}</td>
+									<td align="center" width="13%">${row.emp_code_name}</td>
+									<td width="7%" align="center">
+									 <a href="${pageContext.request.contextPath}/Table_seid.action?tabled=${row.table_id}&name=${row.table_name}&capacity=${row.table_Capacity}" > 
+										<img src="${pageContext.request.contextPath}/admin/images/i_edit.gif" width="16" height="16" border="0" style="CURSOR: hand" type="submit">
+									</a>								
+									</td>
+									<td width="7%" align="center">
+									<a href="${pageContext.request.contextPath}/Table_del.action?tab=${row.table_id}">
+										<img src="${pageContext.request.contextPath}/admin/images/i_del.gif" width="16" height="16" border="0" style="CURSOR: hand">
 									</a>
-									
-								</td>
-								<td width="7%" align="center">
-									<a
-										href="${pageContext.request.contextPath}/Table_del.action?tab=${row.table_id}">
-											<img
-											src="${pageContext.request.contextPath}/admin/images/i_del.gif"
-											width="16" height="16" border="0" style="CURSOR: hand">
-									</a>
-								</td> 
-									</tr>
-								</c:forEach>
-								</tbody>
+									</td> 
+								</tr>
+							</c:forEach>
+							</tbody>
 							</table>
 					</td>
 				</tr>
 			</TBODY>
 		</table>
-	<div class="pagelist">
-		<span id="spanFirst" class="button border-main">首页</span> <span
-			id="spanPre" class="button border-main">上一页</span> <span
-			id="spanNext" class="button border-main">下一页</span> <span
-			id="spanLast" class="button border-main">尾页</span> 第<span
-			id="spanPageNum"></span>页/共 <span id="spanTotalPage"></span>页
-	</div>
-	<div style="display: none">
-		<span id="spanFirstt">首页</span> <span id="spanPret">上一页</span> <span
-			id="spanNextt"> 下一页</span> <span id="spanLastt">尾页</span> 第 <span
-			id="spanPageNumt"></span>页/共<span id="spanTotalPaget"></span>页
-	</div>
+	<button  class="pre" onclick="bac()">上一页</button>
+	<button  class="bac" onclick="pre(4)">下一页</button><span id="currentpage">第1页</span><span>共${total }页</span>
+	<input type="hidden" value="${total }" id="allpage">
 <script type="text/javascript">
-	//分页
-	var theTable = document.getElementById("DataGrid1");
-	var totalPage = document.getElementById("spanTotalPage");
-	var pageNum = document.getElementById("spanPageNum");
-
-	var spanPre = document.getElementById("spanPre");
-	var spanNext = document.getElementById("spanNext");
-	var spanFirst = document.getElementById("spanFirst");
-	var spanLast = document.getElementById("spanLast");
-
-	var totalPaget = document.getElementById("spanTotalPaget");
-	var pageNumt = document.getElementById("spanPageNumt");
-
-	var spanPret = document.getElementById("spanPret");
-	var spanNextt = document.getElementById("spanNextt");
-	var spanFirstt = document.getElementById("spanFirstt");
-	var spanLastt = document.getElementById("spanLastt");
+var pageNo=1;
+	 function bac(){
+		pageNo = --pageNo<1?1:pageNo;
+		 $.ajax({
+			url:"/Ordersystem/Table_ajaxlisttab.action",
+			data:{pageNo:pageNo,tabid:$("#tabidaa").val()},
+			type:"post",
+			dataType:"json",
+			success:function(list){
+				 $("#tbody").empty();
+				 for(var i=0;i<list.length;i++){
+					  var tr = $("<tr style='FONT-WEIGHT: bold; HEIGHT:33px;FONT-WEIGHT: bold;FONT-SIZE: 12pt; HEIGHT: 25px;'>"+
+									"<td align='center' width='13%'>"+list[i].table_id+"</td>"+
+									"<td align='center' width='13%'>"+list[i].table_name+"</td>"+
+									"<td align='center' width='13%'>"+list[i].code_name+"</td>"+
+									"<td align='center' width='13%'>"+list[i].table_Capacity+"</td>"+
+									"<td align='center' width='13%'>"+list[i].emp_name+"</td>"+
+									"<td align='center' width='13%'>"+list[i].emp_code_name+"</td>"+
+									"<td width='7%' align='center'>"+
+									" <a href='${pageContext.request.contextPath}/Table_seid.action?tabled="+list[i].table_id+"&name="+list[i].table_name+"&capacity="+list[i].table_Capacity+"' >"+ 
+									"<img src='${pageContext.request.contextPath}/admin/images/i_edit.gif' width='16' height='16' border='0' style='CURSOR: hand' type='submit'></a></td>"+
+									"<td width='7%' align='center'><a href='${pageContext.request.contextPath}/Table_del.action?tab="+list[i].table_id+"'>"+
+									"<img src='${pageContext.request.contextPath}/admin/images/i_del.gif' width='16' height='16' border='0' style='CURSOR: hand'></a></td></tr>");
+					$("#tbody").append(tr);	 
+				}  
+				$("#currentpage").text("第"+pageNo+"页"); 
+			}
+		}); 
+	}
+	function pre(){
+		var total = $("#allpage").val();
+		pageNo = ++pageNo>total?total:pageNo;
+		 $.ajax({
+			url:"/Ordersystem/Table_ajaxlisttab.action",
+			data:{pageNo:pageNo,tabid:$("#tabidaa").val()},
+			type:"post",
+			dataType:"json",
+			success:function(list){
+				 $("#tbody").empty();
+				 for(var i=0;i<list.length;i++){
+						  var tr = $("<tr style='FONT-WEIGHT: bold; HEIGHT:33px;FONT-WEIGHT: bold;FONT-SIZE: 12pt; HEIGHT: 25px;'>"+
+									"<td align='center' width='13%'>"+list[i].table_id+"</td>"+
+									"<td align='center' width='13%'>"+list[i].table_name+"</td>"+
+									"<td align='center' width='13%'>"+list[i].code_name+"</td>"+
+									"<td align='center' width='13%'>"+list[i].table_Capacity+"</td>"+
+									"<td align='center' width='13%'>"+list[i].emp_name+"</td>"+
+									"<td align='center' width='13%'>"+list[i].emp_code_name+"</td>"+
+									"<td width='7%' align='center'>"+
+									" <a href='${pageContext.request.contextPath}/Table_seid.action?tabled="+list[i].table_id+"&name="+list[i].table_name+"&capacity="+list[i].table_Capacity+"' >"+ 
+									"<img src='${pageContext.request.contextPath}/admin/images/i_edit.gif' width='16' height='16' border='0' style='CURSOR: hand' type='submit'></a></td>"+
+									"<td width='7%' align='center'><a href='${pageContext.request.contextPath}/Table_del.action?tab="+list[i].table_id+"'>"+
+									"<img src='${pageContext.request.contextPath}/admin/images/i_del.gif' width='16' height='16' border='0' style='CURSOR: hand'></a></td></tr>");
+					$("#tbody").append(tr);	
+				}   
+				 $("#currentpage").text("第"+pageNo+"页");
+			}
+		}); 
+	}; 
 	
 
 
-	var numberRowsInTable = theTable.rows.length;
-	var pageSize = 3;
-	var page = 1;
-
-	//下一页     
-	function next() {
-
-		hideTable();
-
-		currentRow = pageSize * page;
-		maxRow = currentRow + pageSize;
-		if (maxRow > numberRowsInTable)
-			maxRow = numberRowsInTable;
-		for ( var i = currentRow; i < maxRow; i++) {
-			theTable.rows[i].style.display = '';
-		}
-		page++;
-
-		if (maxRow == numberRowsInTable) {
-			nextText();
-			lastText();
-		}
-		showPage();
-		preLink();
-		firstLink();
-	}
-
-	//上一页     
-	function pre() {
-
-		hideTable();
-
-		page--;
-
-		currentRow = pageSize * page;
-		maxRow = currentRow - pageSize;
-		if (currentRow > numberRowsInTable)
-			currentRow = numberRowsInTable;
-		for ( var i = maxRow; i < currentRow; i++) {
-			theTable.rows[i].style.display = '';
-		}
-
-		if (maxRow == 0) {
-			preText();
-			firstText();
-		}
-		showPage();
-		nextLink();
-		lastLink();
-	}
-
-	//第一页     
-	function first() {
-		hideTable();
-		page = 1;
-		for ( var i = 0; i < pageSize; i++) {
-			theTable.rows[i].style.display = '';
-		}
-		showPage();
-
-		preText();
-		nextLink();
-		lastLink();
-	}
-
-	//最后一页     
-	function last() {
-		hideTable();
-		page = pageCount();
-		currentRow = pageSize * (page - 1);
-		for ( var i = currentRow; i < numberRowsInTable; i++) {
-			theTable.rows[i].style.display = '';
-		}
-		showPage();
-
-		preLink();
-		nextText();
-		firstLink();
-	}
-
-	function hideTable() {
-		for ( var i = 0; i < numberRowsInTable; i++) {
-			theTable.rows[i].style.display = 'none';
-		}
-	}
-
-	//控制分页
-	function showPage() {
-		pageNum.innerHTML = page;
-		pageNumt.innerHTML = page;
-	}
-
-	//总共页数     
-	function pageCount() {
-        var count = 0;
-        if (numberRowsInTable % pageSize != 0) count = 1;
-        return parseInt(numberRowsInTable / pageSize) + count;
-    }
-
-	//显示链接     
-	function preLink() {
-		spanPre.innerHTML = "<a href='javascript:pre();' id='sasasaa'>上一页</a>";
-
-		spanPret.innerHTML = "<a href='javascript:pre();'>上一页</a>";
-	}
-	function preText() {
-		spanPre.innerHTML = "上一页";
-		spanPret.innerHTML = "上一页";
-	}
-
-	function nextLink() {
-		spanNext.innerHTML = "<a href='javascript:next();' id='sasasaa'>下一页</a>";
-
-		spanNextt.innerHTML = "<a href='javascript:next();'>下一页</a>";
-	}
-	function nextText() {
-		spanNext.innerHTML = "下一页";
-		spanNextt.innerHTML = "下一页";
-	}
-
-	function firstLink() {
-		spanFirst.innerHTML = "<a href='javascript:first();' id='sasasaa'>首页</a>";
-		spanFirstt.innerHTML = "<a href='javascript:first();'>首页</a>";
-	}
-	function firstText() {
-		spanFirst.innerHTML = "首页";
-		spanFirstt.innerHTML = "首页";
-	}
-
-	function lastLink() {
-		spanLast.innerHTML = "<a href='javascript:last();' id='sasasaa'>尾页";
-		spanLastt.innerHTML= "<a href='javascript:last();'>尾页</a>";
-	}
-	function lastText() {
-		spanLast.innerHTML = "尾页";
-		spanLastt.innerHTML = "尾页";
-	}
-
-	//隐藏表格     
-	function hide() {
-		for ( var i = pageSize; i < numberRowsInTable; i++) {
-			theTable.rows[i].style.display = 'none';
-		}
-
-		totalPage.innerHTML = pageCount();
-		pageNum.innerHTML = '1';
-
-		totalPaget.innerHTML = pageCount();
-		pageNumt.innerHTML = '1';
-
-		nextLink();
-		lastLink();
-	}
-	hide(); 
 </script>
 
 
