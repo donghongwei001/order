@@ -273,7 +273,7 @@
 			$("#shijiankuang3").val("");
 		}
 		$(".form_date").datetimepicker({
-			//language:  'fr',
+			language:  "fr",
 			weekStart : 1,
 			todayBtn : 1,
 			autoclose : 1,
