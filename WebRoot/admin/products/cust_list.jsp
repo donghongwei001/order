@@ -84,7 +84,7 @@
 							<tr>
 								<form action="cust_selectuser.action" method="post">
 								<input type="hidden" name="method" value="showone">
-								顾客用户名:&nbsp;&nbsp;&nbsp;<input type="text" name="name"/><br>
+								顾客用户名:&nbsp;&nbsp;&nbsp;<input type="text" name="name" value="${custname }"/><br>
 								<input type="submit" value="查询"/>
 								</form>
 							</tr>

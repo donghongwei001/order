@@ -106,7 +106,6 @@
 										<td align="center" width="18%">${row.account_fk_emp_id}</td>
 										<td align="center" width="18%">${row.emp_name}</td>
 										<td align="center" width="18%">${row.account_status}</td>
-										
 										<td align="center" width="10%">
 											<a href="${pageContext.request.contextPath}/account_edit.action?account_number=${row.account_number}&account_psw=${row.account_psw}&account_fk_emp_id=${row.account_fk_emp_id}"> 
 											<img

@@ -82,7 +82,7 @@
 					$("#posSelect").empty();
 					$("#posSelect").append("<option value='qingxuanze' selected='selected'>--请选择--</option>");
 					for(var i = 0;i<data.length;i++){
-						var str = $("<option value="+data[i].emp_id+">"+data[i].emp_id+"</option>");
+						var str = $("<option value="+data[i].emp_id+">"+data[i].emp_name+"</option>");
 						$("#posSelect").append(str);
 					}
 				},"json");

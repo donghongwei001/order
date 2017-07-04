@@ -141,9 +141,9 @@ td {
 									data-date="2017-06-16T00:00:00Z" data-date-format="yyyy-MM-dd"
 									data-link-field="dtp_input1">
 									<input id="shijiankuang1" name="shijiankuang1" size="25"
-										type="text" value="" readonly> <span class="add-on"><i
-										class="icon-remove"></i> </span> <span class="add-on"><i
-										class="icon-th"></i> </span>
+										type="text" value="" readonly> 
+										<button type="button" onclick="qingchu2()" class="btn btn-danger">×</button> 
+										<span class="add-on"><i	class="icon-th"></i> </span>
 								</div>
 								<input type="hidden" id="dtp_input1" value="" /><br />
 							</div>
@@ -154,8 +154,7 @@ td {
 									data-date="2017-06-16T00:00:00Z" data-date-format="yyyy-MM-dd"
 									data-link-field="dtp_input1">
 									<input id="shijiankuang2" name="shijiankuang2" size="25"
-										type="text" value="" readonly> <span class="add-on"><i
-										class="icon-remove"></i> </span> <span class="add-on"><i
+										type="text" value="" readonly> <button type="button" onclick="qingchu1()" class="btn btn-danger">×</button> <span class="add-on"><i
 										class="icon-th"></i> </span>
 								</div>
 								<input type="hidden" id="dtp_input1" value="" /><br />
@@ -257,6 +256,12 @@ td {
 			minView : 2,
 			forceParse : 0
 		});
+		function qingchu1(){
+			$("#shijiankuang2").val("");
+		}
+		function qingchu2(){
+			$("#shijiankuang1").val("");
+		}
 	</script>
 
 

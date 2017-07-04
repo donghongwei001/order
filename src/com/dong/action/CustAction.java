@@ -45,9 +45,10 @@ public class CustAction extends BaseAction{
 	}
 
 	public void selectuser() {
-		String user=request.getParameter("name");
-		List<CustBean> cb = ce.showCust(user);
+		String custname=request.getParameter("name");
+		List<CustBean> cb = ce.showCust(custname);
 		super.setsession("list", cb);
+		super.setsession("custname", custname);
 		try {
 			request.getRequestDispatcher("/admin/products/cust_list.jsp").forward(request, response);
 		} catch (ServletException e) {

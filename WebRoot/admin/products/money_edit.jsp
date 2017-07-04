@@ -67,14 +67,13 @@
 			<td style="font-size:30px;color:brown;">id</td>
 			<td style="font-size:30px;color:brown;">角色名称</td>
 			<td style="font-size:30px;color:brown;">角色状态</td>
-			<td style="font-size:30px;color:brown;">修改角色状态</td>
 		</tr>
 		<c:forEach items="${list}" var="a">
 			<tr>
 				<td id="id">${a.role_id}</td>
 				<td>${a.role_name}</td>
-				<td>${a.code_name}</td>
-				<td><a href="/Ordersystem/cust_changerole.action?id=${a.role_id}"><button type="button" class="btn btn-info">修改</button></a></td>
+				<td>
+				<a href="/Ordersystem/cust_changerole.action?id=${a.role_id}"><button type="button" class="btn btn-info">${a.code_name}</button></a></td>
 			</tr>
 		</c:forEach>
 	</table>

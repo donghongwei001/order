@@ -1,5 +1,6 @@
 package com.dong.action;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -30,17 +31,21 @@ public class accountAction extends BaseAction{
 	 * 方法功能说明：编辑登录信息状态  
 	 */
 	
+	
 	public String edit() {
 		System.out.println(request.getRequestURI());
 		String account_number=super.getparameter("account_number");
 		String account_psw=super.getparameter("account_psw");
 		String account_fk_emp_id=super.getparameter("account_fk_emp_id");
+		System.out.println(account_fk_emp_id);
 		super.setsession("account_number", account_number);
 		super.setsession("account_psw", account_psw);
 		super.setsession("account_fk_emp_id", account_fk_emp_id);
 		return "blili";
 	}
-	
+	/**
+	 * 方法功能说明：  编辑页面获得编辑后的员工状态
+	 */
 	public String ed() {
 		String account_number=super.getparameter("account_number");
 		String account_psw=super.getparameter("account_psw");
