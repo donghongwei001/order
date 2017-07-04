@@ -18,7 +18,8 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/admin/css/bootstrap.min.css" type="text/css"></link>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/admin/css/bootstrap-datetimepicker.min.css" type="text/css"></link>
 <script type="text/javascript" src="${pageContext.request.contextPath}/admin/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/admin/js/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script></head>
+<script type="text/javascript" src="${pageContext.request.contextPath}/admin/js/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
+</head>
 <body>
 	<div class="container" style="width:90%">
 		<div class="row">
@@ -94,16 +95,7 @@
 	</div>
 </body>
 <script type="text/javascript">
-    $('.form_datetime').datetimepicker({
-        //language:  'fr',
-        weekStart: 1,
-        todayBtn:  1,
-		autoclose: 1,
-		todayHighlight: 1,
-		startView: 2,
-		forceParse: 0,
-        showMeridian: 1
-    });
+    
 	$('.form_date').datetimepicker({
         language:  'fr',
         weekStart: 1,
@@ -114,16 +106,6 @@
 		minView: 2,
 		forceParse: 0
     });
-	$('.form_time').datetimepicker({
-        language:  'fr',
-        weekStart: 1,
-        todayBtn:  1,
-		autoclose: 1,
-		todayHighlight: 1,
-		startView: 1,
-		minView: 0,
-		maxView: 1,
-		forceParse: 0
-    });
+	
 </script>
 </html>

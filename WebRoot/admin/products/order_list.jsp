@@ -130,6 +130,18 @@
 							</div>
 							<input type="hidden" id="dtp_input1" value="" /><br />
 						</div>
+						
+						<div class="form-group">
+                		<label for="dtp_input2" class="control-label">开始时间</label>
+                		<div class="input-group date form_date" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+	                    	<input class="form-control" size="16" name="starttime" type="text" value="${starttime}" readonly>
+	                   		<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+							<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+               			 </div>
+						<input type="hidden" id="dtp_input2" value="" /><br/>
+           			</div>
+						
+						
 						<div class="control-group" id="shijian2">
 							<label class="control-label"> 初始时间</label>
 							<div class="controls input-append date form_datetime"
