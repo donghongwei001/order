@@ -22,8 +22,7 @@
 </HEAD>
 
 <body>
-	<form id="userAction_save_do" name="Form1"	
-		action="${pageContext.request.contextPath}/emp_addEmp.action" method="post" enctype="multipart/form-data">
+	<form id="userAction_save_do" name="Form1"	onsubmit="return checkForm()" action="${pageContext.request.contextPath}/emp_addEmp.action" method="post" enctype="multipart/form-data">
 		<table cellSpacing="1" cellPadding="5" width="100%" align="center"
 			bgColor="#eeeeee" style="border: 1px solid #8ba7e3" border="0">
 			<tr>
@@ -36,15 +35,14 @@
 			<tr>
 				<td align="center" bgColor="#f5fafe" class="ta_01">姓名：</td>
 				<td class="ta_01" bgColor="#ffffff" colspan="3"><input type="text"
-					name="emp.emp_name" 
-					class="bg" id="empname"/><span id="empnamesp"></span>
+					name="emp.emp_name" class="bg" onblur="checkname()" id="empname"/><span id="empnamesp"></span>
 				</td>
 			</tr>
 			<tr>
 				<td align="center" bgColor="#f5fafe" class="ta_01">性别：</td>
 				<td class="ta_01" bgColor="#ffffff" colspan="3">
 				<input type="radio" name="emp.emp_gender" value="男" />男
-				<input type="radio"name="emp.emp_gender" value="女" />女
+				<input type="radio" name="emp.emp_gender" value="女" />女 <span id="gendersp"></span>
 				</td>
 			</tr>
 			<tr>
@@ -126,15 +124,15 @@
 						<option value="29">29</option>
 						<option value="30">30</option>
 						<option value="31">31</option>
-				</select>日</td>
+				</select>日 <span id="empbirday"></span></td>
 			</tr>
 
 
 			<tr>
 				<td align="center" bgColor="#f5fafe" class="ta_01">年龄：</td>
 				<td class="ta_01" bgColor="#ffffff" colspan="3">
-				<select  name="emp.emp_age">
-						<option value="--请选择--">--请选择--</option>
+				<select  name="emp.emp_age" id="empage" >
+						<option value="">--请选择--</option>
 						<option value="20">20</option>
 						<option value="21">21</option>
 						<option value="22">22</option>
@@ -161,7 +159,9 @@
 						<option value="43">43</option>
 						<option value="44">44</option>
 						<option value="45">45</option>
-				</select></td>
+				</select>
+				<span id="empagesp"></span>
+				</td>
 			</tr>
 
 			<tr>
@@ -240,7 +240,7 @@
 						<option  value="29">29</option>
 						<option  value="30">30</option>
 						<option  value="31">31</option>
-					</select>日	
+					</select>日	<span id="emphireday"></span>
 				</td>
 				<td id="id1" bgColor="#ffffff" rowspan="5">
 					 <div id="preview"></div> 					<!-- 添加图片预览位置 --><!-- 添加图片预览位置 --><!-- 添加图片预览位置 -->
@@ -252,23 +252,22 @@
 			<tr>
 				<td align="center" bgColor="#f5fafe" class="ta_01">职位：</td>
 				<td class="ta_01" bgColor="#ffffff">
-					<select  name="emp.emp_fk_pos_id" id="posSelect">
+					<select  name="emp.emp_fk_pos_id" id="posSelect" onchange="checkpos()">
 						<option value="" selected="selected">--请选择--</option>
-					</select>
+					</select><span id="possp"></span>
 				</td>
 				<td class="aa1" bgColor="#ffffff">
 				</td>
 			</tr>
 			<tr>
 				<td align="center" bgColor="#f5fafe" class="ta_01">状态：</td>
-				<td class="ta_01" bgColor="#ffffff"><select
-					name="emp.emp_state">
-						<option value="" selected="selected">--请选择--</option>
+				<td class="ta_01" bgColor="#ffffff"><select onchange="checkstatus()" id="empstatus" name="emp.emp_state">
+						<option value="" selected="selected" >--请选择--</option>
 						<option value="4">在职</option>
 						<option value="5">请假</option>
 						<option value="7">调休</option>
 						<option value="6">离职</option>
-					</select>
+					</select><span id="empstatussp"></span>
 				</td>
 				<td class="aa1" bgColor="#ffffff">
 				</td>
@@ -276,8 +275,7 @@
 			</tr>
 			<tr>
 				<td align="center" bgColor="#f5fafe" class="ta_01">电话：</td>
-				<td class="ta_01" bgColor="#ffffff"><input type="text"
-					name="emp.emp_phone" class="bg" />
+				<td class="ta_01" bgColor="#ffffff"><input type="text" onblur="checkphone()" id="phone" name="emp.emp_phone" class="bg" /><span id="phonesp"></span>
 				</td>
 				<td class="aa1" bgColor="#ffffff">
 				</td>
@@ -294,7 +292,7 @@
 				<td align="center" bgColor="#f5fafe" class="ta_01">上传照片：</td>
 				<td class="ta_01" bgColor="#ffffff" >
 				<!-- <img id="img" ><br> -->
-				<input type="file" name="emppic"  onchange="preview(this)"  class="bg" />&nbsp;&nbsp;&nbsp;<span id="picsp"></span>
+				<input type="file" name="emppic" id="emppict" onchange="preview(this)"  class="bg" />&nbsp;&nbsp;&nbsp;<span id="picsp"></span>
 				</td>
 				<td  class="aa1" bgColor="#ffffff">
 				</td>
@@ -322,60 +320,182 @@
 	$("#empname").focus(function(){
 		//alert("22");
 		 $("#empnamesp").text("");
-	})
-	$("#empname").blur(function(){
-		var name = $(this).val();
+	});
+	
+	//验证员工姓名不能为空
+	function checkname(){
+		var data = document.getElementById("empname");
+		var name = data.value;
 		var sp = $("#empnamesp");
 		if(name==""){
-			sp.css("color","red")
+			sp.css("color","red");
 			sp.text("员工姓名不能为空!");
-			$("#formsub").disabled="true";
-			return;
+			return false;
 		}
-		sp.css("color","green")
+		sp.css("color","green");
 		sp.text("正确!");
-	})
-	function checkForm(){
-	 	return true;
+		return true;
 	}
+	
+	//验证员工状态不能为空
+	function checkstatus(){
+		var data = document.getElementById("empstatus");
+		var name = data.value;
+		var sp = $("#empstatussp");
+		if(name==""){
+			sp.css("color","red");
+			sp.text("请选择员工状态!");
+			return false;
+		}
+		sp.text("");
+		return true;
+	}
+	
+	//验证职位不能为空
+	function checkpos(){
+		var data = document.getElementById("posSelect");
+		var name = data.value;
+		var sp = $("#possp");
+		if(name==""){
+			sp.css("color","red");
+			sp.text("请选择员工职位!");
+			return false;
+		}
+		sp.text("");
+		return true;
+	}
+	
+	//验证性别的方法
+	function checkgender(){
+		var gender = document.getElementsByName("emp.emp_gender");
+		for(var i=0;i<gender.length;i++){
+			if(gender[i].checked==true){
+				return true;
+			} 
+		}
+		$("#gendersp").text("选择您的性别!").css("color","red");
+		return false;
+	}
+	
+	//验证生日的方法
+	function checkbirday(){
+		var birday = document.getElementsByName("emp.emp_birday");
+		for(var i=0;i<birday.length;i++){
+			if(birday[i].value==""){
+				$("#empbirday").text("请录入您的生日!").css("color","red");
+				return false;
+			} 
+		}
+			return true;
+	}
+	//验证入职日期的方法
+	function checkhireday(){
+		var birday = document.getElementsByName("emp.emp_hire_date");
+		for(var i=0;i<birday.length;i++){
+			if(birday[i].value==""){
+				$("#emphireday").text("请录入您的入职日期!").css("color","red");
+				return false;
+			} 
+		}
+			return true;
+	}
+	
+	//验证年龄的方法
+	function checkage(){
+		var age = document.getElementById("empage");
+		alert(age.value);
+		if(age.value==""){
+			$("#empagesp").text("请选择您的年龄!").css("color","red");
+			return false;
+		}
+		
+		return true;
+	}
+	//表单验证
+	$("#phone").focus(function(){
+		//alert("22");
+		 $("#phonesp").text("");
+	});
+	//验证手机号的方法
+	function checkphone(){
+		var data = document.getElementById("phone");
+		var name = data.value;
+		var idcarreg=/^[1-9][0-9]{10}$/;
+		var sp = $("#phonesp");
+		if(name==""){
+			sp.css("color","red");
+			sp.text("联系电话不能为空!");
+			return false;
+		}
+		if(!idcarreg.test(name)){
+			sp.text("联系电话格式有误!").css("color","red");
+			return false;
+		}	
+		
+		sp.css("color","green");
+		sp.text("正确!");
+		return true;
+	}
+	//验证照片格式的方法
+	function checkpic(){
+		 var prevDiv = document.getElementById("emppict"); 
+	 	 var lastname = prevDiv.value.substring(prevDiv.value.indexOf('.')).toLowerCase();
+	 	 if(lastname!=".jpg"&&lastname!=".png"&&lastname!=".gif"){
+	 	 	$("#picsp").text("图片格式有误,请重新上传!").css("color","red");
+	 	 	return false;
+	 	 }
+	 	 return true;
+	}	
+	
+	//表单验证的方法
+	function checkForm(){
+		//alert(checkname());
+		//alert(seleidcar());
+		//alert(checkstatus());
+		if(checkpic()&&checkname()&&seleidcar()&&checkstatus()&&checkpos()&&checkgender()&&checkbirday()&&checkphone()&&checkhireday()&&checkage()){
+			return true;
+		}
+	 	return false;
+	}
+	
+	//验证身份证号不能为空 且必须为18为数字
 	 $("#idcar").focus(function(){
 	 	$("#idcarsp").text("");
-	 })
-	 $("#idcar").blur(function(){
-		var idcar = $(this).val();
+	 });
+	
+	//验证身份证号不能为空 且必须为18位数字 验证身份证号唯一性
+	function seleidcar(){
+		var data = document.getElementById("idcar");
+		var idcar = data.value;
 		var sp = $("#idcarsp");
-		var idcarreg=/^[1-9][0-9]{16}([0-9]|X){1}$/
+		var idcarreg=/^[1-9][0-9]{16}([0-9]|X){1}$/;
 		if(idcar==""){
 			sp.text("员工身份证号不能为空!").css("color","red");
-			return;
+			return false;
 		}
 		if(!idcarreg.test(idcar)){
 			sp.text("员工身份证号格式有误!").css("color","red");
-			return;
-		}
-		var year = idcar.substring(6,10);
-		var month = idcar.substring(10,12);
-		var day = idcar.substring(12,14);
-		var yearopt = $("#birthyear option");
-		/* alert(year);
-		$("option[value="+year+"]").prop("checked",true); */
-		/* for(var i=0;i<yearopt.length;i++){
-			alert(yearopt[i].val());
-		
-			if(year==yearopt[i].val()){
-				yearopt[i].checked=true;
-			}
-		} */
-		
-	}) 
+			return false;
+		}	
 	
-	/* var form = document.getElementById("userAction_save_do");
-		form.submitted = false;
-		form.onsubmit=function(){
-		if(form.submitted) return false;
-		form.submitted = true;
-		return true;
-	} */
+		$.ajax({
+			url:"/Ordersystem/emp_selidcar.action",
+			data:{emp_idcar:$("#idcar").val()},
+			type:"post",
+			dataType:"text",
+			success:function(list){
+				 if(list=="false"){
+				 	var sp = $("#idcarsp").text("身份证号存在重复,不能再次录入!").css("color","red");
+				 		var submitBtn = document.getElementById("formsub");
+					 	submitBtn.onclick = function (event) {
+					  	return false;
+					 };
+				 };
+			}
+		}); 
+		 return true;
+	}
+	
 	
 	//省市级联
   	addressInit('cmbProvince', 'cmbCity', 'cmbArea');  
@@ -387,12 +507,13 @@
 	 	 var lastname = file.value.substring(file.value.indexOf(".")).toLowerCase();
 	 	 if(lastname!=".jpg"&&lastname!=".png"&&lastname!=".gif"){
 	 	 	$("#picsp").text("图片格式有误,请重新上传!").css("color","red");
+	 	 	return false;
 	 	 }
 		 if (file.files && file.files[0]){  
 		 var reader = new FileReader();  
 			 reader.onload = function(evt){  
 			 	prevDiv.innerHTML = '<img src="' + evt.target.result + '" />';  
-			 }    
+			 } ;   
 			 reader.readAsDataURL(file.files[0]);  
 		}  
 		 else {  
@@ -414,18 +535,5 @@
 				},"json");})
 	
 	
-	function seleidcar(){
-		$.ajax({
-			url:"/Ordersystem/emp_selidcar.action",
-			data:{emp_idcar:$("#idcar").val()},
-			type:"post",
-			dataType:"text",
-			success:function(list){
-				 if(list=="false"){
-				 	var sp = $("#idcarsp").text("身份证号存在重复,不能再次录入!").css("color","red");
-				 }
-			}
-		}); 
-	}
 </script>
 </HTML>
