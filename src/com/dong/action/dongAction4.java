@@ -639,11 +639,8 @@ public class dongAction4 extends ActionSupport{
 	//ÆÀ·Ö 
 	@Action("pingfen")
 	public String pingfen(){
-		String orderid=(String) session.getAttribute("orderid");
-		String pingfen=request.getParameter("pingfen");
-		String yijian=request.getParameter("yijian");
-		System.out.println(orderid+pingfen+yijian);
-		Object[]params=new Object[]{pingfen,yijian,orderid};
+
+		Object[]params=new Object[]{getPingfen(),getYijian(),session.getAttribute("orderid")};
 		int flag=new DaoFactory().executeUpdate("update order_table set order_dt_score=?,oeder_dt_mark=? where order_id=?", params);
 		try {
 			response.getWriter().print(flag);
