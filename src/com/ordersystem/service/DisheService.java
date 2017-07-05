@@ -49,7 +49,7 @@ public class DisheService {
 			sta +=" and ft.food_price between "+price.get("minprice")+" and "+price.get("maxprice");
 		}
 		String sql1 = "select top "+pageSize+" ft.food_id,ft.food_name,ft.food_price,ft.food_time,ft.food_merge,ft.food_time,ft.food_pic,ft.food_fk_dishes_id,ft.food_description,dt.dishes_name from food_table ft,dishes_table dt where ft.food_fk_dishes_id=dt.dishes_id "+
-		sta+" and ft.food_id not in(select top "+pageStart+" ft.food_id from food_table ft,dishes_table dt where ft.food_fk_dishes_id=dt.dishes_id "+sta+" order by ft.food_id asc) order by ft.food_id asc";
+		sta+" and ft.food_id not in(select top "+pageStart+" ft.food_id from food_table ft,dishes_table dt where ft.food_fk_dishes_id=dt.dishes_id "+sta+" order by ft.food_id desc) order by ft.food_id desc";
 		String sql2 = "select count(*) from food_table ft,dishes_table dt where ft.food_fk_dishes_id=dt.dishes_id "+sta;
 		List dishInfo = di.queryDishe(sql1,sql2);
 		return dishInfo;

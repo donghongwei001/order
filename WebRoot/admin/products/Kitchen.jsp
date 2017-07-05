@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="refresh" content="20;url=http:${pageContext.request.contextPath}/kitchen_findFood.action">
 <title>Kitchen_sortFood</title>
 <link href="${pageContext.request.contextPath }/admin/css/bootstrap.min.css" rel="stylesheet">
 <script src="${pageContext.request.contextPath }/admin/js/jquery-2.1.3.js"></script>

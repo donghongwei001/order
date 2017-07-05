@@ -21,7 +21,7 @@
 </style>
 
 <body>
-	<form id="userAction_save_do" name="Form1"
+	<form id="userAction_save_do" name="Form1" onsubmit="return checkForm()"
 		action="${pageContext.request.contextPath}/dishe_addDishe.action" method="post" enctype="multipart/form-data">
 		&nbsp;
 		<table cellSpacing="1" cellPadding="5" width="100%" align="center"  
@@ -35,7 +35,7 @@
 
 			<tr>
 				<td align="center" bgColor="#f5fafe" class="ta_01">菜品名称：</td>
-				<td class="ta_01" bgColor="#ffffff"><input  onblur="dishesadd()" id="se" type="text" name="db.food_name" class="bg" style="padding:0px;margin:0px;"
+				<td class="ta_01" bgColor="#ffffff"><input onblur="dishesadd()" id="se" type="text" name="db.food_name" class="bg" style="padding:0px;margin:0px;"
 				onkeyup="value=value.replace(/[^\u4E00-\u9FA5]/g,'')" onpaste="value=value.replace(/[^\u4E00-\u9FA5]/g,'')" oncontextmenu="value=value.replace(/[^\u4E00-\u9FA5]/g,'')">
 				<span id="foodnamesp"></span></td>
 				<td  bgColor="#ffffff" class="ta_01" colspan="2" rowspan="6"> <div id="preview"></div>  </td>
@@ -44,8 +44,8 @@
 			</tr>
 			<tr>
 				<td align="center" bgColor="#f5fafe" class="ta_01">菜品单价：</td>
-				<td class="ta_01" bgColor="#ffffff"><input type="text" name="db.food_price" class="bg" 
-				onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"/>
+				<td class="ta_01" bgColor="#ffffff"><input type="text" name="db.food_price" class="bg" onblur="checkmoney()"  id="fdmoney"
+				onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"/><span id="fdmoneysp"></span>
 				</td>
 				
 			</tr> 
@@ -53,8 +53,8 @@
 			<tr>
 				<td align="center" bgColor="#f5fafe" class="ta_01">最大并菜数：</td>
 				<td class="ta_01" bgColor="#ffffff"><input type="text"
-					name="db.food_merge"  class="bg"
-					onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"/>
+					name="db.food_merge"  class="bg" onblur="checkmeger()"
+					onkeyup="this.value=this.value.replace(/\D/g,'')" id="megernum" onafterpaste="this.value=this.value.replace(/\D/g,'')"/><span id="megersp"></span>
 				</td>
 				
 			</tr>
@@ -62,8 +62,8 @@
 		<tr>
 		<td align="center" bgColor="#f5fafe" class="ta_01">加工时间:</td>
 		<td class="ta_01" bgColor="#ffffff" ><input type="text"
-					name="db.food_time" 
-					class="bg" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"/>
+					name="db.food_time" id="dotime"	onblur="checktime()"
+					class="bg" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"/><span>/分钟</span><span id="dotimesp"></span>
 				</td>
 		
 		</tr>
@@ -74,7 +74,7 @@
 					id="category">
 						<option value="" selected="selected">--选择菜品类--</option>
 									
-				</select>
+				</select><span id="categorysp"></span>
 				</td>
 		
 		
@@ -83,7 +83,7 @@
 				<td align="center" bgColor="#f5fafe" class="ta_01">上传图片：</td>
 				<td class="ta_01" bgColor="#ffffff">
 				<input
-					type="file" name="food_pic" size="30"  onchange="preview(this)"  value=""/>&nbsp;&nbsp;&nbsp;<span id="picsp"></span>
+					type="file" id="foodpic" name="food_pic" size="30"  onchange="preview(this)"  value=""/>&nbsp;&nbsp;&nbsp;<span id="picsp"></span>
 				</td>
 			</tr>
 			
@@ -127,10 +127,81 @@
 	</form>
 	
 	<script type="text/javascript">
+	//验证图片格式
+	function checkpic(){
+		var foodpic = document.getElementById("foodpic");  
+		 $("#picsp").text("");
+	 	 var lastname = foodpic.value.substring(foodpic.value.indexOf(".")).toLowerCase();
+	 	 if(lastname!=".jpg"&&lastname!=".png"&&lastname!=".gif"){
+	 	 	$("#picsp").text("图片格式有误,请重新上传!").css("color","red");
+	 	 	return false;
+	 	 }
+	 	 return true;
+	
+	}
+	
+	//验证菜系是否为空
+	function checkcategory(){
+		var category = document.getElementById("category").value;
+		if(category==""){
+			$("#categorysp").text("请选择菜系!").css("color","red");
+			return false;
+		}
+		$("#categorysp").text("");
+		return true;
+	}
+	
+	$("#megernum").focus(function(){
+		$("#megersp").text("");
+	})
+	
+	//验证最大合并数是否为空
+	function checkmeger(){
+		var meger = document.getElementById("megernum").value;
+		if(meger==""){
+			$("#megersp").text("请填写菜品最大合并数!").css("color","red");
+			return false;
+		}
+		return true;
+	}
+	
+	$("#dotime").focus(function(){
+		$("#dotimesp").text("");
+	})
+	//验证做菜时间是否为空
+	function checktime(){
+		var time = document.getElementById("dotime").value;
+		if(time==""){
+			$("#dotimesp").text("请填写菜品最大合并数!").css("color","red");
+			return false;
+		}
+		return true;
+	}
+	
+	$("#fdmoney").focus(function(){
+		$("#fdmoneysp").text("");
+	})
+	//验证菜品单价是否为空
+	function checkmoney(){
+		var money = document.getElementById("fdmoney").value;
+		if(money==""){
+			$("#fdmoneysp").text("请填写菜品最大合并数!").css("color","red");
+			return false;
+		}
+		return true;
+		
+	}
+	
+	//表单验证
+	function checkForm(){
+		if(checkpic()&&dishesadd()&&checkcategory()&&checkmeger()&&checktime()&&checkmoney()){
+			return true;
+		}
+		return false;
+	}
 	//图片动态预览
 	 function preview(file)  
 		 { 
-		  
 		 var prevDiv = document.getElementById('preview');  
 		 $("#picsp").text("");
 	 	 var lastname = file.value.substring(file.value.indexOf(".")).toLowerCase();
@@ -162,6 +233,12 @@
 				},"json");
 		})
 	function dishesadd(){
+		var foodname = document.getElementById("se").value;
+		if(foodname==""){
+			$("#foodnamesp").text("菜品名称不能为空!").css("color","red");
+			return false;
+		}
+	
 		$.ajax({
 			url:"/Ordersystem/dishe_se.action",
 			data:{tbname:$("#se").val()},
@@ -170,9 +247,11 @@
 			success:function(list){
 				 if(list=="false"){
 				 	$("#foodnamesp").text("该菜已存在不能重复录入!").css("color","red");
+				 	return false;
 				 }
 			}
-		}); 
+		});
+		return true; 
 	}
 	$("#se").focus(function(){
 		$("#foodnamesp").text("");

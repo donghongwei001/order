@@ -17,7 +17,7 @@
 
 </style>
 <body>
-	<form id="userAction_save_do" name="Form1"
+	<form id="userAction_save_do" name="Form1" onsubmit="return checkForm()"
 		action="${pageContext.request.contextPath}/dishe_updateDishe.action" method="post" enctype="multipart/form-data">
 		&nbsp;
 		<table cellSpacing="1" cellPadding="5" width="100%" align="center"
@@ -89,7 +89,7 @@
 				<input type="hidden" value="${disheInfo.food_pic }" name="oldpic">
 				<input type="hidden" value="${disheInfo.food_id }" name="db.food_id">
 				<input
-					type="file" name="food_pic" onchange="preview(this)" size="30" value=""/>
+					type="file" name="food_pic" id="foodpic" onchange="preview(this)" size="30" value=""/><span id="picsp"></span>
 				</td>
 			</tr>
 			
@@ -133,10 +133,52 @@
 	</form>
 	<script type="text/javascript" src="../js/jquery-2.1.3.js"></script>
 	<script type="text/javascript">
+	//验证图片格式
+	function checkpic(){
+		var foodpic = document.getElementById("foodpic");  
+		var picsp = document.getElementById("picsp");
+		 picsp.text="";
+	 	 var lastname = foodpic.value.substring(foodpic.value.indexOf(".")).toLowerCase();
+	 	 if(lastname!=".jpg"&&lastname!=".png"&&lastname!=".gif"){
+	 	 	picsp.text="图片格式有误,请重新上传!";
+	 	 	return false;
+	 	 }
+	 	 return true;
+	
+	}
+	
+	//验证做菜时间是否为空
+	function checktime(){
+		var time = document.getElementById("dotime").value;
+		if(time==""){
+			$("#dotimesp").text("请填写菜品最大合并数!").css("color","red");
+			return false;
+		}
+		return true;
+	}
+	
+	$("#fdmoney").focus(function(){
+		$("#fdmoneysp").text("");
+	})
+	
+	//表单验证
+	function checkForm(){
+		if(checkpic()&&checktime()){
+			return true;
+		}
+		return false;
+	}
+	
 	//图片动态预览
 	 function preview(file)  
 		 {  
-		 var prevDiv = document.getElementById('preview');  
+		 var prevDiv = document.getElementById('preview');
+		 var picsp = document.getElementById("picsp");
+		 picsp.text="";
+	 	 var lastname = file.value.substring(file.value.indexOf(".")).toLowerCase();
+	 	 if(lastname!=".jpg"&&lastname!=".png"&&lastname!=".gif"){
+	 	 	picsp.text="图片格式有误,请重新上传!";
+	 	 }  
 		 if (file.files && file.files[0]){  
 		 var reader = new FileReader();  
 			 reader.onload = function(evt){  

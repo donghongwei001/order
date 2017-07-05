@@ -80,9 +80,9 @@
 						</tr>
 						<c:forEach items="${showftl }" var="ft">
 						<tr>
-							<td align="center">${ft.table_id }</td>
-							<td align="center">${ft.sailnum }</td>
-							<td align="center">${ft.countmoney }</td>
+							<td>${ft.table_id }</td>
+							<td>${ft.sailnum }</td>
+							<td>${ft.countmoney }</td>
 						</tr>	
 						</c:forEach>
 					</table>

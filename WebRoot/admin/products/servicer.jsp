@@ -65,7 +65,7 @@ div {
 		<nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="#">brand</a>
+				<a class="navbar-brand" href="#"></a>
 			</div>
 			<div class="collapse navbar-collapse">
 				<p class="navbar-text">
