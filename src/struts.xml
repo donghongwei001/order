@@ -84,7 +84,7 @@
 		<interceptors>
 			<interceptor name="donginter" class="com.dong.interceptor.Quanxianinterceptor">
 				<!-- 拦截的方法 -->
-				<param name="includeMethods">del,updatezhuozi,addzhuozi,selezhuo,selac,findCook,query1,editEmp,changerole,addrole,addDishe,queryAllDishes,delDishe,editDishe,addEmp,queryEmp,delEmp,xiugaiquanxian,quanxian,jiaose,queryEmp,showTable,findFood,secFindFood,thrFindFood,queryAllDishes,seleAll,showAllCust</param>
+				<param name="includeMethods">edit,add,del,updatezhuozi,addzhuozi,selezhuo,selac,findCook,query1,editEmp,changerole,addrole,addDishe,queryAllDishes,delDishe,editDishe,addEmp,queryEmp,delEmp,xiugaiquanxian,quanxian,jiaose,queryEmp,showTable,findFood,secFindFood,thrFindFood,queryAllDishes,seleAll,showAllCust</param>
 			</interceptor>
 			<!-- 构建一个拦截器栈 -->
 			<interceptor-stack name="aaabbb">
