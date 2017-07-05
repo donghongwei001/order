@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.mail.Session;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -205,7 +204,6 @@ public class TableAction extends BaseAction {
 	 *tb_id:»ñÈ¡×À×ÓID 
 	 */
 	public String updatezhuozi(){
-		System.out.println(request.getRequestURI());
 		TableBean tb=new TableBean();
 		ser_tabBean st=new ser_tabBean();
 		String tb_id=super.getparameter("id");

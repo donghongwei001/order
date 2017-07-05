@@ -1,5 +1,3 @@
-
-
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <HTML>
@@ -138,7 +136,7 @@ td {
 							<div class="control-group" id="shijian1">
 								<label class="control-label"> 初始时间</label>
 								<div class="controls input-append date form_datetime"
-									data-date="2017-06-16T00:00:00Z" data-date-format="yyyy-MM-dd"
+									data-date="2017-06-16T00:00:00Z" data-date-format="yyyy-mm-dd"
 									data-link-field="dtp_input1">
 									<input id="shijiankuang1" name="shijiankuang1" size="25"
 										type="text" value="" readonly> 
@@ -151,7 +149,7 @@ td {
 							<div class="control-group" id="shijian2">
 								<label class="control-label">截止时间</label>
 								<div class="controls input-append date form_datetime"
-									data-date="2017-06-16T00:00:00Z" data-date-format="yyyy-MM-dd"
+									data-date="2017-06-16T00:00:00Z" data-date-format="yyyy-mm-dd"
 									data-link-field="dtp_input1">
 									<input id="shijiankuang2" name="shijiankuang2" size="25"
 										type="text" value="" readonly> <button type="button" onclick="qingchu1()" class="btn btn-danger">×</button> <span class="add-on"><i
@@ -237,7 +235,7 @@ td {
 		src="../js/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
 	<script type="text/javascript">
 		$(".form_datetime").datetimepicker({
-			//language:  'fr',
+			language:  'zh-CN',
 			weekStart : 1,
 			todayBtn : 1,
 			autoclose : 1,
@@ -247,7 +245,7 @@ td {
 			showMeridian : 1
 		});
 		$(".form_date").datetimepicker({
-			language : "fr",
+			language : "zh-CN",
 			weekStart : 1,
 			todayBtn : 1,
 			autoclose : 1,

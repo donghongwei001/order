@@ -35,8 +35,9 @@
 
 			<tr>
 				<td align="center" bgColor="#f5fafe" class="ta_01">菜品名称：</td>
-				<td class="ta_01" bgColor="#ffffff"><input  onblur="CheckChinese(se,菜品名称)" id="se" type="text" name="db.food_name" class="bg"
-				onkeyup="value=value.replace(/[^\u4E00-\u9FA5]/g,'')"onpaste="value=value.replace(/[^\u4E00-\u9FA5]/g,'')" oncontextmenu="value=value.replace(/[^\u4E00-\u9FA5]/g,'')">
+				<td class="ta_01" bgColor="#ffffff"><input  onblur="dishesadd()" id="se" type="text" name="db.food_name" class="bg" style="padding:0px;margin:0px;"
+				onkeyup="value=value.replace(/[^\u4E00-\u9FA5]/g,'')" onpaste="value=value.replace(/[^\u4E00-\u9FA5]/g,'')" oncontextmenu="value=value.replace(/[^\u4E00-\u9FA5]/g,'')">
+				<span id="foodnamesp"></span></td>
 				<td  bgColor="#ffffff" class="ta_01" colspan="2" rowspan="6"> <div id="preview"></div>  </td>
 				
 				
@@ -168,11 +169,14 @@
 			dataType:"text",
 			success:function(list){
 				 if(list=="false"){
-				 	alert("此菜已存在");
+				 	$("#foodnamesp").text("该菜已存在不能重复录入!").css("color","red");
 				 }
 			}
 		}); 
 	}
+	$("#se").focus(function(){
+		$("#foodnamesp").text("");
+	})
 	//只能输入中文字
 		function CheckChinese(self) {
 			var foodname = self.value;
