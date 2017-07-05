@@ -193,13 +193,7 @@ carousel-inner {
 								type="password" class="form-control" name="u.pass"
 								placeholder="Password" id="mima" aria-describedby="basic-addon1"style="width:60%">
 						</div>
-						<div>
-							<input type="text" id="Txtidcode" class="txtVerification">
-							&nbsp;&nbsp;&nbsp;&nbsp;<span id="idcode"></span> <input
-								type="button" id="butn" value="提交">
-
-
-						</div>
+						
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">关闭</button>
