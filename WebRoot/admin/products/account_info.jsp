@@ -63,7 +63,6 @@
 					<FONT face="宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT> <INPUT
 					class="button_ok" type="button" onclick="history.go(-1)" value="返回" />
 					<span id="Label1">
-					
 					</span>
 				</td>
 			</tr>

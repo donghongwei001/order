@@ -46,12 +46,13 @@ public class AccountImpl {
 	 * 方法功能说明：  查询员工编号
 	 */
 	public List<EmpBeam> sele() {
-		String sql="select emp_name from emp_table";
+		String sql="select emp_name,emp_id from emp_table";
 		ArrayList<ArrayList> arr=dt.execQuery(sql, null);
 		ArrayList<EmpBeam> list=new ArrayList<EmpBeam>();
 		for (int i = 0; i < arr.size(); i++) {
 			EmpBeam eb=new EmpBeam();
 			eb.setEmp_name((String)arr.get(i).get(0).toString());
+			eb.setEmp_id((Integer) arr.get(i).get(1));
 			list.add(eb);
 		}
 		return list;
@@ -60,9 +61,10 @@ public class AccountImpl {
 	 * 方法功能说明：  添加员工账号状态信息
 	 */
 	public void addaccount(accountBean ab){
+		String sql="insert into account(account_number,account_psw,account_fk_emp_id,account_status) values(?,?,?,?)";
 		Object[] pa=new Object[]{ab.getAccount_number(),ab.getAccount_psw(),ab.getAccount_fk_emp_id(),ab.getAccount_status()};
-		String sql="insert into account (account_number,account_psw,account_fk_emp_id,account_status) values(?,?,?,?)";
 		dt.executeUpdate(sql, pa);
+
 	}
 	
 	public void seleemp_name() {
